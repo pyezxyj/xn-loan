@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	
+	<!-- 分页BO层注入paginableDao -->
+	<bean id="sysLogBO" class="com.xnjr.mall.bo.impl.SYSLogBOImpl">
+		<property name="paginableDAO" ref="sysLogDAOImpl"/>
+	</bean>	
+	
+	<bean id="sysDictBO" class="com.xnjr.mall.bo.impl.SYSDictBOImpl">
+		<property name="paginableDAO" ref="sysDictDAOImpl"/>
+	</bean>	
+	
+	<bean id="sysConfigBO" class="com.xnjr.mall.bo.impl.SYSConfigBOImpl">
+		<property name="paginableDAO" ref="sysConfigDAOImpl"/>
+	</bean>	
+	
+	<bean id="productBO" class="com.xnjr.mall.bo.impl.ProductBOImpl">
+		<property name="paginableDAO" ref="productDAOImpl"/>
+	</bean>	
+	
+	<bean id="modelBO" class="com.xnjr.mall.bo.impl.ModelBOImpl">
+		<property name="paginableDAO" ref="modelDAOImpl"/>
+	</bean>	
+	
+	<bean id="modelSpecsBO" class="com.xnjr.mall.bo.impl.ModelSpecsBOImpl">
+		<property name="paginableDAO" ref="modelSpecsDAOImpl"/>
+	</bean>
+	
+	<bean id="addressBO" class="com.xnjr.mall.bo.impl.AddressBOImpl">
+		<property name="paginableDAO" ref="addressDAOImpl"/>
+	</bean>	
+	
+	<bean id="buyGuideBO" class="com.xnjr.mall.bo.impl.BuyGuideBOImpl">
+		<property name="paginableDAO" ref="buyGuideDAOImpl"/>
+	</bean>	
+	
+	<bean id="cartBO" class="com.xnjr.mall.bo.impl.CartBOImpl">
+		<property name="paginableDAO" ref="cartDAOImpl"/>
+	</bean>	
+	
+	<bean id="invoiceBO" class="com.xnjr.mall.bo.impl.InvoiceBOImpl">
+		<property name="paginableDAO" ref="invoiceDAOImpl"/>
+	</bean>	
+	
+	<bean id="invoiceModelBO" class="com.xnjr.mall.bo.impl.InvoiceModelBOImpl">
+		<property name="paginableDAO" ref="invoiceModelDAOImpl"/>
+	</bean>	
+	
+	<bean id="logisticsBO" class="com.xnjr.mall.bo.impl.LogisticsBOImpl">
+		<property name="paginableDAO" ref="logisticsDAOImpl"/>
+	</bean>	
+	
+	<bean id="goodsBO" class="com.xnjr.mall.bo.impl.GoodsBOImpl">
+		<property name="paginableDAO" ref="goodsDAOImpl"/>
+	</bean>	
+	
+	<bean id="repairOrderBO" class="com.xnjr.mall.bo.impl.RepairOrderBOImpl">
+		<property name="paginableDAO" ref="repairOrderDAOImpl"/>
+	</bean>	
+	
+	<bean id="merCardBO" class="com.xnjr.mall.bo.impl.MerCardBOImpl">
+		<property name="paginableDAO" ref="merCardDAOImpl"/>
+	</bean>	
+</beans>
