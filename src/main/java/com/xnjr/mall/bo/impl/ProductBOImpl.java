@@ -46,7 +46,7 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             product.setCode(code);
             product.setUpdater(product.getUpdater());
             product.setUpdateDatetime(new Date());
-            product.setStatus(EPutStatus.todoAPPROVE.getCode());
+            product.setStatus(EPutStatus.todoPUBLISH.getCode());
             product.setRemark(product.getRemark());
             productDAO.insert(product);
         }
@@ -80,10 +80,7 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             if (!isProductExist(product.getCode())) {
                 throw new BizException("xn000000", "产品编号不存在");
             }
-            product.setUpdater(product.getUpdater());
             product.setUpdateDatetime(new Date());
-            product.setStatus(EPutStatus.todoAPPROVE.getCode());
-            product.setRemark(product.getRemark());
             count = productDAO.updateProduct(product);
         }
         return count;
@@ -128,51 +125,6 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
     }
 
     @Override
-    public int approveProduct(String code, String checkUser, String checkNote) {
-        int count = 0;
-        if (StringUtils.isNotBlank(code)) {
-            Product product = new Product();
-            product.setCode(code);
-            product.setUpdater(checkUser);
-            product.setUpdateDatetime(new Date());
-            product.setStatus(EPutStatus.APPROVE_YES.getCode());
-            product.setRemark(checkNote);
-            count = productDAO.updateStatus(product);
-        }
-        return count;
-    }
-
-    @Override
-    public int unApproveProduct(String code, String checkUser, String checkNote) {
-        int count = 0;
-        if (StringUtils.isNotBlank(code)) {
-            Product product = new Product();
-            product.setCode(code);
-            product.setUpdater(checkUser);
-            product.setUpdateDatetime(new Date());
-            product.setStatus(EPutStatus.APPROVE_NO.getCode());
-            product.setRemark(checkNote);
-            count = productDAO.updateStatus(product);
-        }
-        return count;
-    }
-
-    @Override
-    public int putOn(String code, String checkUser, String checkNote) {
-        int count = 0;
-        if (StringUtils.isNotBlank(code)) {
-            Product product = new Product();
-            product.setCode(code);
-            product.setUpdater(checkUser);
-            product.setUpdateDatetime(new Date());
-            product.setStatus(EPutStatus.ONLINE.getCode());
-            product.setRemark(checkNote);
-            count = productDAO.updateStatus(product);
-        }
-        return count;
-    }
-
-    @Override
     public int putOff(String code, String checkUser, String checkNote) {
         int count = 0;
         if (StringUtils.isNotBlank(code)) {
@@ -180,9 +132,29 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
             product.setCode(code);
             product.setUpdater(checkUser);
             product.setUpdateDatetime(new Date());
-            product.setStatus(EPutStatus.todoAPPROVE.getCode());
+            product.setStatus(EPutStatus.PUBLISH_NO.getCode());
             product.setRemark(checkNote);
             count = productDAO.updateStatus(product);
+        }
+        return count;
+    }
+
+    @Override
+    public int putOn(String code, Long originalPrice, Long discountPrice,
+            String location, Integer orderNo, String updater, String remark) {
+        int count = 0;
+        if (StringUtils.isNotBlank(code)) {
+            Product product = new Product();
+            product.setCode(code);
+            product.setOriginalPrice(originalPrice);
+            product.setDiscountPrice(discountPrice);
+            product.setLocation(location);
+            product.setOrderNo(orderNo);
+            product.setUpdater(updater);
+            product.setUpdateDatetime(new Date());
+            product.setStatus(EPutStatus.PUBLISH_YES.getCode());
+            product.setRemark(remark);
+            count = productDAO.updatePutOnProduct(product);
         }
         return count;
     }

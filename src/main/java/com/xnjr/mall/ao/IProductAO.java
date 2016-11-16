@@ -36,29 +36,31 @@ public interface IProductAO {
     public Product getProduct(String code);
 
     /**
-     * 审核产品
+     * 上架产品
      * @param code
-     * @param checkUser
-     * @param checkResult
-     * @param checkNote
+     * @param originalPrice
+     * @param discountPrice
+     * @param location
+     * @param orderNo
+     * @param updater
+     * @param remark
      * @return 
-     * @create: 2016年5月17日 上午11:27:16 haiqingzheng
+     * @create: 2016年11月16日 下午5:33:30 haiqingzheng
      * @history:
      */
-    public int checkProduct(String code, String checkUser, String checkResult,
-            String checkNote);
+    public int putOnProduct(String code, Long originalPrice,
+            Long discountPrice, String location, Integer orderNo,
+            String updater, String remark);
 
     /**
-     * 上架/下架产品
+     * 下架产品
      * @param code
-     * @param checkUser
-     * @param checkResult 1上架 0下架
-     * @param checkNote
+     * @param updater
+     * @param remark
      * @return 
-     * @create: 2016年5月17日 上午11:28:12 haiqingzheng
+     * @create: 2016年11月16日 下午5:34:33 haiqingzheng
      * @history:
      */
-    public int putOnOffProduct(String code, String checkUser,
-            String checkResult, String checkNote);
+    public int putOffProduct(String code, String updater, String remark);
 
 }

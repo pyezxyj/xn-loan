@@ -19,7 +19,6 @@ import com.xnjr.mall.ao.IProductAO;
 import com.xnjr.mall.bo.IProductBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Product;
-import com.xnjr.mall.enums.EBoolean;
 import com.xnjr.mall.enums.EPutStatus;
 import com.xnjr.mall.exception.BizException;
 
@@ -59,7 +58,13 @@ public class ProductAOImpl implements IProductAO {
     public int dropProduct(String code) {
         int count = 0;
         if (StringUtils.isNotBlank(code)) {
-            count = productBO.removeProduct(code);
+            Product product = productBO.getProduct(code);
+            if (EPutStatus.todoPUBLISH.getCode().equals(product.getStatus())) {
+                count = productBO.removeProduct(code);
+            } else {
+                throw new BizException("xn000000", "产品已经上架过，不能删除");
+            }
+
         }
         return count;
     }
@@ -80,14 +85,7 @@ public class ProductAOImpl implements IProductAO {
 
         int count = 0;
         if (product != null) {
-            // 只有待审核和审核不通过的产品可进行修改
-            if (EPutStatus.todoAPPROVE.getCode().equals(dbProduct.getStatus())
-                    || EPutStatus.APPROVE_NO.getCode().equals(
-                        dbProduct.getStatus())) {
-                count = productBO.refreshProduct(product);
-            } else {
-                throw new BizException("xn000000", "只有待审核和审核不通过的产品可进行修改");
-            }
+            count = productBO.refreshProduct(product);
         }
         return count;
     }
@@ -118,41 +116,27 @@ public class ProductAOImpl implements IProductAO {
     }
 
     @Override
-    public int checkProduct(String code, String checkUser, String checkResult,
-            String checkNote) {
+    public int putOnProduct(String code, Long originalPrice,
+            Long discountPrice, String location, Integer orderNo,
+            String updater, String remark) {
         int count = 0;
         Product product = productBO.getProduct(code);
-        if (!EPutStatus.todoAPPROVE.getCode().equals(product.getStatus())) {
-            throw new BizException("xn000000", "该产品不处于待审核状态");
+        if (EPutStatus.PUBLISH_YES.getCode().equals(product.getStatus())) {
+            throw new BizException("xn000000", "该产品已经上架");
         }
-        if (EBoolean.YES.getCode().equals(checkResult)) {
-            count = productBO.approveProduct(code, checkUser, checkNote);
-        } else if (EBoolean.NO.getCode().equals(checkResult)) {
-            count = productBO.unApproveProduct(code, checkUser, checkNote);
-        } else {
-            throw new BizException("xn000000", "审核结果传值有误");
-        }
+        count = productBO.putOn(code, originalPrice, discountPrice, location,
+            orderNo, updater, remark);
         return count;
     }
 
     @Override
-    public int putOnOffProduct(String code, String checkUser,
-            String checkResult, String checkNote) {
+    public int putOffProduct(String code, String updater, String remark) {
         int count = 0;
         Product product = productBO.getProduct(code);
-        if (EBoolean.YES.getCode().equals(checkResult)) {
-            if (!EPutStatus.APPROVE_YES.getCode().equals(product.getStatus())) {
-                throw new BizException("xn000000", "该产品不处于审核通过状态，不能上架");
-            }
-            count = productBO.putOn(code, checkUser, checkNote);
-        } else if (EBoolean.NO.getCode().equals(checkResult)) {
-            if (!EPutStatus.ONLINE.getCode().equals(product.getStatus())) {
-                throw new BizException("xn000000", "该产品不处于上架状态，不能下架");
-            }
-            count = productBO.putOff(code, checkUser, checkNote);
-        } else {
-            throw new BizException("xn000000", "审核结果传值有误");
+        if (!EPutStatus.PUBLISH_YES.getCode().equals(product.getStatus())) {
+            throw new BizException("xn000000", "该产品不处于上架状态，不能下架");
         }
+        count = productBO.putOff(code, updater, remark);
         return count;
     }
 }

@@ -12,10 +12,6 @@
 
 	
 	<!-- 分页BO层注入paginableDao -->
-	<bean id="sysLogBO" class="com.xnjr.mall.bo.impl.SYSLogBOImpl">
-		<property name="paginableDAO" ref="sysLogDAOImpl"/>
-	</bean>	
-	
 	<bean id="sysDictBO" class="com.xnjr.mall.bo.impl.SYSDictBOImpl">
 		<property name="paginableDAO" ref="sysDictDAOImpl"/>
 	</bean>	
@@ -28,47 +24,17 @@
 		<property name="paginableDAO" ref="productDAOImpl"/>
 	</bean>	
 	
-	<bean id="modelBO" class="com.xnjr.mall.bo.impl.ModelBOImpl">
-		<property name="paginableDAO" ref="modelDAOImpl"/>
-	</bean>	
-	
-	<bean id="modelSpecsBO" class="com.xnjr.mall.bo.impl.ModelSpecsBOImpl">
-		<property name="paginableDAO" ref="modelSpecsDAOImpl"/>
-	</bean>
-	
-	<bean id="addressBO" class="com.xnjr.mall.bo.impl.AddressBOImpl">
-		<property name="paginableDAO" ref="addressDAOImpl"/>
-	</bean>	
-	
-	<bean id="buyGuideBO" class="com.xnjr.mall.bo.impl.BuyGuideBOImpl">
-		<property name="paginableDAO" ref="buyGuideDAOImpl"/>
-	</bean>	
-	
 	<bean id="cartBO" class="com.xnjr.mall.bo.impl.CartBOImpl">
 		<property name="paginableDAO" ref="cartDAOImpl"/>
 	</bean>	
 	
-	<bean id="invoiceBO" class="com.xnjr.mall.bo.impl.InvoiceBOImpl">
-		<property name="paginableDAO" ref="invoiceDAOImpl"/>
+	<bean id="orderBO" class="com.xnjr.mall.bo.impl.OrderBOImpl">
+		<property name="paginableDAO" ref="orderDAOImpl"/>
 	</bean>	
 	
-	<bean id="invoiceModelBO" class="com.xnjr.mall.bo.impl.InvoiceModelBOImpl">
-		<property name="paginableDAO" ref="invoiceModelDAOImpl"/>
+	<bean id="productOrderBO" class="com.xnjr.mall.bo.impl.ProductOrderBOImpl">
+		<property name="paginableDAO" ref="productOrderDAOImpl"/>
 	</bean>	
 	
-	<bean id="logisticsBO" class="com.xnjr.mall.bo.impl.LogisticsBOImpl">
-		<property name="paginableDAO" ref="logisticsDAOImpl"/>
-	</bean>	
 	
-	<bean id="goodsBO" class="com.xnjr.mall.bo.impl.GoodsBOImpl">
-		<property name="paginableDAO" ref="goodsDAOImpl"/>
-	</bean>	
-	
-	<bean id="repairOrderBO" class="com.xnjr.mall.bo.impl.RepairOrderBOImpl">
-		<property name="paginableDAO" ref="repairOrderDAOImpl"/>
-	</bean>	
-	
-	<bean id="merCardBO" class="com.xnjr.mall.bo.impl.MerCardBOImpl">
-		<property name="paginableDAO" ref="merCardDAOImpl"/>
-	</bean>	
 </beans>

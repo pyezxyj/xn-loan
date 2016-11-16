@@ -14,8 +14,7 @@ package com.xnjr.mall.enums;
  * @history:
  */
 public enum EPutStatus {
-    todoAPPROVE("0", "待审核"), APPROVE_YES("1", "审核已通过"), APPROVE_NO("2",
-            "初审不通过，进入可重提状态"), ONLINE("3", "已上架"), OFFLINE("4", "已下架");
+    todoPUBLISH("0", "未发布"), PUBLISH_YES("1", "已上架"), PUBLISH_NO("2", "已下架");
 
     EPutStatus(String code, String value) {
         this.code = code;

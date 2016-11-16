@@ -12,32 +12,32 @@ import com.xnjr.mall.ao.IProductAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
-import com.xnjr.mall.dto.req.XN601003Req;
+import com.xnjr.mall.dto.req.XN808014Req;
 import com.xnjr.mall.dto.res.BooleanRes;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
 /** 
- * 上架/下架产品
+ * 产品下架
  * @author: haiqingzheng 
  * @since: 2016年5月17日 上午9:06:30 
  * @history:
  */
-public class XN601003 extends AProcessor {
+public class XN808014 extends AProcessor {
 
     private IProductAO productAO = SpringContextHolder
         .getBean(IProductAO.class);
 
-    private XN601003Req req = null;
+    private XN808014Req req = null;
 
     /** 
      * @see com.xnjr.mall.api.IProcessor#doBusiness()
      */
     @Override
     public Object doBusiness() throws BizException {
-        int count = productAO.putOnOffProduct(req.getCode(),
-            req.getCheckUser(), req.getCheckResult(), req.getCheckNote());
+        int count = productAO.putOffProduct(req.getCode(), req.getUpdater(),
+            req.getRemark());
         return new BooleanRes(count > 0 ? true : false);
     }
 
@@ -46,9 +46,8 @@ public class XN601003 extends AProcessor {
      */
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN601003Req.class);
-        StringValidater.validateBlank(req.getCode(), req.getCheckUser(),
-            req.getCheckResult(), req.getCheckNote());
+        req = JsonUtil.json2Bean(inputparams, XN808014Req.class);
+        StringValidater.validateBlank(req.getCode(), req.getUpdater(),
+            req.getRemark());
     }
-
 }

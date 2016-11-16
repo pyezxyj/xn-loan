@@ -13,12 +13,15 @@ package com.xnjr.mall.dto.req;
  * @since: 2016年5月17日 上午9:08:54 
  * @history:
  */
-public class XN601001Req {
+public class XN808012Req {
 
     // 产品编号
     private String code;
 
     // 产品大类
+    private String category;
+
+    // 产品小类
     private String type;
 
     // 产品名称
@@ -30,23 +33,29 @@ public class XN601001Req {
     // 广告图片
     private String advPic;
 
-    // 主推图
-    private String majorPic;
+    // pic1
+    private String pic1;
 
-    // 主推文本
-    private String majorText;
+    // pic2
+    private String pic2;
 
-    // 全家福图
-    private String familyPic;
+    // pic3
+    private String pic3;
 
-    // 全家福文本
-    private String familyText;
+    // pic4
+    private String pic4;
 
-    // 亮点图
-    private String highlightPic;
+    // 产品详情
+    private String description;
 
-    // 亮点文本
-    private String highlightText;
+    // 进货价
+    private String costPrice;
+
+    // 库存量进货价
+    private String quantity;
+
+    // 状态
+    private String status;
 
     // 更新人
     private String updater;
@@ -60,6 +69,14 @@ public class XN601001Req {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getType() {
@@ -94,52 +111,68 @@ public class XN601001Req {
         this.advPic = advPic;
     }
 
-    public String getMajorPic() {
-        return majorPic;
+    public String getPic1() {
+        return pic1;
     }
 
-    public void setMajorPic(String majorPic) {
-        this.majorPic = majorPic;
+    public void setPic1(String pic1) {
+        this.pic1 = pic1;
     }
 
-    public String getMajorText() {
-        return majorText;
+    public String getPic2() {
+        return pic2;
     }
 
-    public void setMajorText(String majorText) {
-        this.majorText = majorText;
+    public void setPic2(String pic2) {
+        this.pic2 = pic2;
     }
 
-    public String getFamilyPic() {
-        return familyPic;
+    public String getPic3() {
+        return pic3;
     }
 
-    public void setFamilyPic(String familyPic) {
-        this.familyPic = familyPic;
+    public void setPic3(String pic3) {
+        this.pic3 = pic3;
     }
 
-    public String getFamilyText() {
-        return familyText;
+    public String getPic4() {
+        return pic4;
     }
 
-    public void setFamilyText(String familyText) {
-        this.familyText = familyText;
+    public void setPic4(String pic4) {
+        this.pic4 = pic4;
     }
 
-    public String getHighlightPic() {
-        return highlightPic;
+    public String getDescription() {
+        return description;
     }
 
-    public void setHighlightPic(String highlightPic) {
-        this.highlightPic = highlightPic;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getHighlightText() {
-        return highlightText;
+    public String getCostPrice() {
+        return costPrice;
     }
 
-    public void setHighlightText(String highlightText) {
-        this.highlightText = highlightText;
+    public void setCostPrice(String costPrice) {
+        this.costPrice = costPrice;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getUpdater() {
@@ -157,4 +190,5 @@ public class XN601001Req {
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
 }

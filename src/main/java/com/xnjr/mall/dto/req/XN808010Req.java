@@ -1,31 +1,19 @@
 /**
- * @Title Product.java 
- * @Package com.xnjr.mall.domain 
+ * @Title XN601000Req.java 
+ * @Package com.xnjr.mall.dto.req 
  * @Description 
  * @author haiqingzheng  
- * @date 2016年5月16日 下午8:01:28 
+ * @date 2016年5月17日 上午9:08:54 
  * @version V1.0   
  */
-package com.xnjr.mall.domain;
-
-import java.util.Date;
-
-import com.xnjr.mall.dao.base.ABaseDO;
+package com.xnjr.mall.dto.req;
 
 /** 
  * @author: haiqingzheng 
- * @since: 2016年5月16日 下午8:01:28 
+ * @since: 2016年5月17日 上午9:08:54 
  * @history:
  */
-public class Product extends ABaseDO {
-
-    /** 
-     * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
-     */
-    private static final long serialVersionUID = 8925323602686009210L;
-
-    // 产品编号
-    private String code;
+public class XN808010Req {
 
     // 产品大类
     private String category;
@@ -58,10 +46,10 @@ public class Product extends ABaseDO {
     private String description;
 
     // 进货价
-    private Long costPrice;
+    private String costPrice;
 
     // 库存量进货价
-    private Long quantity;
+    private String quantity;
 
     // 状态
     private String status;
@@ -69,37 +57,11 @@ public class Product extends ABaseDO {
     // 更新人
     private String updater;
 
-    // 更新时间
-    private Date updateDatetime;
-
     // 备注
     private String remark;
 
-    // 原价
-    private Long originalPrice;
-
-    // 折扣价
-    private Long discountPrice;
-
-    // 位置
-    private String location;
-
-    // 相对位置编号
-    private Integer orderNo;
-
     // 所属公司编号
     private String companyCode;
-
-    // 名字模糊查询
-    private String nameForQuery;
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 
     public String getCategory() {
         return category;
@@ -181,19 +143,19 @@ public class Product extends ABaseDO {
         this.description = description;
     }
 
-    public Long getCostPrice() {
+    public String getCostPrice() {
         return costPrice;
     }
 
-    public void setCostPrice(Long costPrice) {
+    public void setCostPrice(String costPrice) {
         this.costPrice = costPrice;
     }
 
-    public Long getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Long quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
@@ -213,52 +175,12 @@ public class Product extends ABaseDO {
         this.updater = updater;
     }
 
-    public Date getUpdateDatetime() {
-        return updateDatetime;
-    }
-
-    public void setUpdateDatetime(Date updateDatetime) {
-        this.updateDatetime = updateDatetime;
-    }
-
     public String getRemark() {
         return remark;
     }
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public Long getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public void setOriginalPrice(Long originalPrice) {
-        this.originalPrice = originalPrice;
-    }
-
-    public Long getDiscountPrice() {
-        return discountPrice;
-    }
-
-    public void setDiscountPrice(Long discountPrice) {
-        this.discountPrice = discountPrice;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public Integer getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(Integer orderNo) {
-        this.orderNo = orderNo;
     }
 
     public String getCompanyCode() {
@@ -268,13 +190,4 @@ public class Product extends ABaseDO {
     public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
     }
-
-    public String getNameForQuery() {
-        return nameForQuery;
-    }
-
-    public void setNameForQuery(String nameForQuery) {
-        this.nameForQuery = nameForQuery;
-    }
-
 }

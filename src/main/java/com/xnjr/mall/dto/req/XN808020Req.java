@@ -13,9 +13,17 @@ package com.xnjr.mall.dto.req;
  * @since: 2016年5月17日 上午9:08:54 
  * @history:
  */
-public class XN601005Req {
+public class XN808020Req extends APageReq {
+
+    /** 
+     * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
+     */
+    private static final long serialVersionUID = 7405232977567267123L;
 
     // 产品大类
+    private String category;
+
+    // 产品小类
     private String type;
 
     // 产品名称
@@ -24,8 +32,16 @@ public class XN601005Req {
     // 状态
     private String status;
 
-    // 更新人
-    private String updater;
+    // 公司编号
+    private String companyCode;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getType() {
         return type;
@@ -51,12 +67,11 @@ public class XN601005Req {
         this.status = status;
     }
 
-    public String getUpdater() {
-        return updater;
+    public String getCompanyCode() {
+        return companyCode;
     }
 
-    public void setUpdater(String updater) {
-        this.updater = updater;
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
     }
-
 }

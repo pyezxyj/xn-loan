@@ -38,7 +38,10 @@
 				AND t.type = #{type}
 			</if>
 			<if test="name != null and name != '' ">
-				AND t.name like "%"#{name}"%"
+				AND t.name = #{name}
+			</if>
+			<if test="nameForQuery != null and nameForQuery != '' ">
+				AND t.name like "%"#{nameForQuery}"%"
 			</if>
 			<if test="companyCode != null and companyCode != '' ">
 				AND t.company_code = #{companyCode}
@@ -119,6 +122,7 @@
 		,updater
 		,update_datetime
 		,remark
+		,company_code
 		)
 		VALUES(
 		#{code}
@@ -138,6 +142,7 @@
 		,#{updater}
 		,#{updateDatetime}
 		,#{remark}
+		,#{companyCode}
 		)
 	</insert>
 	
@@ -156,7 +161,6 @@
 		,description = #{description}
 		,cost_price = #{costPrice}
 		,quantity = #{quantity}
-		,status = #{status}
 		,updater = #{updater}
 		,update_datetime = #{updateDatetime}
 		,remark = #{remark}
@@ -167,6 +171,20 @@
 		UPDATE tmall_product
 		SET
 		status = #{status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_putOn" parameterType="product">
+		UPDATE tmall_product
+		SET
+		original_price = #{originalPrice}
+		,discount_price = #{discountPrice}
+		,location = #{location}
+		,order_no = #{orderNo}
+		,status = #{status}
 		,updater = #{updater}
 		,update_datetime = #{updateDatetime}
 		,remark = #{remark}
