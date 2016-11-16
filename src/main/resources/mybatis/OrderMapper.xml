@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.IOrderDAO">
+	<resultMap id="order_DB_Result" type="order">
+		<result column="code" property="code" />
+		<result column="type" property="type" />
+		<result column="receiver" property="receiver" />
+		<result column="reMobile" property="reMobile" />
+		<result column="reAddress" property="reAddress" />
+		<result column="receipt_type" property="receiptType" />
+		<result column="receipt_title" property="receiptTitle" />
+		<result column="apply_user" property="applyUser" />
+		<result column="apply_note" property="applyNote" />
+		<result column="apply_datetime" property="applyDatetime" />
+		<result column="amount" property="amount" />
+		<result column="pay_amount" property="payAmount" />
+		<result column="status" property="status" />
+		<result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="remark" property="remark" />
+		<result column="logistics_code" property="logisticsCode" />
+		<result column="logistics_company" property="logisticsCompany" />
+		<result column="deliverer" property="deliverer" />
+		<result column="delivery_datetime" property="deliveryDatetime" />
+		<result column="pdf" property="pdf" />
+		<result column="company_code" property="companyCode" />
+		
+		<result column="login_name" property="loginName" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="codeForQuery != null and codeForQuery != '' ">
+				AND t.code like "%"#{codeForQuery}"%"
+			</if>
+			<if test="applyUser != null and applyUser != '' ">
+				AND t.apply_user = #{applyUser}
+			</if>
+			<if test="applyDatetimeStart != null and applyDatetimeStart != '' ">
+				<![CDATA[AND t.apply_datetime >= #{applyDatetimeStart}]]>
+			</if>
+			<if test="applyDatetimeEnd != null and applyDatetimeEnd != '' ">
+				<![CDATA[AND t.apply_datetime <= #{applyDatetimeEnd}]]>
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="loginName != null and loginName != '' ">
+				AND tu.login_name like "%"#{loginName}"%"
+			</if>
+			<if test="companyCode != null and companyCode != '' ">
+				AND t.company_code = #{companyCode}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_order" parameterType="order" resultMap="order_DB_Result">
+		SELECT
+		t.code
+		,t.type
+		,t.receiver
+		,t.re_mobile
+		,t.re_address
+		,t.receipt_type
+		,t.receipt_title
+		,t.apply_user
+		,tu.login_name
+		,t.apply_datetime
+		,t.apply_note
+		,t.amount
+		,t.pay_amount
+		,t.status
+		,t.updater
+		,t.update_datetime
+		,t.remark
+		,t.logistics_code
+		,t.logistics_company
+		,t.deliverer
+		,t.delivery_datetime
+		,t.pdf
+		,t.company_code
+		FROM
+		tmall_order t LEFT JOIN ${userDB}.tstd_user tu ON t.apply_user = tu.user_id
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_order_count" parameterType="order"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tmall_order t LEFT JOIN ${userDB}.tstd_user tu ON t.apply_user = tu.user_id
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_order" parameterType="order">
+		INSERT INTO tmall_order(
+		code
+		,type
+		,receiver
+		,re_mobile
+		,re_address
+		,receipt_type
+		,receipt_title
+		,apply_user
+		,apply_note
+		,apply_datetime
+		,amount
+		,pay_amount
+		,status
+		)
+		VALUES(
+		#{code}
+		,#{type}
+		,#{receiver}
+		,#{reMobile}
+		,#{reAddress}
+		,#{receiptType}
+		,#{receiptTitle}
+		,#{applyUser}
+		,#{applyNote}
+		,#{applyDatetime}
+		,#{amount}
+		,#{payAmount}
+		,#{status}
+		)
+	</insert>
+
+	<update id="update_orderStatus" parameterType="order">
+		UPDATE tmall_order
+		SET
+		status = #{status}
+		WHERE
+		code = #{code}
+	</update>
+	
+	<update id="update_orderCancel" parameterType="order">
+		UPDATE tmall_order
+		SET
+		status = #{status}
+		,remark = #{remark}
+		WHERE
+		code = #{code}
+	</update>
+	
+	<update id="update_orderApprove" parameterType="order">
+		UPDATE tmall_order
+		SET
+		status = #{status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE
+		code = #{code}
+	</update>
+	
+	<update id="update_orderPayAmount" parameterType="order">
+		UPDATE tmall_order
+		SET
+		pay_amount = #{payAmount}
+		WHERE
+		code = #{code}
+	</update>
+</mapper>

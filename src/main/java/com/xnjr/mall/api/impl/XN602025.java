@@ -2,12 +2,12 @@ package com.xnjr.mall.api.impl;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.xnjr.mall.ao.IInvoiceAO;
+import com.xnjr.mall.ao.IOrderAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.DateUtil;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
-import com.xnjr.mall.domain.Invoice;
+import com.xnjr.mall.domain.Order;
 import com.xnjr.mall.dto.req.XN602025Req;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
@@ -21,8 +21,8 @@ import com.xnjr.mall.spring.SpringContextHolder;
  */
 public class XN602025 extends AProcessor {
 
-    private IInvoiceAO invoiceAO = SpringContextHolder
-        .getBean(IInvoiceAO.class);
+    private IOrderAO invoiceAO = SpringContextHolder
+        .getBean(IOrderAO.class);
 
     private XN602025Req req = null;
 
@@ -31,7 +31,7 @@ public class XN602025 extends AProcessor {
      */
     @Override
     public Object doBusiness() throws BizException {
-        Invoice condition = new Invoice();
+        Order condition = new Order();
         condition.setCodeForQuery(req.getCode());
         condition.setLoginName(req.getLoginName());
         condition.setApplyUser(req.getApplyUser());
@@ -43,7 +43,7 @@ public class XN602025 extends AProcessor {
             DateUtil.DATA_TIME_PATTERN_1));
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
-            orderColumn = IInvoiceAO.DEFAULT_ORDER_COLUMN;
+            orderColumn = IOrderAO.DEFAULT_ORDER_COLUMN;
         }
         condition.setOrder(orderColumn, req.getOrderDir());
         int start = StringValidater.toInteger(req.getStart());

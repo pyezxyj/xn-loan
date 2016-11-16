@@ -4,13 +4,10 @@
 <mapper namespace="com.xnjr.mall.dao.ISYSDictDAO">
 	<resultMap id="sysDict_DB_Result" type="sysDict">
 		<result column="id" property="id" />
-		<result column="to_system" property="toSystem" />
 		<result column="type" property="type" />
 		<result column="parent_key" property="parentKey" />
 		<result column="dkey" property="dkey" />
 		<result column="dvalue" property="dvalue" />
-		<result column="updater" property="updater" />
-		<result column="update_datetime" property="updateDatetime" />
 		<result column="remark" property="remark" />
 	</resultMap>
 	<sql id="where_condition">
@@ -18,9 +15,6 @@
 			<if test="id != null">
 				AND t.id = #{id}
 			</if>	
-			<if test="toSystem != null and toSystem != '' ">
-				AND t.to_system = #{toSystem}
-			</if>
 			<if test="type != null and type != '' ">
 				AND t.type = #{type}
 			</if>
@@ -35,14 +29,10 @@
 	<select id="select_sysDict" parameterType="sysDict" resultMap="sysDict_DB_Result">
 		SELECT
 		id
-		,to_system
 		,type
 		,parent_key
 		,dkey
-		
 		,dvalue
-		,updater
-		,update_datetime
 		,remark
 		FROM
 		tsys_dict t 
@@ -61,23 +51,17 @@
 	
 	<insert id="insert_sysDict" parameterType="sysDict" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO tsys_dict(
-		to_system
 		,type
 		,parent_key
 		,dkey
 		,dvalue
-		,updater
-		,update_datetime
 		,remark
 		)
 		VALUES(
-		#{toSystem}
 		,#{type}
 		,#{parentKey}
 		,#{dkey}
 		,#{dvalue}
-		,#{updater}
-		,#{updateDatetime}
 		,#{remark}
 		)
 	</insert>
@@ -91,8 +75,6 @@
 	<update id="update_sysDict" parameterType="sysDict">
 		UPDATE tsys_dict SET
 		dvalue = #{dvalue}
-		,updater = #{updater}
-		,update_datetime = #{updateDatetime}
 		,remark=#{remark}
 		WHERE id = #{id}
 	</update>

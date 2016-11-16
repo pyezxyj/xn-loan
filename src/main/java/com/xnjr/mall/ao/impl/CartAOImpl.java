@@ -16,9 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xnjr.mall.ao.ICartAO;
-import com.xnjr.mall.bo.IBuyGuideBO;
 import com.xnjr.mall.bo.ICartBO;
-import com.xnjr.mall.bo.IModelBO;
+import com.xnjr.mall.bo.IProductBO;
 import com.xnjr.mall.bo.IUserBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Cart;
@@ -37,10 +36,7 @@ public class CartAOImpl implements ICartAO {
     ICartBO cartBO;
 
     @Autowired
-    IBuyGuideBO buyGuideBO;
-
-    @Autowired
-    IModelBO modelBO;
+    IProductBO productBO;
 
     @Autowired
     IUserBO userBO;
@@ -51,10 +47,10 @@ public class CartAOImpl implements ICartAO {
     @Override
     public String addCart(Cart data) {
         String code = null;
-        if (!modelBO.isModelExist(data.getModelCode())) {
+        if (!productBO.isProductExist(data.getProductCode())) {
             throw new BizException("xn0000", "型号编号不存在");
         }
-        Cart cart = cartBO.getCart(data.getUserId(), data.getModelCode());
+        Cart cart = cartBO.getCart(data.getUserId(), data.getProductCode());
         if (cart != null) {
             code = cart.getCode();
             data.setCode(code);
@@ -111,7 +107,7 @@ public class CartAOImpl implements ICartAO {
         if (page != null && page.getList() != null) {
             for (Cart cart : page.getList()) {
                 Long salePrice = buyGuideBO.getBuyGuidePrice(
-                    cart.getModelCode(), user.getLevel());
+                    cart.getProductCode(), user.getLevel());
                 cart.setSalePrice(salePrice);
             }
         }
@@ -130,7 +126,7 @@ public class CartAOImpl implements ICartAO {
         if (!CollectionUtils.sizeIsEmpty(list)) {
             for (Cart cart : list) {
                 Long salePrice = buyGuideBO.getBuyGuidePrice(
-                    cart.getModelCode(), user.getLevel());
+                    cart.getProductCode(), user.getLevel());
                 cart.setSalePrice(salePrice);
             }
         }
@@ -147,7 +143,7 @@ public class CartAOImpl implements ICartAO {
         String userId = cart.getUserId();
         XN805901Res user = userBO.getRemoteUser(userId, userId);
         // 获取价格
-        Long salePrice = buyGuideBO.getBuyGuidePrice(cart.getModelCode(),
+        Long salePrice = buyGuideBO.getBuyGuidePrice(cart.getProductCode(),
             user.getLevel());
         cart.setSalePrice(salePrice);
         return cart;

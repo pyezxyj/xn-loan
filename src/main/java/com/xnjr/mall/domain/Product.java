@@ -28,6 +28,9 @@ public class Product extends ABaseDO {
     private String code;
 
     // 产品大类
+    private String category;
+
+    // 产品小类
     private String type;
 
     // 产品名称
@@ -39,23 +42,26 @@ public class Product extends ABaseDO {
     // 广告图片
     private String advPic;
 
-    // 主推图
-    private String majorPic;
+    // pic1
+    private String pic1;
 
-    // 主推文本
-    private String majorText;
+    // pic2
+    private String pic2;
 
-    // 全家福图
-    private String familyPic;
+    // pic3
+    private String pic3;
 
-    // 全家福文本
-    private String familyText;
+    // pic4
+    private String pic4;
 
-    // 亮点图
-    private String highlightPic;
+    // 产品详情
+    private String description;
 
-    // 亮点文本
-    private String highlightText;
+    // 进货价
+    private String costPrice;
+
+    // 库存量进货价
+    private String quantity;
 
     // 状态
     private String status;
@@ -69,12 +75,35 @@ public class Product extends ABaseDO {
     // 备注
     private String remark;
 
+    // 原价
+    private Long originalPrice;
+
+    // 折扣价
+    private Long discountPrice;
+
+    // 位置
+    private String location;
+
+    // 相对位置编号
+    private String orderNo;
+
+    // 所属公司编号
+    private String companyCode;
+
     public String getCode() {
         return code;
     }
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getType() {
@@ -109,52 +138,60 @@ public class Product extends ABaseDO {
         this.advPic = advPic;
     }
 
-    public String getMajorPic() {
-        return majorPic;
+    public String getPic1() {
+        return pic1;
     }
 
-    public void setMajorPic(String majorPic) {
-        this.majorPic = majorPic;
+    public void setPic1(String pic1) {
+        this.pic1 = pic1;
     }
 
-    public String getMajorText() {
-        return majorText;
+    public String getPic2() {
+        return pic2;
     }
 
-    public void setMajorText(String majorText) {
-        this.majorText = majorText;
+    public void setPic2(String pic2) {
+        this.pic2 = pic2;
     }
 
-    public String getFamilyPic() {
-        return familyPic;
+    public String getPic3() {
+        return pic3;
     }
 
-    public void setFamilyPic(String familyPic) {
-        this.familyPic = familyPic;
+    public void setPic3(String pic3) {
+        this.pic3 = pic3;
     }
 
-    public String getFamilyText() {
-        return familyText;
+    public String getPic4() {
+        return pic4;
     }
 
-    public void setFamilyText(String familyText) {
-        this.familyText = familyText;
+    public void setPic4(String pic4) {
+        this.pic4 = pic4;
     }
 
-    public String getHighlightPic() {
-        return highlightPic;
+    public String getDescription() {
+        return description;
     }
 
-    public void setHighlightPic(String highlightPic) {
-        this.highlightPic = highlightPic;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getHighlightText() {
-        return highlightText;
+    public String getCostPrice() {
+        return costPrice;
     }
 
-    public void setHighlightText(String highlightText) {
-        this.highlightText = highlightText;
+    public void setCostPrice(String costPrice) {
+        this.costPrice = costPrice;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public String getStatus() {
@@ -187,5 +224,45 @@ public class Product extends ABaseDO {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Long getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(Long originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
+    public Long getDiscountPrice() {
+        return discountPrice;
+    }
+
+    public void setDiscountPrice(Long discountPrice) {
+        this.discountPrice = discountPrice;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public String getCompanyCode() {
+        return companyCode;
+    }
+
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
     }
 }

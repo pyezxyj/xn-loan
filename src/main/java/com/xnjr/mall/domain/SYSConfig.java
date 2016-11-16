@@ -8,8 +8,6 @@
  */
 package com.xnjr.mall.domain;
 
-import java.util.Date;
-
 import com.xnjr.mall.dao.base.ABaseDO;
 
 /** 
@@ -26,8 +24,8 @@ public class SYSConfig extends ABaseDO {
     // 编号（自增长）
     private Long id;
 
-    // 针对系统
-    private String toSystem;
+    // 配置名
+    private String cname;
 
     // key值
     private String ckey;
@@ -35,17 +33,11 @@ public class SYSConfig extends ABaseDO {
     // value值
     private String cvalue;
 
-    // 参数说明
-    private String note;
-
-    // 最近更新人
-    private String updater;
-
-    // 最近更新时间
-    private Date updateDatetime;
-
     // 备注
     private String remark;
+
+    // 所属公司编号
+    private String companyCode;
 
     // ************* 模糊查询 *****************
     private String ckeyForQuery;
@@ -58,12 +50,12 @@ public class SYSConfig extends ABaseDO {
         this.id = id;
     }
 
-    public String getToSystem() {
-        return toSystem;
+    public String getCname() {
+        return cname;
     }
 
-    public void setToSystem(String toSystem) {
-        this.toSystem = toSystem;
+    public void setCname(String cname) {
+        this.cname = cname;
     }
 
     public String getCkey() {
@@ -82,36 +74,20 @@ public class SYSConfig extends ABaseDO {
         this.cvalue = cvalue;
     }
 
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public String getUpdater() {
-        return updater;
-    }
-
-    public void setUpdater(String updater) {
-        this.updater = updater;
-    }
-
-    public Date getUpdateDatetime() {
-        return updateDatetime;
-    }
-
-    public void setUpdateDatetime(Date updateDatetime) {
-        this.updateDatetime = updateDatetime;
-    }
-
     public String getRemark() {
         return remark;
     }
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getCompanyCode() {
+        return companyCode;
+    }
+
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
     }
 
     public String getCkeyForQuery() {

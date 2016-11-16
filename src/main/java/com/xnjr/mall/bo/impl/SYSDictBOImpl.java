@@ -8,7 +8,6 @@
  */
 package com.xnjr.mall.bo.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,6 @@ public class SYSDictBOImpl extends PaginableBOImpl<SYSDict> implements
     public Long saveSYSDict(SYSDict data) {
         Long id = null;
         if (data != null) {
-            data.setUpdateDatetime(new Date());
             sysDictDAO.insert(data);
             id = data.getId();
         }
@@ -65,7 +63,6 @@ public class SYSDictBOImpl extends PaginableBOImpl<SYSDict> implements
     public int refreshSYSDict(SYSDict data) {
         int count = 0;
         if (data != null) {
-            data.setUpdateDatetime(new Date());
             count = sysDictDAO.update(data);
         }
         return count;

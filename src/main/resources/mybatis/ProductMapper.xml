@@ -4,31 +4,44 @@
 <mapper namespace="com.xnjr.mall.dao.IProductDAO">
 	<resultMap id="product_DB_Result" type="product">
 		<result column="code" property="code" />
-		<result column="name" property="name" />
+		<result column="category" property="category" />
 		<result column="type" property="type" />
+		<result column="name" property="name" />
 		<result column="adv_title" property="advTitle" />
 		<result column="adv_pic" property="advPic" />
-		<result column="major_pic" property="majorPic" />
-		<result column="major_text" property="majorText" />
-		<result column="family_pic" property="familyPic" />
-		<result column="family_text" property="familyText" />
-		<result column="highlight_pic" property="highlightPic" />
-		<result column="highlight_text" property="highlightText" />
+		<result column="pic1" property="pic1" />
+		<result column="pic2" property="pic2" />
+		<result column="pic3" property="pic3" />
+		<result column="pic4" property="pic4" />
+		<result column="description" property="description" />
+		<result column="cost_price" property="costPrice" />
+		<result column="quantity" property="quantity" />
 		<result column="status" property="status" />
 	    <result column="updater" property="updater" />
 		<result column="update_datetime" property="updateDatetime" />
 		<result column="remark" property="remark" />
+		<result column="original_price" property="originalPrice" />
+		<result column="discount_price" property="discountPrice" />
+		<result column="location" property="location" />
+		<result column="order_no" property="orderNo" />
+		<result column="company_code" property="companyCode" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
-			<if test="name != null and name != '' ">
-				AND t.name like "%"#{name}"%"
+			<if test="category != null and category != '' ">
+				AND t.category = #{category}
 			</if>
 			<if test="type != null and type != '' ">
 				AND t.type = #{type}
+			</if>
+			<if test="name != null and name != '' ">
+				AND t.name like "%"#{name}"%"
+			</if>
+			<if test="companyCode != null and companyCode != '' ">
+				AND t.company_code = #{companyCode}
 			</if>
 			<choose>
 				 <when test="status == '13'">
@@ -49,20 +62,27 @@
 	<select id="select_product" parameterType="product" resultMap="product_DB_Result">
 		SELECT
 		code
-		,name
+		,category
 		,type
+		,name
 		,adv_title
 		,adv_pic
-		,major_pic
-		,major_text
-		,family_pic
-		,family_text
-		,highlight_pic
-		,highlight_text
+		,pic1
+		,pic2
+		,pic3
+		,pic4
+		,description
+		,cost_price
+		,quantity
 		,status
 		,updater
 		,update_datetime
 		,remark
+		,original_price
+		,discount_price
+		,location
+		,order_no
+		,company_code
 		FROM
 		tmall_product t
 		<include refid="where_condition" />
@@ -83,16 +103,18 @@
 		INSERT INTO
 		tmall_product(
 		code
-		,name
+		,category
 		,type
+		,name
 		,adv_title
 		,adv_pic
-		,major_pic
-		,major_text
-		,family_pic
-		,family_text
-		,highlight_pic
-		,highlight_text
+		,pic1
+		,pic2
+		,pic3
+		,pic4
+		,description
+		,cost_price
+		,quantity
 		,status
 		,updater
 		,update_datetime
@@ -100,16 +122,18 @@
 		)
 		VALUES(
 		#{code}
-		,#{name}
+		,#{category}
 		,#{type}
+		,#{name}
 		,#{advTitle}
 		,#{advPic}
-		,#{majorPic}
-		,#{majorText}
-		,#{familyPic}
-		,#{familyText}
-		,#{highlightPic}
-		,#{highlightText}
+		,#{pic1}
+		,#{pic2}
+		,#{pic3}
+		,#{pic4}
+		,#{description}
+		,#{costPrice}
+		,#{quantity}
 		,#{status}
 		,#{updater}
 		,#{updateDatetime}
@@ -121,15 +145,17 @@
 		UPDATE tmall_product
 		SET
 		name = #{name}
+		,category = #{category}
 		,type = #{type}
 		,adv_title = #{advTitle}
 		,adv_pic = #{advPic}
-		,major_pic = #{majorPic}
-		,major_text = #{majorText}
-		,family_pic = #{familyPic}
-		,family_text = #{familyText}
-		,highlight_pic = #{highlightPic}
-		,highlight_text = #{highlightText}
+		,pic1 = #{pic1}
+		,pic2 = #{pic2}
+		,pic3 = #{pic3}
+		,pic4 = #{pic4}
+		,description = #{description}
+		,cost_price = #{costPrice}
+		,quantity = #{quantity}
 		,status = #{status}
 		,updater = #{updater}
 		,update_datetime = #{updateDatetime}

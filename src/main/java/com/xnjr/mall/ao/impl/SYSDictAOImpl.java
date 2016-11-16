@@ -68,14 +68,12 @@ public class SYSDictAOImpl implements ISYSDictAO {
             throw new BizException("xn000000", "type类型不在枚举类中 0-第一层 1-第二层");
         }
         SYSDict sysDict = new SYSDict();
-        sysDict.setToSystem("8");
         sysDict.setType(type);
         if (EDictType.SECOND.getCode().equals(type)) {
             sysDict.setParentKey(parentKey);
         }
         sysDict.setDkey(key);
         sysDict.setDvalue(value);
-        sysDict.setUpdater(updater);
         sysDict.setRemark(remark);
         return sysDictBO.saveSYSDict(sysDict);
     }
@@ -99,7 +97,6 @@ public class SYSDictAOImpl implements ISYSDictAO {
         SYSDict data = new SYSDict();
         data.setId(id);
         data.setDvalue(value);
-        data.setUpdater(updater);
         data.setRemark(remark);
         return sysDictBO.refreshSYSDict(data);
     }

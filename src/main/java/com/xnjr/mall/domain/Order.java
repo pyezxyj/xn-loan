@@ -1,0 +1,336 @@
+/**
+ * @Title Invoice.java 
+ * @Package com.xnjr.mall.domain 
+ * @Description 
+ * @author xieyj  
+ * @date 2016年5月23日 下午7:32:38 
+ * @version V1.0   
+ */
+package com.xnjr.mall.domain;
+
+import java.util.Date;
+import java.util.List;
+
+import com.xnjr.mall.dao.base.ABaseDO;
+
+/**
+ * @author: haiqingzheng 
+ * @since: 2016年11月16日 上午11:16:07 
+ * @history:
+ */
+public class Order extends ABaseDO {
+    /** 
+     * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
+     */
+    private static final long serialVersionUID = -6380104639754144884L;
+
+    // 编号
+    private String code;
+
+    // 类型(散买，批发)
+    private String type;
+
+    // 收件人姓名
+    private String receiver;
+
+    // 收件人电话
+    private String reMobile;
+
+    // 收货地址
+    private String reAddress;
+
+    // 发票类型(1 个人，2 企业)
+    private String receiptType;
+
+    // 发票抬头
+    private String receiptTitle;
+
+    // 下单人
+    private String applyUser;
+
+    // 申请备注
+    private String applyNote;
+
+    // 申请时间
+    private Date applyDatetime;
+
+    // 订单金额
+    private Long amount;
+
+    // 实际支付金额
+    private Long payAmount;
+
+    // 状态
+    private String status;
+
+    // 更新人
+    private String updater;
+
+    // 更新时间
+    private Date updateDatetime;
+
+    // 备注
+    private String remark;
+
+    // 物流单号
+    private String logisticsCode;
+
+    // 物流公司
+    private String logisticsCompany;
+
+    // 发货人
+    private String deliverer;
+
+    // 发货时间
+    private Date deliveryDatetime;
+
+    // 物流单
+    private String pdf;
+
+    // 所属公司编号
+    private String companyCode;
+
+    // *************dp properties **************
+
+    // 订单总金额
+    private Long totalAmount;
+
+    // 申请开始时间起
+    private Date applyDatetimeStart;
+
+    // 申请开始时间止
+    private Date applyDatetimeEnd;
+
+    // 模糊查询使用
+    private String codeForQuery;
+
+    // 下单人用户名
+    private String loginName;
+
+    List<ProductOrder> productOrderList;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public String getReMobile() {
+        return reMobile;
+    }
+
+    public void setReMobile(String reMobile) {
+        this.reMobile = reMobile;
+    }
+
+    public String getReAddress() {
+        return reAddress;
+    }
+
+    public void setReAddress(String reAddress) {
+        this.reAddress = reAddress;
+    }
+
+    public String getReceiptType() {
+        return receiptType;
+    }
+
+    public void setReceiptType(String receiptType) {
+        this.receiptType = receiptType;
+    }
+
+    public String getReceiptTitle() {
+        return receiptTitle;
+    }
+
+    public void setReceiptTitle(String receiptTitle) {
+        this.receiptTitle = receiptTitle;
+    }
+
+    public String getApplyUser() {
+        return applyUser;
+    }
+
+    public void setApplyUser(String applyUser) {
+        this.applyUser = applyUser;
+    }
+
+    public String getApplyNote() {
+        return applyNote;
+    }
+
+    public void setApplyNote(String applyNote) {
+        this.applyNote = applyNote;
+    }
+
+    public Date getApplyDatetime() {
+        return applyDatetime;
+    }
+
+    public void setApplyDatetime(Date applyDatetime) {
+        this.applyDatetime = applyDatetime;
+    }
+
+    public Long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Long amount) {
+        this.amount = amount;
+    }
+
+    public Long getPayAmount() {
+        return payAmount;
+    }
+
+    public void setPayAmount(Long payAmount) {
+        this.payAmount = payAmount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
+
+    public Date getUpdateDatetime() {
+        return updateDatetime;
+    }
+
+    public void setUpdateDatetime(Date updateDatetime) {
+        this.updateDatetime = updateDatetime;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getLogisticsCode() {
+        return logisticsCode;
+    }
+
+    public void setLogisticsCode(String logisticsCode) {
+        this.logisticsCode = logisticsCode;
+    }
+
+    public String getLogisticsCompany() {
+        return logisticsCompany;
+    }
+
+    public void setLogisticsCompany(String logisticsCompany) {
+        this.logisticsCompany = logisticsCompany;
+    }
+
+    public String getDeliverer() {
+        return deliverer;
+    }
+
+    public void setDeliverer(String deliverer) {
+        this.deliverer = deliverer;
+    }
+
+    public Date getDeliveryDatetime() {
+        return deliveryDatetime;
+    }
+
+    public void setDeliveryDatetime(Date deliveryDatetime) {
+        this.deliveryDatetime = deliveryDatetime;
+    }
+
+    public String getPdf() {
+        return pdf;
+    }
+
+    public void setPdf(String pdf) {
+        this.pdf = pdf;
+    }
+
+    public String getCompanyCode() {
+        return companyCode;
+    }
+
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
+    }
+
+    public Long getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(Long totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public Date getApplyDatetimeStart() {
+        return applyDatetimeStart;
+    }
+
+    public void setApplyDatetimeStart(Date applyDatetimeStart) {
+        this.applyDatetimeStart = applyDatetimeStart;
+    }
+
+    public Date getApplyDatetimeEnd() {
+        return applyDatetimeEnd;
+    }
+
+    public void setApplyDatetimeEnd(Date applyDatetimeEnd) {
+        this.applyDatetimeEnd = applyDatetimeEnd;
+    }
+
+    public String getCodeForQuery() {
+        return codeForQuery;
+    }
+
+    public void setCodeForQuery(String codeForQuery) {
+        this.codeForQuery = codeForQuery;
+    }
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
+    public List<ProductOrder> getProductOrderList() {
+        return productOrderList;
+    }
+
+    public void setProductOrderList(List<ProductOrder> productOrderList) {
+        this.productOrderList = productOrderList;
+    }
+
+}

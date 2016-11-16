@@ -1,7 +1,5 @@
 package com.xnjr.mall.bo.impl;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,7 +36,6 @@ public class SYSConfigBOImpl extends PaginableBOImpl<SYSConfig> implements
         int count = 0;
         if (data != null) {
             data.setId(data.getId());
-            data.setUpdateDatetime(new Date());
             count = sysConfigDAO.insert(data);
         }
         return count;
@@ -48,7 +45,6 @@ public class SYSConfigBOImpl extends PaginableBOImpl<SYSConfig> implements
     public int refreshSYSConfig(SYSConfig data) {
         int count = 0;
         if (data != null) {
-            data.setUpdateDatetime(new Date());
             count = sysConfigDAO.updateValue(data);
         }
         return count;

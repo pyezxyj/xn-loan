@@ -1,42 +1,48 @@
+/**
+ * @Title Invoice.java 
+ * @Package com.xnjr.mall.domain 
+ * @Description 
+ * @author xieyj  
+ * @date 2016年5月23日 下午7:32:38 
+ * @version V1.0   
+ */
 package com.xnjr.mall.domain;
 
 import com.xnjr.mall.dao.base.ABaseDO;
 
 /** 
- * @author: haiqingzheng 
- * @since: 2016年11月16日 上午11:16:18 
+ * @author: xieyj 
+ * @since: 2016年5月23日 下午7:32:38 
  * @history:
  */
-public class Cart extends ABaseDO {
-
+public class ProductOrder extends ABaseDO {
     /** 
      * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
      */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -6380104639754144884L;
 
-    /* *************db properties ************* */
     // 编号
     private String code;
 
-    // 用户编号
-    private String userId;
+    // 订单编号
+    private String orderCode;
 
-    // 商品编号
+    // 型号编号
     private String productCode;
 
     // 数量
     private Integer quantity;
 
-    /* *************db properties ************* */
+    // 单价
+    private Long salePrice;
 
-    // 商品广告图
-    private String advPic;
+    // **************db properties
 
-    // 商品名称
+    // 产品名称
     private String productName;
 
-    // 价格
-    private Long salePrice;
+    // 广告图
+    private String advPic;
 
     public String getCode() {
         return code;
@@ -46,12 +52,12 @@ public class Cart extends ABaseDO {
         this.code = code;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getOrderCode() {
+        return orderCode;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setOrderCode(String orderCode) {
+        this.orderCode = orderCode;
     }
 
     public String getProductCode() {
@@ -70,12 +76,12 @@ public class Cart extends ABaseDO {
         this.quantity = quantity;
     }
 
-    public String getAdvPic() {
-        return advPic;
+    public Long getSalePrice() {
+        return salePrice;
     }
 
-    public void setAdvPic(String advPic) {
-        this.advPic = advPic;
+    public void setSalePrice(Long salePrice) {
+        this.salePrice = salePrice;
     }
 
     public String getProductName() {
@@ -86,12 +92,11 @@ public class Cart extends ABaseDO {
         this.productName = productName;
     }
 
-    public Long getSalePrice() {
-        return salePrice;
+    public String getAdvPic() {
+        return advPic;
     }
 
-    public void setSalePrice(Long salePrice) {
-        this.salePrice = salePrice;
+    public void setAdvPic(String advPic) {
+        this.advPic = advPic;
     }
-
 }

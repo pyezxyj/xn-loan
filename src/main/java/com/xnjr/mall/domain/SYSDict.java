@@ -8,8 +8,6 @@
  */
 package com.xnjr.mall.domain;
 
-import java.util.Date;
-
 import com.xnjr.mall.dao.base.ABaseDO;
 
 /** 
@@ -26,9 +24,6 @@ public class SYSDict extends ABaseDO {
     // 编号（自增长）
     private Long id;
 
-    // 针对系统
-    private String toSystem;
-
     // 类型（第一层/第二层）
     private String type;
 
@@ -41,12 +36,6 @@ public class SYSDict extends ABaseDO {
     // value
     private String dvalue;
 
-    // 修改人
-    private String updater;
-
-    // 修改时间
-    private Date updateDatetime;
-
     // 备注
     private String remark;
 
@@ -56,14 +45,6 @@ public class SYSDict extends ABaseDO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getToSystem() {
-        return toSystem;
-    }
-
-    public void setToSystem(String toSystem) {
-        this.toSystem = toSystem;
     }
 
     public String getType() {
@@ -96,22 +77,6 @@ public class SYSDict extends ABaseDO {
 
     public void setDvalue(String dvalue) {
         this.dvalue = dvalue;
-    }
-
-    public String getUpdater() {
-        return updater;
-    }
-
-    public void setUpdater(String updater) {
-        this.updater = updater;
-    }
-
-    public Date getUpdateDatetime() {
-        return updateDatetime;
-    }
-
-    public void setUpdateDatetime(Date updateDatetime) {
-        this.updateDatetime = updateDatetime;
     }
 
     public String getRemark() {

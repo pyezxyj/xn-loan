@@ -1,10 +1,10 @@
 package com.xnjr.mall.api.impl;
 
-import com.xnjr.mall.ao.IInvoiceAO;
+import com.xnjr.mall.ao.IOrderAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
-import com.xnjr.mall.domain.Invoice;
+import com.xnjr.mall.domain.Order;
 import com.xnjr.mall.dto.req.XN602020Req;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
@@ -18,8 +18,8 @@ import com.xnjr.mall.spring.SpringContextHolder;
  */
 public class XN602020 extends AProcessor {
 
-    private IInvoiceAO invoiceAO = SpringContextHolder
-        .getBean(IInvoiceAO.class);
+    private IOrderAO invoiceAO = SpringContextHolder
+        .getBean(IOrderAO.class);
 
     private XN602020Req req = null;
 
@@ -28,7 +28,7 @@ public class XN602020 extends AProcessor {
      */
     @Override
     public Object doBusiness() throws BizException {
-        Invoice data = new Invoice();
+        Order data = new Order();
         data.setApplyUser(req.getApplyUser());
         data.setApplyNote(req.getApplyNote());
         data.setAddressCode(req.getAddressCode());

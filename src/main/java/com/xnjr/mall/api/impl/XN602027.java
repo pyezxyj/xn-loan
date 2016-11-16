@@ -1,6 +1,6 @@
 package com.xnjr.mall.api.impl;
 
-import com.xnjr.mall.ao.IInvoiceAO;
+import com.xnjr.mall.ao.IOrderAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
@@ -17,8 +17,8 @@ import com.xnjr.mall.spring.SpringContextHolder;
  */
 public class XN602027 extends AProcessor {
 
-    private IInvoiceAO invoiceAO = SpringContextHolder
-        .getBean(IInvoiceAO.class);
+    private IOrderAO invoiceAO = SpringContextHolder
+        .getBean(IOrderAO.class);
 
     private XN602027Req req = null;
 
