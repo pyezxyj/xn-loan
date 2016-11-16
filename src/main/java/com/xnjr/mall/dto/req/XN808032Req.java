@@ -7,7 +7,7 @@ import java.util.List;
  * @since: 2015年8月19日 下午7:41:26 
  * @history:
  */
-public class XN602006Req {
+public class XN808032Req {
 
     // 购物车列表
     private List<String> cartCodeList;

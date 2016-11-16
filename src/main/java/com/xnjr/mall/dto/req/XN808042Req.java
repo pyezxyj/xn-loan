@@ -5,7 +5,7 @@ package com.xnjr.mall.dto.req;
  * @since: 2015年8月19日 下午7:41:26 
  * @history:
  */
-public class XN602005Req {
+public class XN808042Req {
 
     // 编号（必填）
     private String code;

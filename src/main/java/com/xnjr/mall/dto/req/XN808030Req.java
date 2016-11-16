@@ -5,24 +5,16 @@ package com.xnjr.mall.dto.req;
  * @since: 2015年8月19日 下午7:41:26 
  * @history:
  */
-public class XN602002Req {
-
-    // 编号（必填）
-    private String code;
+public class XN808030Req {
 
     // 用户编号（必填）
     private String userId;
 
+    // 产品编号（必填）
+    private String productCode;
+
     // 数量（必填）
     private String quantity;
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 
     public String getUserId() {
         return userId;
@@ -32,6 +24,14 @@ public class XN602002Req {
         this.userId = userId;
     }
 
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+
     public String getQuantity() {
         return quantity;
     }
@@ -39,4 +39,5 @@ public class XN602002Req {
     public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
+
 }

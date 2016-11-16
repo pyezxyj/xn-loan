@@ -1,38 +1,35 @@
 package com.xnjr.mall.api.impl;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import com.xnjr.mall.ao.ICartAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
-import com.xnjr.mall.core.StringValidater;
-import com.xnjr.mall.domain.Cart;
-import com.xnjr.mall.dto.req.XN602002Req;
+import com.xnjr.mall.dto.req.XN808032Req;
 import com.xnjr.mall.dto.res.BooleanRes;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
 /**
- * 修改购物车型号
+ * 购物车批量删除
  * @author: xieyj 
  * @since: 2016年5月23日 上午9:04:12 
  * @history:
  */
-public class XN602002 extends AProcessor {
+public class XN808032 extends AProcessor {
 
     private ICartAO cartAO = SpringContextHolder.getBean(ICartAO.class);
 
-    private XN602002Req req = null;
+    private XN808032Req req = null;
 
     /** 
      * @see com.xnjr.mall.api.IProcessor#doBusiness()
      */
     @Override
     public Object doBusiness() throws BizException {
-        Cart data = new Cart();
-        data.setCode(req.getCode());
-        data.setUserId(req.getUserId());
-        data.setQuantity(Integer.valueOf(req.getQuantity()));
-        return new BooleanRes(cartAO.editCart(data) > 0 ? true : false);
+        int count = cartAO.dropCartList(req.getCartCodeList());
+        return new BooleanRes(count > 0 ? true : false);
     }
 
     /** 
@@ -40,8 +37,9 @@ public class XN602002 extends AProcessor {
      */
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN602002Req.class);
-        StringValidater.validateBlank(req.getCode(), req.getUserId());
-        StringValidater.validateNumber(req.getQuantity());
+        req = JsonUtil.json2Bean(inputparams, XN808032Req.class);
+        if (CollectionUtils.sizeIsEmpty(req.getCartCodeList())) {
+            throw new BizException("xn702000", "选中的购物车货物不能为空");
+        }
     }
 }

@@ -21,7 +21,7 @@ import com.xnjr.mall.bo.IProductBO;
 import com.xnjr.mall.bo.IUserBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Cart;
-import com.xnjr.mall.dto.res.XN805901Res;
+import com.xnjr.mall.domain.Product;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -48,7 +48,7 @@ public class CartAOImpl implements ICartAO {
     public String addCart(Cart data) {
         String code = null;
         if (!productBO.isProductExist(data.getProductCode())) {
-            throw new BizException("xn0000", "型号编号不存在");
+            throw new BizException("xn0000", "产品编号不存在");
         }
         Cart cart = cartBO.getCart(data.getUserId(), data.getProductCode());
         if (cart != null) {
@@ -100,15 +100,11 @@ public class CartAOImpl implements ICartAO {
      */
     @Override
     public Paginable<Cart> queryCartPage(int start, int limit, Cart condition) {
-        // 获取用户信息
-        String userId = condition.getUserId();
-        XN805901Res user = userBO.getRemoteUser(userId, userId);
         Paginable<Cart> page = cartBO.getPaginable(start, limit, condition);
         if (page != null && page.getList() != null) {
             for (Cart cart : page.getList()) {
-                Long salePrice = buyGuideBO.getBuyGuidePrice(
-                    cart.getProductCode(), user.getLevel());
-                cart.setSalePrice(salePrice);
+                Product product = productBO.getProduct(cart.getProductCode());
+                cart.setSalePrice(product.getDiscountPrice());
             }
         }
         return page;
@@ -119,15 +115,11 @@ public class CartAOImpl implements ICartAO {
      */
     @Override
     public List<Cart> queryCartList(Cart condition) {
-        // 获取用户信息
-        String userId = condition.getUserId();
-        XN805901Res user = userBO.getRemoteUser(userId, userId);
         List<Cart> list = cartBO.queryCartList(condition);
         if (!CollectionUtils.sizeIsEmpty(list)) {
             for (Cart cart : list) {
-                Long salePrice = buyGuideBO.getBuyGuidePrice(
-                    cart.getProductCode(), user.getLevel());
-                cart.setSalePrice(salePrice);
+                Product product = productBO.getProduct(cart.getProductCode());
+                cart.setSalePrice(product.getDiscountPrice());
             }
         }
         return list;
@@ -139,13 +131,9 @@ public class CartAOImpl implements ICartAO {
     @Override
     public Cart getCart(String code) {
         Cart cart = cartBO.getCart(code);
-        // 获取用户信息
-        String userId = cart.getUserId();
-        XN805901Res user = userBO.getRemoteUser(userId, userId);
         // 获取价格
-        Long salePrice = buyGuideBO.getBuyGuidePrice(cart.getProductCode(),
-            user.getLevel());
-        cart.setSalePrice(salePrice);
+        Product product = productBO.getProduct(cart.getProductCode());
+        cart.setSalePrice(product.getDiscountPrice());
         return cart;
     }
 }

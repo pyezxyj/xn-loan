@@ -1,35 +1,35 @@
 package com.xnjr.mall.api.impl;
 
-import org.apache.commons.collections.CollectionUtils;
-
 import com.xnjr.mall.ao.ICartAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
-import com.xnjr.mall.dto.req.XN602006Req;
-import com.xnjr.mall.dto.res.BooleanRes;
+import com.xnjr.mall.core.StringValidater;
+import com.xnjr.mall.domain.Cart;
+import com.xnjr.mall.dto.req.XN808041Req;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
 /**
- * 购物车批量删除
+ * 查询购物车型号列表
  * @author: xieyj 
  * @since: 2016年5月23日 上午9:04:12 
  * @history:
  */
-public class XN602006 extends AProcessor {
+public class XN808041 extends AProcessor {
 
     private ICartAO cartAO = SpringContextHolder.getBean(ICartAO.class);
 
-    private XN602006Req req = null;
+    private XN808041Req req = null;
 
     /** 
      * @see com.xnjr.mall.api.IProcessor#doBusiness()
      */
     @Override
     public Object doBusiness() throws BizException {
-        int count = cartAO.dropCartList(req.getCartCodeList());
-        return new BooleanRes(count > 0 ? true : false);
+        Cart condition = new Cart();
+        condition.setUserId(req.getUserId());
+        return cartAO.queryCartList(condition);
     }
 
     /** 
@@ -37,9 +37,7 @@ public class XN602006 extends AProcessor {
      */
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN602006Req.class);
-        if (CollectionUtils.sizeIsEmpty(req.getCartCodeList())) {
-            throw new BizException("xn702000", "选中的购物车货物不能为空");
-        }
+        req = JsonUtil.json2Bean(inputparams, XN808041Req.class);
+        StringValidater.validateBlank(req.getUserId());
     }
 }

@@ -8,7 +8,7 @@ import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.domain.Cart;
-import com.xnjr.mall.dto.req.XN602003Req;
+import com.xnjr.mall.dto.req.XN808040Req;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
@@ -19,11 +19,11 @@ import com.xnjr.mall.spring.SpringContextHolder;
  * @since: 2016年5月23日 上午9:04:12 
  * @history:
  */
-public class XN602003 extends AProcessor {
+public class XN808040 extends AProcessor {
 
     private ICartAO cartAO = SpringContextHolder.getBean(ICartAO.class);
 
-    private XN602003Req req = null;
+    private XN808040Req req = null;
 
     /** 
      * @see com.xnjr.mall.api.IProcessor#doBusiness()
@@ -47,7 +47,7 @@ public class XN602003 extends AProcessor {
      */
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN602003Req.class);
+        req = JsonUtil.json2Bean(inputparams, XN808040Req.class);
         StringValidater.validateBlank(req.getUserId());
         StringValidater.validateNumber(req.getStart(), req.getLimit());
     }
