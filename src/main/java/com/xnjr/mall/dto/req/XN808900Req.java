@@ -13,7 +13,7 @@ package com.xnjr.mall.dto.req;
  * @since: 2016年4月17日 下午5:00:54 
  * @history:
  */
-public class XNlh5010Req {
+public class XN808900Req {
 
     // 类型（第一层/第二层）（必填）
     private String type;
@@ -26,9 +26,6 @@ public class XNlh5010Req {
 
     // value（必填）
     private String dvalue;
-
-    // 修改人（必填）
-    private String updater;
 
     // 备注（选填）
     private String remark;
@@ -63,14 +60,6 @@ public class XNlh5010Req {
 
     public void setDvalue(String dvalue) {
         this.dvalue = dvalue;
-    }
-
-    public String getUpdater() {
-        return updater;
-    }
-
-    public void setUpdater(String updater) {
-        this.updater = updater;
     }
 
     public String getRemark() {

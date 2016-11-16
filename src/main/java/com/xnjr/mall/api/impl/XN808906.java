@@ -14,7 +14,7 @@ import com.xnjr.mall.ao.ISYSDictAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.domain.SYSDict;
-import com.xnjr.mall.dto.req.XNlh5014Req;
+import com.xnjr.mall.dto.req.XN808906Req;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
@@ -25,11 +25,11 @@ import com.xnjr.mall.spring.SpringContextHolder;
  * @since: 2016年4月17日 下午8:06:49 
  * @history:
  */
-public class XNlh5014 extends AProcessor {
+public class XN808906 extends AProcessor {
     private ISYSDictAO sysDictAO = SpringContextHolder
         .getBean(ISYSDictAO.class);
 
-    private XNlh5014Req req = null;
+    private XN808906Req req = null;
 
     /** 
      * @see com.xnjr.mall.api.IProcessor#doBusiness()
@@ -53,7 +53,7 @@ public class XNlh5014 extends AProcessor {
      */
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XNlh5014Req.class);
+        req = JsonUtil.json2Bean(inputparams, XN808906Req.class);
     }
 
 }

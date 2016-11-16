@@ -1,9 +1,9 @@
 /**
- * @Title XNlh5015.java 
+ * @Title XNlh5012.java 
  * @Package com.xnjr.moom.api.impl 
  * @Description 
  * @author haiqingzheng  
- * @date 2016年4月17日 下午8:14:13 
+ * @date 2016年4月17日 下午6:50:47 
  * @version V1.0   
  */
 package com.xnjr.mall.api.impl;
@@ -12,29 +12,32 @@ import com.xnjr.mall.ao.ISYSDictAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
-import com.xnjr.mall.dto.req.XNlh5015Req;
+import com.xnjr.mall.dto.req.XN808902Req;
+import com.xnjr.mall.dto.res.XNlh5012Res;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
 /** 
- * 详情查询数据字典
+ * 修改数据字典
  * @author: haiqingzheng 
- * @since: 2016年4月17日 下午8:14:13 
+ * @since: 2016年4月17日 下午6:50:47 
  * @history:
  */
-public class XNlh5015 extends AProcessor {
+public class XN808902 extends AProcessor {
     private ISYSDictAO sysDictAO = SpringContextHolder
         .getBean(ISYSDictAO.class);
 
-    private XNlh5015Req req = null;
+    private XN808902Req req = null;
 
     /** 
      * @see com.xnjr.mall.api.IProcessor#doBusiness()
      */
     @Override
     public Object doBusiness() throws BizException {
-        return sysDictAO.getSYSDict(StringValidater.toLong(req.getId()));
+        sysDictAO.editSYSDict(StringValidater.toLong(req.getId()),
+            req.getDvalue(), req.getRemark());
+        return new XNlh5012Res(true);
     }
 
     /** 
@@ -42,7 +45,8 @@ public class XNlh5015 extends AProcessor {
      */
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XNlh5015Req.class);
-        StringValidater.validateBlank(req.getId());
+        req = JsonUtil.json2Bean(inputparams, XN808902Req.class);
+        StringValidater.validateBlank(req.getId(), req.getDvalue());
     }
+
 }

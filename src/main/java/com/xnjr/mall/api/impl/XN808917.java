@@ -1,9 +1,9 @@
 /**
- * @Title XNlh5033.java 
- * @Package com.xnjr.moom.api.impl 
+ * @Title XNlh5034.java 
+ * @Package com.xnjr.mall.api.impl 
  * @Description 
  * @author haiqingzheng  
- * @date 2016年4月17日 下午10:43:03 
+ * @date 2016年6月12日 下午1:36:16 
  * @version V1.0   
  */
 package com.xnjr.mall.api.impl;
@@ -12,29 +12,30 @@ import com.xnjr.mall.ao.ISYSConfigAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
-import com.xnjr.mall.dto.req.XNlh5033Req;
+import com.xnjr.mall.dto.req.XN808917Req;
+import com.xnjr.mall.dto.res.XNlh5034Res;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
 /** 
- * 详情查询系统参数
+ * 根据key获取value值
  * @author: haiqingzheng 
- * @since: 2016年4月17日 下午10:43:03 
+ * @since: 2016年6月12日 下午1:36:16 
  * @history:
  */
-public class XNlh5033 extends AProcessor {
+public class XN808917 extends AProcessor {
     private ISYSConfigAO sysConfigAO = SpringContextHolder
         .getBean(ISYSConfigAO.class);
 
-    private XNlh5033Req req = null;
+    private XN808917Req req = null;
 
     /** 
      * @see com.xnjr.mall.api.IProcessor#doBusiness()
      */
     @Override
     public Object doBusiness() throws BizException {
-        return sysConfigAO.getSYSConfig(StringValidater.toLong(req.getId()));
+        return new XNlh5034Res(sysConfigAO.getConfigValue(req.getKey()));
     }
 
     /** 
@@ -42,8 +43,8 @@ public class XNlh5033 extends AProcessor {
      */
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XNlh5033Req.class);
-        StringValidater.validateBlank(req.getId());
+        req = JsonUtil.json2Bean(inputparams, XN808917Req.class);
+        StringValidater.validateBlank(req.getKey());
     }
 
 }

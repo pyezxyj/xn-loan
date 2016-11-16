@@ -7,7 +7,7 @@ import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.domain.SYSConfig;
-import com.xnjr.mall.dto.req.XNlh5032Req;
+import com.xnjr.mall.dto.req.XN808915Req;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
@@ -18,15 +18,16 @@ import com.xnjr.mall.spring.SpringContextHolder;
  * @since: 2016年4月17日 下午8:30:55 
  * @history:
  */
-public class XNlh5032 extends AProcessor {
+public class XN808915 extends AProcessor {
     private ISYSConfigAO sysConfigAO = SpringContextHolder
         .getBean(ISYSConfigAO.class);
 
-    private XNlh5032Req req = null;
+    private XN808915Req req = null;
 
     @Override
     public Object doBusiness() throws BizException {
         SYSConfig data = new SYSConfig();
+        data.setCompanyCode(req.getCompanyCode());
         data.setCkeyForQuery(req.getCkey());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
@@ -40,7 +41,7 @@ public class XNlh5032 extends AProcessor {
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XNlh5032Req.class);
+        req = JsonUtil.json2Bean(inputparams, XN808915Req.class);
         StringValidater.validateBlank(req.getStart(), req.getLimit());
     }
 
