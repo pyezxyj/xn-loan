@@ -22,7 +22,7 @@ public interface IProductOrderBO extends IPaginableBO<ProductOrder> {
      * @create: 2016年5月25日 上午10:26:32 xieyj
      * @history:
      */
-    public String saveProductOrder(String invoiceCode, String modelCode,
+    public String saveProductOrder(String orderCode, String productCode,
             Integer quantity, Long salePrice);
 
     /**

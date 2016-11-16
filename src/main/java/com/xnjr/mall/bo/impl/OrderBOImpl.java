@@ -100,7 +100,7 @@ public class OrderBOImpl extends PaginableBOImpl<Order> implements IOrderBO {
             data.setCode(code);
             data.setUpdater(order.getUpdater());
             data.setRemark(remark);
-            data.setStatus(EOrderStatus.FINISH.getCode());
+            data.setStatus(EOrderStatus.YHYC.getCode());
             count = orderDAO.updateOrderCancel(data);
         }
         return count;

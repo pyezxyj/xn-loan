@@ -1,29 +1,26 @@
 package com.xnjr.mall.api.impl;
 
-import org.apache.commons.collections.CollectionUtils;
-
 import com.xnjr.mall.ao.IOrderAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.domain.Order;
-import com.xnjr.mall.dto.req.XN602021Req;
+import com.xnjr.mall.dto.req.XN808050Req;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
 /**
- * 购物车批量提交订单
+ * 立即下单
  * @author: xieyj 
  * @since: 2016年5月23日 上午9:04:12 
  * @history:
  */
-public class XN602021 extends AProcessor {
+public class XN808050 extends AProcessor {
 
-    private IOrderAO invoiceAO = SpringContextHolder
-        .getBean(IOrderAO.class);
+    private IOrderAO orderAO = SpringContextHolder.getBean(IOrderAO.class);
 
-    private XN602021Req req = null;
+    private XN808050Req req = null;
 
     /** 
      * @see com.xnjr.mall.api.IProcessor#doBusiness()
@@ -33,10 +30,10 @@ public class XN602021 extends AProcessor {
         Order data = new Order();
         data.setApplyUser(req.getApplyUser());
         data.setApplyNote(req.getApplyNote());
-        data.setAddressCode(req.getAddressCode());
         data.setReceiptType(req.getReceiptType());
         data.setReceiptTitle(req.getReceiptTitle());
-        return invoiceAO.commitInvoice(req.getCartCodeList(), data);
+        return orderAO.commitOrder(req.getAddressCode(), req.getProductCode(),
+            Integer.valueOf(req.getQuantity()), data);
     }
 
     /** 
@@ -44,10 +41,9 @@ public class XN602021 extends AProcessor {
      */
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN602021Req.class);
-        StringValidater.validateBlank(req.getApplyUser(), req.getAddressCode());
-        if (CollectionUtils.isEmpty(req.getCartCodeList())) {
-            throw new BizException("xn702000", "购物车中货物不能为空");
-        }
+        req = JsonUtil.json2Bean(inputparams, XN808050Req.class);
+        StringValidater.validateBlank(req.getApplyUser(), req.getAddressCode(),
+            req.getProductCode());
+        StringValidater.validateNumber(req.getQuantity());
     }
 }

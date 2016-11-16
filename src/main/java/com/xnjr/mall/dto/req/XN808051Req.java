@@ -1,36 +1,32 @@
 package com.xnjr.mall.dto.req;
 
+import java.util.List;
+
 /**
- * 选择一个型号，提交订单
+ * 提交订单
  * @author: xieyj 
  * @since: 2016年5月23日 上午8:46:53 
  * @history:
  */
-public class XN602020Req {
+public class XN808051Req {
+
+    // 收件编号（必填）
+    private String addressCode;
 
     // 申请人（必填）
     private String applyUser;
 
-    // 型号编号（必填）
-    private String modelCode;
-
-    // 数量（必填）
-    private String quantity;
-
-    // 单价（必填）
-    private String salePrice;
-
     // 申请备注（选填）
     private String applyNote;
-
-    // 收件编号（必填）
-    private String addressCode;
 
     // 发票类型（必填）
     private String receiptType;
 
     // 发票抬头（必填）
     private String receiptTitle;
+
+    // 购物车列表（必填）
+    private List<String> cartCodeList;
 
     public String getApplyUser() {
         return applyUser;
@@ -40,28 +36,12 @@ public class XN602020Req {
         this.applyUser = applyUser;
     }
 
-    public String getModelCode() {
-        return modelCode;
+    public List<String> getCartCodeList() {
+        return cartCodeList;
     }
 
-    public void setModelCode(String modelCode) {
-        this.modelCode = modelCode;
-    }
-
-    public String getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getSalePrice() {
-        return salePrice;
-    }
-
-    public void setSalePrice(String salePrice) {
-        this.salePrice = salePrice;
+    public void setCartCodeList(List<String> cartCodeList) {
+        this.cartCodeList = cartCodeList;
     }
 
     public String getApplyNote() {

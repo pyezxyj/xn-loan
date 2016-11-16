@@ -41,14 +41,14 @@ public interface IOrderBO extends IPaginableBO<Order> {
     public int refreshOrderStatus(String code, String status);
 
     /**
-     * 取消发货单（前端）
+     * 取消订单（前端）
      * @param code
-     * @param applyNote
+     * @param remark
      * @return 
      * @create: 2016年5月25日 上午8:18:57 xieyj
      * @history:
      */
-    public int cancelOrder(String code, String applyNote);
+    public int cancelOrder(String code, String remark);
 
     /**
      * 取消发货单，分强制取消(支付待确认)和系统自动取消(未支付)

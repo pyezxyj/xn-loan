@@ -6,7 +6,7 @@ package com.xnjr.mall.dto.req;
  * @since: 2016年5月23日 上午8:46:53 
  * @history:
  */
-public class XN602023Req {
+public class XN808053Req {
 
     // 用户编号（必填）
     private String userId;
@@ -15,7 +15,7 @@ public class XN602023Req {
     private String code;
 
     // 取消原因（必填）
-    private String approveNote;
+    private String remark;
 
     public String getCode() {
         return code;
@@ -33,11 +33,12 @@ public class XN602023Req {
         this.userId = userId;
     }
 
-    public String getApproveNote() {
-        return approveNote;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setApproveNote(String approveNote) {
-        this.approveNote = approveNote;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
+
 }

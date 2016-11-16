@@ -1,26 +1,27 @@
 package com.xnjr.mall.dto.req;
 
-import java.util.List;
-
 /**
- * 提交订单
+ * 选择一个产品，提交订单
  * @author: xieyj 
  * @since: 2016年5月23日 上午8:46:53 
  * @history:
  */
-public class XN602021Req {
+public class XN808050Req {
+
+    // 商品编号（必填）
+    private String productCode;
+
+    // 数量（必填）
+    private String quantity;
+
+    // 收件编号（必填）
+    private String addressCode;
 
     // 申请人（必填）
     private String applyUser;
 
-    // 购物车列表（必填）
-    private List<String> cartCodeList;
-
     // 申请备注（选填）
     private String applyNote;
-
-    // 收件编号（必填）
-    private String addressCode;
 
     // 发票类型（必填）
     private String receiptType;
@@ -36,12 +37,12 @@ public class XN602021Req {
         this.applyUser = applyUser;
     }
 
-    public List<String> getCartCodeList() {
-        return cartCodeList;
+    public String getQuantity() {
+        return quantity;
     }
 
-    public void setCartCodeList(List<String> cartCodeList) {
-        this.cartCodeList = cartCodeList;
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public String getApplyNote() {
@@ -74,5 +75,13 @@ public class XN602021Req {
 
     public void setReceiptTitle(String receiptTitle) {
         this.receiptTitle = receiptTitle;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
     }
 }

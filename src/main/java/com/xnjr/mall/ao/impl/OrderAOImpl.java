@@ -20,14 +20,15 @@ import com.xnjr.mall.ao.IOrderAO;
 import com.xnjr.mall.bo.IAccountBO;
 import com.xnjr.mall.bo.ICartBO;
 import com.xnjr.mall.bo.IOrderBO;
+import com.xnjr.mall.bo.IProductBO;
 import com.xnjr.mall.bo.IProductOrderBO;
 import com.xnjr.mall.bo.IUserBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Cart;
 import com.xnjr.mall.domain.Order;
+import com.xnjr.mall.domain.Product;
 import com.xnjr.mall.domain.ProductOrder;
 import com.xnjr.mall.dto.res.XN802011Res;
-import com.xnjr.mall.dto.res.XN805901Res;
 import com.xnjr.mall.enums.EDirection;
 import com.xnjr.mall.enums.EOrderStatus;
 import com.xnjr.mall.enums.ESysAccount;
@@ -56,15 +57,25 @@ public class OrderAOImpl implements IOrderAO {
     @Autowired
     private IAccountBO accountBO;
 
+    @Autowired
+    private IProductBO productBO;
+
     /**
      * @see com.xnjr.mall.ao.IOrderAO#commitOrder(java.lang.String, java.lang.Integer, java.lang.Long, com.xnjr.mall.domain.Order)
      */
     @Override
     @Transactional
-    public String commitOrder(String modelCode, Integer quantity,
-            Long salePrice, Order data) {
+    public String commitOrder(String addressCode, String productCode,
+            Integer quantity, Order data) {
+        // 获取地址信息 待完善
+        // 计算订单总价
+        Product product = productBO.getProduct(productCode);
+        Long amount = quantity * product.getDiscountPrice();
+        data.setAmount(amount);
         String code = orderBO.saveOrder(data);
-        productOrderBO.saveProductOrder(code, modelCode, quantity, salePrice);
+        // 订单产品快照关联
+        productOrderBO.saveProductOrder(code, productCode, quantity,
+            product.getDiscountPrice());
         return code;
     }
 
@@ -73,23 +84,24 @@ public class OrderAOImpl implements IOrderAO {
      */
     @Override
     @Transactional
-    public String commitOrder(List<String> cartCodeList, Order data) {
+    public String commitOrder(List<String> cartCodeList, String addressCode,
+            Order data) {
+        // 获取地址信息 待完善
         // 获取购物车中的记录，形成订单型号关联表
         if (CollectionUtils.isEmpty(cartCodeList)) {
             throw new BizException("xn0000", "请选择购物车中的货物");
         }
-
         String code = orderBO.saveOrder(data);
-        // 获取用户信息
-        String userId = data.getApplyUser();
-        XN805901Res user = userBO.getRemoteUser(userId, userId);
+        Long amount = 0L;
         for (String cartCode : cartCodeList) {
             Cart cart = cartBO.getCart(cartCode);
-            Long salePrice = buyGuideBO.getBuyGuidePrice(cart.getModelCode(),
-                user.getLevel());
+            Product product = productBO.getProduct(cart.getProductCode());
+            amount = amount + (cart.getQuantity() * product.getDiscountPrice());
+
             productOrderBO.saveProductOrder(code, cart.getProductCode(),
-                cart.getQuantity(), salePrice);
+                cart.getQuantity(), product.getDiscountPrice());
         }
+
         // 删除购物车选中记录
         for (String cartCode : cartCodeList) {
             cartBO.removeCart(cartCode);
@@ -99,7 +111,7 @@ public class OrderAOImpl implements IOrderAO {
 
     @Override
     @Transactional
-    public void toPayOrder(String code, String tradePwd) {
+    public void toPayOrder(String code) {
         Order order = orderBO.getOrder(code);
         if (!EOrderStatus.TO_PAY.getCode().equals(order.getStatus())) {
             throw new BizException("xn000000", "订单不处于待支付状态");
@@ -123,7 +135,7 @@ public class OrderAOImpl implements IOrderAO {
      * @see com.xnjr.mall.ao.IOrderAO#cancelOrder(java.lang.String, java.lang.String)
      */
     @Override
-    public int cancelOrder(String code, String userId, String approveNote) {
+    public int cancelOrder(String code, String userId, String remark) {
         Order data = orderBO.getOrder(code);
         if (!userId.equals(data.getApplyUser())) {
             throw new BizException("xn0000", "订单申请人和取消操作用户不符");
@@ -131,7 +143,7 @@ public class OrderAOImpl implements IOrderAO {
         if (!EOrderStatus.TO_PAY.getCode().equals(data.getStatus())) {
             throw new BizException("xn0000", "订单状态不是待支付状态");
         }
-        return orderBO.cancelOrder(code, approveNote);
+        return orderBO.cancelOrder(code, remark);
     }
 
     /**

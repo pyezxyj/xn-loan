@@ -4,32 +4,33 @@ import com.xnjr.mall.ao.IOrderAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
-import com.xnjr.mall.dto.req.XN602022Req;
+import com.xnjr.mall.dto.req.XN808053Req;
 import com.xnjr.mall.dto.res.BooleanRes;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
 /**
- * 提交支付待确认订单
+ * 用户自主取消订单（用户异常）
  * @author: xieyj 
  * @since: 2016年5月23日 上午9:04:12 
  * @history:
  */
-public class XN602022 extends AProcessor {
+public class XN808053 extends AProcessor {
 
-    private IOrderAO invoiceAO = SpringContextHolder
-        .getBean(IOrderAO.class);
+    private IOrderAO orderAO = SpringContextHolder.getBean(IOrderAO.class);
 
-    private XN602022Req req = null;
+    private XN808053Req req = null;
 
     /** 
      * @see com.xnjr.mall.api.IProcessor#doBusiness()
      */
     @Override
     public Object doBusiness() throws BizException {
-        invoiceAO.toPayInvoice(req.getCode(), req.getTradePwd());
-        return new BooleanRes(true);
+        int count = orderAO.cancelOrder(req.getCode(), req.getUserId(),
+            req.getRemark());
+        return new BooleanRes(count > 0 ? true : false);
+
     }
 
     /** 
@@ -37,7 +38,8 @@ public class XN602022 extends AProcessor {
      */
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN602022Req.class);
-        StringValidater.validateBlank(req.getCode());
+        req = JsonUtil.json2Bean(inputparams, XN808053Req.class);
+        StringValidater.validateBlank(req.getCode(), req.getUserId(),
+            req.getRemark());
     }
 }
