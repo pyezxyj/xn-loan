@@ -2,6 +2,7 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>	
+	    <typeAlias alias="category" type="com.xnjr.mall.domain.Category" />
 		<typeAlias alias="product" type="com.xnjr.mall.domain.Product" />
 		<typeAlias alias="cart" type="com.xnjr.mall.domain.Cart" />
 		<typeAlias alias="order" type="com.xnjr.mall.domain.Order" />
