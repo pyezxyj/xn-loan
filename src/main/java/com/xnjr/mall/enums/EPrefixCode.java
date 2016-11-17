@@ -1,15 +1,15 @@
 package com.xnjr.mall.enums;
 
-/**
- * 订单前缀编号
+/** 
+ * 编号前缀
  * @author: xieyj 
- * @since: 2016年4月28日 上午6:59:25 
+ * @since: 2015-3-7 上午8:41:50 
  * @history:
  */
-public enum EPrefixOrderNo {
-    company("FC", "公司"), individual("FI", "个体户"), user("FU", "资金方用户");
+public enum EPrefixCode {
+    CATEGORY("FL", "分类");
 
-    EPrefixOrderNo(String code, String value) {
+    EPrefixCode(String code, String value) {
         this.code = code;
         this.value = value;
     }

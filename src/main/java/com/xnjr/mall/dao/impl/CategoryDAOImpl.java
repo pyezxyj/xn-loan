@@ -10,6 +10,8 @@ package com.xnjr.mall.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.xnjr.mall.dao.ICategoryDAO;
 import com.xnjr.mall.dao.base.support.AMybatisTemplate;
 import com.xnjr.mall.domain.Category;
@@ -19,6 +21,7 @@ import com.xnjr.mall.domain.Category;
  * @since: 2016年11月16日 下午3:56:04 
  * @history:
  */
+@Repository("categoryDAOImpl")
 public class CategoryDAOImpl extends AMybatisTemplate implements ICategoryDAO {
 
     /** 

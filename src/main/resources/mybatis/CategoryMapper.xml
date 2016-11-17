@@ -26,14 +26,13 @@
 	<select id="select_category" parameterType="category" resultMap="category_DB_Result">
 		SELECT
 		t.code
-		,t.user_id
-		,t.product_code
-		,t.quantity
-		,tp.name product_name
-		,tp.adv_pic adv_pic
-		,tp.discount_price sale_price
+		,t.parent_code
+		,t.name
+		,t.pic
+		,t.order_no
+		,t.company_code
 		FROM
-		tmall_category t INNER JOIN tmall_product tp ON t.product_code = tp.code
+		tforum_category t
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -44,36 +43,43 @@
 
 	<select id="select_category_count" parameterType="category"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tmall_category t INNER JOIN tmall_product tp ON t.product_code = tp.code
+		SELECT count(1) FROM tforum_category t
 		<include refid="where_condition" />
 	</select>
 
 	<insert id="insert_category" parameterType="category">
 		INSERT INTO
-		tmall_category(
+		tforum_category(
 		code
-		,user_id
-		,product_code
-		,quantity
+		,parent_code
+		,name
+		,pic
+		,order_no
+		,company_code
 		)
 		VALUES(
 		#{code}
-		,#{userId}
-		,#{productCode}
-		,#{quantity}
+		,#{parentCode}
+		,#{name}
+		,#{pic}
+		,#{orderNo}
+		,#{companyCode}
 		)
 	</insert>
 	
 	<update id="update_category" parameterType="category">
-		UPDATE tmall_category
+		UPDATE tforum_category
 		SET
-		quantity = #{quantity}
+		parent_code = #{parentCode}
+		,name = #{name}
+		,pic = #{pic}
+		,order_no = #{orderNo}
 		WHERE code = #{code}
 	</update>
 	
 	<delete id="delete_category" parameterType="category">
 		DELETE FROM
-		tmall_category
+		tforum_category
 		WHERE
 		code = #{code}
 	</delete>

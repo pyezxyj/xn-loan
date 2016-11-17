@@ -20,6 +20,10 @@
 		<property name="paginableDAO" ref="sysConfigDAOImpl"/>
 	</bean>	
 	
+	<bean id="categoryBO" class="com.xnjr.mall.bo.impl.CategoryBOImpl">
+		<property name="paginableDAO" ref="categoryDAOImpl" />
+	</bean>
+	
 	<bean id="productBO" class="com.xnjr.mall.bo.impl.ProductBOImpl">
 		<property name="paginableDAO" ref="productDAOImpl"/>
 	</bean>	

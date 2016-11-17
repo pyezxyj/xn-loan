@@ -1,43 +1,25 @@
-/**
- * @Title Category.java 
- * @Package com.xnjr.mall.domain 
- * @Description 
- * @author haiqingzheng  
- * @date 2016年11月16日 上午11:11:51 
- * @version V1.0   
- */
-package com.xnjr.mall.domain;
+package com.xnjr.mall.dto.req;
 
-import com.xnjr.mall.dao.base.ABaseDO;
-
-/** 
- * @author: haiqingzheng 
- * @since: 2016年11月16日 上午11:11:51 
- * @history:
- */
-public class Category extends ABaseDO {
-
-    /** 
-     * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
-     */
-    private static final long serialVersionUID = 682677933434404190L;
-
-    // 编号
+public class XN808002Req {
+    // 编号(必填)
     private String code;
 
-    // 父编号
+    // 父编号(必填)
     private String parentCode;
 
-    // 分类名称
+    // 类型(1 板块，2商城)(必填)
+    private String type;
+
+    // 分类名称(必填)
     private String name;
 
-    // 分类图片
+    // 分类图片(必填)
     private String pic;
 
-    // 顺序
-    private Integer orderNo;
+    // 顺序(选填)
+    private String orderNo;
 
-    // 所属公司编号
+    // 所属公司编号(必填)
     private String companyCode;
 
     public String getCode() {
@@ -56,6 +38,14 @@ public class Category extends ABaseDO {
         this.parentCode = parentCode;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getName() {
         return name;
     }
@@ -72,11 +62,11 @@ public class Category extends ABaseDO {
         this.pic = pic;
     }
 
-    public Integer getOrderNo() {
+    public String getOrderNo() {
         return orderNo;
     }
 
-    public void setOrderNo(Integer orderNo) {
+    public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
     }
 
@@ -87,5 +77,4 @@ public class Category extends ABaseDO {
     public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
     }
-
 }
