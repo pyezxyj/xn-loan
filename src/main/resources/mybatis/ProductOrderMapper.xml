@@ -16,7 +16,7 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
-			<if test="order_code != null and orderCode != '' ">
+			<if test="orderCode != null and orderCode != '' ">
 				AND t.order_code = #{orderCode}
 			</if>
 			<if test="productCode != null and productCode != '' ">
@@ -32,7 +32,7 @@
 		,t.quantity
 		,tp.name product_name
 		,t.sale_price
-		,t.adv_pic
+		,tp.adv_pic
 		FROM
 		tmall_product_order t INNER JOIN tmall_product tp ON t.product_code = tp.code
 		<include refid="where_condition" />

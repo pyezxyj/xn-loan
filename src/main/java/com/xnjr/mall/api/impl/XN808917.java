@@ -35,7 +35,8 @@ public class XN808917 extends AProcessor {
      */
     @Override
     public Object doBusiness() throws BizException {
-        return new XNlh5034Res(sysConfigAO.getConfigValue(req.getKey()));
+        return new XNlh5034Res(sysConfigAO.getConfigValue(req.getCompanyCode(),
+            req.getKey()));
     }
 
     /** 
@@ -44,7 +45,7 @@ public class XN808917 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN808917Req.class);
-        StringValidater.validateBlank(req.getKey());
+        StringValidater.validateBlank(req.getCompanyCode(), req.getKey());
     }
 
 }

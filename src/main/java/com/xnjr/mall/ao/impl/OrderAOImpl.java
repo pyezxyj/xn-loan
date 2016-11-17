@@ -22,8 +22,10 @@ import com.xnjr.mall.bo.ICartBO;
 import com.xnjr.mall.bo.IOrderBO;
 import com.xnjr.mall.bo.IProductBO;
 import com.xnjr.mall.bo.IProductOrderBO;
+import com.xnjr.mall.bo.ISYSConfigBO;
 import com.xnjr.mall.bo.IUserBO;
 import com.xnjr.mall.bo.base.Paginable;
+import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.domain.Cart;
 import com.xnjr.mall.domain.Order;
 import com.xnjr.mall.domain.Product;
@@ -60,6 +62,9 @@ public class OrderAOImpl implements IOrderAO {
     @Autowired
     private IProductBO productBO;
 
+    @Autowired
+    private ISYSConfigBO sysConfigBO;
+
     /**
      * @see com.xnjr.mall.ao.IOrderAO#commitOrder(java.lang.String, java.lang.Integer, java.lang.Long, com.xnjr.mall.domain.Order)
      */
@@ -68,10 +73,27 @@ public class OrderAOImpl implements IOrderAO {
     public String commitOrder(String addressCode, String productCode,
             Integer quantity, Order data) {
         // 获取地址信息 待完善
+        String receiver = "郑海清";
+        String reMobile = "15268501481";
+        String reAddress = "浙江省杭州市余杭区仓前街道梦想小镇天使村5幢2楼";
+        data.setReceiver(receiver);
+        data.setReMobile(reMobile);
+        data.setReAddress(reAddress);
         // 计算订单总价
         Product product = productBO.getProduct(productCode);
         Long amount = quantity * product.getDiscountPrice();
         data.setAmount(amount);
+        // 计算订单运费
+        Long yunfei = 0L;
+        Long byje = StringValidater.toLong(sysConfigBO.getConfigValue(
+            product.getCompanyCode(), "byje"));
+        if (amount < byje) {
+            yunfei = StringValidater.toLong(sysConfigBO.getConfigValue(
+                product.getCompanyCode(), "yunfei"));
+        }
+        data.setYunfei(yunfei);
+        // 设置订单所属公司
+        data.setCompanyCode(product.getCompanyCode());
         String code = orderBO.saveOrder(data);
         // 订单产品快照关联
         productOrderBO.saveProductOrder(code, productCode, quantity,
@@ -87,17 +109,45 @@ public class OrderAOImpl implements IOrderAO {
     public String commitOrder(List<String> cartCodeList, String addressCode,
             Order data) {
         // 获取地址信息 待完善
+        String receiver = "郑海清";
+        String reMobile = "15268501481";
+        String reAddress = "浙江省杭州市余杭区仓前街道梦想小镇天使村5幢2楼";
+        data.setReceiver(receiver);
+        data.setReMobile(reMobile);
+        data.setReAddress(reAddress);
         // 获取购物车中的记录，形成订单型号关联表
         if (CollectionUtils.isEmpty(cartCodeList)) {
             throw new BizException("xn0000", "请选择购物车中的货物");
         }
-        String code = orderBO.saveOrder(data);
+
+        // 计算订单总金额
         Long amount = 0L;
+        String companyCode = "";
         for (String cartCode : cartCodeList) {
             Cart cart = cartBO.getCart(cartCode);
             Product product = productBO.getProduct(cart.getProductCode());
             amount = amount + (cart.getQuantity() * product.getDiscountPrice());
+            companyCode = product.getCompanyCode();
+        }
+        data.setAmount(amount);
+        data.setCompanyCode(companyCode);
 
+        // 计算订单运费
+        Long yunfei = 0L;
+        Long byje = StringValidater.toLong(sysConfigBO.getConfigValue(
+            companyCode, "byje"));
+        if (amount < byje) {
+            yunfei = StringValidater.toLong(sysConfigBO.getConfigValue(
+                companyCode, "yunfei"));
+        }
+        data.setYunfei(yunfei);
+
+        String code = orderBO.saveOrder(data);
+
+        // 落地订单产品关联信息
+        for (String cartCode : cartCodeList) {
+            Cart cart = cartBO.getCart(cartCode);
+            Product product = productBO.getProduct(cart.getProductCode());
             productOrderBO.saveProductOrder(code, cart.getProductCode(),
                 cart.getQuantity(), product.getDiscountPrice());
         }
@@ -117,18 +167,19 @@ public class OrderAOImpl implements IOrderAO {
             throw new BizException("xn000000", "订单不处于待支付状态");
         }
         // 当前用户充值，划出；系统账户划入
-        XN802011Res res = accountBO.getAccountByUserId(order.getApplyUser());
-        accountBO.doChargeOfflineWithoutApp(res.getAccountNumber(),
-            order.getTotalAmount(), "alipay", "6228584324242", "无", "admin",
-            "线上支付模拟", code);
-        accountBO.doTransferOss(res.getAccountNumber(),
-            EDirection.MINUS.getCode(), order.getTotalAmount(), 0L,
-            EDirection.MINUS.getValue());
-        accountBO.doTransferOss(ESysAccount.SYS_ACCOUNT.getCode(),
-            EDirection.PLUS.getCode(), order.getTotalAmount(), 0L,
-            EDirection.PLUS.getValue());
+        // XN802011Res res = accountBO.getAccountByUserId(order.getApplyUser());
+        // accountBO.doChargeOfflineWithoutApp(res.getAccountNumber(),
+        // order.getTotalAmount(), "alipay", "6228584324242", "无", "admin",
+        // "线上支付模拟", code);
+        // accountBO.doTransferOss(res.getAccountNumber(),
+        // EDirection.MINUS.getCode(), order.getTotalAmount(), 0L,
+        // EDirection.MINUS.getValue());
+        // accountBO.doTransferOss(ESysAccount.SYS_ACCOUNT.getCode(),
+        // EDirection.PLUS.getCode(), order.getTotalAmount(), 0L,
+        // EDirection.PLUS.getValue());
         orderBO.refreshOrderStatus(code, EOrderStatus.PAY_YES.getCode());
-        orderBO.refreshOrderPayAmount(code, order.getTotalAmount());
+        orderBO.refreshOrderPayAmount(code,
+            order.getTotalAmount() + order.getYunfei());
     }
 
     /** 

@@ -11,7 +11,7 @@ import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
 /**
- * 提交支付待确认订单
+ * 支付订单
  * @author: xieyj 
  * @since: 2016年5月23日 上午9:04:12 
  * @history:

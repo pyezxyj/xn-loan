@@ -65,11 +65,12 @@ public class SYSConfigBOImpl extends PaginableBOImpl<SYSConfig> implements
      * @see com.xnjr.mall.bo.ISYSConfigBO#getConfigValue(java.lang.String)
      */
     @Override
-    public String getConfigValue(String ckey) {
+    public String getConfigValue(String companyCode, String ckey) {
         String result = null;
         SYSConfig sysConfig = null;
         if (ckey != null) {
             SYSConfig condition = new SYSConfig();
+            condition.setCompanyCode(companyCode);
             condition.setCkey(ckey);
             sysConfig = sysConfigDAO.select(condition);
         }

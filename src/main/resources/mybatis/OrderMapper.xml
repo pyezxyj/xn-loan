@@ -14,6 +14,7 @@
 		<result column="apply_note" property="applyNote" />
 		<result column="apply_datetime" property="applyDatetime" />
 		<result column="amount" property="amount" />
+		<result column="yunfei" property="yunfei" />
 		<result column="pay_amount" property="payAmount" />
 		<result column="status" property="status" />
 		<result column="updater" property="updater" />
@@ -66,10 +67,11 @@
 		,t.receipt_type
 		,t.receipt_title
 		,t.apply_user
-		,tu.login_name
+		<!-- ,tu.login_name -->
 		,t.apply_datetime
 		,t.apply_note
 		,t.amount
+		,t.yunfei
 		,t.pay_amount
 		,t.status
 		,t.updater
@@ -82,7 +84,7 @@
 		,t.pdf
 		,t.company_code
 		FROM
-		tmall_order t LEFT JOIN ${userDB}.tstd_user tu ON t.apply_user = tu.user_id
+		tmall_order t <!-- LEFT JOIN ${userDB}.tstd_user tu ON t.apply_user = tu.user_id -->
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -93,7 +95,7 @@
 
 	<select id="select_order_count" parameterType="order"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tmall_order t LEFT JOIN ${userDB}.tstd_user tu ON t.apply_user = tu.user_id
+		SELECT count(1) FROM tmall_order t <!-- LEFT JOIN ${userDB}.tstd_user tu ON t.apply_user = tu.user_id -->
 		<include refid="where_condition" />
 	</select>
 
@@ -110,8 +112,10 @@
 		,apply_note
 		,apply_datetime
 		,amount
+		,yunfei
 		,pay_amount
 		,status
+		,company_code
 		)
 		VALUES(
 		#{code}
@@ -125,8 +129,10 @@
 		,#{applyNote}
 		,#{applyDatetime}
 		,#{amount}
+		,#{yunfei}
 		,#{payAmount}
 		,#{status}
+		,#{companyCode}
 		)
 	</insert>
 

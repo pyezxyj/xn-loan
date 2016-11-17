@@ -57,6 +57,9 @@ public class Order extends ABaseDO {
     // 订单金额
     private Long amount;
 
+    // 运费
+    private Long yunfei;
+
     // 实际支付金额
     private Long payAmount;
 
@@ -331,6 +334,14 @@ public class Order extends ABaseDO {
 
     public void setProductOrderList(List<ProductOrder> productOrderList) {
         this.productOrderList = productOrderList;
+    }
+
+    public Long getYunfei() {
+        return yunfei;
+    }
+
+    public void setYunfei(Long yunfei) {
+        this.yunfei = yunfei;
     }
 
 }

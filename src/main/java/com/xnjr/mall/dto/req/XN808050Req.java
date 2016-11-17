@@ -84,4 +84,5 @@ public class XN808050Req {
     public void setProductCode(String productCode) {
         this.productCode = productCode;
     }
+
 }

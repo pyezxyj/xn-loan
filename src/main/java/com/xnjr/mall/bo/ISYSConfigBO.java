@@ -43,5 +43,5 @@ public interface ISYSConfigBO extends IPaginableBO<SYSConfig> {
      * @create: 2016年4月20日 下午3:04:47 xieyj
      * @history:
      */
-    public String getConfigValue(String ckey);
+    public String getConfigValue(String companyCode, String ckey);
 }

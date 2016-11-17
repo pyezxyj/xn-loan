@@ -19,7 +19,7 @@
 				AND t.ckey = #{ckey}
 			</if>	
 			<if test="companyCode != null and companyCode != '' ">
-				AND t.company_code = #{company_code}
+				AND t.company_code = #{companyCode}
 			</if>
 			<if test="ckeyForQuery != null and ckeyForQuery != '' ">
 				AND t.ckey like "%"#{ckeyForQuery}"%"

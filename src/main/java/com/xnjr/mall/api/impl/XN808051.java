@@ -8,6 +8,7 @@ import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.domain.Order;
 import com.xnjr.mall.dto.req.XN808051Req;
+import com.xnjr.mall.enums.EOrderType;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
@@ -34,6 +35,7 @@ public class XN808051 extends AProcessor {
         data.setApplyNote(req.getApplyNote());
         data.setReceiptType(req.getReceiptType());
         data.setReceiptTitle(req.getReceiptTitle());
+        data.setType(EOrderType.SH_SALE.getCode());
         return invoiceAO.commitOrder(req.getCartCodeList(),
             req.getAddressCode(), data);
     }
