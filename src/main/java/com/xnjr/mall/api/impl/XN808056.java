@@ -1,35 +1,36 @@
 package com.xnjr.mall.api.impl;
 
-import com.xnjr.mall.ao.ILogisticsAO;
+import com.xnjr.mall.ao.IOrderAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
-import com.xnjr.mall.dto.req.XN602043Req;
+import com.xnjr.mall.dto.req.XN808056Req;
 import com.xnjr.mall.dto.res.BooleanRes;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
 
-/** 
- * 物流单-确认收货
- * @author: haiqingzheng 
- * @since: 2016年5月29日 下午3:19:39 
+/**
+ * 取消订单（后台），商户异常
+ * @author: xieyj 
+ * @since: 2016年5月23日 上午9:04:12 
  * @history:
  */
-public class XN602043 extends AProcessor {
-    private ILogisticsAO logisticsAO = SpringContextHolder
-        .getBean(ILogisticsAO.class);
+public class XN808056 extends AProcessor {
 
-    private XN602043Req req = null;
+    private IOrderAO orderAO = SpringContextHolder.getBean(IOrderAO.class);
+
+    private XN808056Req req = null;
 
     /** 
      * @see com.xnjr.mall.api.IProcessor#doBusiness()
      */
     @Override
     public Object doBusiness() throws BizException {
-        int count = logisticsAO.confirmLogistics(req.getCode(),
-            req.getUpdater(), req.getRemark());
+        int count = orderAO.cancelOrderOss(req.getCode(), req.getUpdater(),
+            req.getRemark());
         return new BooleanRes(count > 0 ? true : false);
+
     }
 
     /** 
@@ -37,7 +38,7 @@ public class XN602043 extends AProcessor {
      */
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN602043Req.class);
+        req = JsonUtil.json2Bean(inputparams, XN808056Req.class);
         StringValidater.validateBlank(req.getCode(), req.getUpdater(),
             req.getRemark());
     }

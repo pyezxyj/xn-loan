@@ -104,4 +104,9 @@ public class OrderDAOImpl extends AMybatisTemplate implements IOrderDAO {
     public int updateOrderPayAmount(Order data) {
         return super.update("update_orderPayAmount", data);
     }
+
+    @Override
+    public int updateOrderDeliver(Order data) {
+        return super.update("update_orderDeliver", data);
+    }
 }

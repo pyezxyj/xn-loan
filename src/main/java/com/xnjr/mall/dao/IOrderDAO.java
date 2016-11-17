@@ -30,13 +30,22 @@ public interface IOrderDAO extends IBaseDAO<Order> {
     public int updateOrderCancel(Order data);
 
     /**
-     * 订单发货
+     * 订单
      * @param data
      * @return 
      * @create: 2016年5月24日 下午9:05:31 xieyj
      * @history:
      */
     public int updateOrderApprove(Order data);
+
+    /**
+     * 订单发货
+     * @param data
+     * @return 
+     * @create: 2016年11月17日 下午2:48:54 haiqingzheng
+     * @history:
+     */
+    public int updateOrderDeliver(Order data);
 
     /**
      * 更新订单支付金额

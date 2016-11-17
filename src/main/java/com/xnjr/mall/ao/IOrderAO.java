@@ -62,14 +62,24 @@ public interface IOrderAO {
     /**
      * 取消发货单
      * @param code
-     * @param approveUser
-     * @param approveNote
+     * @param updater
+     * @param remark
      * @return 
-     * @create: 2016年5月26日 下午4:51:22 xieyj
+     * @create: 2016年11月17日 下午3:18:07 haiqingzheng
      * @history:
      */
-    public int cancelOrderOss(String code, String approveUser,
-            String approveNote);
+    public int cancelOrderOss(String code, String updater, String remark);
+
+    /**
+     * 确认收货
+     * @param code
+     * @param updater
+     * @param remark
+     * @return 
+     * @create: 2016年11月17日 下午3:26:14 haiqingzheng
+     * @history:
+     */
+    public int confirmOrder(String code, String updater, String remark);
 
     /**
      * 订单付款
@@ -87,6 +97,33 @@ public interface IOrderAO {
     public void payOrder(String code, Long amount, String fromType,
             String fromCode, String pdf, String toCardNo, String approveUser,
             String approveNote);
+
+    /**
+     * 订单发货
+     * @param code
+     * @param logisticsCompany
+     * @param logisticsCode
+     * @param deliverer
+     * @param deliveryDatetime
+     * @param pdf
+     * @param updater
+     * @param remark 
+     * @create: 2016年11月17日 下午2:41:49 haiqingzheng
+     * @history:
+     */
+    public void deliverOrder(String code, String logisticsCompany,
+            String logisticsCode, String deliverer, String deliveryDatetime,
+            String pdf, String updater, String remark);
+
+    /**
+     * 现场发货
+     * @param code
+     * @param updater
+     * @param remark 
+     * @create: 2016年11月17日 下午3:07:43 haiqingzheng
+     * @history:
+     */
+    public void deliverOrder(String code, String updater, String remark);
 
     /**
      * 发货单分页查询

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.xnjr.mall.bo.IOrderBO;
 import com.xnjr.mall.bo.base.PaginableBOImpl;
+import com.xnjr.mall.common.DateUtil;
 import com.xnjr.mall.core.EGeneratePrefix;
 import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.IOrderDAO;
@@ -139,9 +140,9 @@ public class OrderBOImpl extends PaginableBOImpl<Order> implements IOrderBO {
             Order data = new Order();
             data.setCode(code);
             data.setUpdater(updater);
-            ;
             data.setStatus(status);
             data.setUpdateDatetime(new Date());
+            data.setRemark(remark);
             count = orderDAO.updateOrderApprove(data);
         }
         return count;
@@ -166,7 +167,7 @@ public class OrderBOImpl extends PaginableBOImpl<Order> implements IOrderBO {
             condition.setCode(code);
             data = orderDAO.select(condition);
             if (data == null) {
-                throw new BizException("xn0000", "发货单编号不存在");
+                throw new BizException("xn0000", "订单编号不存在");
             }
             ProductOrder imCondition = new ProductOrder();
             imCondition.setOrderCode(code);
@@ -196,5 +197,24 @@ public class OrderBOImpl extends PaginableBOImpl<Order> implements IOrderBO {
             count = orderDAO.updateOrderPayAmount(data);
         }
         return count;
+    }
+
+    @Override
+    public int deliverOrder(String code, String logisticsCompany,
+            String logisticsCode, String deliverer, String deliveryDatetime,
+            String pdf, String updater, String remark) {
+        Order order = new Order();
+        order.setCode(code);
+        order.setLogisticsCode(logisticsCode);
+        order.setLogisticsCompany(logisticsCompany);
+        order.setDeliverer(deliverer);
+        order.setDeliveryDatetime(DateUtil.strToDate(deliveryDatetime,
+            DateUtil.DATA_TIME_PATTERN_1));
+        order.setPdf(pdf);
+        order.setStatus(EOrderStatus.SEND.getCode());
+        order.setUpdater(updater);
+        order.setUpdateDatetime(new Date());
+        order.setRemark(remark);
+        return orderDAO.updateOrderDeliver(order);
     }
 }
