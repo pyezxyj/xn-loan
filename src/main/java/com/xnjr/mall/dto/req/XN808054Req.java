@@ -8,48 +8,37 @@
  */
 package com.xnjr.mall.dto.req;
 
-import java.util.List;
-
-import com.xnjr.mall.domain.Goods;
 
 /** 
  * @author: haiqingzheng 
  * @since: 2016年5月29日 下午3:21:20 
  * @history:
  */
-public class XN602040Req {
+public class XN808054Req {
 
-    // 物流单号
+    // 订单号
     private String code;
 
-    // 关联的发货单号
-    private String invoiceCode;
-
     // 物流公司
-    private String company;
+    private String logisticsCompany;
 
-    // 发货时间
-    private String deliveryDatetime;
+    // 物流单号
+    private String logisticsCode;
 
     // 发货人
     private String deliverer;
 
-    // 货品信息
-    private List<Goods> goodsList;
+    // 发货时间
+    private String deliveryDatetime;
+
+    // 发货单留存
+    private String pdf;
 
     // 更新人
     private String updater;
 
     // 备注
     private String remark;
-
-    public String getInvoiceCode() {
-        return invoiceCode;
-    }
-
-    public void setInvoiceCode(String invoiceCode) {
-        this.invoiceCode = invoiceCode;
-    }
 
     public String getCode() {
         return code;
@@ -59,20 +48,20 @@ public class XN602040Req {
         this.code = code;
     }
 
-    public String getCompany() {
-        return company;
+    public String getLogisticsCompany() {
+        return logisticsCompany;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
+    public void setLogisticsCompany(String logisticsCompany) {
+        this.logisticsCompany = logisticsCompany;
     }
 
-    public String getDeliveryDatetime() {
-        return deliveryDatetime;
+    public String getLogisticsCode() {
+        return logisticsCode;
     }
 
-    public void setDeliveryDatetime(String deliveryDatetime) {
-        this.deliveryDatetime = deliveryDatetime;
+    public void setLogisticsCode(String logisticsCode) {
+        this.logisticsCode = logisticsCode;
     }
 
     public String getDeliverer() {
@@ -83,12 +72,20 @@ public class XN602040Req {
         this.deliverer = deliverer;
     }
 
-    public List<Goods> getGoodsList() {
-        return goodsList;
+    public String getDeliveryDatetime() {
+        return deliveryDatetime;
     }
 
-    public void setGoodsList(List<Goods> goodsList) {
-        this.goodsList = goodsList;
+    public void setDeliveryDatetime(String deliveryDatetime) {
+        this.deliveryDatetime = deliveryDatetime;
+    }
+
+    public String getPdf() {
+        return pdf;
+    }
+
+    public void setPdf(String pdf) {
+        this.pdf = pdf;
     }
 
     public String getUpdater() {
@@ -106,4 +103,5 @@ public class XN602040Req {
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
 }

@@ -11,7 +11,6 @@ package com.xnjr.mall.ao.impl;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,10 +29,7 @@ import com.xnjr.mall.domain.Cart;
 import com.xnjr.mall.domain.Order;
 import com.xnjr.mall.domain.Product;
 import com.xnjr.mall.domain.ProductOrder;
-import com.xnjr.mall.dto.res.XN802011Res;
-import com.xnjr.mall.enums.EDirection;
 import com.xnjr.mall.enums.EOrderStatus;
-import com.xnjr.mall.enums.ESysAccount;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -201,17 +197,27 @@ public class OrderAOImpl implements IOrderAO {
      * @see com.xnjr.mall.ao.IOrderAO#cancelOrder(java.lang.String, java.lang.String, java.lang.String)
      */
     @Override
-    public int cancelOrderOss(String code, String approveUser,
-            String approveNote) {
+    public int cancelOrderOss(String code, String updater, String remark) {
         Order data = orderBO.getOrder(code);
-        if (!EOrderStatus.TO_PAY.getCode().equals(data.getStatus())) {
-            throw new BizException("xn0000", "订单状态不是待支付状态");
+        if (!EOrderStatus.TO_PAY.getCode().equals(data.getStatus())
+                && !EOrderStatus.PAY_YES.getCode().equals(data.getStatus())
+                && !EOrderStatus.SEND.getCode().equals(data.getStatus())) {
+            throw new BizException("xn0000", "当前订单状态不可取消");
         }
-        if (StringUtils.isBlank(approveNote)) {
-            approveNote = "管理端取消订单";
+        String status = null;
+        if (EOrderStatus.TO_PAY.getCode().equals(data.getStatus())) {
+            status = EOrderStatus.YHYC.getCode();
+            remark = "管理端取消订单，用户异常";
+        } else if (EOrderStatus.PAY_YES.getCode().equals(data.getStatus())) {
+            // 退款至用户 待完善
+            status = EOrderStatus.SHYC.getCode();
+            remark = "管理端取消订单，商户异常";
+        } else if (EOrderStatus.SEND.getCode().equals(data.getStatus())) {
+            // 退款至用户 待完善
+            status = EOrderStatus.KDYC.getCode();
+            remark = "管理端取消订单，快递异常";
         }
-        return orderBO.cancelOrder(code, approveUser, approveNote,
-            EOrderStatus.FINISH.getCode());
+        return orderBO.cancelOrder(code, updater, remark, status);
     }
 
     /** 
@@ -222,33 +228,33 @@ public class OrderAOImpl implements IOrderAO {
     public void payOrder(String code, Long amount, String fromType,
             String fromCode, String pdf, String toCardNo, String approveUser,
             String approveNote) {
-        Long payAmount = 0L;
-        Order order = orderBO.getOrder(code);
-        // 更新订单
-        if (EOrderStatus.TO_PAY.getCode().equals(order.getStatus())) {
-            if (amount == null || amount.longValue() == 0) {
-                throw new BizException("xn0000", "首款金额不能为空");
-            }
-            orderBO.refreshOrderStatus(code, EOrderStatus.PAY_YES.getCode());
-            payAmount = amount;
-        } else {
-            amount = order.getTotalAmount() - order.getPayAmount();
-            if (EOrderStatus.RECEIVE.getCode().equals(order.getStatus())) {
-                orderBO.refreshOrderStatus(code, EOrderStatus.FINISH.getCode());
-            }
-            payAmount = order.getTotalAmount();
-        }
-        // 更新支付金额
-        orderBO.refreshOrderPayAmount(code, payAmount);
-        // 当前用户充值，划出；系统账户划入
-        XN802011Res res = accountBO.getAccountByUserId(order.getApplyUser());
-        accountBO.doChargeOfflineWithoutApp(res.getAccountNumber(), amount,
-            fromType, fromCode, pdf, approveUser, approveNote, code);
-        accountBO
-            .doTransferOss(res.getAccountNumber(), EDirection.MINUS.getCode(),
-                amount, 0L, EDirection.MINUS.getValue());
-        accountBO.doTransferOss(ESysAccount.SYS_ACCOUNT.getCode(),
-            EDirection.PLUS.getCode(), amount, 0L, EDirection.PLUS.getValue());
+        // Long payAmount = 0L;
+        // Order order = orderBO.getOrder(code);
+        // // 更新订单
+        // if (EOrderStatus.TO_PAY.getCode().equals(order.getStatus())) {
+        // if (amount == null || amount.longValue() == 0) {
+        // throw new BizException("xn0000", "首款金额不能为空");
+        // }
+        // orderBO.refreshOrderStatus(code, EOrderStatus.PAY_YES.getCode());
+        // payAmount = amount;
+        // } else {
+        // amount = order.getTotalAmount() - order.getPayAmount();
+        // if (EOrderStatus.RECEIVE.getCode().equals(order.getStatus())) {
+        // orderBO.refreshOrderStatus(code, EOrderStatus.FINISH.getCode());
+        // }
+        // payAmount = order.getTotalAmount();
+        // }
+        // // 更新支付金额
+        // orderBO.refreshOrderPayAmount(code, payAmount);
+        // // 当前用户充值，划出；系统账户划入
+        // XN802011Res res = accountBO.getAccountByUserId(order.getApplyUser());
+        // accountBO.doChargeOfflineWithoutApp(res.getAccountNumber(), amount,
+        // fromType, fromCode, pdf, approveUser, approveNote, code);
+        // accountBO
+        // .doTransferOss(res.getAccountNumber(), EDirection.MINUS.getCode(),
+        // amount, 0L, EDirection.MINUS.getValue());
+        // accountBO.doTransferOss(ESysAccount.SYS_ACCOUNT.getCode(),
+        // EDirection.PLUS.getCode(), amount, 0L, EDirection.PLUS.getValue());
     }
 
     /** 
@@ -297,5 +303,38 @@ public class OrderAOImpl implements IOrderAO {
     @Override
     public Order getOrder(String code) {
         return orderBO.getOrder(code);
+    }
+
+    @Override
+    public void deliverOrder(String code, String logisticsCompany,
+            String logisticsCode, String deliverer, String deliveryDatetime,
+            String pdf, String updater, String remark) {
+        // 保存物流单信息
+        Order order = orderBO.getOrder(code);
+        if (!EOrderStatus.PAY_YES.getCode().equalsIgnoreCase(order.getStatus())) {
+            throw new BizException("xn000000", "订单未支付，不能发货");
+        }
+        orderBO.deliverOrder(code, logisticsCompany, logisticsCode, deliverer,
+            deliveryDatetime, pdf, updater, remark);
+    }
+
+    @Override
+    public void deliverOrder(String code, String updater, String remark) {
+        Order order = orderBO.getOrder(code);
+        if (!EOrderStatus.PAY_YES.getCode().equalsIgnoreCase(order.getStatus())) {
+            throw new BizException("xn000000", "订单未支付，不能发货");
+        }
+        orderBO
+            .approveOrder(code, updater, EOrderStatus.SEND.getCode(), remark);
+    }
+
+    @Override
+    public int confirmOrder(String code, String updater, String remark) {
+        Order order = orderBO.getOrder(code);
+        if (!EOrderStatus.SEND.getCode().equalsIgnoreCase(order.getStatus())) {
+            throw new BizException("xn000000", "订单未发货，不能确认收货");
+        }
+        return orderBO.approveOrder(code, updater,
+            EOrderStatus.RECEIVE.getCode(), remark);
     }
 }

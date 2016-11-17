@@ -64,17 +64,35 @@ public interface IOrderBO extends IPaginableBO<Order> {
             String status);
 
     /**
-     * 发货反馈更新
+     * 现场发货
      * @param code
-     * @param approveUser
+     * @param updater
      * @param status
-     * @param approveNote
+     * @param remark
      * @return 
-     * @create: 2016年5月25日 下午12:40:10 xieyj
+     * @create: 2016年11月17日 下午3:06:19 haiqingzheng
      * @history:
      */
-    public int approveOrder(String code, String approveUser, String status,
-            String approveNote);
+    public int approveOrder(String code, String updater, String status,
+            String remark);
+
+    /**
+     * 订单发货
+     * @param code
+     * @param logisticsCompany
+     * @param logisticsCode
+     * @param deliverer
+     * @param deliveryDatetime
+     * @param pdf
+     * @param updater
+     * @param remark
+     * @return 
+     * @create: 2016年11月17日 下午2:50:48 haiqingzheng
+     * @history:
+     */
+    public int deliverOrder(String code, String logisticsCompany,
+            String logisticsCode, String deliverer, String deliveryDatetime,
+            String pdf, String updater, String remark);
 
     /**
      * 更新发货单金额

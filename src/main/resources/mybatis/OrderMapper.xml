@@ -147,6 +147,24 @@
 		UPDATE tmall_order
 		SET
 		status = #{status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE
+		code = #{code}
+	</update>
+	
+	<update id="update_orderDeliver" parameterType="order">
+		UPDATE tmall_order
+		SET
+		logistics_company = #{logisticsCompany}
+		,logistics_code = #{logisticsCode}
+		,deliverer = #{deliverer}
+		,delivery_datetime = #{deliveryDatetime}
+		,pdf = #{pdf}
+		,status = #{status}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
 		,remark = #{remark}
 		WHERE
 		code = #{code}
