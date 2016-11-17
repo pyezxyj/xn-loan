@@ -107,8 +107,8 @@ public class Order extends ABaseDO {
     // 模糊查询使用
     private String codeForQuery;
 
-    // 下单人用户名
-    private String loginName;
+    // 下单人手机号
+    private String mobile;
 
     List<ProductOrder> productOrderList;
 
@@ -320,14 +320,6 @@ public class Order extends ABaseDO {
         this.codeForQuery = codeForQuery;
     }
 
-    public String getLoginName() {
-        return loginName;
-    }
-
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
-    }
-
     public List<ProductOrder> getProductOrderList() {
         return productOrderList;
     }
@@ -342,6 +334,14 @@ public class Order extends ABaseDO {
 
     public void setYunfei(Long yunfei) {
         this.yunfei = yunfei;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
 }

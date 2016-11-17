@@ -5,6 +5,7 @@
 	<resultMap id="category_DB_Result" type="category">
 		<result column="code" property="code" />
 		<result column="parent_code" property="parentCode" />
+		<result column="parent_name" property="parentName" />
 		<result column="name" property="name" />
 		<result column="pic" property="pic" />
 		<result column="order_no" property="orderNo" />
@@ -27,6 +28,7 @@
 		SELECT
 		t.code
 		,t.parent_code
+		,(select name from tmall_category tc where tc.code = t.parent_code) as parent_name
 		,t.name
 		,t.pic
 		,t.order_no

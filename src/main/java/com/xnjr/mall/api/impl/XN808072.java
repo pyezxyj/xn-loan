@@ -4,7 +4,7 @@ import com.xnjr.mall.ao.IOrderAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
-import com.xnjr.mall.dto.req.XN602027Req;
+import com.xnjr.mall.dto.req.XN808072Req;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
@@ -15,19 +15,18 @@ import com.xnjr.mall.spring.SpringContextHolder;
  * @since: 2016年5月23日 上午9:04:12 
  * @history:
  */
-public class XN602027 extends AProcessor {
+public class XN808072 extends AProcessor {
 
-    private IOrderAO invoiceAO = SpringContextHolder
-        .getBean(IOrderAO.class);
+    private IOrderAO orderAO = SpringContextHolder.getBean(IOrderAO.class);
 
-    private XN602027Req req = null;
+    private XN808072Req req = null;
 
     /** 
      * @see com.xnjr.mall.api.IProcessor#doBusiness()
      */
     @Override
     public Object doBusiness() throws BizException {
-        return invoiceAO.getInvoice(req.getInvoiceCode());
+        return orderAO.getOrder(req.getCode());
     }
 
     /** 
@@ -35,7 +34,7 @@ public class XN602027 extends AProcessor {
      */
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN602027Req.class);
-        StringValidater.validateBlank(req.getInvoiceCode());
+        req = JsonUtil.json2Bean(inputparams, XN808072Req.class);
+        StringValidater.validateBlank(req.getCode());
     }
 }

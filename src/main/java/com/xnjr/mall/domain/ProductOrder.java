@@ -27,7 +27,7 @@ public class ProductOrder extends ABaseDO {
     // 订单编号
     private String orderCode;
 
-    // 型号编号
+    // 产品编号
     private String productCode;
 
     // 数量

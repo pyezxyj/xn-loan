@@ -11,6 +11,7 @@
 		<result column="receipt_type" property="receiptType" />
 		<result column="receipt_title" property="receiptTitle" />
 		<result column="apply_user" property="applyUser" />
+		<result column="mobile" property="mobile" />
 		<result column="apply_note" property="applyNote" />
 		<result column="apply_datetime" property="applyDatetime" />
 		<result column="amount" property="amount" />
@@ -26,8 +27,6 @@
 		<result column="delivery_datetime" property="deliveryDatetime" />
 		<result column="pdf" property="pdf" />
 		<result column="company_code" property="companyCode" />
-		
-		<result column="login_name" property="loginName" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -49,8 +48,8 @@
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
 			</if>
-			<if test="loginName != null and loginName != '' ">
-				AND tu.login_name like "%"#{loginName}"%"
+			<if test="mobile != null and mobile != '' ">
+				AND tu.mobile like "%"#{mobile}"%"
 			</if>
 			<if test="companyCode != null and companyCode != '' ">
 				AND t.company_code = #{companyCode}
@@ -67,7 +66,7 @@
 		,t.receipt_type
 		,t.receipt_title
 		,t.apply_user
-		<!-- ,tu.login_name -->
+		,tu.mobile
 		,t.apply_datetime
 		,t.apply_note
 		,t.amount
@@ -84,7 +83,7 @@
 		,t.pdf
 		,t.company_code
 		FROM
-		tmall_order t <!-- LEFT JOIN ${userDB}.tstd_user tu ON t.apply_user = tu.user_id -->
+		tmall_order t LEFT JOIN ${userDB}.tstd_user tu ON t.apply_user = tu.user_id
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -95,7 +94,7 @@
 
 	<select id="select_order_count" parameterType="order"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tmall_order t <!-- LEFT JOIN ${userDB}.tstd_user tu ON t.apply_user = tu.user_id -->
+		SELECT count(1) FROM tmall_order t LEFT JOIN ${userDB}.tstd_user tu ON t.apply_user = tu.user_id
 		<include refid="where_condition" />
 	</select>
 

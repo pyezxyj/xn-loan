@@ -261,14 +261,10 @@ public class OrderAOImpl implements IOrderAO {
             for (Order order : page.getList()) {
                 ProductOrder imCondition = new ProductOrder();
                 imCondition.setOrderCode(order.getCode());
-                List<ProductOrder> orderModelList = productOrderBO
+                List<ProductOrder> productOrderList = productOrderBO
                     .queryProductOrderList(imCondition);
-                order.setProductOrderList(orderModelList);
-                Long totalAmount = 0L;
-                for (ProductOrder orderModel : orderModelList) {
-                    totalAmount += orderModel.getQuantity()
-                            * orderModel.getSalePrice();
-                }
+                order.setProductOrderList(productOrderList);
+                Long totalAmount = order.getAmount() + order.getYunfei();
                 order.setTotalAmount(totalAmount);
             }
         }
@@ -285,14 +281,10 @@ public class OrderAOImpl implements IOrderAO {
             for (Order order : list) {
                 ProductOrder imCondition = new ProductOrder();
                 imCondition.setOrderCode(order.getCode());
-                List<ProductOrder> orderModelList = productOrderBO
+                List<ProductOrder> productOrderList = productOrderBO
                     .queryProductOrderList(imCondition);
-                order.setProductOrderList(orderModelList);
-                Long totalAmount = 0L;
-                for (ProductOrder orderModel : orderModelList) {
-                    totalAmount += orderModel.getQuantity()
-                            * orderModel.getSalePrice();
-                }
+                order.setProductOrderList(productOrderList);
+                Long totalAmount = order.getAmount() + order.getYunfei();
                 order.setTotalAmount(totalAmount);
             }
         }
@@ -304,18 +296,6 @@ public class OrderAOImpl implements IOrderAO {
      */
     @Override
     public Order getOrder(String code) {
-        Order order = orderBO.getOrder(code);
-        // 收货地址信息
-        Address address = addressBO.getAddress(order.getAddressCode());
-        order.setAddress(address);
-        // 附带物流信息
-        if (EOrderStatus.SEND.getCode().equalsIgnoreCase(order.getStatus())
-                || EOrderStatus.RECEIVE.getCode().equalsIgnoreCase(
-                    order.getStatus())
-                || EOrderStatus.FINISH.getCode().equalsIgnoreCase(
-                    order.getStatus())) {
-            order.setLogistics(logisticsBO.getLogisticsByOrderCode(code));
-        }
-        return order;
+        return orderBO.getOrder(code);
     }
 }

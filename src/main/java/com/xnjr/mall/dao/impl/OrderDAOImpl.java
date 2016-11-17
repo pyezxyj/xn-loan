@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.xnjr.mall.common.DBPropertiesUtil;
+import com.xnjr.mall.common.PropertiesUtil;
 import com.xnjr.mall.dao.IOrderDAO;
 import com.xnjr.mall.dao.base.support.AMybatisTemplate;
 import com.xnjr.mall.domain.Order;
@@ -38,7 +38,7 @@ public class OrderDAOImpl extends AMybatisTemplate implements IOrderDAO {
      */
     @Override
     public Order select(Order condition) {
-        condition.setUserDB(DBPropertiesUtil.Config.USER_DB);
+        condition.setUserDB(PropertiesUtil.Config.USER_DB);
         return super.select(NAMESPACE.concat("select_order"), condition,
             Order.class);
     }
@@ -48,7 +48,7 @@ public class OrderDAOImpl extends AMybatisTemplate implements IOrderDAO {
      */
     @Override
     public Long selectTotalCount(Order condition) {
-        condition.setUserDB(DBPropertiesUtil.Config.USER_DB);
+        condition.setUserDB(PropertiesUtil.Config.USER_DB);
         return super.selectTotalCount(NAMESPACE.concat("select_order_count"),
             condition);
     }
@@ -58,7 +58,7 @@ public class OrderDAOImpl extends AMybatisTemplate implements IOrderDAO {
      */
     @Override
     public List<Order> selectList(Order condition) {
-        condition.setUserDB(DBPropertiesUtil.Config.USER_DB);
+        condition.setUserDB(PropertiesUtil.Config.USER_DB);
         return super.selectList(NAMESPACE.concat("select_order"), condition,
             Order.class);
     }
@@ -68,7 +68,7 @@ public class OrderDAOImpl extends AMybatisTemplate implements IOrderDAO {
      */
     @Override
     public List<Order> selectList(Order condition, int start, int count) {
-        condition.setUserDB(DBPropertiesUtil.Config.USER_DB);
+        condition.setUserDB(PropertiesUtil.Config.USER_DB);
         return super.selectList(NAMESPACE.concat("select_order"), start, count,
             condition, Order.class);
     }

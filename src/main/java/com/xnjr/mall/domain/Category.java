@@ -40,6 +40,10 @@ public class Category extends ABaseDO {
     // 所属公司编号
     private String companyCode;
 
+    // ***************db properties
+    // 父编号名称
+    private String parentName;
+
     public String getCode() {
         return code;
     }
@@ -88,4 +92,11 @@ public class Category extends ABaseDO {
         this.companyCode = companyCode;
     }
 
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
 }

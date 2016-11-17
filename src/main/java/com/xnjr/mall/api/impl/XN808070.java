@@ -8,7 +8,7 @@ import com.xnjr.mall.common.DateUtil;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.domain.Order;
-import com.xnjr.mall.dto.req.XN602025Req;
+import com.xnjr.mall.dto.req.XN808070Req;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
@@ -19,12 +19,11 @@ import com.xnjr.mall.spring.SpringContextHolder;
  * @since: 2016年5月23日 上午9:04:12 
  * @history:
  */
-public class XN602025 extends AProcessor {
+public class XN808070 extends AProcessor {
 
-    private IOrderAO invoiceAO = SpringContextHolder
-        .getBean(IOrderAO.class);
+    private IOrderAO orderAO = SpringContextHolder.getBean(IOrderAO.class);
 
-    private XN602025Req req = null;
+    private XN808070Req req = null;
 
     /** 
      * @see com.xnjr.mall.api.IProcessor#doBusiness()
@@ -33,10 +32,10 @@ public class XN602025 extends AProcessor {
     public Object doBusiness() throws BizException {
         Order condition = new Order();
         condition.setCodeForQuery(req.getCode());
-        condition.setLoginName(req.getLoginName());
+        condition.setMobile(req.getMobile());
         condition.setApplyUser(req.getApplyUser());
         condition.setStatus(req.getStatus());
-        condition.setIsSecondPay(req.getIsSecondPay());
+        condition.setCompanyCode(req.getCompanyCode());
         condition.setApplyDatetimeStart(DateUtil.strToDate(req.getDateStart(),
             DateUtil.DATA_TIME_PATTERN_1));
         condition.setApplyDatetimeEnd(DateUtil.strToDate(req.getDateEnd(),
@@ -48,7 +47,7 @@ public class XN602025 extends AProcessor {
         condition.setOrder(orderColumn, req.getOrderDir());
         int start = StringValidater.toInteger(req.getStart());
         int limit = StringValidater.toInteger(req.getLimit());
-        return invoiceAO.queryInvoicePage(start, limit, condition);
+        return orderAO.queryOrderPage(start, limit, condition);
     }
 
     /** 
@@ -56,7 +55,7 @@ public class XN602025 extends AProcessor {
      */
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN602025Req.class);
+        req = JsonUtil.json2Bean(inputparams, XN808070Req.class);
         StringValidater.validateNumber(req.getStart(), req.getLimit());
     }
 }

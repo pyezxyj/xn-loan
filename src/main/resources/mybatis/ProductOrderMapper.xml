@@ -6,8 +6,8 @@
 		<result column="code" property="code" />
 		<result column="order_code" property="orderCode" />
 		<result column="product_code" property="productCode" />
-		<result column="quantity" property="quantity" />
 		<result column="product_name" property="productName" />
+		<result column="quantity" property="quantity" />
 		<result column="sale_price" property="salePrice" />
 		<result column="adv_pic" property="advPic" />
 	</resultMap>
