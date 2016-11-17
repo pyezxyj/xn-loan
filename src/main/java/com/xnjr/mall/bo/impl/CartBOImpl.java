@@ -17,10 +17,10 @@ import org.springframework.stereotype.Component;
 
 import com.xnjr.mall.bo.ICartBO;
 import com.xnjr.mall.bo.base.PaginableBOImpl;
-import com.xnjr.mall.core.EGeneratePrefix;
 import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.ICartDAO;
 import com.xnjr.mall.domain.Cart;
+import com.xnjr.mall.enums.EGeneratePrefix;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -70,7 +70,7 @@ public class CartBOImpl extends PaginableBOImpl<Cart> implements ICartBO {
     public String saveCart(Cart data) {
         String code = null;
         if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.CT.getCode());
+            code = OrderNoGenerater.generateM(EGeneratePrefix.CART.getCode());
             data.setCode(code);
             cartDAO.insert(data);
         }

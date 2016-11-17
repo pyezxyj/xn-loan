@@ -20,6 +20,7 @@ import com.xnjr.mall.bo.base.PaginableBOImpl;
 import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.IProductDAO;
 import com.xnjr.mall.domain.Product;
+import com.xnjr.mall.enums.EGeneratePrefix;
 import com.xnjr.mall.enums.EPutStatus;
 import com.xnjr.mall.exception.BizException;
 
@@ -42,7 +43,8 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
     public String saveProduct(Product product) {
         String code = null;
         if (product != null) {
-            code = OrderNoGenerater.generateM("MP");
+            code = OrderNoGenerater
+                .generateM(EGeneratePrefix.PRODUCT.getCode());
             product.setCode(code);
             product.setUpdater(product.getUpdater());
             product.setUpdateDatetime(new Date());

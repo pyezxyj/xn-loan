@@ -16,10 +16,10 @@ import org.springframework.stereotype.Component;
 
 import com.xnjr.mall.bo.IProductOrderBO;
 import com.xnjr.mall.bo.base.PaginableBOImpl;
-import com.xnjr.mall.core.EGeneratePrefix;
 import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.IProductOrderDAO;
 import com.xnjr.mall.domain.ProductOrder;
+import com.xnjr.mall.enums.EGeneratePrefix;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -40,7 +40,8 @@ public class ProductOrderBOImpl extends PaginableBOImpl<ProductOrder> implements
     @Override
     public String saveProductOrder(String orderCode, String productCode,
             Integer quantity, Long salePrice) {
-        String code = OrderNoGenerater.generateM(EGeneratePrefix.IM.getCode());
+        String code = OrderNoGenerater.generateM(EGeneratePrefix.PRODUCT_ORDER
+            .getCode());
         ProductOrder data = new ProductOrder();
         data.setCode(code);
         data.setOrderCode(orderCode);

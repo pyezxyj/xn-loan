@@ -34,7 +34,10 @@ public class XN808050 extends AProcessor {
         data.setReceiptType(req.getReceiptType());
         data.setReceiptTitle(req.getReceiptTitle());
         data.setType(EOrderType.SH_SALE.getCode());
-        return orderAO.commitOrder(req.getAddressCode(), req.getProductCode(),
+        data.setReceiver(req.getReceiver());
+        data.setReMobile(req.getReMobile());
+        data.setReAddress(req.getReAddress());
+        return orderAO.commitOrder(req.getProductCode(),
             Integer.valueOf(req.getQuantity()), data);
     }
 
@@ -44,8 +47,8 @@ public class XN808050 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN808050Req.class);
-        StringValidater.validateBlank(req.getApplyUser(), req.getAddressCode(),
-            req.getProductCode());
+        StringValidater.validateBlank(req.getApplyUser(), req.getReceiver(),
+            req.getReMobile(), req.getReAddress(), req.getProductCode());
         StringValidater.validateNumber(req.getQuantity());
     }
 }

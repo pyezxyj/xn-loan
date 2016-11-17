@@ -1,4 +1,4 @@
-package com.xnjr.mall.core;
+package com.xnjr.mall.enums;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,8 +10,8 @@ import java.util.Map;
  */
 public enum EGeneratePrefix {
 
-    AD("AD", "收件地址"), BG("BG", "购买引导"), CT("CT", "购物车"), IN("IN", "发货单"), IM(
-            "IM", "发货单型号");
+    CATEGORY("FL", "分类"), PRODUCT("CP", "产品"), CART("GW", "购物车"), ORDER("DD",
+            "定单"), PRODUCT_ORDER("CD", "产品订单");
 
     public static Map<String, EGeneratePrefix> getOrderTypeMap() {
         Map<String, EGeneratePrefix> map = new HashMap<String, EGeneratePrefix>();

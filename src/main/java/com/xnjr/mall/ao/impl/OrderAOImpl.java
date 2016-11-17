@@ -24,11 +24,14 @@ import com.xnjr.mall.bo.IProductOrderBO;
 import com.xnjr.mall.bo.ISYSConfigBO;
 import com.xnjr.mall.bo.IUserBO;
 import com.xnjr.mall.bo.base.Paginable;
+import com.xnjr.mall.common.SysConstants;
+import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.domain.Cart;
 import com.xnjr.mall.domain.Order;
 import com.xnjr.mall.domain.Product;
 import com.xnjr.mall.domain.ProductOrder;
+import com.xnjr.mall.enums.EGeneratePrefix;
 import com.xnjr.mall.enums.EOrderStatus;
 import com.xnjr.mall.exception.BizException;
 
@@ -66,15 +69,7 @@ public class OrderAOImpl implements IOrderAO {
      */
     @Override
     @Transactional
-    public String commitOrder(String addressCode, String productCode,
-            Integer quantity, Order data) {
-        // 获取地址信息 待完善
-        String receiver = "郑海清";
-        String reMobile = "15268501481";
-        String reAddress = "浙江省杭州市余杭区仓前街道梦想小镇天使村5幢2楼";
-        data.setReceiver(receiver);
-        data.setReMobile(reMobile);
-        data.setReAddress(reAddress);
+    public String commitOrder(String productCode, Integer quantity, Order data) {
         // 计算订单总价
         Product product = productBO.getProduct(productCode);
         Long amount = quantity * product.getDiscountPrice();
@@ -82,10 +77,10 @@ public class OrderAOImpl implements IOrderAO {
         // 计算订单运费
         Long yunfei = 0L;
         Long byje = StringValidater.toLong(sysConfigBO.getConfigValue(
-            product.getCompanyCode(), "byje"));
+            product.getCompanyCode(), SysConstants.BYJE));
         if (amount < byje) {
             yunfei = StringValidater.toLong(sysConfigBO.getConfigValue(
-                product.getCompanyCode(), "yunfei"));
+                product.getCompanyCode(), SysConstants.YUNFEI));
         }
         data.setYunfei(yunfei);
         // 设置订单所属公司
@@ -102,21 +97,18 @@ public class OrderAOImpl implements IOrderAO {
      */
     @Override
     @Transactional
-    public String commitOrder(List<String> cartCodeList, String addressCode,
-            Order data) {
-        // 获取地址信息 待完善
-        String receiver = "郑海清";
-        String reMobile = "15268501481";
-        String reAddress = "浙江省杭州市余杭区仓前街道梦想小镇天使村5幢2楼";
-        data.setReceiver(receiver);
-        data.setReMobile(reMobile);
-        data.setReAddress(reAddress);
-        // 获取购物车中的记录，形成订单型号关联表
+    public String commitOrder(List<String> cartCodeList, Order data) {
+        // 获取购物车中的记录，形成订单产品关联表
         if (CollectionUtils.isEmpty(cartCodeList)) {
             throw new BizException("xn0000", "请选择购物车中的货物");
         }
 
-        // 计算订单总金额
+        // 订单号生成
+        String code = OrderNoGenerater.generateM(EGeneratePrefix.ORDER
+            .getCode());
+        data.setCode(code);
+
+        // 落地订单产品关联信息 计算订单总金额
         Long amount = 0L;
         String companyCode = "";
         for (String cartCode : cartCodeList) {
@@ -124,30 +116,23 @@ public class OrderAOImpl implements IOrderAO {
             Product product = productBO.getProduct(cart.getProductCode());
             amount = amount + (cart.getQuantity() * product.getDiscountPrice());
             companyCode = product.getCompanyCode();
-        }
-        data.setAmount(amount);
-        data.setCompanyCode(companyCode);
-
-        // 计算订单运费
-        Long yunfei = 0L;
-        Long byje = StringValidater.toLong(sysConfigBO.getConfigValue(
-            companyCode, "byje"));
-        if (amount < byje) {
-            yunfei = StringValidater.toLong(sysConfigBO.getConfigValue(
-                companyCode, "yunfei"));
-        }
-        data.setYunfei(yunfei);
-
-        String code = orderBO.saveOrder(data);
-
-        // 落地订单产品关联信息
-        for (String cartCode : cartCodeList) {
-            Cart cart = cartBO.getCart(cartCode);
-            Product product = productBO.getProduct(cart.getProductCode());
             productOrderBO.saveProductOrder(code, cart.getProductCode(),
                 cart.getQuantity(), product.getDiscountPrice());
         }
 
+        data.setAmount(amount);
+        data.setCompanyCode(companyCode);
+        // 计算订单运费
+        Long yunfei = 0L;
+        Long byje = StringValidater.toLong(sysConfigBO.getConfigValue(
+            companyCode, SysConstants.BYJE));
+        if (amount < byje) {
+            yunfei = StringValidater.toLong(sysConfigBO.getConfigValue(
+                companyCode, SysConstants.YUNFEI));
+        }
+        data.setYunfei(yunfei);
+        // 保存订单
+        orderBO.saveOrder(data);
         // 删除购物车选中记录
         for (String cartCode : cartCodeList) {
             cartBO.removeCart(cartCode);
@@ -175,7 +160,7 @@ public class OrderAOImpl implements IOrderAO {
         // EDirection.PLUS.getValue());
         orderBO.refreshOrderStatus(code, EOrderStatus.PAY_YES.getCode());
         orderBO.refreshOrderPayAmount(code,
-            order.getTotalAmount() + order.getYunfei());
+            order.getAmount() + order.getYunfei());
     }
 
     /** 
@@ -309,7 +294,6 @@ public class OrderAOImpl implements IOrderAO {
     public void deliverOrder(String code, String logisticsCompany,
             String logisticsCode, String deliverer, String deliveryDatetime,
             String pdf, String updater, String remark) {
-        // 保存物流单信息
         Order order = orderBO.getOrder(code);
         if (!EOrderStatus.PAY_YES.getCode().equalsIgnoreCase(order.getStatus())) {
             throw new BizException("xn000000", "订单未支付，不能发货");
@@ -324,8 +308,8 @@ public class OrderAOImpl implements IOrderAO {
         if (!EOrderStatus.PAY_YES.getCode().equalsIgnoreCase(order.getStatus())) {
             throw new BizException("xn000000", "订单未支付，不能发货");
         }
-        orderBO
-            .approveOrder(code, updater, EOrderStatus.SEND.getCode(), remark);
+        orderBO.approveOrder(code, updater, EOrderStatus.RECEIVE.getCode(),
+            remark);
     }
 
     @Override

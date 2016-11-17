@@ -36,8 +36,10 @@ public class XN808051 extends AProcessor {
         data.setReceiptType(req.getReceiptType());
         data.setReceiptTitle(req.getReceiptTitle());
         data.setType(EOrderType.SH_SALE.getCode());
-        return invoiceAO.commitOrder(req.getCartCodeList(),
-            req.getAddressCode(), data);
+        data.setReceiver(req.getReceiver());
+        data.setReMobile(req.getReMobile());
+        data.setReAddress(req.getReAddress());
+        return invoiceAO.commitOrder(req.getCartCodeList(), data);
     }
 
     /** 
@@ -46,7 +48,8 @@ public class XN808051 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN808051Req.class);
-        StringValidater.validateBlank(req.getApplyUser(), req.getAddressCode());
+        StringValidater.validateBlank(req.getApplyUser(), req.getReceiver(),
+            req.getReMobile(), req.getReAddress());
         if (CollectionUtils.isEmpty(req.getCartCodeList())) {
             throw new BizException("xn702000", "购物车中货物不能为空");
         }

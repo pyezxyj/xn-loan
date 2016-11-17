@@ -18,8 +18,6 @@ import org.springframework.stereotype.Component;
 import com.xnjr.mall.bo.IOrderBO;
 import com.xnjr.mall.bo.base.PaginableBOImpl;
 import com.xnjr.mall.common.DateUtil;
-import com.xnjr.mall.core.EGeneratePrefix;
-import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.IOrderDAO;
 import com.xnjr.mall.dao.IProductOrderDAO;
 import com.xnjr.mall.domain.Order;
@@ -61,8 +59,6 @@ public class OrderBOImpl extends PaginableBOImpl<Order> implements IOrderBO {
     public String saveOrder(Order data) {
         String code = null;
         if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.IN.getCode());
-            data.setCode(code);
             data.setStatus(EOrderStatus.TO_PAY.getCode());
             data.setApplyDatetime(new Date());
             data.setPayAmount(0L);
@@ -100,6 +96,7 @@ public class OrderBOImpl extends PaginableBOImpl<Order> implements IOrderBO {
             Order data = new Order();
             data.setCode(code);
             data.setUpdater(order.getUpdater());
+            data.setUpdateDatetime(new Date());
             data.setRemark(remark);
             data.setStatus(EOrderStatus.YHYC.getCode());
             count = orderDAO.updateOrderCancel(data);
@@ -116,14 +113,14 @@ public class OrderBOImpl extends PaginableBOImpl<Order> implements IOrderBO {
         int count = 0;
         if (StringUtils.isNotBlank(code)) {
             if (!isOrderExist(code)) {
-                throw new BizException("xn0000", "发货单不存在");
+                throw new BizException("xn0000", "订单不存在");
             }
             Order data = new Order();
             data.setCode(code);
             data.setStatus(status);
             data.setUpdater(updater);
-            data.setRemark(remark);
             data.setUpdateDatetime(new Date());
+            data.setRemark(remark);
             count = orderDAO.updateOrderCancel(data);
         }
         return count;

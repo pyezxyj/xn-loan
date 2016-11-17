@@ -11,7 +11,7 @@ import com.xnjr.mall.bo.base.PaginableBOImpl;
 import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.ICategoryDAO;
 import com.xnjr.mall.domain.Category;
-import com.xnjr.mall.enums.EPrefixCode;
+import com.xnjr.mall.enums.EGeneratePrefix;
 import com.xnjr.mall.exception.BizException;
 
 /**
@@ -40,7 +40,8 @@ public class CategoryBOImpl extends PaginableBOImpl<Category> implements
     public String saveCategory(Category data) {
         String code = null;
         if (data != null) {
-            code = OrderNoGenerater.generateM(EPrefixCode.CATEGORY.getCode());
+            code = OrderNoGenerater.generateM(EGeneratePrefix.CATEGORY
+                .getCode());
             data.setCode(code);
             categoryDAO.insert(data);
         }

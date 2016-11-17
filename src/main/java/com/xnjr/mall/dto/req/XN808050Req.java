@@ -14,8 +14,14 @@ public class XN808050Req {
     // 数量（必填）
     private String quantity;
 
-    // 收件编号（必填）
-    private String addressCode;
+    // 收件人姓名（必填）
+    private String receiver;
+
+    // 收件人电话（必填）
+    private String reMobile;
+
+    // 收货地址（必填）
+    private String reAddress;
 
     // 申请人（必填）
     private String applyUser;
@@ -53,12 +59,28 @@ public class XN808050Req {
         this.applyNote = applyNote;
     }
 
-    public String getAddressCode() {
-        return addressCode;
+    public String getReceiver() {
+        return receiver;
     }
 
-    public void setAddressCode(String addressCode) {
-        this.addressCode = addressCode;
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public String getReMobile() {
+        return reMobile;
+    }
+
+    public void setReMobile(String reMobile) {
+        this.reMobile = reMobile;
+    }
+
+    public String getReAddress() {
+        return reAddress;
+    }
+
+    public void setReAddress(String reAddress) {
+        this.reAddress = reAddress;
     }
 
     public String getReceiptType() {

@@ -24,8 +24,7 @@ public interface IOrderAO {
      * @create: 2016年5月25日 上午10:48:20 xieyj
      * @history:
      */
-    public String commitOrder(String addressCode, String productCode,
-            Integer quantity, Order data);
+    public String commitOrder(String productCode, Integer quantity, Order data);
 
     /**
      * 批量提交发货单
@@ -35,8 +34,7 @@ public interface IOrderAO {
      * @create: 2016年5月25日 上午10:16:02 xieyj
      * @history:
      */
-    public String commitOrder(List<String> cartCodeList, String addressCode,
-            Order data);
+    public String commitOrder(List<String> cartCodeList, Order data);
 
     /**
      * 支付订单，待确认

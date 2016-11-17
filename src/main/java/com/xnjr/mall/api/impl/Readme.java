@@ -1,8 +1,7 @@
 package com.xnjr.mall.api.impl;
 
-//mall系统
+//橙商户std-mall
 public class Readme {
-    // 601产品展示
-    // 602散买
-    // 603批发
+    // 808
+    // 808900-808999 基础数据
 }
