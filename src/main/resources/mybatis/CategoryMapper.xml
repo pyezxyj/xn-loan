@@ -32,7 +32,7 @@
 		,t.order_no
 		,t.company_code
 		FROM
-		tforum_category t
+		tmall_category t
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -43,13 +43,13 @@
 
 	<select id="select_category_count" parameterType="category"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tforum_category t
+		SELECT count(1) FROM tmall_category t
 		<include refid="where_condition" />
 	</select>
 
 	<insert id="insert_category" parameterType="category">
 		INSERT INTO
-		tforum_category(
+		tmall_category(
 		code
 		,parent_code
 		,name
@@ -68,7 +68,7 @@
 	</insert>
 	
 	<update id="update_category" parameterType="category">
-		UPDATE tforum_category
+		UPDATE tmall_category
 		SET
 		parent_code = #{parentCode}
 		,name = #{name}
@@ -79,7 +79,7 @@
 	
 	<delete id="delete_category" parameterType="category">
 		DELETE FROM
-		tforum_category
+		tmall_category
 		WHERE
 		code = #{code}
 	</delete>
