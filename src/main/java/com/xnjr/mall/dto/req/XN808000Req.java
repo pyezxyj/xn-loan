@@ -4,9 +4,6 @@ public class XN808000Req {
     // 父编号(必填)
     private String parentCode;
 
-    // 类型(1 板块，2商城)(必填)
-    private String type;
-
     // 分类名称(必填)
     private String name;
 
@@ -25,14 +22,6 @@ public class XN808000Req {
 
     public void setParentCode(String parentCode) {
         this.parentCode = parentCode;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getName() {

@@ -3,7 +3,6 @@ package com.xnjr.mall.api.impl;
 import com.xnjr.mall.ao.ICategoryAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
-import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.domain.Category;
 import com.xnjr.mall.dto.req.XN808006Req;
 import com.xnjr.mall.exception.BizException;
@@ -34,6 +33,5 @@ public class XN808006 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN808006Req.class);
-        StringValidater.validateBlank(req.getCompanyCode());
     }
 }
