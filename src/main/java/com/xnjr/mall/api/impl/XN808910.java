@@ -6,7 +6,7 @@ import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.domain.SYSConfig;
 import com.xnjr.mall.dto.req.XN808910Req;
-import com.xnjr.mall.dto.res.XNlh5031Res;
+import com.xnjr.mall.dto.res.BooleanRes;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
@@ -30,7 +30,7 @@ public class XN808910 extends AProcessor {
         data.setCvalue(req.getCvalue());
         data.setRemark(req.getRemark());
         sysConfigAO.editSYSConfig(data);
-        return new XNlh5031Res(true);
+        return new BooleanRes(true);
     }
 
     @Override

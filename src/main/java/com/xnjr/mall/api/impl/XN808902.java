@@ -13,7 +13,7 @@ import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.dto.req.XN808902Req;
-import com.xnjr.mall.dto.res.XNlh5012Res;
+import com.xnjr.mall.dto.res.BooleanRes;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
@@ -37,7 +37,7 @@ public class XN808902 extends AProcessor {
     public Object doBusiness() throws BizException {
         sysDictAO.editSYSDict(StringValidater.toLong(req.getId()),
             req.getDvalue(), req.getRemark());
-        return new XNlh5012Res(true);
+        return new BooleanRes(true);
     }
 
     /** 

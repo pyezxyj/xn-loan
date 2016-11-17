@@ -13,7 +13,6 @@ import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.dto.req.XN808917Req;
-import com.xnjr.mall.dto.res.XNlh5034Res;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
@@ -35,8 +34,7 @@ public class XN808917 extends AProcessor {
      */
     @Override
     public Object doBusiness() throws BizException {
-        return new XNlh5034Res(sysConfigAO.getConfigValue(req.getCompanyCode(),
-            req.getKey()));
+        return sysConfigAO.getConfigValue(req.getCompanyCode(), req.getKey());
     }
 
     /** 
