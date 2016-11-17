@@ -51,14 +51,14 @@
 	
 	<insert id="insert_sysDict" parameterType="sysDict" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO tsys_dict(
-		,type
+		type
 		,parent_key
 		,dkey
 		,dvalue
 		,remark
 		)
 		VALUES(
-		,#{type}
+		#{type}
 		,#{parentKey}
 		,#{dkey}
 		,#{dvalue}
