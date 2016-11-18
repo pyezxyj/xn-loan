@@ -10,7 +10,7 @@ public class XN808006Req {
     // 分类名称(选填)
     private String name;
 
-    // 所属公司编号(必填)
+    // 所属公司编号(选填)
     private String companyCode;
 
     public String getParentCode() {
