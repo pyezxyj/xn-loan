@@ -9,7 +9,7 @@
  Target Server Version : 50545
  File Encoding         : utf-8
 
- Date: 11/16/2016 13:42:28 PM
+ Date: 11/18/2016 13:16:55 PM
 */
 
 SET NAMES utf8;
@@ -57,12 +57,13 @@ CREATE TABLE `tmall_order` (
   `apply_note` varchar(255) DEFAULT NULL COMMENT '下单备注',
   `apply_datetime` datetime DEFAULT NULL COMMENT '下单时间',
   `amount` bigint(20) DEFAULT NULL COMMENT '订单金额',
+  `yunfei` bigint(20) DEFAULT NULL COMMENT '运费',
   `pay_amount` bigint(20) DEFAULT NULL COMMENT '实际支付金额',
   `status` varchar(4) DEFAULT NULL COMMENT '状态',
   `updater` varchar(32) DEFAULT NULL COMMENT '更新人',
   `update_datetime` datetime DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
-  `logistics_code` varchar(32) NOT NULL COMMENT '物流单号',
+  `logistics_code` varchar(32) DEFAULT NULL COMMENT '物流单号',
   `logistics_company` varchar(32) DEFAULT NULL COMMENT '物流公司编号',
   `deliverer` varchar(32) DEFAULT NULL COMMENT '发货人编号',
   `delivery_datetime` datetime DEFAULT NULL COMMENT '发货时间',
@@ -95,7 +96,7 @@ CREATE TABLE `tmall_product` (
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `original_price` bigint(20) DEFAULT NULL COMMENT '原价',
   `discount_price` bigint(20) DEFAULT NULL COMMENT '折扣价',
-  `location` varchar(32) DEFAULT NULL COMMENT '位置',
+  `location` varchar(32) DEFAULT NULL COMMENT '位置(0 普通 1 热门)',
   `order_no` int(11) DEFAULT NULL COMMENT '相对位置编号',
   `company_code` varchar(32) DEFAULT NULL COMMENT '所属公司',
   PRIMARY KEY (`code`)
@@ -115,6 +116,19 @@ CREATE TABLE `tmall_product_order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+--  Table structure for `tstd_uread`
+-- ----------------------------
+DROP TABLE IF EXISTS `tstd_uread`;
+CREATE TABLE `tstd_uread` (
+  `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `sms_code` varchar(32) DEFAULT NULL COMMENT '广播内容编号',
+  `user_id` varchar(32) DEFAULT NULL COMMENT 'C端用户编号',
+  `status` varchar(4) DEFAULT NULL COMMENT '状态',
+  `read_datetime` datetime DEFAULT NULL COMMENT '阅读时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
 --  Table structure for `tsys_config`
 -- ----------------------------
 DROP TABLE IF EXISTS `tsys_config`;
@@ -126,7 +140,7 @@ CREATE TABLE `tsys_config` (
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `company_code` varchar(32) DEFAULT NULL COMMENT '公司编号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `tsys_dict`
@@ -140,6 +154,6 @@ CREATE TABLE `tsys_dict` (
   `dvalue` varchar(255) DEFAULT NULL COMMENT '值',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;
