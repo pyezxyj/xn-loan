@@ -8,6 +8,8 @@
  */
 package com.xnjr.mall.api.impl;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.xnjr.mall.ao.IProductAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
@@ -36,11 +38,14 @@ public class XN808013 extends AProcessor {
      */
     @Override
     public Object doBusiness() throws BizException {
+        Integer orderNo = null;
+        if (StringUtils.isNotBlank(req.getOrderNo())) {
+            orderNo = StringValidater.toInteger(req.getOrderNo());
+        }
         int count = productAO.putOnProduct(req.getCode(),
             StringValidater.toLong(req.getOriginalPrice()),
             StringValidater.toLong(req.getDiscountPrice()), req.getLocation(),
-            StringValidater.toInteger(req.getOrderNo()), req.getUpdater(),
-            req.getRemark());
+            orderNo, req.getUpdater(), req.getRemark());
         return new BooleanRes(count > 0 ? true : false);
     }
 
@@ -51,7 +56,7 @@ public class XN808013 extends AProcessor {
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN808013Req.class);
         StringValidater.validateBlank(req.getCode(), req.getOriginalPrice(),
-            req.getDiscountPrice(), req.getLocation(), req.getOrderNo(),
-            req.getUpdater(), req.getRemark());
+            req.getDiscountPrice(), req.getLocation(), req.getUpdater(),
+            req.getRemark());
     }
 }

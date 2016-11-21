@@ -10,6 +10,9 @@ public class XN808915Req extends APageReq {
     // key值(选填)
     private String ckey;
 
+    // cname(选填)
+    private String cname;
+
     private String companyCode;
 
     public String getCkey() {
@@ -28,4 +31,11 @@ public class XN808915Req extends APageReq {
         this.companyCode = companyCode;
     }
 
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
 }

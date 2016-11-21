@@ -24,6 +24,9 @@
 			<if test="ckeyForQuery != null and ckeyForQuery != '' ">
 				AND t.ckey like "%"#{ckeyForQuery}"%"
 			</if>
+			<if test="cname != null and cname != '' ">
+				AND t.cname = #{cname}
+			</if>	
 		</trim>
 	</sql>
 	<select id="select_sysConfig" parameterType="sysConfig" resultMap="sysConfig_DB_Result">

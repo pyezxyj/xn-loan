@@ -28,6 +28,7 @@ public class XN808915 extends AProcessor {
     public Object doBusiness() throws BizException {
         SYSConfig data = new SYSConfig();
         data.setCompanyCode(req.getCompanyCode());
+        data.setCname(req.getCname());
         data.setCkeyForQuery(req.getCkey());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
