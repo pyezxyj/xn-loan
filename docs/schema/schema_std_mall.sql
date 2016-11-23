@@ -34,9 +34,11 @@ DROP TABLE IF EXISTS `tmall_category`;
 CREATE TABLE `tmall_category` (
   `code` varchar(32) NOT NULL COMMENT '编号',
   `parent_code` varchar(32) DEFAULT NULL COMMENT '父节点',
+  `type` varchar(4) DEFAULT NULL COMMENT '类型',
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
   `pic` varchar(255) DEFAULT NULL COMMENT '图片',
   `order_no` int(11) DEFAULT NULL COMMENT '序号',
+  `belong` varchar(32) DEFAULT NULL COMMENT '属于谁',
   `company_code` varchar(32) DEFAULT NULL COMMENT '公司编号',
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -13,8 +13,8 @@ import com.xnjr.mall.spring.SpringContextHolder;
 
 /**
  * 修改系统参数
- * @author: Gejin 
- * @since: 2016年4月17日 下午8:17:35 
+ * @author: xieyj 
+ * @since: 2016年11月23日 下午5:54:40 
  * @history:
  */
 public class XN808910 extends AProcessor {
@@ -29,6 +29,7 @@ public class XN808910 extends AProcessor {
         data.setId(StringValidater.toLong(req.getId()));
         data.setCvalue(req.getCvalue());
         data.setRemark(req.getRemark());
+        data.setCompanyCode(req.getCompanyCode());
         sysConfigAO.editSYSConfig(data);
         return new BooleanRes(true);
     }
@@ -36,7 +37,8 @@ public class XN808910 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN808910Req.class);
-        StringValidater.validateBlank(req.getId(), req.getCvalue());
+        StringValidater.validateBlank(req.getId(), req.getCvalue(),
+            req.getCompanyCode());
 
     }
 

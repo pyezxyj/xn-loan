@@ -15,7 +15,7 @@ public interface ISYSConfigAO {
 
     public Long addSYSConfig(SYSConfig data);
 
-    public int editSYSConfig(SYSConfig data);
+    public void editSYSConfig(SYSConfig data);
 
     public Paginable<SYSConfig> querySYSConfigPage(int start, int limit,
             SYSConfig condition);

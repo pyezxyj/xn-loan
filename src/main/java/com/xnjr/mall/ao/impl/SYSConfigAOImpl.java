@@ -11,7 +11,6 @@ import com.xnjr.mall.domain.SYSConfig;
 import com.xnjr.mall.exception.BizException;
 
 /**
- * 
  * @author: Gejin 
  * @since: 2016年4月17日 下午7:32:28 
  * @history:
@@ -39,14 +38,18 @@ public class SYSConfigAOImpl implements ISYSConfigAO {
     }
 
     @Override
-    public int editSYSConfig(SYSConfig data) {
-        int count = 0;
-        if (data != null && sysConfigBO.isSYSConfigExist(data.getId())) {
-            count = sysConfigBO.refreshSYSConfig(data);
+    public void editSYSConfig(SYSConfig data) {
+        SYSConfig sysConfig = sysConfigBO.getConfig(data.getId());
+        if (0L == sysConfig.getBelong()) {
+            data.setCname(sysConfig.getCname());
+            data.setCkey(sysConfig.getCkey());
+            data.setCvalue(sysConfig.getCvalue());
+            data.setRemark(sysConfig.getRemark());
+            data.setBelong(data.getId());
+            sysConfigBO.saveSYSConfig(data);
         } else {
-            throw new BizException("lh5031", "系统参数ID不存在！");
+            sysConfigBO.refreshSYSConfig(data);
         }
-        return count;
     }
 
     @Override

@@ -8,6 +8,7 @@
 		<result column="ckey" property="ckey" />
 		<result column="cvalue" property="cvalue" />
 		<result column="remark" property="remark" />
+		<result column="belong" property="belong" />
 		<result column="company_code" property="companyCode" />
 	</resultMap>
 	<sql id="where_condition">
@@ -19,7 +20,7 @@
 				AND t.ckey = #{ckey}
 			</if>	
 			<if test="companyCode != null and companyCode != '' ">
-				AND t.company_code = #{companyCode}
+				AND (t.company_code = #{companyCode} or (t.belong = 0 and NOT EXISTS (select * from tsys_config tc where tc.belong = t.id and tc.company_code = #{companyCode})))
 			</if>
 			<if test="ckeyForQuery != null and ckeyForQuery != '' ">
 				AND t.ckey like "%"#{ckeyForQuery}"%"
@@ -36,6 +37,7 @@
 		,ckey
 		,cvalue
 		,remark
+		,belong
 		,company_code
 		FROM
 		tsys_config t 
@@ -58,6 +60,7 @@
 		,ckey
 		,cvalue
 		,remark
+		,belong
 		,company_code
 		)
 		VALUES(
@@ -65,6 +68,7 @@
 		,#{ckey}
 		,#{cvalue}
 		,#{remark}
+		,#{belong}
 		,#{companyCode}
 		)
 	</insert>

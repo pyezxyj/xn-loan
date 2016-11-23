@@ -10,6 +10,9 @@ public class XN808910Req {
     // 备注（选填）
     private String remark;
 
+    // 公司编号（必填）
+    private String companyCode;
+
     public String getId() {
         return id;
     }
@@ -34,4 +37,11 @@ public class XN808910Req {
         this.remark = remark;
     }
 
+    public String getCompanyCode() {
+        return companyCode;
+    }
+
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
+    }
 }

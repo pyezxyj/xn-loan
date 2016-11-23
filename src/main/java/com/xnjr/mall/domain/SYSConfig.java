@@ -36,6 +36,9 @@ public class SYSConfig extends ABaseDO {
     // 备注
     private String remark;
 
+    // 属于(0 地方默认，其他父节点序号)
+    private Long belong;
+
     // 所属公司编号
     private String companyCode;
 
@@ -96,5 +99,13 @@ public class SYSConfig extends ABaseDO {
 
     public void setCkeyForQuery(String ckeyForQuery) {
         this.ckeyForQuery = ckeyForQuery;
+    }
+
+    public Long getBelong() {
+        return belong;
+    }
+
+    public void setBelong(Long belong) {
+        this.belong = belong;
     }
 }
