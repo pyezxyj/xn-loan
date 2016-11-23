@@ -195,7 +195,7 @@
 	</update>
 	
 	<update id="update_product_quantity" parameterType="product">
-		UPDATE tforum_product
+		UPDATE tmall_product
 		SET
 		quantity = quantity - ${quantity}
 		WHERE code = #{code}
