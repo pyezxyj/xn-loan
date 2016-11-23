@@ -119,19 +119,6 @@ CREATE TABLE `tmall_product_order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `tstd_uread`
--- ----------------------------
-DROP TABLE IF EXISTS `tstd_uread`;
-CREATE TABLE `tstd_uread` (
-  `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `sms_code` varchar(32) DEFAULT NULL COMMENT '广播内容编号',
-  `user_id` varchar(32) DEFAULT NULL COMMENT 'C端用户编号',
-  `status` varchar(4) DEFAULT NULL COMMENT '状态',
-  `read_datetime` datetime DEFAULT NULL COMMENT '阅读时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
 --  Table structure for `tsys_config`
 -- ----------------------------
 DROP TABLE IF EXISTS `tsys_config`;
@@ -141,9 +128,10 @@ CREATE TABLE `tsys_config` (
   `ckey` varchar(32) DEFAULT NULL COMMENT 'key值',
   `cvalue` varchar(255) DEFAULT NULL COMMENT '值',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `belong` int(11) DEFAULT NULL COMMENT '属于谁',
   `company_code` varchar(32) DEFAULT NULL COMMENT '公司编号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `tsys_dict`
@@ -157,6 +145,6 @@ CREATE TABLE `tsys_dict` (
   `dvalue` varchar(255) DEFAULT NULL COMMENT '值',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;

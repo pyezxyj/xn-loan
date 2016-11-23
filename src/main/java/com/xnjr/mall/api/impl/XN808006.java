@@ -26,6 +26,7 @@ public class XN808006 extends AProcessor {
         Category condition = new Category();
         condition.setParentCode(req.getParentCode());
         condition.setName(req.getName());
+        condition.setType(req.getType());
         condition.setCompanyCode(req.getCompanyCode());
         return categoryAO.queryCategoryList(condition);
     }

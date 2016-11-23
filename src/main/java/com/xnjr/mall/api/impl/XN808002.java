@@ -33,6 +33,7 @@ public class XN808002 extends AProcessor {
         data.setParentCode(req.getParentCode());
         data.setName(req.getName());
         data.setPic(req.getPic());
+        data.setCompanyCode(req.getCompanyCode());
         if (StringUtils.isNotBlank(req.getOrderNo())) {
             data.setOrderNo(Integer.valueOf(req.getOrderNo()));
         }

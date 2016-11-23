@@ -29,6 +29,7 @@ public class XN808005 extends AProcessor {
         Category condition = new Category();
         condition.setParentCode(req.getParentCode());
         condition.setName(req.getName());
+        condition.setType(req.getType());
         condition.setCompanyCode(req.getCompanyCode());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {

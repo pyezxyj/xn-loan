@@ -84,10 +84,10 @@ public class OrderAOImpl implements IOrderAO {
         // 计算订单运费
         Long yunfei = 0L;
         Long byje = StringValidater.toLong(sysConfigBO.getConfigValue(
-            product.getCompanyCode(), SysConstants.BYJE));
+            product.getCompanyCode(), SysConstants.BYJE)) * 1000;
         if (amount < byje) {
             yunfei = StringValidater.toLong(sysConfigBO.getConfigValue(
-                product.getCompanyCode(), SysConstants.YUNFEI));
+                product.getCompanyCode(), SysConstants.YUNFEI)) * 1000;
         }
         data.setYunfei(yunfei);
         // 设置订单所属公司
