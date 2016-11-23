@@ -72,6 +72,13 @@ public class OrderAOImpl implements IOrderAO {
     public String commitOrder(String productCode, Integer quantity, Order data) {
         // 计算订单总价
         Product product = productBO.getProduct(productCode);
+        if (product.getQuantity() != null
+                && (product.getQuantity() - quantity) < 0) {
+            throw new BizException("xn0000", "该商品库存量不足，无法购买");
+        }
+        // 减去库存量
+        productBO.refreshProductQuantity(productCode, quantity);
+
         Long amount = quantity * product.getDiscountPrice();
         data.setAmount(amount);
         // 计算订单运费
@@ -85,7 +92,11 @@ public class OrderAOImpl implements IOrderAO {
         data.setYunfei(yunfei);
         // 设置订单所属公司
         data.setCompanyCode(product.getCompanyCode());
-        String code = orderBO.saveOrder(data);
+        // 订单号生成
+        String code = OrderNoGenerater.generateM(EGeneratePrefix.ORDER
+            .getCode());
+        data.setCode(code);
+        orderBO.saveOrder(data);
         // 订单产品快照关联
         productOrderBO.saveProductOrder(code, productCode, quantity,
             product.getDiscountPrice());
@@ -114,6 +125,15 @@ public class OrderAOImpl implements IOrderAO {
         for (String cartCode : cartCodeList) {
             Cart cart = cartBO.getCart(cartCode);
             Product product = productBO.getProduct(cart.getProductCode());
+            if (product.getQuantity() != null
+                    && (product.getQuantity() - cart.getQuantity()) < 0) {
+                throw new BizException("xn0000", "商品[" + product.getName()
+                        + "]库存量不足，无法购买");
+            }
+            // 减去库存量
+            productBO.refreshProductQuantity(product.getCode(),
+                product.getQuantity());
+
             amount = amount + (cart.getQuantity() * product.getDiscountPrice());
             companyCode = product.getCompanyCode();
             productOrderBO.saveProductOrder(code, cart.getProductCode(),
@@ -147,6 +167,9 @@ public class OrderAOImpl implements IOrderAO {
         if (!EOrderStatus.TO_PAY.getCode().equals(order.getStatus())) {
             throw new BizException("xn000000", "订单不处于待支付状态");
         }
+        orderBO.refreshOrderPayAmount(code,
+            order.getAmount() + order.getYunfei());
+
         // 当前用户充值，划出；系统账户划入
         // XN802011Res res = accountBO.getAccountByUserId(order.getApplyUser());
         // accountBO.doChargeOfflineWithoutApp(res.getAccountNumber(),
@@ -158,9 +181,6 @@ public class OrderAOImpl implements IOrderAO {
         // accountBO.doTransferOss(ESysAccount.SYS_ACCOUNT.getCode(),
         // EDirection.PLUS.getCode(), order.getTotalAmount(), 0L,
         // EDirection.PLUS.getValue());
-        orderBO.refreshOrderStatus(code, EOrderStatus.PAY_YES.getCode());
-        orderBO.refreshOrderPayAmount(code,
-            order.getAmount() + order.getYunfei());
     }
 
     /** 
@@ -192,15 +212,15 @@ public class OrderAOImpl implements IOrderAO {
         String status = null;
         if (EOrderStatus.TO_PAY.getCode().equals(data.getStatus())) {
             status = EOrderStatus.YHYC.getCode();
-            remark = "管理端取消订单，用户异常";
+            // remark = "管理端取消订单，用户异常";
         } else if (EOrderStatus.PAY_YES.getCode().equals(data.getStatus())) {
             // 退款至用户 待完善
             status = EOrderStatus.SHYC.getCode();
-            remark = "管理端取消订单，商户异常";
+            // remark = "管理端取消订单，商户异常";
         } else if (EOrderStatus.SEND.getCode().equals(data.getStatus())) {
             // 退款至用户 待完善
             status = EOrderStatus.KDYC.getCode();
-            remark = "管理端取消订单，快递异常";
+            // remark = "管理端取消订单，快递异常";
         }
         return orderBO.cancelOrder(code, updater, remark, status);
     }
@@ -255,8 +275,6 @@ public class OrderAOImpl implements IOrderAO {
                 List<ProductOrder> productOrderList = productOrderBO
                     .queryProductOrderList(imCondition);
                 order.setProductOrderList(productOrderList);
-                Long totalAmount = order.getAmount() + order.getYunfei();
-                order.setTotalAmount(totalAmount);
             }
         }
         return page;
@@ -275,8 +293,6 @@ public class OrderAOImpl implements IOrderAO {
                 List<ProductOrder> productOrderList = productOrderBO
                     .queryProductOrderList(imCondition);
                 order.setProductOrderList(productOrderList);
-                Long totalAmount = order.getAmount() + order.getYunfei();
-                order.setTotalAmount(totalAmount);
             }
         }
         return list;
@@ -320,5 +336,14 @@ public class OrderAOImpl implements IOrderAO {
         }
         return orderBO.approveOrder(code, updater,
             EOrderStatus.RECEIVE.getCode(), remark);
+    }
+
+    /** 
+     * @see com.xnjr.mall.ao.IOrderAO#expedOrder(java.lang.String)
+     */
+    @Override
+    public void expedOrder(String code) {
+        orderBO.getOrder(code);
+        orderBO.expedOrder(code);
     }
 }

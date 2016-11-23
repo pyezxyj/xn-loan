@@ -49,7 +49,7 @@ public class XN808010 extends AProcessor {
         data.setPic4(req.getPic4());
         data.setDescription(req.getDescription());
         data.setCostPrice(StringValidater.toLong(req.getCostPrice()));
-        data.setQuantity(StringValidater.toLong(req.getQuantity()));
+        data.setQuantity(StringValidater.toInteger(req.getQuantity()));
         data.setUpdater(req.getUpdater());
         data.setRemark(req.getRemark());
         data.setCompanyCode(req.getCompanyCode());

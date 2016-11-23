@@ -59,6 +59,7 @@ CREATE TABLE `tmall_order` (
   `amount` bigint(20) DEFAULT NULL COMMENT '订单金额',
   `yunfei` bigint(20) DEFAULT NULL COMMENT '运费',
   `pay_amount` bigint(20) DEFAULT NULL COMMENT '实际支付金额',
+  `pay_datetime` datetime DEFAULT NULL COMMENT '实际支付时间',
   `status` varchar(4) DEFAULT NULL COMMENT '状态',
   `updater` varchar(32) DEFAULT NULL COMMENT '更新人',
   `update_datetime` datetime DEFAULT NULL COMMENT '更新时间',

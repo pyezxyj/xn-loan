@@ -61,7 +61,7 @@ public class Product extends ABaseDO {
     private Long costPrice;
 
     // 库存量进货价
-    private Long quantity;
+    private Integer quantity;
 
     // 状态
     private String status;
@@ -189,11 +189,11 @@ public class Product extends ABaseDO {
         this.costPrice = costPrice;
     }
 
-    public Long getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Long quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 

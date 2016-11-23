@@ -43,6 +43,8 @@ public class XN808020 extends AProcessor {
         condition.setType(req.getType());
         condition.setNameForQuery(req.getName());
         condition.setStatus(req.getStatus());
+
+        condition.setLocation(req.getLocation());
         condition.setCompanyCode(req.getCompanyCode());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {

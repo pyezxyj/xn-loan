@@ -28,7 +28,7 @@ public interface IOrderBO extends IPaginableBO<Order> {
      * @create: 2016年5月24日 下午9:35:33 xieyj
      * @history:
      */
-    public String saveOrder(Order data);
+    public void saveOrder(Order data);
 
     /**
      * 更新发货单状态
@@ -39,6 +39,15 @@ public interface IOrderBO extends IPaginableBO<Order> {
      * @history:
      */
     public int refreshOrderStatus(String code, String status);
+
+    /**
+     * 订单催货
+     * @param code
+     * @return 
+     * @create: 2016年11月23日 下午2:04:28 xieyj
+     * @history:
+     */
+    public int expedOrder(String code);
 
     /**
      * 取消订单（前端）

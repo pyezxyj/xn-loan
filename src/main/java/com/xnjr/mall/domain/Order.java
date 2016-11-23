@@ -63,6 +63,9 @@ public class Order extends ABaseDO {
     // 实际支付金额
     private Long payAmount;
 
+    // 实际支付时间
+    private Date payDatetime;
+
     // 状态
     private String status;
 
@@ -94,9 +97,6 @@ public class Order extends ABaseDO {
     private String companyCode;
 
     // *************dp properties **************
-
-    // 订单总金额
-    private Long totalAmount;
 
     // 申请开始时间起
     private Date applyDatetimeStart;
@@ -288,14 +288,6 @@ public class Order extends ABaseDO {
         this.companyCode = companyCode;
     }
 
-    public Long getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(Long totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
     public Date getApplyDatetimeStart() {
         return applyDatetimeStart;
     }
@@ -344,4 +336,11 @@ public class Order extends ABaseDO {
         this.mobile = mobile;
     }
 
+    public Date getPayDatetime() {
+        return payDatetime;
+    }
+
+    public void setPayDatetime(Date payDatetime) {
+        this.payDatetime = payDatetime;
+    }
 }

@@ -37,7 +37,7 @@ public interface IOrderAO {
     public String commitOrder(List<String> cartCodeList, Order data);
 
     /**
-     * 支付订单，待确认
+     * 支付订单,待发货
      * @param code
      * @param tradePwd
      * @return 
@@ -45,6 +45,15 @@ public interface IOrderAO {
      * @history:
      */
     public void toPayOrder(String code);
+
+    /**
+     * 催货
+     * @param code
+     * @return 
+     * @create: 2016年11月23日 下午2:07:38 xieyj
+     * @history:
+     */
+    public void expedOrder(String code);
 
     /**
      * 取消发货单

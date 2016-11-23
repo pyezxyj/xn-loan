@@ -41,6 +41,7 @@ public class XN808021 extends AProcessor {
         condition.setType(req.getType());
         condition.setStatus(req.getStatus());
         condition.setUpdater(req.getUpdater());
+        condition.setLocation(req.getLocation());
         condition.setCompanyCode(req.getCompanyCode());
         return productAO.queryProductList(condition);
     }

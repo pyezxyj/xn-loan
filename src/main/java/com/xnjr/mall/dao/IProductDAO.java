@@ -24,4 +24,6 @@ public interface IProductDAO extends IBaseDAO<Product> {
     public int updateStatus(Product product);
 
     public int updatePutOnProduct(Product product);
+
+    public int updateQuantity(Product data);
 }

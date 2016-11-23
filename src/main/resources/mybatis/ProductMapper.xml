@@ -60,6 +60,9 @@
 			<if test="updater != null and updater != '' ">
 				AND t.updater = #{updater}
 			</if>
+			<if test="location != null and location != '' ">
+				AND t.location = #{location}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_product" parameterType="product" resultMap="product_DB_Result">
@@ -188,6 +191,13 @@
 		,updater = #{updater}
 		,update_datetime = #{updateDatetime}
 		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_product_quantity" parameterType="product">
+		UPDATE tforum_product
+		SET
+		quantity = quantity - ${quantity}
 		WHERE code = #{code}
 	</update>
 

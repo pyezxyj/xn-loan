@@ -32,6 +32,9 @@ public class XN808020Req extends APageReq {
     // 状态
     private String status;
 
+    // 位置
+    private String location;
+
     // 公司编号
     private String companyCode;
 
@@ -73,5 +76,13 @@ public class XN808020Req extends APageReq {
 
     public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

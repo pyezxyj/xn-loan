@@ -70,7 +70,7 @@ public class SYSConfigBOImpl extends PaginableBOImpl<SYSConfig> implements
         SYSConfig sysConfig = null;
         if (ckey != null) {
             SYSConfig condition = new SYSConfig();
-            condition.setCompanyCode(companyCode);
+            // condition.setCompanyCode(companyCode);
             condition.setCkey(ckey);
             sysConfig = sysConfigDAO.select(condition);
         }

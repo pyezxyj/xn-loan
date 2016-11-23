@@ -29,6 +29,9 @@ public class XN808021Req {
     // 更新人
     private String updater;
 
+    // 位置
+    private String location;
+
     // 公司编号
     private String companyCode;
 
@@ -78,6 +81,14 @@ public class XN808021Req {
 
     public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
 }

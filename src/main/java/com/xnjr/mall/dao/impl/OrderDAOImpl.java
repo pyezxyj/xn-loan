@@ -109,4 +109,12 @@ public class OrderDAOImpl extends AMybatisTemplate implements IOrderDAO {
     public int updateOrderDeliver(Order data) {
         return super.update("update_orderDeliver", data);
     }
+
+    /** 
+     * @see com.xnjr.mall.dao.IOrderDAO#updateOrderExped(com.xnjr.mall.domain.Order)
+     */
+    @Override
+    public int updateOrderExped(Order data) {
+        return super.update("update_order_exped", data);
+    }
 }

@@ -39,13 +39,16 @@ public class CategoryAOImpl implements ICategoryAO {
 
     @Override
     public void editCategory(Category data) {
-        if (!categoryBO.isCategoryExist(data.getCode())) {
-            throw new BizException("xn0000", "该分类编号不存在");
-        }
+        Category category = categoryBO.getCategory(data.getCode());
         if (!EBoolean.NO.getCode().equals(data.getParentCode())) {
             checkParentCode(data.getParentCode());
         }
-        categoryBO.refreshCategory(data);
+        if (EBoolean.YES.getCode().equals(category.getBelong())) {
+            data.setBelong(category.getCode());
+            categoryBO.saveCategory(data);
+        } else {
+            categoryBO.refreshCategory(data);
+        }
     }
 
     private void checkParentCode(String parentCode) {
@@ -58,6 +61,9 @@ public class CategoryAOImpl implements ICategoryAO {
     @Transactional
     public void dropCategory(String code) {
         Category data = categoryBO.getCategory(code);
+        if (EBoolean.YES.getCode().equals(data.getBelong())) {
+            throw new BizException("xn0000", "默认数据无法删除，请修改");
+        }
         // 判断是否一级分类
         if (EBoolean.NO.getCode().equals(data.getParentCode())) {
             isUseCategoryProduct(code);

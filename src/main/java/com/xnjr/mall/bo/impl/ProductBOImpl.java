@@ -161,4 +161,19 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
         return count;
     }
 
+    /** 
+     * @see com.xnjr.mall.bo.IProductBO#refreshProductQuantity(java.lang.String, java.lang.Integer)
+     */
+    @Override
+    public int refreshProductQuantity(String code, Integer quantity) {
+        int count = 0;
+        if (StringUtils.isNotBlank(code)) {
+            Product data = new Product();
+            data.setCode(code);
+            data.setQuantity(quantity);
+            count = productDAO.updateQuantity(data);
+        }
+        return count;
+    }
+
 }

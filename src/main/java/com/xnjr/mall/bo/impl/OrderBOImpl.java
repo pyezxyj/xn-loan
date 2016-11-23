@@ -56,15 +56,13 @@ public class OrderBOImpl extends PaginableBOImpl<Order> implements IOrderBO {
      * @see com.xnjr.mall.bo.IOrderBO#saveOrder(com.xnjr.mall.domain.Order)
      */
     @Override
-    public String saveOrder(Order data) {
-        String code = null;
+    public void saveOrder(Order data) {
         if (data != null) {
             data.setStatus(EOrderStatus.TO_PAY.getCode());
             data.setApplyDatetime(new Date());
             data.setPayAmount(0L);
             orderDAO.insert(data);
         }
-        return code;
     }
 
     /** 
@@ -170,12 +168,6 @@ public class OrderBOImpl extends PaginableBOImpl<Order> implements IOrderBO {
             imCondition.setOrderCode(code);
             List<ProductOrder> productOrderList = orderModelDAO
                 .selectList(imCondition);
-            Long totalAmount = 0L;
-            for (ProductOrder orderModel : productOrderList) {
-                totalAmount += orderModel.getQuantity()
-                        * orderModel.getSalePrice();
-            }
-            data.setTotalAmount(totalAmount);
             data.setProductOrderList(productOrderList);
         }
         return data;
@@ -190,6 +182,8 @@ public class OrderBOImpl extends PaginableBOImpl<Order> implements IOrderBO {
         if (isOrderExist(code)) {
             Order data = new Order();
             data.setCode(code);
+            data.setStatus(EOrderStatus.PAY_YES.getCode());
+            data.setPayDatetime(new Date());
             data.setPayAmount(payAmount);
             count = orderDAO.updateOrderPayAmount(data);
         }
@@ -213,5 +207,20 @@ public class OrderBOImpl extends PaginableBOImpl<Order> implements IOrderBO {
         order.setUpdateDatetime(new Date());
         order.setRemark(remark);
         return orderDAO.updateOrderDeliver(order);
+    }
+
+    /** 
+     * @see com.xnjr.mall.bo.IOrderBO#expedOrder(java.lang.String)
+     */
+    @Override
+    public int expedOrder(String code) {
+        int count = 0;
+        if (StringUtils.isNotBlank(code)) {
+            Order data = new Order();
+            data.setCode(code);
+            data.setUpdateDatetime(new Date());
+            count = orderDAO.updateOrderExped(data);
+        }
+        return count;
     }
 }

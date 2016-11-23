@@ -6,8 +6,8 @@
 		<result column="code" property="code" />
 		<result column="type" property="type" />
 		<result column="receiver" property="receiver" />
-		<result column="reMobile" property="reMobile" />
-		<result column="reAddress" property="reAddress" />
+		<result column="re_mobile" property="reMobile" />
+		<result column="re_address" property="reAddress" />
 		<result column="receipt_type" property="receiptType" />
 		<result column="receipt_title" property="receiptTitle" />
 		<result column="apply_user" property="applyUser" />
@@ -17,6 +17,7 @@
 		<result column="amount" property="amount" />
 		<result column="yunfei" property="yunfei" />
 		<result column="pay_amount" property="payAmount" />
+		<result column="pay_datetime" property="payDatetime" />
 		<result column="status" property="status" />
 		<result column="updater" property="updater" />
 		<result column="update_datetime" property="updateDatetime" />
@@ -154,6 +155,15 @@
 		code = #{code}
 	</update>
 	
+	<update id="update_order_exped" parameterType="order">
+		UPDATE tmall_order
+		SET
+		update_datetime = #{updateDatetime}
+		,remark = #{remark}
+		WHERE
+		code = #{code}
+	</update>
+	
 	<update id="update_orderDeliver" parameterType="order">
 		UPDATE tmall_order
 		SET
@@ -184,7 +194,9 @@
 	<update id="update_orderPayAmount" parameterType="order">
 		UPDATE tmall_order
 		SET
-		pay_amount = #{payAmount}
+		status = #{status}
+		,pay_amount = #{payAmount}
+		,pay_datetime = #{payDatetime}
 		WHERE
 		code = #{code}
 	</update>
