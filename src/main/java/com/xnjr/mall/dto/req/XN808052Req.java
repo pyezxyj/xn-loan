@@ -11,6 +11,9 @@ public class XN808052Req {
     // 编号（必填）
     private String code;
 
+    // 支付渠道（必填）(01 积分支付)
+    private String channel;
+
     public String getCode() {
         return code;
     }
@@ -19,4 +22,11 @@ public class XN808052Req {
         this.code = code;
     }
 
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
+    }
 }

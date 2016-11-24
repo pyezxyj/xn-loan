@@ -44,7 +44,7 @@ public interface IOrderBO extends IPaginableBO<Order> {
      * 订单催货
      * @param code
      * @return 
-     * @create: 2016年11月23日 下午2:04:28 xieyj
+     * @create: 2016年11月24日 下午8:19:24 xieyj
      * @history:
      */
     public int expedOrder(String code);

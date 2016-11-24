@@ -27,7 +27,7 @@ public class XN808052 extends AProcessor {
      */
     @Override
     public Object doBusiness() throws BizException {
-        orderAO.toPayOrder(req.getCode());
+        orderAO.toPayOrder(req.getCode(), req.getChannel());
         return new BooleanRes(true);
     }
 

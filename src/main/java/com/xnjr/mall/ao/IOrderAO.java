@@ -39,12 +39,11 @@ public interface IOrderAO {
     /**
      * 支付订单,待发货
      * @param code
-     * @param tradePwd
-     * @return 
-     * @create: 2016年5月25日 上午11:40:28 xieyj
+     * @param channel 
+     * @create: 2016年11月24日 下午4:41:56 xieyj
      * @history:
      */
-    public void toPayOrder(String code);
+    public void toPayOrder(String code, String channel);
 
     /**
      * 催货

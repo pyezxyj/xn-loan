@@ -11,6 +11,7 @@
 		<result column="receipt_type" property="receiptType" />
 		<result column="receipt_title" property="receiptTitle" />
 		<result column="apply_user" property="applyUser" />
+		<result column="apply_user_name" property="applyUserName" />
 		<result column="mobile" property="mobile" />
 		<result column="apply_note" property="applyNote" />
 		<result column="apply_datetime" property="applyDatetime" />
@@ -18,6 +19,7 @@
 		<result column="yunfei" property="yunfei" />
 		<result column="pay_amount" property="payAmount" />
 		<result column="pay_datetime" property="payDatetime" />
+		<result column="prompt_times" property="promptTimes" />
 		<result column="status" property="status" />
 		<result column="updater" property="updater" />
 		<result column="update_datetime" property="updateDatetime" />
@@ -73,6 +75,8 @@
 		,t.amount
 		,t.yunfei
 		,t.pay_amount
+		,t.pay_datetime
+		,t.prompt_times
 		,t.status
 		,t.updater
 		,t.update_datetime
@@ -114,6 +118,7 @@
 		,amount
 		,yunfei
 		,pay_amount
+		,prompt_times
 		,status
 		,company_code
 		)
@@ -131,6 +136,7 @@
 		,#{amount}
 		,#{yunfei}
 		,#{payAmount}
+		,#{promptTimes}
 		,#{status}
 		,#{companyCode}
 		)
@@ -158,7 +164,8 @@
 	<update id="update_order_exped" parameterType="order">
 		UPDATE tmall_order
 		SET
-		update_datetime = #{updateDatetime}
+		prompt_times = prompt_times + 1
+		,update_datetime = #{updateDatetime}
 		,remark = #{remark}
 		WHERE
 		code = #{code}

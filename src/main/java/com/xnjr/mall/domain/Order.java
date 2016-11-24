@@ -93,6 +93,9 @@ public class Order extends ABaseDO {
     // 物流单
     private String pdf;
 
+    // 催货次数
+    private Integer promptTimes;
+
     // 所属公司编号
     private String companyCode;
 
@@ -110,7 +113,16 @@ public class Order extends ABaseDO {
     // 下单人手机号
     private String mobile;
 
+    // 订单产品详情列表
     List<ProductOrder> productOrderList;
+
+    public Integer getPromptTimes() {
+        return promptTimes;
+    }
+
+    public void setPromptTimes(Integer promptTimes) {
+        this.promptTimes = promptTimes;
+    }
 
     public String getCode() {
         return code;

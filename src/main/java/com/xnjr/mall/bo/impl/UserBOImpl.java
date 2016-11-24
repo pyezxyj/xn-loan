@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import com.xnjr.mall.bo.IUserBO;
 import com.xnjr.mall.bo.base.PaginableBOImpl;
 import com.xnjr.mall.domain.User;
+import com.xnjr.mall.dto.req.XN805300Req;
 import com.xnjr.mall.dto.req.XN805901Req;
 import com.xnjr.mall.dto.req.XN805902Req;
 import com.xnjr.mall.dto.res.XN805901Res;
@@ -47,6 +48,22 @@ public class UserBOImpl extends PaginableBOImpl<User> implements IUserBO {
         req.setUserId(userId);
         req.setTradePwd(tradePwd);
         BizConnecter.getBizData("805902", JsonUtils.object2Json(req),
+            Object.class);
+    }
+
+    /** 
+     * @see com.xnjr.mall.bo.IUserBO#doTransfer(java.lang.String, java.lang.String, java.lang.Long, java.lang.String, java.lang.String)
+     */
+    @Override
+    public void doTransfer(String userId, String direction, Long amount,
+            String remark, String refNo) {
+        XN805300Req req = new XN805300Req();
+        req.setUserId(userId);
+        req.setDirection(direction);
+        req.setAmount(String.valueOf(amount));
+        req.setRemark(remark);
+        req.setRefNo(refNo);
+        BizConnecter.getBizData("805300", JsonUtils.object2Json(req),
             Object.class);
     }
 }

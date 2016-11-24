@@ -30,4 +30,17 @@ public interface IUserBO extends IPaginableBO<User> {
      */
     public void checkTradePwd(String userId, String tradePwd);
 
+    /**
+     * 加减积分
+     * @param userId
+     * @param direction
+     * @param amount
+     * @param remark
+     * @param refNo 
+     * @create: 2016年10月12日 上午8:13:47 xieyj
+     * @history:
+     */
+    public void doTransfer(String userId, String direction, Long amount,
+            String remark, String refNo);
+
 }

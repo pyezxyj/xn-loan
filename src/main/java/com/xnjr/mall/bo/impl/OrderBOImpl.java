@@ -61,6 +61,7 @@ public class OrderBOImpl extends PaginableBOImpl<Order> implements IOrderBO {
             data.setStatus(EOrderStatus.TO_PAY.getCode());
             data.setApplyDatetime(new Date());
             data.setPayAmount(0L);
+            data.setPromptTimes(0);
             orderDAO.insert(data);
         }
     }
@@ -216,9 +217,15 @@ public class OrderBOImpl extends PaginableBOImpl<Order> implements IOrderBO {
     public int expedOrder(String code) {
         int count = 0;
         if (StringUtils.isNotBlank(code)) {
+            Order order = this.getOrder(code);
+            if (!EOrderStatus.PAY_YES.getCode().equalsIgnoreCase(
+                order.getStatus())) {
+                throw new BizException("xn000000", "该订单不是已支付状态，无法操作");
+            }
             Order data = new Order();
             data.setCode(code);
             data.setUpdateDatetime(new Date());
+            data.setRemark("催货次数:" + (order.getPromptTimes() + 1) + "次");
             count = orderDAO.updateOrderExped(data);
         }
         return count;
