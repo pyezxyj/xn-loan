@@ -43,8 +43,6 @@ public class SYSConfigAOImpl implements ISYSConfigAO {
         if (0L == sysConfig.getBelong()) {
             data.setCname(sysConfig.getCname());
             data.setCkey(sysConfig.getCkey());
-            data.setCvalue(sysConfig.getCvalue());
-            data.setRemark(sysConfig.getRemark());
             data.setBelong(data.getId());
             sysConfigBO.saveSYSConfig(data);
         } else {

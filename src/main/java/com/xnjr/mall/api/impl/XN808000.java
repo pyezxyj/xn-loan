@@ -32,6 +32,7 @@ public class XN808000 extends AProcessor {
         data.setParentCode(req.getParentCode());
         data.setName(req.getName());
         data.setPic(req.getPic());
+        data.setType(req.getType());
         if (StringUtils.isNotBlank(req.getOrderNo())) {
             data.setOrderNo(Integer.valueOf(req.getOrderNo()));
         }

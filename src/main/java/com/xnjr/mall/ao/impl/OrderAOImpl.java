@@ -8,9 +8,12 @@
  */
 package com.xnjr.mall.ao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +27,7 @@ import com.xnjr.mall.bo.IProductOrderBO;
 import com.xnjr.mall.bo.ISYSConfigBO;
 import com.xnjr.mall.bo.IUserBO;
 import com.xnjr.mall.bo.base.Paginable;
+import com.xnjr.mall.common.DateUtil;
 import com.xnjr.mall.common.SysConstants;
 import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.core.StringValidater;
@@ -43,6 +47,8 @@ import com.xnjr.mall.exception.BizException;
  */
 @Service
 public class OrderAOImpl implements IOrderAO {
+    protected static final Logger logger = LoggerFactory
+        .getLogger(OrderAOImpl.class);
 
     @Autowired
     private IOrderBO orderBO;
@@ -337,5 +343,26 @@ public class OrderAOImpl implements IOrderAO {
     @Override
     public void expedOrder(String code) {
         orderBO.expedOrder(code);
+    }
+
+    /** 
+     * @see com.xnjr.mall.ao.IOrderAO#doChangeOrderStatusDaily()
+     */
+    @Override
+    public void doChangeOrderStatusDaily() {
+        logger.info("***************开始扫描未支付订单***************");
+        Order condition = new Order();
+        condition.setStatus(EOrderStatus.TO_PAY.getCode());
+        // 前两小时还未支付的订单
+        condition.setApplyDatetimeEnd(DateUtil.getRelativeDate(new Date(),
+            -(60 * 60 * 2 + 1)));
+        List<Order> orderList = orderBO.queryOrderList(condition);
+        if (CollectionUtils.isNotEmpty(orderList)) {
+            for (Order order : orderList) {
+                orderBO.refreshOrderStatus(order.getCode(),
+                    EOrderStatus.YHYC.getCode());
+            }
+        }
+        logger.info("***************结束扫描未支付订单***************");
     }
 }

@@ -45,6 +45,7 @@ public class CategoryAOImpl implements ICategoryAO {
         }
         if (EBoolean.YES.getCode().equals(category.getBelong())) {
             data.setBelong(category.getCode());
+            data.setType(category.getType());
             categoryBO.saveCategory(data);
         } else {
             categoryBO.refreshCategory(data);

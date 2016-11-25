@@ -158,4 +158,11 @@ public interface IOrderAO {
      */
     public Order getOrder(String code);
 
+    /**
+     *  订单未支付，扫描取消订单
+     * @create: 2016年11月25日 下午3:19:04 xieyj
+     * @history:
+     */
+    public void doChangeOrderStatusDaily();
+
 }
