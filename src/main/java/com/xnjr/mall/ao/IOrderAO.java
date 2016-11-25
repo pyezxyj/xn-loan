@@ -27,7 +27,7 @@ public interface IOrderAO {
     public String commitOrder(String productCode, Integer quantity, Order data);
 
     /**
-     * 批量提交发货单
+     * 批量提交订单
      * @param userId
      * @param data
      * @return 
@@ -55,7 +55,7 @@ public interface IOrderAO {
     public void expedOrder(String code);
 
     /**
-     * 取消发货单
+     * 取消订单
      * @param code
      * @param userId
      * @param applyNote
@@ -66,7 +66,7 @@ public interface IOrderAO {
     public int cancelOrder(String code, String userId, String applyNote);
 
     /**
-     * 取消发货单
+     * 取消订单
      * @param code
      * @param updater
      * @param remark
@@ -86,23 +86,6 @@ public interface IOrderAO {
      * @history:
      */
     public int confirmOrder(String code, String updater, String remark);
-
-    /**
-     * 订单付款
-     * @param code
-     * @param amount
-     * @param fromType
-     * @param fromCode
-     * @param pdf
-     * @param toCardNo
-     * @param approveUser
-     * @param approveNote 
-     * @create: 2016年6月13日 上午11:35:08 xieyj
-     * @history:
-     */
-    public void payOrder(String code, Long amount, String fromType,
-            String fromCode, String pdf, String toCardNo, String approveUser,
-            String approveNote);
 
     /**
      * 订单发货
@@ -132,7 +115,7 @@ public interface IOrderAO {
     public void deliverOrder(String code, String updater, String remark);
 
     /**
-     * 发货单分页查询
+     * 订单分页查询
      * @param condition
      * @return 
      * @create: 2015年8月27日 下午2:22:56 xieyj
@@ -141,7 +124,7 @@ public interface IOrderAO {
     public Paginable<Order> queryOrderPage(int start, int limit, Order condition);
 
     /**
-     * 发货单列表查询
+     * 订单列表查询
      * @param condition
      * @return 
      * @create: 2015年8月27日 下午2:22:56 xieyj
@@ -150,7 +133,7 @@ public interface IOrderAO {
     public List<Order> queryOrderList(Order condition);
 
     /**
-     * 发货单详情
+     * 订单详情
      * @param code
      * @return 
      * @create: 2016年5月24日 上午9:07:33 xieyj

@@ -107,6 +107,12 @@ public class Order extends ABaseDO {
     // 申请开始时间止
     private Date applyDatetimeEnd;
 
+    // 更新时间起
+    private Date updateDatetimeStart;
+
+    // 更新时间止
+    private Date updateDatetimeEnd;
+
     // 模糊查询使用
     private String codeForQuery;
 
@@ -115,6 +121,22 @@ public class Order extends ABaseDO {
 
     // 订单产品详情列表
     List<ProductOrder> productOrderList;
+
+    public Date getUpdateDatetimeEnd() {
+        return updateDatetimeEnd;
+    }
+
+    public void setUpdateDatetimeEnd(Date updateDatetimeEnd) {
+        this.updateDatetimeEnd = updateDatetimeEnd;
+    }
+
+    public Date getUpdateDatetimeStart() {
+        return updateDatetimeStart;
+    }
+
+    public void setUpdateDatetimeStart(Date updateDatetimeStart) {
+        this.updateDatetimeStart = updateDatetimeStart;
+    }
 
     public Integer getPromptTimes() {
         return promptTimes;

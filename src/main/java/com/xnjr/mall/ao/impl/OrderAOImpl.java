@@ -25,6 +25,7 @@ import com.xnjr.mall.bo.IOrderBO;
 import com.xnjr.mall.bo.IProductBO;
 import com.xnjr.mall.bo.IProductOrderBO;
 import com.xnjr.mall.bo.ISYSConfigBO;
+import com.xnjr.mall.bo.ISmsOutBO;
 import com.xnjr.mall.bo.IUserBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.common.DateUtil;
@@ -70,6 +71,9 @@ public class OrderAOImpl implements IOrderAO {
 
     @Autowired
     private ISYSConfigBO sysConfigBO;
+
+    @Autowired
+    private ISmsOutBO smsOutBO;
 
     /**
      * @see com.xnjr.mall.ao.IOrderAO#commitOrder(java.lang.String, java.lang.Integer, java.lang.Long, com.xnjr.mall.domain.Order)
@@ -220,45 +224,12 @@ public class OrderAOImpl implements IOrderAO {
             }
             userBO.doTransfer(data.getApplyUser(), EDirection.PLUS.getCode(),
                 payAmount, jRemark, code);
+            // 发送短信
+            String userId = data.getApplyUser();
+            smsOutBO.sentContent(userId, userId, "尊敬的用户，您的订单[" + data.getCode()
+                    + "]已取消,请及时查看退款。");
         }
         return orderBO.cancelOrder(code, updater, remark, status);
-    }
-
-    /** 
-     * @see com.xnjr.mall.ao.IOrderAO#payOrder(com.xnjr.mall.domain.Order)
-     */
-    @Override
-    @Transactional
-    public void payOrder(String code, Long amount, String fromType,
-            String fromCode, String pdf, String toCardNo, String approveUser,
-            String approveNote) {
-        // Long payAmount = 0L;
-        // Order order = orderBO.getOrder(code);
-        // // 更新订单
-        // if (EOrderStatus.TO_PAY.getCode().equals(order.getStatus())) {
-        // if (amount == null || amount.longValue() == 0) {
-        // throw new BizException("xn0000", "首款金额不能为空");
-        // }
-        // orderBO.refreshOrderStatus(code, EOrderStatus.PAY_YES.getCode());
-        // payAmount = amount;
-        // } else {
-        // amount = order.getTotalAmount() - order.getPayAmount();
-        // if (EOrderStatus.RECEIVE.getCode().equals(order.getStatus())) {
-        // orderBO.refreshOrderStatus(code, EOrderStatus.FINISH.getCode());
-        // }
-        // payAmount = order.getTotalAmount();
-        // }
-        // // 更新支付金额
-        // orderBO.refreshOrderPayAmount(code, payAmount);
-        // // 当前用户充值，划出；系统账户划入
-        // XN802011Res res = accountBO.getAccountByUserId(order.getApplyUser());
-        // accountBO.doChargeOfflineWithoutApp(res.getAccountNumber(), amount,
-        // fromType, fromCode, pdf, approveUser, approveNote, code);
-        // accountBO
-        // .doTransferOss(res.getAccountNumber(), EDirection.MINUS.getCode(),
-        // amount, 0L, EDirection.MINUS.getValue());
-        // accountBO.doTransferOss(ESysAccount.SYS_ACCOUNT.getCode(),
-        // EDirection.PLUS.getCode(), amount, 0L, EDirection.PLUS.getValue());
     }
 
     /** 
@@ -315,6 +286,10 @@ public class OrderAOImpl implements IOrderAO {
         }
         orderBO.deliverOrder(code, logisticsCompany, logisticsCode, deliverer,
             deliveryDatetime, pdf, updater, remark);
+        // 发送短信
+        String userId = order.getApplyUser();
+        smsOutBO.sentContent(userId, userId, "尊敬的用户，您的订单[" + order.getCode()
+                + "]已发货,请注意查收。");
     }
 
     @Override
@@ -350,6 +325,11 @@ public class OrderAOImpl implements IOrderAO {
      */
     @Override
     public void doChangeOrderStatusDaily() {
+        doChangeNoPayOrder();
+        doChangeNoReceiveOrder();
+    }
+
+    private void doChangeNoPayOrder() {
         logger.info("***************开始扫描未支付订单***************");
         Order condition = new Order();
         condition.setStatus(EOrderStatus.TO_PAY.getCode());
@@ -364,5 +344,23 @@ public class OrderAOImpl implements IOrderAO {
             }
         }
         logger.info("***************结束扫描未支付订单***************");
+
+    }
+
+    private void doChangeNoReceiveOrder() {
+        logger.info("***************开始扫描已发货未确认订单***************");
+        Order condition = new Order();
+        condition.setStatus(EOrderStatus.SEND.getCode());
+        // 已发货后15天内未收货，自动确认收货
+        condition.setUpdateDatetimeEnd(DateUtil.getRelativeDate(new Date(),
+            (60 * 60 * 24 * 15 + 1)));
+        List<Order> orderList = orderBO.queryOrderList(condition);
+        if (CollectionUtils.isNotEmpty(orderList)) {
+            for (Order order : orderList) {
+                orderBO.approveOrder(order.getCode(), "soft",
+                    EOrderStatus.RECEIVE.getCode(), "系统自动确认收货");
+            }
+        }
+        logger.info("***************结束扫描已发货未确认订单***************");
     }
 }

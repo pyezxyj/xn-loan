@@ -57,6 +57,12 @@
 			<if test="companyCode != null and companyCode != '' ">
 				AND t.company_code = #{companyCode}
 			</if>
+			<if test="updateDatetimeStart != null and updateDatetimeStart != '' ">
+				<![CDATA[AND t.update_datetime >= #{updateDatetimeStart}]]>
+			</if>
+			<if test="updateDatetimeEnd != null and updateDatetimeEnd != '' ">
+				<![CDATA[AND t.update_datetime <= #{updateDatetimeEnd}]]>
+			</if>
 		</trim>
 	</sql>
 	<select id="select_order" parameterType="order" resultMap="order_DB_Result">
