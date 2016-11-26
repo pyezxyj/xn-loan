@@ -9,8 +9,8 @@
   ssh root@121.43.101.148 -p 57652
 
   cd /home/wwwroot/b2cmall/tomcat_std_mall/webapps
-  cp ./xn-b2cmall/WEB-INF/classes/application.properties .
-  cp ./xn-b2cmall/WEB-INF/classes/config.properties .
+  cp ./std-mall/WEB-INF/classes/application.properties .
+  cp ./std-mall/WEB-INF/classes/config.properties .
   rm -rf std-mall*
   mv /home/std-mall.war .
   
