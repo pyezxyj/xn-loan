@@ -214,20 +214,17 @@ public class OrderAOImpl implements IOrderAO {
         if (EOrderStatus.TO_PAY.getCode().equals(data.getStatus())) {
             status = EOrderStatus.YHYC.getCode();
         } else {
-            String jRemark = null;
             if (EOrderStatus.PAY_YES.getCode().equals(data.getStatus())) {
-                jRemark = "商品退款，商户无货";
                 status = EOrderStatus.SHYC.getCode();
             } else if (EOrderStatus.SEND.getCode().equals(data.getStatus())) {
-                jRemark = "商品退款，快递异常";
                 status = EOrderStatus.KDYC.getCode();
             }
             userBO.doTransfer(data.getApplyUser(), EDirection.PLUS.getCode(),
-                payAmount, jRemark, code);
+                payAmount, remark, code);
             // 发送短信
             String userId = data.getApplyUser();
             smsOutBO.sentContent(userId, userId, "尊敬的用户，您的订单[" + data.getCode()
-                    + "]已取消,请及时查看退款。");
+                    + "]已取消,退款原因:[" + remark + "],请及时查看退款。");
         }
         return orderBO.cancelOrder(code, updater, remark, status);
     }
@@ -353,7 +350,7 @@ public class OrderAOImpl implements IOrderAO {
         condition.setStatus(EOrderStatus.SEND.getCode());
         // 已发货后15天内未收货，自动确认收货
         condition.setUpdateDatetimeEnd(DateUtil.getRelativeDate(new Date(),
-            (60 * 60 * 24 * 15 + 1)));
+            -(60 * 60 * 24 * 15 + 1)));
         List<Order> orderList = orderBO.queryOrderList(condition);
         if (CollectionUtils.isNotEmpty(orderList)) {
             for (Order order : orderList) {
