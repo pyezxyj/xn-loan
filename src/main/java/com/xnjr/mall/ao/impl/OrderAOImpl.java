@@ -341,7 +341,6 @@ public class OrderAOImpl implements IOrderAO {
             }
         }
         logger.info("***************结束扫描未支付订单***************");
-
     }
 
     private void doChangeNoReceiveOrder() {
