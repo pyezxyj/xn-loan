@@ -11,6 +11,7 @@ package com.xnjr.mall.api.impl;
 import com.xnjr.mall.ao.IProductAO;
 import com.xnjr.mall.api.AProcessor;
 import com.xnjr.mall.common.JsonUtil;
+import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.domain.Product;
 import com.xnjr.mall.dto.req.XN808021Req;
 import com.xnjr.mall.exception.BizException;
@@ -43,6 +44,7 @@ public class XN808021 extends AProcessor {
         condition.setUpdater(req.getUpdater());
         condition.setLocation(req.getLocation());
         condition.setCompanyCode(req.getCompanyCode());
+        condition.setSystemCode(req.getSystemCode());
         return productAO.queryProductList(condition);
     }
 
@@ -52,6 +54,7 @@ public class XN808021 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN808021Req.class);
+        StringValidater.validateBlank(req.getSystemCode());
     }
 
 }

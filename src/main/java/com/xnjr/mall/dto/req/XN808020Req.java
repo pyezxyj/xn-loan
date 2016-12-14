@@ -38,6 +38,9 @@ public class XN808020Req extends APageReq {
     // 公司编号
     private String companyCode;
 
+    // 所属系统编号(必填)
+    private String systemCode;
+
     public String getCategory() {
         return category;
     }
@@ -84,5 +87,13 @@ public class XN808020Req extends APageReq {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getSystemCode() {
+        return systemCode;
+    }
+
+    public void setSystemCode(String systemCode) {
+        this.systemCode = systemCode;
     }
 }

@@ -65,9 +65,8 @@ public class XN808012 extends AProcessor {
         req = JsonUtil.json2Bean(inputparams, XN808012Req.class);
         StringValidater.validateBlank(req.getCode(), req.getCategory(),
             req.getType(), req.getName(), req.getAdvTitle(), req.getAdvPic(),
-            req.getPic1(), req.getPic2(), req.getPic3(), req.getPic4(),
-            req.getDescription(), req.getCostPrice(), req.getQuantity(),
-            req.getUpdater());
+            req.getPic1(), req.getDescription(), req.getCostPrice(),
+            req.getQuantity(), req.getUpdater());
     }
 
 }

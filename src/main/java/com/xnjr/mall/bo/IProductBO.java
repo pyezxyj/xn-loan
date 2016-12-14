@@ -34,7 +34,7 @@ public interface IProductBO extends IPaginableBO<Product> {
 
     public Product getProduct(String code);
 
-    public int putOn(String code, Long originalPrice, Long discountPrice,
+    public int putOn(String code, Long price1, Long price2, Long price3,
             String location, Integer orderNo, String updater, String remark);
 
     public int putOff(String code, String updater, String remark);

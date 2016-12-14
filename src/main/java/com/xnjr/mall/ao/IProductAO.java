@@ -38,19 +38,19 @@ public interface IProductAO {
     /**
      * 上架产品
      * @param code
-     * @param originalPrice
-     * @param discountPrice
+     * @param price1
+     * @param price2
+     * @param price3
      * @param location
      * @param orderNo
      * @param updater
      * @param remark
      * @return 
-     * @create: 2016年11月16日 下午5:33:30 haiqingzheng
+     * @create: 2016年12月14日 下午3:59:22 haiqingzheng
      * @history:
      */
-    public int putOnProduct(String code, Long originalPrice,
-            Long discountPrice, String location, Integer orderNo,
-            String updater, String remark);
+    public int putOnProduct(String code, Long price1, Long price2, Long price3,
+            String location, Integer orderNo, String updater, String remark);
 
     /**
      * 下架产品

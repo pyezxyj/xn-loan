@@ -17,11 +17,14 @@ public class XN808013Req {
     // 产品编号
     private String code;
 
-    // 原价
-    private String originalPrice;
+    // 价格1
+    private String price1;
 
-    // 折扣价
-    private String discountPrice;
+    // 价格2
+    private String price2;
+
+    // 价格3
+    private String price3;
 
     // 位置
     private String location;
@@ -39,20 +42,28 @@ public class XN808013Req {
         return code;
     }
 
-    public String getOriginalPrice() {
-        return originalPrice;
+    public String getPrice1() {
+        return price1;
     }
 
-    public void setOriginalPrice(String originalPrice) {
-        this.originalPrice = originalPrice;
+    public void setPrice1(String price1) {
+        this.price1 = price1;
     }
 
-    public String getDiscountPrice() {
-        return discountPrice;
+    public String getPrice2() {
+        return price2;
     }
 
-    public void setDiscountPrice(String discountPrice) {
-        this.discountPrice = discountPrice;
+    public void setPrice2(String price2) {
+        this.price2 = price2;
+    }
+
+    public String getPrice3() {
+        return price3;
+    }
+
+    public void setPrice3(String price3) {
+        this.price3 = price3;
     }
 
     public String getLocation() {

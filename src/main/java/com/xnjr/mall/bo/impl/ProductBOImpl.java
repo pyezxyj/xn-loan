@@ -142,14 +142,15 @@ public class ProductBOImpl extends PaginableBOImpl<Product> implements
     }
 
     @Override
-    public int putOn(String code, Long originalPrice, Long discountPrice,
+    public int putOn(String code, Long price1, Long price2, Long price3,
             String location, Integer orderNo, String updater, String remark) {
         int count = 0;
         if (StringUtils.isNotBlank(code)) {
             Product product = new Product();
             product.setCode(code);
-            product.setOriginalPrice(originalPrice);
-            product.setDiscountPrice(discountPrice);
+            product.setPrice1(price1);
+            product.setPrice2(price2);
+            product.setPrice3(price3);
             product.setLocation(location);
             product.setOrderNo(orderNo);
             product.setUpdater(updater);

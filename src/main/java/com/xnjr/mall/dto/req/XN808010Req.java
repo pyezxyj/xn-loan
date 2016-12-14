@@ -63,6 +63,9 @@ public class XN808010Req {
     // 所属公司编号
     private String companyCode;
 
+    // 所属系统编号
+    private String systemCode;
+
     public String getCategory() {
         return category;
     }
@@ -189,5 +192,13 @@ public class XN808010Req {
 
     public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
+    }
+
+    public String getSystemCode() {
+        return systemCode;
+    }
+
+    public void setSystemCode(String systemCode) {
+        this.systemCode = systemCode;
     }
 }

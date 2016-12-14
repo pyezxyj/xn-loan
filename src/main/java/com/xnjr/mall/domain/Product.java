@@ -75,11 +75,14 @@ public class Product extends ABaseDO {
     // 备注
     private String remark;
 
-    // 原价
-    private Long originalPrice;
+    // 价格1
+    private Long price1;
 
-    // 折扣价
-    private Long discountPrice;
+    // 价格2
+    private Long price2;
+
+    // 价格3
+    private Long price3;
 
     // 位置
     private String location;
@@ -89,6 +92,9 @@ public class Product extends ABaseDO {
 
     // 所属公司编号
     private String companyCode;
+
+    // 所属系统编号
+    private String systemCode;
 
     // 名字模糊查询
     private String nameForQuery;
@@ -229,22 +235,6 @@ public class Product extends ABaseDO {
         this.remark = remark;
     }
 
-    public Long getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public void setOriginalPrice(Long originalPrice) {
-        this.originalPrice = originalPrice;
-    }
-
-    public Long getDiscountPrice() {
-        return discountPrice;
-    }
-
-    public void setDiscountPrice(Long discountPrice) {
-        this.discountPrice = discountPrice;
-    }
-
     public String getLocation() {
         return location;
     }
@@ -275,6 +265,38 @@ public class Product extends ABaseDO {
 
     public void setNameForQuery(String nameForQuery) {
         this.nameForQuery = nameForQuery;
+    }
+
+    public Long getPrice1() {
+        return price1;
+    }
+
+    public void setPrice1(Long price1) {
+        this.price1 = price1;
+    }
+
+    public Long getPrice2() {
+        return price2;
+    }
+
+    public void setPrice2(Long price2) {
+        this.price2 = price2;
+    }
+
+    public Long getPrice3() {
+        return price3;
+    }
+
+    public void setPrice3(Long price3) {
+        this.price3 = price3;
+    }
+
+    public String getSystemCode() {
+        return systemCode;
+    }
+
+    public void setSystemCode(String systemCode) {
+        this.systemCode = systemCode;
     }
 
 }

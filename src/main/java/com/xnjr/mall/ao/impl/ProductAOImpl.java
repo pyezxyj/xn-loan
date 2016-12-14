@@ -116,15 +116,14 @@ public class ProductAOImpl implements IProductAO {
     }
 
     @Override
-    public int putOnProduct(String code, Long originalPrice,
-            Long discountPrice, String location, Integer orderNo,
-            String updater, String remark) {
+    public int putOnProduct(String code, Long price1, Long price2, Long price3,
+            String location, Integer orderNo, String updater, String remark) {
         int count = 0;
         Product product = productBO.getProduct(code);
         if (EPutStatus.PUBLISH_YES.getCode().equals(product.getStatus())) {
             throw new BizException("xn000000", "该产品已经上架");
         }
-        count = productBO.putOn(code, originalPrice, discountPrice, location,
+        count = productBO.putOn(code, price1, price2, price3, location,
             orderNo, updater, remark);
         return count;
     }
