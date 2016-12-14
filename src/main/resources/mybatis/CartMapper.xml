@@ -10,7 +10,6 @@
 		<result column="adv_pic" property="advPic" />
 		<result column="product_name" property="productName" />
 		<result column="sale_price" property="salePrice" />
-		
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -33,7 +32,9 @@
 		,t.quantity
 		,tp.name product_name
 		,tp.adv_pic adv_pic
-		,tp.discount_price sale_price
+		,tp.price1 price1
+		,tp.price2 price2
+		,tp.price3 price3
 		FROM
 		tmall_cart t INNER JOIN tmall_product tp ON t.product_code = tp.code
 		<include refid="where_condition" />
@@ -57,12 +58,14 @@
 		,user_id
 		,product_code
 		,quantity
+		,system_code
 		)
 		VALUES(
 		#{code}
 		,#{userId}
 		,#{productCode}
 		,#{quantity}
+		,#{systemCode}
 		)
 	</insert>
 	

@@ -58,6 +58,8 @@ public class CartAOImpl implements ICartAO {
             data.setQuantity(quantity);
             cartBO.refreshCart(data);
         } else {
+            Product product = productBO.getProduct(data.getProductCode());
+            data.setSystemCode(product.getSystemCode());
             code = cartBO.saveCart(data);
         }
         return code;
@@ -104,7 +106,9 @@ public class CartAOImpl implements ICartAO {
         if (page != null && page.getList() != null) {
             for (Cart cart : page.getList()) {
                 Product product = productBO.getProduct(cart.getProductCode());
-                cart.setSalePrice(product.getDiscountPrice());
+                cart.setPrice1(product.getPrice1());
+                cart.setPrice2(product.getPrice2());
+                cart.setPrice3(product.getPrice3());
             }
         }
         return page;
@@ -119,7 +123,9 @@ public class CartAOImpl implements ICartAO {
         if (!CollectionUtils.sizeIsEmpty(list)) {
             for (Cart cart : list) {
                 Product product = productBO.getProduct(cart.getProductCode());
-                cart.setSalePrice(product.getDiscountPrice());
+                cart.setPrice1(product.getPrice1());
+                cart.setPrice2(product.getPrice2());
+                cart.setPrice3(product.getPrice3());
             }
         }
         return list;
@@ -133,7 +139,9 @@ public class CartAOImpl implements ICartAO {
         Cart cart = cartBO.getCart(code);
         // 获取价格
         Product product = productBO.getProduct(cart.getProductCode());
-        cart.setSalePrice(product.getDiscountPrice());
+        cart.setPrice1(product.getPrice1());
+        cart.setPrice2(product.getPrice2());
+        cart.setPrice3(product.getPrice3());
         return cart;
     }
 }
