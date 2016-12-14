@@ -4,7 +4,7 @@ public class XN808000Req {
     // 父编号(必填)
     private String parentCode;
 
-    // 类型
+    // 类型（必填）
     private String type;
 
     // 分类名称(必填)
@@ -18,6 +18,9 @@ public class XN808000Req {
 
     // 所属公司编号(选填)
     private String companyCode;
+
+    // 所属系统编号(必填)
+    private String systemCode;
 
     public String getType() {
         return type;
@@ -65,5 +68,13 @@ public class XN808000Req {
 
     public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
+    }
+
+    public String getSystemCode() {
+        return systemCode;
+    }
+
+    public void setSystemCode(String systemCode) {
+        this.systemCode = systemCode;
     }
 }
