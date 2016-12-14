@@ -60,7 +60,9 @@ public class OrderBOImpl extends PaginableBOImpl<Order> implements IOrderBO {
         if (data != null) {
             data.setStatus(EOrderStatus.TO_PAY.getCode());
             data.setApplyDatetime(new Date());
-            data.setPayAmount(0L);
+            data.setPayAmount1(0L);
+            data.setPayAmount2(0L);
+            data.setPayAmount3(0L);
             data.setPromptTimes(0);
             orderDAO.insert(data);
         }
@@ -178,14 +180,17 @@ public class OrderBOImpl extends PaginableBOImpl<Order> implements IOrderBO {
      * @see com.xnjr.mall.bo.IOrderBO#refreshOrderPayAmount(java.lang.String, java.lang.Long)
      */
     @Override
-    public int refreshOrderPayAmount(String code, Long payAmount) {
+    public int refreshOrderPayAmount(String code, Long payAmount1,
+            Long payAmount2, Long payAmount3) {
         int count = 0;
         if (isOrderExist(code)) {
             Order data = new Order();
             data.setCode(code);
             data.setStatus(EOrderStatus.PAY_YES.getCode());
             data.setPayDatetime(new Date());
-            data.setPayAmount(payAmount);
+            data.setPayAmount1(payAmount1);
+            data.setPayAmount2(payAmount2);
+            data.setPayAmount3(payAmount3);
             count = orderDAO.updateOrderPayAmount(data);
         }
         return count;

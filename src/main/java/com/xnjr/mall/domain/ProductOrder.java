@@ -33,8 +33,17 @@ public class ProductOrder extends ABaseDO {
     // 数量
     private Integer quantity;
 
-    // 单价
-    private Long salePrice;
+    // 价格1
+    private Long price1;
+
+    // 价格2
+    private Long price2;
+
+    // 价格3
+    private Long price3;
+
+    // 系统编号
+    private String systemCode;
 
     // **************db properties
 
@@ -76,12 +85,28 @@ public class ProductOrder extends ABaseDO {
         this.quantity = quantity;
     }
 
-    public Long getSalePrice() {
-        return salePrice;
+    public Long getPrice1() {
+        return price1;
     }
 
-    public void setSalePrice(Long salePrice) {
-        this.salePrice = salePrice;
+    public void setPrice1(Long price1) {
+        this.price1 = price1;
+    }
+
+    public Long getPrice2() {
+        return price2;
+    }
+
+    public void setPrice2(Long price2) {
+        this.price2 = price2;
+    }
+
+    public Long getPrice3() {
+        return price3;
+    }
+
+    public void setPrice3(Long price3) {
+        this.price3 = price3;
     }
 
     public String getProductName() {
@@ -98,5 +123,13 @@ public class ProductOrder extends ABaseDO {
 
     public void setAdvPic(String advPic) {
         this.advPic = advPic;
+    }
+
+    public String getSystemCode() {
+        return systemCode;
+    }
+
+    public void setSystemCode(String systemCode) {
+        this.systemCode = systemCode;
     }
 }

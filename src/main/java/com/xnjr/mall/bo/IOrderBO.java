@@ -111,7 +111,8 @@ public interface IOrderBO extends IPaginableBO<Order> {
      * @create: 2016年6月12日 下午12:26:06 xieyj
      * @history:
      */
-    public int refreshOrderPayAmount(String code, Long payAmount);
+    public int refreshOrderPayAmount(String code, Long payAmount1,
+            Long payAmount2, Long payAmount3);
 
     /**
      * 查询发货单列表

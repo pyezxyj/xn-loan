@@ -8,7 +8,9 @@
 		<result column="product_code" property="productCode" />
 		<result column="product_name" property="productName" />
 		<result column="quantity" property="quantity" />
-		<result column="sale_price" property="salePrice" />
+		<result column="price1" property="price1" />
+		<result column="price2" property="price2" />
+		<result column="price3" property="price3" />
 		<result column="adv_pic" property="advPic" />
 	</resultMap>
 	<sql id="where_condition">
@@ -31,7 +33,9 @@
 		,t.product_code
 		,t.quantity
 		,tp.name product_name
-		,t.sale_price
+		,t.price1
+		,t.price2
+		,t.price3
 		,tp.adv_pic
 		FROM
 		tmall_product_order t INNER JOIN tmall_product tp ON t.product_code = tp.code
@@ -55,14 +59,20 @@
 		,order_code
 		,product_code
 		,quantity
-		,sale_price
+		,price1
+		,price2
+		,price3
+		,system_code
 		)
 		VALUES(
 		#{code}
 		,#{orderCode}
 		,#{productCode}
 		,#{quantity}
-		,#{salePrice}
+		,#{price1}
+		,#{price2}
+		,#{price3}
+		,#{systemCode}
 		)
 	</insert>
 </mapper>

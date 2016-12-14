@@ -55,13 +55,25 @@ public class Order extends ABaseDO {
     private Date applyDatetime;
 
     // 订单金额
-    private Long amount;
+    private Long amount1;
+
+    // 订单金额
+    private Long amount2;
+
+    // 订单金额
+    private Long amount3;
+
+    // 实际支付金额
+    private Long payAmount1;
+
+    // 实际支付金额
+    private Long payAmount2;
+
+    // 实际支付金额
+    private Long payAmount3;
 
     // 运费
     private Long yunfei;
-
-    // 实际支付金额
-    private Long payAmount;
 
     // 实际支付时间
     private Date payDatetime;
@@ -98,6 +110,9 @@ public class Order extends ABaseDO {
 
     // 所属公司编号
     private String companyCode;
+
+    // 所属系统编号
+    private String systemCode;
 
     // *************dp properties **************
 
@@ -226,20 +241,52 @@ public class Order extends ABaseDO {
         this.applyDatetime = applyDatetime;
     }
 
-    public Long getAmount() {
-        return amount;
+    public Long getAmount1() {
+        return amount1;
     }
 
-    public void setAmount(Long amount) {
-        this.amount = amount;
+    public void setAmount1(Long amount1) {
+        this.amount1 = amount1;
     }
 
-    public Long getPayAmount() {
-        return payAmount;
+    public Long getAmount2() {
+        return amount2;
     }
 
-    public void setPayAmount(Long payAmount) {
-        this.payAmount = payAmount;
+    public void setAmount2(Long amount2) {
+        this.amount2 = amount2;
+    }
+
+    public Long getAmount3() {
+        return amount3;
+    }
+
+    public void setAmount3(Long amount3) {
+        this.amount3 = amount3;
+    }
+
+    public Long getPayAmount1() {
+        return payAmount1;
+    }
+
+    public void setPayAmount1(Long payAmount1) {
+        this.payAmount1 = payAmount1;
+    }
+
+    public Long getPayAmount2() {
+        return payAmount2;
+    }
+
+    public void setPayAmount2(Long payAmount2) {
+        this.payAmount2 = payAmount2;
+    }
+
+    public Long getPayAmount3() {
+        return payAmount3;
+    }
+
+    public void setPayAmount3(Long payAmount3) {
+        this.payAmount3 = payAmount3;
     }
 
     public String getStatus() {
@@ -376,5 +423,13 @@ public class Order extends ABaseDO {
 
     public void setPayDatetime(Date payDatetime) {
         this.payDatetime = payDatetime;
+    }
+
+    public String getSystemCode() {
+        return systemCode;
+    }
+
+    public void setSystemCode(String systemCode) {
+        this.systemCode = systemCode;
     }
 }
