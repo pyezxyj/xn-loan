@@ -1,7 +1,8 @@
 package com.xnjr.mall.api.impl;
 
-//橙商户std-mall
+//标准业务 std-biz
 public class Readme {
-    // 808
+    // 808000-808199 商城
+    // 808200-808299 o2o
     // 808900-808999 基础数据
 }
