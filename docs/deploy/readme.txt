@@ -14,6 +14,12 @@
   rm -rf std-mall*
   mv /home/std-mall.war .
   
+  cd /home/wwwroot/zhpay/tomcat_std_mall/webapps
+  cp ./zhpay/WEB-INF/classes/application.properties .
+  cp ./zhpay/WEB-INF/classes/config.properties .
+  rm -rf std-mall*
+  mv /home/std-mall.war .
+  
 4. 已备份配置文件放回原处,重启tomcat
   mv -f application.properties ./std-mall/WEB-INF/classes/
   mv -f config.properties ./std-mall/WEB-INF/classes/
