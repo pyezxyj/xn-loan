@@ -12,7 +12,7 @@ public enum EGeneratePrefix {
 
     CATEGORY("FL", "分类"), PRODUCT("CP", "产品"), CART("GW", "购物车"), ORDER("DD",
             "定单"), PRODUCT_ORDER("CD", "产品订单"), STORE_TICKET("ZKQ", "店铺折扣券"), USER_TICKET(
-            "UT", "用户折扣券");
+            "UT", "用户折扣券"), STORE_ACTION("HD", "店铺互动");
 
     public static Map<String, EGeneratePrefix> getOrderTypeMap() {
         Map<String, EGeneratePrefix> map = new HashMap<String, EGeneratePrefix>();

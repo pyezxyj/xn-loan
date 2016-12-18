@@ -51,4 +51,8 @@
 	<bean id="userTicketBO" class="com.xnjr.mall.bo.impl.UserTicketBOImpl">
 		<property name="paginableDAO" ref="userTicketDAOImpl"/>
 	</bean>
+	
+	<bean id="storeActionBO" class="com.xnjr.mall.bo.impl.StoreActionBOImpl">
+		<property name="paginableDAO" ref="storeActionDAOImpl"/>
+	</bean>
 </beans>
