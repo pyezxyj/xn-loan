@@ -11,6 +11,7 @@
 	    <typeAlias alias="sysConfig" type="com.xnjr.mall.domain.SYSConfig" />
 	    <typeAlias alias="store" type="com.xnjr.mall.domain.Store" />
 	    <typeAlias alias="storeTicket" type="com.xnjr.mall.domain.StoreTicket" />
+	    <typeAlias alias="userTicket" type="com.xnjr.mall.domain.UserTicket" />
 	</typeAliases>	
 </configuration>
 

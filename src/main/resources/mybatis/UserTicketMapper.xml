@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.IUserTicketDAO">
+	<resultMap id="userTicket_DB_Result" type="userTicket">
+		<result column="code" property="code" />
+		<result column="user_id" property="userId" />
+		<result column="ticket_code" property="ticketCode" />
+		<result column="create_datetime" property="createDatetime" />
+		<result column="status" property="status" />
+		<result column="system_code" property="systemCode" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_userTicket" parameterType="userTicket" resultMap="userTicket_DB_Result">
+		SELECT
+		t.code
+		,t.user_id
+		,t.ticket_code
+		,t.create_datetime
+		,t.status
+		,t.system_code
+		FROM
+		to2o_user_ticket t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_userTicket_count" parameterType="userTicket"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM to2o_user_ticket t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_userTicket" parameterType="userTicket">
+		INSERT INTO
+		to2o_user_ticket(
+		code
+		,user_id
+		,ticket_code
+		,create_datetime
+		,status
+		,system_code
+		)
+		VALUES(
+		#{id}
+		,#{userId}
+		,#{ticketCode}
+		,#{createDatetime}
+		,#{status}
+		,#{systemCode}
+		)
+	</insert>
+
+	<update id="update_userTicket" parameterType="userTicket">
+		UPDATE to2o_user_ticket
+		SET
+		user_id = #{userId}
+		,ticket_code = #{ticketCode}
+		,create_datetime = #{createDatetime}
+		,status = #{status}
+		,system_code = #{systemCode}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>
