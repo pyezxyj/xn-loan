@@ -9,6 +9,7 @@
 		<typeAlias alias="productOrder" type="com.xnjr.mall.domain.ProductOrder" />
 		<typeAlias alias="sysDict" type="com.xnjr.mall.domain.SYSDict" />
 	    <typeAlias alias="sysConfig" type="com.xnjr.mall.domain.SYSConfig" />
+	    <typeAlias alias="store" type="com.xnjr.mall.domain.Store" />
 	</typeAliases>	
 </configuration>
 

@@ -40,5 +40,7 @@
 		<property name="paginableDAO" ref="productOrderDAOImpl"/>
 	</bean>	
 	
-	
+	<bean id="storeBO" class="com.xnjr.mall.bo.impl.StoreBOImpl">
+		<property name="paginableDAO" ref="storeDAOImpl"/>
+	</bean>
 </beans>

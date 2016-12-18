@@ -14,7 +14,7 @@ package com.xnjr.mall.enums;
  * @history:
  */
 public enum EUserKind {
-    Admin("9", "管理员"), Operator("1", "操作员");
+    Admin("9", "管理员"), Operator("1", "操作员"), Store("2", "商家");
 
     EUserKind(String code, String value) {
         this.code = code;
