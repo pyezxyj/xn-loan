@@ -1,5 +1,6 @@
 package com.xnjr.mall.bo.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -12,6 +13,7 @@ import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.IUserTicketDAO;
 import com.xnjr.mall.domain.UserTicket;
 import com.xnjr.mall.enums.EGeneratePrefix;
+import com.xnjr.mall.enums.EUserTicketStatus;
 import com.xnjr.mall.exception.BizException;
 
 @Component
@@ -38,6 +40,8 @@ public class UserTicketBOImpl extends PaginableBOImpl<UserTicket> implements
             code = OrderNoGenerater.generateM(EGeneratePrefix.USER_TICKET
                 .getCode());
             data.setCode(code);
+            data.setStatus(EUserTicketStatus.UNUSED.getCode());
+            data.setCreateDatetime(new Date());
             userTicketDAO.insert(data);
         }
         return code;

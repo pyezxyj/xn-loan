@@ -32,6 +32,18 @@ public class UserTicket extends ABaseDO {
     // 系统编号
     private String systemCode;
 
+    // 折扣券名称
+    private String ticketName;
+
+    // 折扣券类型
+    private String ticketType;
+
+    // 折扣券Key1
+    private Long ticketKey1;
+
+    // 折扣券key2
+    private Long ticketKey2;
+
     public String getCode() {
         return code;
     }
@@ -78,6 +90,38 @@ public class UserTicket extends ABaseDO {
 
     public void setSystemCode(String systemCode) {
         this.systemCode = systemCode;
+    }
+
+    public String getTicketName() {
+        return ticketName;
+    }
+
+    public void setTicketName(String ticketName) {
+        this.ticketName = ticketName;
+    }
+
+    public String getTicketType() {
+        return ticketType;
+    }
+
+    public void setTicketType(String ticketType) {
+        this.ticketType = ticketType;
+    }
+
+    public Long getTicketKey1() {
+        return ticketKey1;
+    }
+
+    public void setTicketKey1(Long ticketKey1) {
+        this.ticketKey1 = ticketKey1;
+    }
+
+    public Long getTicketKey2() {
+        return ticketKey2;
+    }
+
+    public void setTicketKey2(Long ticketKey2) {
+        this.ticketKey2 = ticketKey2;
     }
 
 }

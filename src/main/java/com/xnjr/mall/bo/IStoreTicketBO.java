@@ -13,7 +13,9 @@ public interface IStoreTicketBO extends IPaginableBO<StoreTicket> {
 
     public int removeStoreTicket(String code);
 
-    // public int refreshStoreTicket(StoreTicket data);
+    public int refreshStoreTicket(StoreTicket data);
+
+    public int refreshStatus(String code, String status);
 
     public List<StoreTicket> queryStoreTicketList(StoreTicket condition);
 

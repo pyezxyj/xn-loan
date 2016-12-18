@@ -1,5 +1,6 @@
 package com.xnjr.mall.bo.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -38,6 +39,7 @@ public class StoreTicketBOImpl extends PaginableBOImpl<StoreTicket> implements
             code = OrderNoGenerater.generateM(EGeneratePrefix.STORE_TICKET
                 .getCode());
             data.setCode(code);
+            data.setCreateDatetime(new Date());
             storeTicketDAO.insert(data);
         }
         return code;
@@ -54,14 +56,14 @@ public class StoreTicketBOImpl extends PaginableBOImpl<StoreTicket> implements
         return count;
     }
 
-    // @Override
-    // public int refreshStoreTicket(StoreTicket data) {
-    // int count = 0;
-    // if (StringUtils.isNotBlank(data.getCode())) {
-    // count = storeTicketDAO.update(data);
-    // }
-    // return count;
-    // }
+    @Override
+    public int refreshStoreTicket(StoreTicket data) {
+        int count = 0;
+        if (StringUtils.isNotBlank(data.getCode())) {
+            count = storeTicketDAO.update(data);
+        }
+        return count;
+    }
 
     @Override
     public List<StoreTicket> queryStoreTicketList(StoreTicket condition) {
@@ -76,9 +78,21 @@ public class StoreTicketBOImpl extends PaginableBOImpl<StoreTicket> implements
             condition.setCode(code);
             data = storeTicketDAO.select(condition);
             if (data == null) {
-                throw new BizException("xn0000", "异常");
+                throw new BizException("xn0000", "折扣券编号不存在");
             }
         }
         return data;
+    }
+
+    @Override
+    public int refreshStatus(String code, String status) {
+        int count = 0;
+        if (StringUtils.isNotBlank(code)) {
+            StoreTicket data = new StoreTicket();
+            data.setCode(code);
+            data.setStatus(status);
+            count = storeTicketDAO.updateStatus(data);
+        }
+        return count;
     }
 }

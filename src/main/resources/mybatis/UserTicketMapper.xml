@@ -9,6 +9,10 @@
 		<result column="create_datetime" property="createDatetime" />
 		<result column="status" property="status" />
 		<result column="system_code" property="systemCode" />
+		<result column="ticket_name" property="ticketName" />
+		<result column="ticket_type" property="ticketType" />
+		<result column="ticket_key1" property="ticketKey1" />
+		<result column="ticket_key2" property="ticketKey2" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -24,9 +28,13 @@
 		,t.ticket_code
 		,t.create_datetime
 		,t.status
-		,t.system_code
+		,t.system_code 
+		,st.name ticket_name
+		,st.type ticket_type
+		,st.key1 ticket_key1
+		,st.key2 ticket_key2
 		FROM
-		to2o_user_ticket t
+		to2o_user_ticket t left join to2o_store_ticket st on t.ticket_code = st.code
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -52,7 +60,7 @@
 		,system_code
 		)
 		VALUES(
-		#{id}
+		#{code}
 		,#{userId}
 		,#{ticketCode}
 		,#{createDatetime}

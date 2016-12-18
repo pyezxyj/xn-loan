@@ -105,12 +105,21 @@
 		,currency = #{currency}
 		,validate_start = #{validateStart}
 		,validate_end = #{validateEnd}
-		,create_datetime = #{createDatetime}
-		,status = #{status}
-		,store_code = #{storeCode}
-		,system_code = #{systemCode}
 		WHERE code = #{code}
 	</update>
-
+	
+	<update id="update_status" parameterType="storeTicket">
+		UPDATE to2o_store_ticket
+		SET
+		status = #{status}
+		WHERE code = #{code}
+	</update>
+	
+	<delete id="delete_storeTicket" parameterType="storeTicket">
+		DELETE FROM
+		to2o_store_ticket
+		WHERE
+		code = #{code}
+	</delete>
 
 </mapper>

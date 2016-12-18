@@ -12,7 +12,16 @@ public interface IStoreTicketAO {
 
     public int dropStoreTicket(String code);
 
-    // public int editStoreTicket(StoreTicket data);
+    public int editStoreTicket(StoreTicket data);
+
+    /**
+     * 折扣券上架/下架
+     * @param code
+     * @return 
+     * @create: 2016年12月18日 下午10:31:31 haiqingzheng
+     * @history:
+     */
+    public int putOnOff(String code);
 
     public Paginable<StoreTicket> queryStoreTicketPage(int start, int limit,
             StoreTicket condition);
