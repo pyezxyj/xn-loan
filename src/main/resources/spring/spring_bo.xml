@@ -55,4 +55,8 @@
 	<bean id="storeActionBO" class="com.xnjr.mall.bo.impl.StoreActionBOImpl">
 		<property name="paginableDAO" ref="storeActionDAOImpl"/>
 	</bean>
+	
+	<bean id="storePurchaseBO" class="com.xnjr.mall.bo.impl.StorePurchaseBOImpl">
+		<property name="paginableDAO" ref="storePurchaseDAOImpl"/>
+	</bean>
 </beans>

@@ -13,6 +13,7 @@
 	    <typeAlias alias="storeTicket" type="com.xnjr.mall.domain.StoreTicket" />
 	    <typeAlias alias="userTicket" type="com.xnjr.mall.domain.UserTicket" />
 	    <typeAlias alias="storeAction" type="com.xnjr.mall.domain.StoreAction" />
+	    <typeAlias alias="storePurchase" type="com.xnjr.mall.domain.StorePurchase" />
 	</typeAliases>	
 </configuration>
 
