@@ -10,6 +10,7 @@
 		<typeAlias alias="sysDict" type="com.xnjr.mall.domain.SYSDict" />
 	    <typeAlias alias="sysConfig" type="com.xnjr.mall.domain.SYSConfig" />
 	    <typeAlias alias="store" type="com.xnjr.mall.domain.Store" />
+	    <typeAlias alias="storeTicket" type="com.xnjr.mall.domain.StoreTicket" />
 	</typeAliases>	
 </configuration>
 
