@@ -13,10 +13,11 @@ package com.xnjr.mall.enums;
  * @since: 2016年5月17日 上午10:36:47 
  * @history:
  */
-public enum EPutStatus {
-    todoPUBLISH("0", "未发布"), PUBLISH_YES("1", "已上架"), PUBLISH_NO("2", "已下架");
+public enum EProductStatus {
+    TO_PUBLISH("0", "已提交"), APPROVE_YES("1", "审批通过"), APPROVE_NO("2", "审批不通过"), PUBLISH_YES(
+            "3", "已上架"), PUBLISH_NO("4", "已下架");
 
-    EPutStatus(String code, String value) {
+    EProductStatus(String code, String value) {
         this.code = code;
         this.value = value;
     }

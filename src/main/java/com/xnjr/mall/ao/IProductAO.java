@@ -36,6 +36,19 @@ public interface IProductAO {
     public Product getProduct(String code);
 
     /**
+     * 审核产品
+     * @param code
+     * @param approveResult
+     * @param approver
+     * @param approveNote
+     * @return 
+     * @create: 2016年12月17日 下午1:28:31 xieyj
+     * @history:
+     */
+    public void approveProduct(String code, String approveResult,
+            String approver, String approveNote);
+
+    /**
      * 上架产品
      * @param code
      * @param price1

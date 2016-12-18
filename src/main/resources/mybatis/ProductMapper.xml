@@ -49,17 +49,17 @@
 				AND t.company_code = #{companyCode}
 			</if>
 			<if test="systemCode != null and systemCode != '' ">
-				AND t.company_code = #{systemCode}
+				AND t.system_code = #{systemCode}
 			</if>
 			<choose>
 				 <when test="status == '13'">
-				  AND (t.status = 1 or t.status = 3)
+				  	AND (t.status = 1 or t.status = 3)
 				 </when>
 				 <when test="status != null and status != '' ">
-				  AND t.status = #{status}
+				  	AND t.status = #{status}
 				 </when>
 				 <otherwise>
-				  AND 1 = 1
+				  	AND 1 = 1
 				 </otherwise>
 			</choose>
 			<if test="updater != null and updater != '' ">
