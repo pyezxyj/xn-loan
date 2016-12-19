@@ -47,5 +47,36 @@
 	<bean id="jewelInteractBO" class="com.xnjr.mall.bo.impl.JewelInteractBOImpl">
 		<property name="paginableDAO" ref="jewelInteractDAOImpl"/>
 	</bean>	
+
+	<bean id="storeBO" class="com.xnjr.mall.bo.impl.StoreBOImpl">
+		<property name="paginableDAO" ref="storeDAOImpl"/>
+	</bean>
 	
+	<bean id="storeTicketBO" class="com.xnjr.mall.bo.impl.StoreTicketBOImpl">
+		<property name="paginableDAO" ref="storeTicketDAOImpl"/>
+	</bean>
+	
+	<bean id="userTicketBO" class="com.xnjr.mall.bo.impl.UserTicketBOImpl">
+		<property name="paginableDAO" ref="userTicketDAOImpl"/>
+	</bean>
+	
+	<bean id="storeActionBO" class="com.xnjr.mall.bo.impl.StoreActionBOImpl">
+		<property name="paginableDAO" ref="storeActionDAOImpl"/>
+	</bean>
+	
+	<bean id="storePurchaseBO" class="com.xnjr.mall.bo.impl.StorePurchaseBOImpl">
+		<property name="paginableDAO" ref="storePurchaseDAOImpl"/>
+	</bean>
+	
+	<bean id="stockBO" class="com.xnjr.mall.bo.impl.StockBOImpl">
+		<property name="paginableDAO" ref="stockDAOImpl"/>
+	</bean>
+	
+	<bean id="stockHoldBO" class="com.xnjr.mall.bo.impl.StockHoldBOImpl">
+		<property name="paginableDAO" ref="stockHoldDAOImpl"/>
+	</bean>
+	
+	<bean id="stockBackBO" class="com.xnjr.mall.bo.impl.StockBackBOImpl">
+		<property name="paginableDAO" ref="stockBackDAOImpl"/>
+	</bean>
 </beans>

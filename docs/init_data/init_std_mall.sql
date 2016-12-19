@@ -1,11 +1,22 @@
 /*
--- Query: SELECT * FROM std_mall.tsys_config
-LIMIT 0, 50000
+-- Query: SELECT * FROM std_mall.tmall_category where parent_code = '0'
+LIMIT 0, 5000
 
--- Date: 2016-11-18 13:38
+-- Date: 2016-12-17 17:23
 */
-INSERT INTO `tsys_config` (`id`,`cname`,`ckey`,`cvalue`,`remark`,`belong`,`company_code`) VALUES (1,'包邮订单金额','byje','88','订单金额大于等于该配置，包邮',0,NULL);
-INSERT INTO `tsys_config` (`id`,`cname`,`ckey`,`cvalue`,`remark`,`belong`,`company_code`) VALUES (2,'运费','yunfei','10','默认订单运费',0,NULL);
+INSERT INTO `tmall_category` (`code`,`parent_code`,`type`,`name`,`pic`,`order_no`,`belong`,`company_code`,`system_code`) VALUES ('FL201600000000000001','0','1','剁手合集','',1,NULL,NULL,'CD-CZH000001');
+INSERT INTO `tmall_category` (`code`,`parent_code`,`type`,`name`,`pic`,`order_no`,`belong`,`company_code`,`system_code`) VALUES ('FL201600000000000002','0','1','一元夺宝',NULL,2,NULL,NULL,'CD-CZH000001');
+INSERT INTO `tmall_category` (`code`,`parent_code`,`type`,`name`,`pic`,`order_no`,`belong`,`company_code`,`system_code`) VALUES ('FL201600000000000003','0','1','0元试购','',3,NULL,NULL,'CD-CZH000001');
 
-INSERT INTO `tmall_category` (`code`,`parent_code`,`type`,`name`,`pic`,`order_no`,`belong`,`company_code`) VALUES ('FL2016000000000000001','0','2','热门','http://121.43.101.148:8901/M201600000/huo.png',1,'1','0');
-INSERT INTO `tmall_category` (`code`,`parent_code`,`type`,`name`,`pic`,`order_no`,`belong`,`company_code`) VALUES ('FL2016000000000000002','0','2','新品','http://121.43.101.148:8901/M201600000/xin.png',2,'1','0');
+
+INSERT INTO `tmall_category` (`code`,`parent_code`,`type`,`name`,`pic`,`order_no`,`belong`,`company_code`,`system_code`) VALUES ('FL201600000000000004','FL201600000000000001','1','小类1','',1,NULL,NULL,'CD-CZH000001');
+INSERT INTO `tmall_category` (`code`,`parent_code`,`type`,`name`,`pic`,`order_no`,`belong`,`company_code`,`system_code`) VALUES ('FL201600000000000005','FL201600000000000001','1','小类2','',1,NULL,NULL,'CD-CZH000001');
+INSERT INTO `tmall_category` (`code`,`parent_code`,`type`,`name`,`pic`,`order_no`,`belong`,`company_code`,`system_code`) VALUES ('FL201600000000000006','FL201600000000000001','1','小类3','',1,NULL,NULL,'CD-CZH000001');
+INSERT INTO `tmall_category` (`code`,`parent_code`,`type`,`name`,`pic`,`order_no`,`belong`,`company_code`,`system_code`) VALUES ('FL201600000000000007','FL201600000000000001','1','小类4','',1,NULL,NULL,'CD-CZH000001');
+
+INSERT INTO `tmall_category` (`code`,`parent_code`,`type`,`name`,`pic`,`order_no`,`belong`,`company_code`,`system_code`) VALUES ('FL201600000000000008','FL201600000000000003','1','小类1','',1,NULL,NULL,'CD-CZH000001');
+INSERT INTO `tmall_category` (`code`,`parent_code`,`type`,`name`,`pic`,`order_no`,`belong`,`company_code`,`system_code`) VALUES ('FL201600000000000009','FL201600000000000003','1','小类2','',1,NULL,NULL,'CD-CZH000001');
+INSERT INTO `tmall_category` (`code`,`parent_code`,`type`,`name`,`pic`,`order_no`,`belong`,`company_code`,`system_code`) VALUES ('FL201600000000000010','FL201600000000000003','1','小类3','',1,NULL,NULL,'CD-CZH000001');
+INSERT INTO `tmall_category` (`code`,`parent_code`,`type`,`name`,`pic`,`order_no`,`belong`,`company_code`,`system_code`) VALUES ('FL201600000000000011','FL201600000000000003','1','小类4','',1,NULL,NULL,'CD-CZH000001');
+
+

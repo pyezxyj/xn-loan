@@ -33,6 +33,7 @@ public class XN808000 extends AProcessor {
         data.setName(req.getName());
         data.setPic(req.getPic());
         data.setType(req.getType());
+        data.setSystemCode(req.getSystemCode());
         if (StringUtils.isNotBlank(req.getOrderNo())) {
             data.setOrderNo(Integer.valueOf(req.getOrderNo()));
         }
@@ -43,6 +44,7 @@ public class XN808000 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN808000Req.class);
-        StringValidater.validateBlank(req.getParentCode(), req.getName());
+        StringValidater.validateBlank(req.getParentCode(), req.getName(),
+            req.getSystemCode());
     }
 }

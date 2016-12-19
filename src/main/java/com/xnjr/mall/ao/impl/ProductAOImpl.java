@@ -19,7 +19,7 @@ import com.xnjr.mall.ao.IProductAO;
 import com.xnjr.mall.bo.IProductBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Product;
-import com.xnjr.mall.enums.EPutStatus;
+import com.xnjr.mall.enums.EProductStatus;
 import com.xnjr.mall.exception.BizException;
 
 /** 
@@ -40,6 +40,8 @@ public class ProductAOImpl implements IProductAO {
     public String addProduct(Product product) {
         Product condition = new Product();
         condition.setName(product.getName());
+        condition.setCompanyCode(product.getCompanyCode());
+        condition.setSystemCode(product.getSystemCode());
         List<Product> list = productBO.queryProductList(condition);
         if (!CollectionUtils.sizeIsEmpty(list)) {
             throw new BizException("jd00001", "产品名称已存在");
@@ -59,7 +61,7 @@ public class ProductAOImpl implements IProductAO {
         int count = 0;
         if (StringUtils.isNotBlank(code)) {
             Product product = productBO.getProduct(code);
-            if (EPutStatus.todoPUBLISH.getCode().equals(product.getStatus())) {
+            if (EProductStatus.TO_PUBLISH.getCode().equals(product.getStatus())) {
                 count = productBO.removeProduct(code);
             } else {
                 throw new BizException("xn000000", "产品已经上架过，不能删除");
@@ -77,12 +79,18 @@ public class ProductAOImpl implements IProductAO {
         Product dbProduct = productBO.getProduct(product.getCode());
         Product condition = new Product();
         condition.setName(product.getName());
+        condition.setCompanyCode(product.getCompanyCode());
+        condition.setSystemCode(product.getSystemCode());
         List<Product> list = productBO.queryProductList(condition);
         if (!CollectionUtils.sizeIsEmpty(list)
                 && !dbProduct.getName().equals(list.get(0).getName())) {
             throw new BizException("jd00001", "产品名称已存在");
         }
-
+        if (!EProductStatus.TO_PUBLISH.getCode().equals(product.getStatus())
+                && !EProductStatus.PUBLISH_NO.getCode().equals(
+                    product.getStatus())) {
+            throw new BizException("xn000000", "该产品不是已提交或者已下架状态，无法修改");
+        }
         int count = 0;
         if (product != null) {
             count = productBO.refreshProduct(product);
@@ -116,15 +124,29 @@ public class ProductAOImpl implements IProductAO {
     }
 
     @Override
-    public int putOnProduct(String code, Long originalPrice,
-            Long discountPrice, String location, Integer orderNo,
-            String updater, String remark) {
+    public void approveProduct(String code, String approveResult,
+            String approver, String approveNote) {
+        Product product = productBO.getProduct(code);
+        if (!EProductStatus.TO_PUBLISH.getCode().equals(product.getStatus())) {
+            throw new BizException("xn000000", "该产品不是已提交状态");
+        }
+        productBO.approveProduct(code, approveResult, approver, approveNote);
+    }
+
+    @Override
+    public int putOnProduct(String code, Long price1, Long price2, Long price3,
+            String location, Integer orderNo, String updater, String remark) {
         int count = 0;
         Product product = productBO.getProduct(code);
-        if (EPutStatus.PUBLISH_YES.getCode().equals(product.getStatus())) {
-            throw new BizException("xn000000", "该产品已经上架");
+        // 已提交，审核通过，已下架状态可上架；
+        if (!EProductStatus.TO_PUBLISH.getCode().equals(product.getStatus())
+                && !EProductStatus.APPROVE_YES.getCode().equals(
+                    product.getStatus())
+                && !EProductStatus.PUBLISH_NO.getCode().equals(
+                    product.getStatus())) {
+            throw new BizException("xn000000", "该产品状态不符合上架条件，无法上架");
         }
-        count = productBO.putOn(code, originalPrice, discountPrice, location,
+        count = productBO.putOn(code, price1, price2, price3, location,
             orderNo, updater, remark);
         return count;
     }
@@ -133,7 +155,7 @@ public class ProductAOImpl implements IProductAO {
     public int putOffProduct(String code, String updater, String remark) {
         int count = 0;
         Product product = productBO.getProduct(code);
-        if (!EPutStatus.PUBLISH_YES.getCode().equals(product.getStatus())) {
+        if (!EProductStatus.PUBLISH_YES.getCode().equals(product.getStatus())) {
             throw new BizException("xn000000", "该产品不处于上架状态，不能下架");
         }
         count = productBO.putOff(code, updater, remark);

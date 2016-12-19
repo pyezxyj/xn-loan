@@ -43,8 +43,9 @@ public class XN808013 extends AProcessor {
             orderNo = StringValidater.toInteger(req.getOrderNo());
         }
         int count = productAO.putOnProduct(req.getCode(),
-            StringValidater.toLong(req.getOriginalPrice()),
-            StringValidater.toLong(req.getDiscountPrice()), req.getLocation(),
+            StringValidater.toLong(req.getPrice1()),
+            StringValidater.toLong(req.getPrice2()),
+            StringValidater.toLong(req.getPrice3()), req.getLocation(),
             orderNo, req.getUpdater(), req.getRemark());
         return new BooleanRes(count > 0 ? true : false);
     }
@@ -55,8 +56,9 @@ public class XN808013 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN808013Req.class);
-        StringValidater.validateBlank(req.getCode(), req.getOriginalPrice(),
-            req.getDiscountPrice(), req.getLocation(), req.getUpdater());
+        StringValidater.validateBlank(req.getCode(), req.getPrice1(),
+            req.getPrice2(), req.getPrice3(), req.getLocation(),
+            req.getUpdater());
     }
 
 }

@@ -1,22 +1,23 @@
 /**
- * @Title EProductStatus.java 
+ * @Title EUserTicketStatus.java 
  * @Package com.xnjr.mall.enums 
  * @Description 
  * @author haiqingzheng  
- * @date 2016年5月17日 上午10:36:47 
+ * @date 2016年12月18日 下午9:26:46 
  * @version V1.0   
  */
 package com.xnjr.mall.enums;
 
 /** 
  * @author: haiqingzheng 
- * @since: 2016年5月17日 上午10:36:47 
+ * @since: 2016年12月18日 下午9:26:46 
  * @history:
  */
-public enum EPutStatus {
-    todoPUBLISH("0", "未发布"), PUBLISH_YES("1", "已上架"), PUBLISH_NO("2", "已下架");
+public enum EStoreTicketStatus {
+    NEW("0", "待上架"), ONLINE("1", "已上架"), OFFLINE("2", "已下架"), INVAILD("91",
+            "期满作废");
 
-    EPutStatus(String code, String value) {
+    EStoreTicketStatus(String code, String value) {
         this.code = code;
         this.value = value;
     }

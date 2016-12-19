@@ -23,7 +23,8 @@ public interface IProductOrderBO extends IPaginableBO<ProductOrder> {
      * @history:
      */
     public String saveProductOrder(String orderCode, String productCode,
-            Integer quantity, Long salePrice);
+            Integer quantity, Long price1, Long price2, Long price3,
+            String systemCode);
 
     /**
      * 查询发货单型号列表

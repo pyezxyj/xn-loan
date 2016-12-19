@@ -20,11 +20,13 @@
 	    <result column="updater" property="updater" />
 		<result column="update_datetime" property="updateDatetime" />
 		<result column="remark" property="remark" />
-		<result column="original_price" property="originalPrice" />
-		<result column="discount_price" property="discountPrice" />
+		<result column="price1" property="price1" />
+		<result column="price2" property="price2" />
+		<result column="price3" property="price3" />
 		<result column="location" property="location" />
 		<result column="order_no" property="orderNo" />
 		<result column="company_code" property="companyCode" />
+		<result column="system_code" property="systemCode" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -46,15 +48,18 @@
 			<if test="companyCode != null and companyCode != '' ">
 				AND t.company_code = #{companyCode}
 			</if>
+			<if test="systemCode != null and systemCode != '' ">
+				AND t.system_code = #{systemCode}
+			</if>
 			<choose>
 				 <when test="status == '13'">
-				  AND (t.status = 1 or t.status = 3)
+				  	AND (t.status = 1 or t.status = 3)
 				 </when>
 				 <when test="status != null and status != '' ">
-				  AND t.status = #{status}
+				  	AND t.status = #{status}
 				 </when>
 				 <otherwise>
-				  AND 1 = 1
+				  	AND 1 = 1
 				 </otherwise>
 			</choose>
 			<if test="updater != null and updater != '' ">
@@ -84,11 +89,13 @@
 		,updater
 		,update_datetime
 		,remark
-		,original_price
-		,discount_price
+		,price1
+		,price2
+		,price3
 		,location
 		,order_no
 		,company_code
+		,system_code
 		FROM
 		tmall_product t
 		<include refid="where_condition" />
@@ -126,6 +133,7 @@
 		,update_datetime
 		,remark
 		,company_code
+		,system_code
 		)
 		VALUES(
 		#{code}
@@ -146,6 +154,7 @@
 		,#{updateDatetime}
 		,#{remark}
 		,#{companyCode}
+		,#{systemCode}
 		)
 	</insert>
 	
@@ -183,8 +192,9 @@
 	<update id="update_putOn" parameterType="product">
 		UPDATE tmall_product
 		SET
-		original_price = #{originalPrice}
-		,discount_price = #{discountPrice}
+		price1 = #{price1}
+		,price2 = #{price2}
+		,price3 = #{price3}
 		,location = #{location}
 		,order_no = #{orderNo}
 		,status = #{status}

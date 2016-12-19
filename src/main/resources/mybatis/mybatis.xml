@@ -13,6 +13,14 @@
 	    <typeAlias alias="jewelInteract" type="com.xnjr.mall.domain.JewelInteract" />
 	    <typeAlias alias="jewelRecord" type="com.xnjr.mall.domain.JewelRecord" />
 	    <typeAlias alias="jewelRecordNumber" type="com.xnjr.mall.domain.JewelRecordNumber" />
+	    <typeAlias alias="store" type="com.xnjr.mall.domain.Store" />
+	    <typeAlias alias="storeTicket" type="com.xnjr.mall.domain.StoreTicket" />
+	    <typeAlias alias="userTicket" type="com.xnjr.mall.domain.UserTicket" />
+	    <typeAlias alias="storeAction" type="com.xnjr.mall.domain.StoreAction" />
+	    <typeAlias alias="storePurchase" type="com.xnjr.mall.domain.StorePurchase" />
+	    <typeAlias alias="stock" type="com.xnjr.mall.domain.Stock" />
+	    <typeAlias alias="stockHold" type="com.xnjr.mall.domain.StockHold" />
+	    <typeAlias alias="stockBack" type="com.xnjr.mall.domain.StockBack" />
 	</typeAliases>	
 </configuration>
 

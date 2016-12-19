@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.IStoreTicketDAO">
+	<resultMap id="storeTicket_DB_Result" type="storeTicket">
+		<result column="code" property="code" />
+		<result column="name" property="name" />
+		<result column="type" property="type" />
+		<result column="key1" property="key1" />
+		<result column="key2" property="key2" />
+		<result column="description" property="description" />
+		<result column="price" property="price" />
+		<result column="currency" property="currency" />
+		<result column="validate_start" property="validateStart" />
+		<result column="validate_end" property="validateEnd" />
+		<result column="create_datetime" property="createDatetime" />
+		<result column="status" property="status" />
+		<result column="store_code" property="storeCode" />
+		<result column="system_code" property="systemCode" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_storeTicket" parameterType="storeTicket" resultMap="storeTicket_DB_Result">
+		SELECT
+		t.code
+		,t.name
+		,t.type
+		,t.key1
+		,t.key2
+		,t.description
+		,t.price
+		,t.currency
+		,t.validate_start
+		,t.validate_end
+		,t.create_datetime
+		,t.status
+		,t.store_code
+		,t.system_code
+		FROM
+		to2o_store_ticket t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_storeTicket_count" parameterType="storeTicket"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM to2o_store_ticket t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_storeTicket" parameterType="storeTicket">
+		INSERT INTO
+		to2o_store_ticket(
+		code
+		,name
+		,type
+		,key1
+		,key2
+		,description
+		,price
+		,currency
+		,validate_start
+		,validate_end
+		,create_datetime
+		,status
+		,store_code
+		,system_code
+		)
+		VALUES(
+		#{code}
+		,#{name}
+		,#{type}
+		,#{key1}
+		,#{key2}
+		,#{description}
+		,#{price}
+		,#{currency}
+		,#{validateStart}
+		,#{validateEnd}
+		,#{createDatetime}
+		,#{status}
+		,#{storeCode}
+		,#{systemCode}
+		)
+	</insert>
+
+	<update id="update_storeTicket" parameterType="storeTicket">
+		UPDATE to2o_store_ticket
+		SET
+		name = #{name}
+		,type = #{type}
+		,key1 = #{key1}
+		,key2 = #{key2}
+		,description = #{description}
+		,price = #{price}
+		,currency = #{currency}
+		,validate_start = #{validateStart}
+		,validate_end = #{validateEnd}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_status" parameterType="storeTicket">
+		UPDATE to2o_store_ticket
+		SET
+		status = #{status}
+		WHERE code = #{code}
+	</update>
+	
+	<delete id="delete_storeTicket" parameterType="storeTicket">
+		DELETE FROM
+		to2o_store_ticket
+		WHERE
+		code = #{code}
+	</delete>
+
+</mapper>

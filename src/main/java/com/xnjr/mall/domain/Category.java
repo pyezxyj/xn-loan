@@ -47,6 +47,9 @@ public class Category extends ABaseDO {
     // 所属公司编号
     private String companyCode;
 
+    // 所属系统编号
+    private String systemCode;
+
     // ***************db properties
     // 父编号名称
     private String parentName;
@@ -121,5 +124,13 @@ public class Category extends ABaseDO {
 
     public void setBelong(String belong) {
         this.belong = belong;
+    }
+
+    public String getSystemCode() {
+        return systemCode;
+    }
+
+    public void setSystemCode(String systemCode) {
+        this.systemCode = systemCode;
     }
 }

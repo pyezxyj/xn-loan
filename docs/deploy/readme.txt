@@ -14,6 +14,14 @@
   rm -rf std-mall*
   mv /home/std-mall.war .
   
+  cd /home/wwwroot/zhpay/tomcat_std_mall/webapps
+  cp ./zhpay/WEB-INF/classes/application.properties .
+  cp ./zhpay/WEB-INF/classes/config.properties .
+  rm -rf std-mall*
+  mv /home/std-mall.war .
+  
+  http://121.43.101.148:5602/std-mall/api
+  
 4. 已备份配置文件放回原处,重启tomcat
   mv -f application.properties ./std-mall/WEB-INF/classes/
   mv -f config.properties ./std-mall/WEB-INF/classes/
@@ -22,5 +30,5 @@
   ../bin/startup.sh
   
 6. 验证程序
-  http://121.43.101.148:6402/std-mall/api
+  http://121.43.101.148:5602/std-mall/api
 

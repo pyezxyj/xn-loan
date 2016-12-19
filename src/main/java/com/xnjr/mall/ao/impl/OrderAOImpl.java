@@ -36,7 +36,6 @@ import com.xnjr.mall.domain.Cart;
 import com.xnjr.mall.domain.Order;
 import com.xnjr.mall.domain.Product;
 import com.xnjr.mall.domain.ProductOrder;
-import com.xnjr.mall.enums.EDirection;
 import com.xnjr.mall.enums.EGeneratePrefix;
 import com.xnjr.mall.enums.EOrderStatus;
 import com.xnjr.mall.exception.BizException;
@@ -89,10 +88,14 @@ public class OrderAOImpl implements IOrderAO {
         }
         // 减去库存量
         productBO.refreshProductQuantity(productCode, quantity);
-        Long amount = quantity * product.getDiscountPrice();
-        data.setAmount(amount);
+        Long amount1 = quantity * product.getPrice1();
+        data.setAmount1(amount1);
+        Long amount2 = quantity * product.getPrice2();
+        data.setAmount2(amount2);
+        Long amount3 = quantity * product.getPrice3();
+        data.setAmount3(amount3);
         // 计算订单运费
-        Long yunfei = totalYunfei(product.getCompanyCode(), amount);
+        Long yunfei = totalYunfei(product.getCompanyCode(), amount2);
         data.setYunfei(yunfei);
         // 设置订单所属公司
         data.setCompanyCode(product.getCompanyCode());
@@ -100,10 +103,12 @@ public class OrderAOImpl implements IOrderAO {
         String code = OrderNoGenerater.generateM(EGeneratePrefix.ORDER
             .getCode());
         data.setCode(code);
+        data.setSystemCode(product.getSystemCode());
         orderBO.saveOrder(data);
         // 订单产品快照关联
         productOrderBO.saveProductOrder(code, productCode, quantity,
-            product.getDiscountPrice());
+            product.getPrice1(), product.getPrice2(), product.getPrice3(),
+            product.getSystemCode());
         return code;
     }
 
@@ -123,7 +128,9 @@ public class OrderAOImpl implements IOrderAO {
         data.setCode(code);
 
         // 落地订单产品关联信息 计算订单总金额
-        Long amount = 0L;
+        Long amount1 = 0L;
+        Long amount2 = 0L;
+        Long amount3 = 0L;
         String companyCode = "";
         for (String cartCode : cartCodeList) {
             Cart cart = cartBO.getCart(cartCode);
@@ -137,16 +144,22 @@ public class OrderAOImpl implements IOrderAO {
             productBO.refreshProductQuantity(product.getCode(),
                 product.getQuantity());
 
-            amount = amount + (cart.getQuantity() * product.getDiscountPrice());
+            amount1 = amount1 + (cart.getQuantity() * product.getPrice1());
+            amount2 = amount2 + (cart.getQuantity() * product.getPrice2());
+            amount3 = amount3 + (cart.getQuantity() * product.getPrice3());
+
             companyCode = product.getCompanyCode();
             productOrderBO.saveProductOrder(code, cart.getProductCode(),
-                cart.getQuantity(), product.getDiscountPrice());
+                cart.getQuantity(), product.getPrice1(), product.getPrice2(),
+                product.getPrice3(), product.getSystemCode());
         }
 
-        data.setAmount(amount);
+        data.setAmount1(amount1);
+        data.setAmount2(amount2);
+        data.setAmount3(amount3);
         data.setCompanyCode(companyCode);
         // 计算订单运费
-        Long yunfei = totalYunfei(companyCode, amount);
+        Long yunfei = totalYunfei(companyCode, amount2);
         data.setYunfei(yunfei);
         // 保存订单
         orderBO.saveOrder(data);
@@ -175,12 +188,14 @@ public class OrderAOImpl implements IOrderAO {
         if (!EOrderStatus.TO_PAY.getCode().equals(order.getStatus())) {
             throw new BizException("xn000000", "订单不处于待支付状态");
         }
-        Long payAmount = order.getAmount() + order.getYunfei();
+        Long payAmount1 = order.getAmount1(); // 购物币
+        Long payAmount2 = order.getAmount2() + order.getYunfei(); // 人民币
+        Long payAmount3 = order.getAmount3(); // 钱包币
         // if (EChannel.INTEGER.getCode().equals(channel)) {
         // }
-        userBO.doTransfer(order.getApplyUser(), EDirection.MINUS.getCode(),
-            payAmount, "购买商品", code);
-        orderBO.refreshOrderPayAmount(code, payAmount);
+        // userBO.doTransfer(order.getApplyUser(), EDirection.MINUS.getCode(),
+        // payAmount, "购买商品", code);
+        orderBO.refreshOrderPayAmount(code, payAmount1, payAmount2, payAmount3);
     }
 
     /** 
@@ -204,7 +219,9 @@ public class OrderAOImpl implements IOrderAO {
     @Override
     public int cancelOrderOss(String code, String updater, String remark) {
         Order data = orderBO.getOrder(code);
-        Long payAmount = data.getAmount() + data.getYunfei();
+        Long payAmount1 = data.getAmount1();
+        Long payAmount2 = data.getAmount2() + data.getYunfei();
+        Long payAmount3 = data.getAmount3();
         if (!EOrderStatus.TO_PAY.getCode().equals(data.getStatus())
                 && !EOrderStatus.PAY_YES.getCode().equals(data.getStatus())
                 && !EOrderStatus.SEND.getCode().equals(data.getStatus())) {
@@ -219,8 +236,9 @@ public class OrderAOImpl implements IOrderAO {
             } else if (EOrderStatus.SEND.getCode().equals(data.getStatus())) {
                 status = EOrderStatus.KDYC.getCode();
             }
-            userBO.doTransfer(data.getApplyUser(), EDirection.PLUS.getCode(),
-                payAmount, remark, code);
+            // 退回各种币 待实现
+            // userBO.doTransfer(data.getApplyUser(), EDirection.PLUS.getCode(),
+            // payAmount, remark, code);
             // 发送短信
             String userId = data.getApplyUser();
             smsOutBO.sentContent(userId, userId, "尊敬的用户，您的订单[" + data.getCode()

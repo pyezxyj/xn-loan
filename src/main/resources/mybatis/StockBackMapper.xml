@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.IStockBackDAO">
+	<resultMap id="stockBack_DB_Result" type="stockBack">
+		<result column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="stock_code" property="stockCode" />
+		<result column="back_datetime" property="backDatetime" />
+		<result column="system_code" property="systemCode" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="id != null and id != '' ">
+				AND t.id = #{id}
+			</if>
+			<if test="userId != null and userId != '' ">
+				AND t.user_id = #{userId}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_stockBack" parameterType="stockBack" resultMap="stockBack_DB_Result">
+		SELECT
+		t.id
+		,t.user_id
+		,t.stock_code
+		,t.back_datetime
+		,t.system_code
+		FROM
+		tact_stock_back t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_stockBack_count" parameterType="stockBack"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tact_stock_back t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_stockBack" parameterType="stockBack">
+		INSERT INTO
+		tact_stock_back(
+		user_id
+		,stock_code
+		,back_datetime
+		,system_code
+		)
+		VALUES(
+		#{userId}
+		,#{stockCode}
+		,#{backDatetime}
+		,#{systemCode}
+		)
+	</insert>
+
+	<update id="update_stockBack" parameterType="stockBack">
+		UPDATE tact_stock_back
+		SET
+		user_id = #{userId}
+		,stock_code = #{stockCode}
+		,back_datetime = #{backDatetime}
+		,system_code = #{systemCode}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>

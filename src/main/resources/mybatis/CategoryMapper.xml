@@ -12,6 +12,7 @@
 		<result column="order_no" property="orderNo" />
 		<result column="belong" property="belong" />
 		<result column="company_code" property="companyCode" />
+		<result column="system_code" property="systemCode" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -30,6 +31,9 @@
 			<if test="companyCode != null and companyCode != '' ">
 				AND (t.company_code = #{companyCode} or (t.belong = 1 and NOT EXISTS (select * from tmall_category tc where tc.belong = t.code and tc.company_code = #{companyCode})))
 			</if>
+			<if test="systemCode != null and systemCode != '' ">
+				AND t.system_code = #{systemCode}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_category" parameterType="category" resultMap="category_DB_Result">
@@ -43,6 +47,7 @@
 		,t.order_no
 		,t.belong
 		,t.company_code
+		,t.system_code
 		FROM
 		tmall_category t
 		<include refid="where_condition" />
@@ -70,6 +75,7 @@
 		,order_no
 		,belong
 		,company_code
+		,system_code
 		)
 		VALUES(
 		#{code}
@@ -80,6 +86,7 @@
 		,#{orderNo}
 		,#{belong}
 		,#{companyCode}
+		,#{systemCode}
 		)
 	</insert>
 	

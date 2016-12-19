@@ -27,6 +27,9 @@ public class Cart extends ABaseDO {
     // 数量
     private Integer quantity;
 
+    // 所属系统
+    private String systemCode;
+
     /* *************db properties ************* */
 
     // 商品广告图
@@ -35,8 +38,14 @@ public class Cart extends ABaseDO {
     // 商品名称
     private String productName;
 
-    // 价格
-    private Long salePrice;
+    // 价格1
+    private Long price1;
+
+    // 价格2
+    private Long price2;
+
+    // 价格3
+    private Long price3;
 
     public String getCode() {
         return code;
@@ -86,12 +95,36 @@ public class Cart extends ABaseDO {
         this.productName = productName;
     }
 
-    public Long getSalePrice() {
-        return salePrice;
+    public Long getPrice1() {
+        return price1;
     }
 
-    public void setSalePrice(Long salePrice) {
-        this.salePrice = salePrice;
+    public void setPrice1(Long price1) {
+        this.price1 = price1;
+    }
+
+    public Long getPrice2() {
+        return price2;
+    }
+
+    public void setPrice2(Long price2) {
+        this.price2 = price2;
+    }
+
+    public Long getPrice3() {
+        return price3;
+    }
+
+    public void setPrice3(Long price3) {
+        this.price3 = price3;
+    }
+
+    public String getSystemCode() {
+        return systemCode;
+    }
+
+    public void setSystemCode(String systemCode) {
+        this.systemCode = systemCode;
     }
 
 }

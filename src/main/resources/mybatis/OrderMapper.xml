@@ -15,9 +15,13 @@
 		<result column="mobile" property="mobile" />
 		<result column="apply_note" property="applyNote" />
 		<result column="apply_datetime" property="applyDatetime" />
-		<result column="amount" property="amount" />
+		<result column="amount1" property="amount1" />
+		<result column="amount2" property="amount2" />
+		<result column="amount3" property="amount3" />
+		<result column="pay_amount1" property="payAmount1" />
+		<result column="pay_amount2" property="payAmount2" />
+		<result column="pay_amount3" property="payAmount3" />
 		<result column="yunfei" property="yunfei" />
-		<result column="pay_amount" property="payAmount" />
 		<result column="pay_datetime" property="payDatetime" />
 		<result column="prompt_times" property="promptTimes" />
 		<result column="status" property="status" />
@@ -30,6 +34,7 @@
 		<result column="delivery_datetime" property="deliveryDatetime" />
 		<result column="pdf" property="pdf" />
 		<result column="company_code" property="companyCode" />
+		<result column="system_code" property="systemCode" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -57,6 +62,9 @@
 			<if test="companyCode != null and companyCode != '' ">
 				AND t.company_code = #{companyCode}
 			</if>
+			<if test="systemCode != null and systemCode != '' ">
+				AND t.system_code = #{systemCode}
+			</if>
 			<if test="updateDatetimeStart != null and updateDatetimeStart != '' ">
 				<![CDATA[AND t.update_datetime >= #{updateDatetimeStart}]]>
 			</if>
@@ -78,9 +86,13 @@
 		,tu.mobile
 		,t.apply_datetime
 		,t.apply_note
-		,t.amount
+		,t.amount1
+		,t.amount2
+		,t.amount3
 		,t.yunfei
-		,t.pay_amount
+		,t.pay_amount1
+		,t.pay_amount2
+		,t.pay_amount3
 		,t.pay_datetime
 		,t.prompt_times
 		,t.status
@@ -93,6 +105,7 @@
 		,t.delivery_datetime
 		,t.pdf
 		,t.company_code
+		,t.system_code
 		FROM
 		tmall_order t LEFT JOIN ${userDB}.tstd_user tu ON t.apply_user = tu.user_id
 		<include refid="where_condition" />
@@ -121,12 +134,17 @@
 		,apply_user
 		,apply_note
 		,apply_datetime
-		,amount
+		,amount1
+		,amount2
+		,amount3
 		,yunfei
-		,pay_amount
+		,pay_amount1
+		,pay_amount2
+		,pay_amount3
 		,prompt_times
 		,status
 		,company_code
+		,system_code
 		)
 		VALUES(
 		#{code}
@@ -139,12 +157,17 @@
 		,#{applyUser}
 		,#{applyNote}
 		,#{applyDatetime}
-		,#{amount}
+		,#{amount1}
+		,#{amount2}
+		,#{amount3}
 		,#{yunfei}
-		,#{payAmount}
+		,#{payAmount1}
+		,#{payAmount2}
+		,#{payAmount3}
 		,#{promptTimes}
 		,#{status}
 		,#{companyCode}
+		,#{systemCode}
 		)
 	</insert>
 
@@ -208,7 +231,9 @@
 		UPDATE tmall_order
 		SET
 		status = #{status}
-		,pay_amount = #{payAmount}
+		,pay_amount1 = #{payAmount1}
+		,pay_amount2 = #{payAmount2}
+		,pay_amount3 = #{payAmount3}
 		,pay_datetime = #{payDatetime}
 		WHERE
 		code = #{code}

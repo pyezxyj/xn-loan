@@ -13,6 +13,9 @@ public class XN808006Req {
     // 所属公司编号(选填)
     private String companyCode;
 
+    // 所属系统编号(必填)
+    private String systemCode;
+
     public String getParentCode() {
         return parentCode;
     }
@@ -43,5 +46,13 @@ public class XN808006Req {
 
     public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
+    }
+
+    public String getSystemCode() {
+        return systemCode;
+    }
+
+    public void setSystemCode(String systemCode) {
+        this.systemCode = systemCode;
     }
 }

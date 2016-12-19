@@ -53,6 +53,7 @@ public class XN808010 extends AProcessor {
         data.setUpdater(req.getUpdater());
         data.setRemark(req.getRemark());
         data.setCompanyCode(req.getCompanyCode());
+        data.setSystemCode(req.getSystemCode());
         return new PKCodeRes(productAO.addProduct(data));
     }
 
@@ -64,8 +65,7 @@ public class XN808010 extends AProcessor {
         req = JsonUtil.json2Bean(inputparams, XN808010Req.class);
         StringValidater.validateBlank(req.getCategory(), req.getType(),
             req.getName(), req.getAdvTitle(), req.getAdvPic(), req.getPic1(),
-            req.getPic2(), req.getPic3(), req.getPic4(), req.getDescription(),
-            req.getCostPrice(), req.getQuantity(), req.getUpdater(),
-            req.getCompanyCode());
+            req.getDescription(), req.getCostPrice(), req.getQuantity(),
+            req.getUpdater(), req.getCompanyCode(), req.getSystemCode());
     }
 }
