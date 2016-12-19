@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.IStockDAO">
+	<resultMap id="stock_DB_Result" type="stock">
+		<result column="code" property="code" />
+		<result column="name" property="name" />
+		<result column="pic" property="pic" />
+		<result column="description" property="description" />
+		<result column="capital" property="capital" />
+		<result column="price" property="price" />
+		<result column="currency" property="currency" />
+		<result column="back_interval" property="backInterval" />
+		<result column="back_count" property="backCount" />
+		<result column="welfare1" property="welfare1" />
+		<result column="welfare2" property="welfare2" />
+		<result column="status" property="status" />
+		<result column="system_code" property="systemCode" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_stock" parameterType="stock" resultMap="stock_DB_Result">
+		SELECT
+		t.code
+		,t.name
+		,t.pic
+		,t.description
+		,t.capital
+		,t.price
+		,t.currency
+		,t.back_interval
+		,t.back_count
+		,t.welfare1
+		,t.welfare2
+		,t.status
+		,t.system_code
+		FROM
+		tact_stock t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_stock_count" parameterType="stock"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tact_stock t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_stock" parameterType="stock">
+		INSERT INTO
+		tact_stock(
+		code
+		,name
+		,pic
+		,description
+		,capital
+		,price
+		,currency
+		,back_interval
+		,back_count
+		,welfare1
+		,welfare2
+		,status
+		,system_code
+		)
+		VALUES(
+		#{code}
+		,#{name}
+		,#{pic}
+		,#{description}
+		,#{capital}
+		,#{price}
+		,#{currency}
+		,#{backInterval}
+		,#{backCount}
+		,#{welfare1}
+		,#{welfare2}
+		,#{status}
+		,#{systemCode}
+		)
+	</insert>
+
+	<update id="update_stock" parameterType="stock">
+		UPDATE tact_stock
+		SET
+		name = #{name}
+		,pic = #{pic}
+		,description = #{description}
+		,capital = #{capital}
+		,price = #{price}
+		,currency = #{currency}
+		,back_interval = #{backInterval}
+		,back_count = #{backCount}
+		,welfare1 = #{welfare1}
+		,welfare2 = #{welfare2}
+		,status = #{status}
+		,system_code = #{systemCode}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>
