@@ -31,14 +31,14 @@ public class StockBOImpl extends PaginableBOImpl<Stock> implements IStockBO {
     }
 
     @Override
-    public String saveStock(Stock data) {
-        String code = null;
+    public int saveStock(Stock data) {
+        int count = 0;
         if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.STOCK.getCode());
-            data.setCode(code);
-            stockDAO.insert(data);
+            data.setCode(OrderNoGenerater.generateM(EGeneratePrefix.STOCK
+                .getCode()));
+            count = stockDAO.insert(data);
         }
-        return code;
+        return count;
     }
 
     @Override
@@ -53,10 +53,13 @@ public class StockBOImpl extends PaginableBOImpl<Stock> implements IStockBO {
     }
 
     @Override
-    public int refreshStock(Stock data) {
+    public int refreshStockStatus(String code, String status) {
         int count = 0;
-        if (StringUtils.isNotBlank(data.getCode())) {
-            count = stockDAO.update(data);
+        if (StringUtils.isNotBlank(code)) {
+            Stock data = new Stock();
+            data.setCode(code);
+            data.setStatus(status);
+            count = stockDAO.updateStatus(data);
         }
         return count;
     }
@@ -74,7 +77,7 @@ public class StockBOImpl extends PaginableBOImpl<Stock> implements IStockBO {
             condition.setCode(code);
             data = stockDAO.select(condition);
             if (data == null) {
-                throw new BizException("xn0000", "异常");
+                throw new BizException("xn0000", "股份编号不存在");
             }
         }
         return data;

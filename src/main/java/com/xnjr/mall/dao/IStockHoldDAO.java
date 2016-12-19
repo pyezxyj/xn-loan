@@ -5,5 +5,7 @@ import com.xnjr.mall.domain.StockHold;
 
 //dao层 
 public interface IStockHoldDAO extends IBaseDAO<StockHold> {
-	String NAMESPACE = IStockHoldDAO.class.getName().concat(".");
+    String NAMESPACE = IStockHoldDAO.class.getName().concat(".");
+
+    public int update(StockHold data);
 }

@@ -46,9 +46,8 @@ public class StockDAOImpl extends AMybatisTemplate implements IStockDAO {
     }
 
     @Override
-    public int update(Stock data) {
-        // TODO Auto-generated method stub
-        return 0;
+    public int updateStatus(Stock data) {
+        return super.update(NAMESPACE.concat("update_status"), data);
     }
 
 }

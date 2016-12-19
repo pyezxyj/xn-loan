@@ -11,6 +11,8 @@ public interface IStockHoldBO extends IPaginableBO<StockHold> {
 
     public int saveStockHold(StockHold data);
 
+    public int refreshStockHold(StockHold data);
+
     public int removeStockHold(Long id);
 
     public List<StockHold> queryStockHoldList(StockHold condition);

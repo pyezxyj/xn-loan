@@ -6,7 +6,7 @@ import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.StockBack;
 
 public interface IStockBackAO {
-    static final String DEFAULT_ORDER_COLUMN = "code";
+    static final String DEFAULT_ORDER_COLUMN = "id";
 
     public int addStockBack(StockBack data);
 

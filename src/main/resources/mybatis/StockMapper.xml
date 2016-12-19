@@ -22,6 +22,9 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_stock" parameterType="stock" resultMap="stock_DB_Result">
@@ -89,21 +92,10 @@
 		)
 	</insert>
 
-	<update id="update_stock" parameterType="stock">
+	<update id="update_status" parameterType="stock">
 		UPDATE tact_stock
 		SET
-		name = #{name}
-		,pic = #{pic}
-		,description = #{description}
-		,capital = #{capital}
-		,price = #{price}
-		,currency = #{currency}
-		,back_interval = #{backInterval}
-		,back_count = #{backCount}
-		,welfare1 = #{welfare1}
-		,welfare2 = #{welfare2}
-		,status = #{status}
-		,system_code = #{systemCode}
+		status = #{status}
 		WHERE code = #{code}
 	</update>
 

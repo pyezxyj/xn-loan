@@ -59,4 +59,16 @@
 	<bean id="storePurchaseBO" class="com.xnjr.mall.bo.impl.StorePurchaseBOImpl">
 		<property name="paginableDAO" ref="storePurchaseDAOImpl"/>
 	</bean>
+	
+	<bean id="stockBO" class="com.xnjr.mall.bo.impl.StockBOImpl">
+		<property name="paginableDAO" ref="stockDAOImpl"/>
+	</bean>
+	
+	<bean id="stockHoldBO" class="com.xnjr.mall.bo.impl.StockHoldBOImpl">
+		<property name="paginableDAO" ref="stockHoldDAOImpl"/>
+	</bean>
+	
+	<bean id="stockBackBO" class="com.xnjr.mall.bo.impl.StockBackBOImpl">
+		<property name="paginableDAO" ref="stockBackDAOImpl"/>
+	</bean>
 </beans>

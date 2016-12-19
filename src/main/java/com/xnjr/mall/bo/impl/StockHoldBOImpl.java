@@ -66,4 +66,13 @@ public class StockHoldBOImpl extends PaginableBOImpl<StockHold> implements
         }
         return data;
     }
+
+    @Override
+    public int refreshStockHold(StockHold data) {
+        int count = 0;
+        if (data.getId() != null) {
+            count = stockHoldDAO.update(data);
+        }
+        return count;
+    }
 }

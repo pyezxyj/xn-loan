@@ -6,7 +6,7 @@ import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.StockHold;
 
 public interface IStockHoldAO {
-    static final String DEFAULT_ORDER_COLUMN = "code";
+    static final String DEFAULT_ORDER_COLUMN = "id";
 
     public int addStockHold(StockHold data);
 

@@ -14,6 +14,9 @@
 			<if test="id != null and id != '' ">
 				AND t.id = #{id}
 			</if>
+			<if test="userId != null and userId != '' ">
+				AND t.user_id = #{userId}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_stockBack" parameterType="stockBack" resultMap="stockBack_DB_Result">
@@ -42,13 +45,13 @@
 	<insert id="insert_stockBack" parameterType="stockBack">
 		INSERT INTO
 		tact_stock_back(
-		,user_id
+		user_id
 		,stock_code
 		,back_datetime
 		,system_code
 		)
 		VALUES(
-		,#{userId}
+		#{userId}
 		,#{stockCode}
 		,#{backDatetime}
 		,#{systemCode}

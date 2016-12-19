@@ -18,6 +18,12 @@
 			<if test="id != null and id != '' ">
 				AND t.id = #{id}
 			</if>
+			<if test="userId != null and userId != '' ">
+				AND t.user_id = #{userId}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_stockHold" parameterType="stockHold" resultMap="stockHold_DB_Result">
@@ -50,7 +56,7 @@
 	<insert id="insert_stockHold" parameterType="stockHold">
 		INSERT INTO
 		tact_stock_hold(
-		,user_id
+		user_id
 		,stock_code
 		,status
 		,back_num
@@ -60,7 +66,7 @@
 		,system_code
 		)
 		VALUES(
-		,#{userId}
+		#{userId}
 		,#{stockCode}
 		,#{status}
 		,#{backNum}
@@ -74,14 +80,11 @@
 	<update id="update_stockHold" parameterType="stockHold">
 		UPDATE tact_stock_hold
 		SET
-		user_id = #{userId}
-		,stock_code = #{stockCode}
-		,status = #{status}
+		status = #{status}
 		,back_num = #{backNum}
 		,back_welfare1 = #{backWelfare1}
 		,back_welfare2 = #{backWelfare2}
 		,next_back = #{nextBack}
-		,system_code = #{systemCode}
 		WHERE id = #{id}
 	</update>
 
