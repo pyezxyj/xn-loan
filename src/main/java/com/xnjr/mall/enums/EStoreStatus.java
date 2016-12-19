@@ -15,7 +15,7 @@ package com.xnjr.mall.enums;
  */
 public enum EStoreStatus {
     TOCHECK("0", "待审核"), UNPASS("91", "审核不通过"), ONLINE_CLOSE("1", "已上架，关店"), ONLINE_OPEN(
-            "2", "已上架，开店"), OFFLINE("3", "已下架，关店"), ;
+            "2", "已上架，开店"), OFFLINE("3", "已下架，关店");
     // 状态解释
     // 1.审核通过，店铺自动上架，并且状态是关店
     // 2.上架的店铺，可设置开店或关店状态
