@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.IJewelInteractDAO">
+	<resultMap id="jewelInteract_DB_Result" type="jewelInteract">
+		<result column="id" property="id" />
+		<result column="type" property="type" />
+		<result column="interacter" property="interacter" />
+		<result column="interact_datetime" property="interactDatetime" />
+		<result column="jewel_code" property="jewelCode" />
+		<result column="system_code" property="systemCode" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="id != null and id != '' ">
+				AND t.id = #{id}
+			</if>
+			<if test="systemCode != null and systemCode != '' ">
+				AND t.system_code = #{systemCode}
+			</if>
+			<if test="jewelCode != null and jewelCode != '' ">
+				AND t.jewel_code = #{jewelCode}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_jewelInteract" parameterType="jewelInteract" resultMap="jewelInteract_DB_Result">
+		SELECT
+		id
+		,type
+		,interacter
+		,interact_datetime
+		,jewel_code
+		,system_code
+		FROM
+		tact_jewel_interact t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_jewelInteract_count" parameterType="jewelInteract"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tact_jewel_interact t 
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_jewelInteract" parameterType="jewelInteract">
+		INSERT INTO
+		tact_jewel_interact(
+		id
+		,type
+		,interacter
+		,interact_datetime
+		,jewel_code
+		,system_code
+		)
+		VALUES(
+		#{id}
+		,#{type}
+		,#{interacter}
+		,#{interactDatetime}
+		,#{jewelCode}
+		,#{systemCode}
+		)
+	</insert>
+	
+	<update id="update_jewelInteract" parameterType="jewelInteract">
+		UPDATE tact_jewel_interact
+		SET
+		WHERE code = #{code}
+	</update>
+	
+	<delete id="delete_jewelInteract" parameterType="jewelInteract">
+		DELETE FROM
+		tact_jewel_interact
+		WHERE
+		code = #{code}
+	</delete>
+</mapper>

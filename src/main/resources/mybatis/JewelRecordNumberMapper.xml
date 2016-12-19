@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.IJewelRecordNumberDAO">
+	<resultMap id="JewelRecordNumber_DB_Result" type="jewelRecordNumber">
+		<result column="id" property="id" />
+		<result column="record_code" property="recordCode" />
+		<result column="number" property="number" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="id != null and id != '' ">
+				AND t.id = #{id}
+			</if>
+			<if test="recordCode != null and recordCode != '' ">
+				AND t.record_code = #{recordCode}
+			</if>
+			<if test="number != null and number != '' ">
+				AND t.number = #{number}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_jewelRecordNumber" parameterType="jewelRecordNumber" resultMap="jewelRecordNumber_DB_Result">
+		SELECT
+		t.id
+		,t.record_code
+		,t.number 
+		FROM
+		tact_jewel_record_number t 
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_jewelRecordNumber_count" parameterType="jewelRecordNumber"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tact_jewel_record_number t 
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_cart" parameterType="jewelRecordNumber">
+		INSERT INTO
+		tact_jewel_record_number(
+		t.id
+		,t.record_code
+		,t.number 
+		)
+		VALUES(
+		#{id}
+		,#{recordCode}
+		,#{number}
+		)
+	</insert>
+	
+	<update id="update_jewelRecordNumber" parameterType="jewelRecordNumber">
+		UPDATE tact_jewel_record_number
+		SET
+		quantity = #{quantity}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="delete_jewelRecordNumber" parameterType="jewelRecordNumber">
+		DELETE FROM
+		tact_jewel_record_number
+		WHERE
+		id = #{id}
+	</delete>
+</mapper>

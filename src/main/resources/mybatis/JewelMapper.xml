@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnjr.mall.dao.IJewelDAO">
+	<resultMap id="jewel_DB_Result" type="jewel">
+		<result column="code" property="code" />
+		<result column="store_code" property="storeCode" />
+		<result column="name" property="name" />
+		<result column="slogan" property="slogan" />
+		<result column="adv_pic" property="advPic" />
+		
+		<result column="description" property="description" />
+		<result column="invest_num" property="investNum" />
+		<result column="invest_amount" property="investAmount" />
+		<result column="total_num" property="totalNum" />
+		<result column="price" property="price" />
+		
+		<result column="start_datetime" property="startDatetime" />
+		<result column="raise_days" property="raiseDays" />
+		<result column="win_number" property="winNumber" />
+		<result column="win_user_id" property="winUserId" />
+		<result column="lot_alg" property="lotAlg" />
+		
+		<result column="status" property="status" />
+		<result column="system_code" property="systemCode" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="storeCode != null and storeCode != '' ">
+				AND t.store_code = #{storeCode}
+			</if>
+			<if test="name != null and name != '' ">
+				AND t.name = #{name}
+			</if>
+			<if test="slogan != null and slogan != '' ">
+				AND t.slogan = #{slogan}
+			</if>
+			<if test="advPic != null and advPic != '' ">
+				AND t.adv_pic = #{advPic}
+			</if>
+			<if test="description != null and description != '' ">
+				AND t.description = #{description}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="systemCode != null and systemCode != '' ">
+				AND t.system_code = #{systemCode}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_jewel" parameterType="jewel" resultMap="jewel_DB_Result">
+		SELECT
+		code
+		,store_code
+		,name
+		,slogan
+		,adv_pic
+		
+		,description
+		,invest_num
+		,invest_amount
+		,total_num
+		,price
+		
+		,start_datetime
+		,raise_days
+		,win_number
+		,win_user_id
+		,lot_alg
+		
+		,status
+		,system_code
+		FROM
+		tact_jewel t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_jewel_count" parameterType="jewel"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tact_jewel t 
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_jewel" parameterType="jewel">
+		INSERT INTO
+		tact_jewel(
+		code
+		,store_code
+		,name
+		,slogan
+		,adv_pic
+		
+		,description
+		,invest_num
+		,invest_amount
+		,total_num
+		,price
+		
+		,start_datetime
+		,raise_days
+		,win_number
+		,win_user_id
+		,lot_alg
+		
+		,status
+		,system_code
+		)
+		VALUES(
+		#{code}
+		,#{storeCode}
+		,#{name}
+		,#{slogan}
+		,#{advPic}
+		
+		,#{description}
+		,#{investNum}
+		,#{investAmount}
+		,#{totalNum}
+		,#{price}
+		
+		,#{startDatetime}
+		,#{raiseDays}
+		,#{winNumber}
+		,#{winUserId}
+		,#{lotAlg}
+		
+		,#{status}
+		,#{systemCode}
+		)
+	</insert>
+	
+	<update id="update_jewelApprove" parameterType="jewel">
+		UPDATE tact_jewel
+		SET
+		status=#{status}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_jewel" parameterType="jewel">
+		UPDATE tact_jewel
+		SET
+		code=#{code}
+		,name=#{name}
+		,slogan=#{slogan}
+    	,adv_pic=#{advPic}
+		,price=#{price}
+		
+    	,description=#{description}
+    	,start_datetime=#{startDatetime}
+		,raise_days=#{raiseDays}
+		WHERE code = #{code}
+	</update>
+	
+	<delete id="delete_jewel" parameterType="jewel">
+		DELETE FROM
+		tact_jewel
+		WHERE
+		code = #{code}
+	</delete>
+</mapper>

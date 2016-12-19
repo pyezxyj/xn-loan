@@ -9,6 +9,10 @@
 		<typeAlias alias="productOrder" type="com.xnjr.mall.domain.ProductOrder" />
 		<typeAlias alias="sysDict" type="com.xnjr.mall.domain.SYSDict" />
 	    <typeAlias alias="sysConfig" type="com.xnjr.mall.domain.SYSConfig" />
+	    <typeAlias alias="jewel" type="com.xnjr.mall.domain.Jewel" />
+	    <typeAlias alias="jewelInteract" type="com.xnjr.mall.domain.JewelInteract" />
+	    <typeAlias alias="jewelRecord" type="com.xnjr.mall.domain.JewelRecord" />
+	    <typeAlias alias="jewelRecordNumber" type="com.xnjr.mall.domain.JewelRecordNumber" />
 	</typeAliases>	
 </configuration>
 

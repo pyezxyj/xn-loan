@@ -40,5 +40,12 @@
 		<property name="paginableDAO" ref="productOrderDAOImpl"/>
 	</bean>	
 	
+	<bean id="jewelBO" class="com.xnjr.mall.bo.impl.JewelBOImpl">
+		<property name="paginableDAO" ref="jewelDAOImpl"/>
+	</bean>	
+	
+	<bean id="jewelInteractBO" class="com.xnjr.mall.bo.impl.JewelInteractBOImpl">
+		<property name="paginableDAO" ref="jewelInteractDAOImpl"/>
+	</bean>	
 	
 </beans>

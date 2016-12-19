@@ -11,7 +11,7 @@ import java.util.Map;
 public enum EGeneratePrefix {
 
     CATEGORY("FL", "分类"), PRODUCT("CP", "产品"), CART("GW", "购物车"), ORDER("DD",
-            "定单"), PRODUCT_ORDER("CD", "产品订单");
+            "定单"), PRODUCT_ORDER("CD", "产品订单"), IEWEL("IW", "夺宝标的");
 
     public static Map<String, EGeneratePrefix> getOrderTypeMap() {
         Map<String, EGeneratePrefix> map = new HashMap<String, EGeneratePrefix>();
