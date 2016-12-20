@@ -142,6 +142,7 @@
 		UPDATE tact_jewel
 		SET
 		status=#{status}
+		
 		WHERE code = #{code}
 	</update>
 	
