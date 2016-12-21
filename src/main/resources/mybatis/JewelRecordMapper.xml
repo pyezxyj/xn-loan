@@ -92,7 +92,8 @@
 	<update id="update_jewelRecord" parameterType="jewelRecord">
 		UPDATE tact_jewel_record
 		SET
-
+		status=#{status}
+		,remark=#{remark}
 		WHERE code = #{code}
 	</update>
 	

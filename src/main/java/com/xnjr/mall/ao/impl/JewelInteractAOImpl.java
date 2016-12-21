@@ -53,7 +53,7 @@ public class JewelInteractAOImpl implements IJewelInteractAO {
     }
 
     @Override
-    public List<JewelInteract> queryCartList(JewelInteract condition) {
+    public List<JewelInteract> queryJewelInteractList(JewelInteract condition) {
         return jewelInteractBO.queryJewelInteractList(condition);
     }
 

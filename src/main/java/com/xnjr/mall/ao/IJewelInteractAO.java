@@ -58,7 +58,7 @@ public interface IJewelInteractAO {
      * @create: 2016年12月19日 下午8:22:07 shan
      * @history:
      */
-    public List<JewelInteract> queryCartList(JewelInteract condition);
+    public List<JewelInteract> queryJewelInteractList(JewelInteract condition);
 
     /**
      * 查询互动详情

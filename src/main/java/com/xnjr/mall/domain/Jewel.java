@@ -50,7 +50,7 @@ public class Jewel extends ABaseDO {
     public Date startDatetime;
 
     // 募集天数
-    public String raiseDay;
+    public String raiseDays;
 
     // 中奖号码
     public String winNumber;
@@ -59,7 +59,7 @@ public class Jewel extends ABaseDO {
     public String winUserId;
 
     // 抽奖算法
-    public String logAlg;
+    public String lotAlg;
 
     // 状态（0 待审批，1 审批通过（募集中），2 审批不通过，3 到期，4 待发货，5 已发货）
     public String status;
@@ -155,12 +155,12 @@ public class Jewel extends ABaseDO {
         this.startDatetime = startDatetime;
     }
 
-    public String getRaiseDay() {
-        return raiseDay;
+    public String getRaiseDays() {
+        return raiseDays;
     }
 
-    public void setRaiseDay(String raiseDay) {
-        this.raiseDay = raiseDay;
+    public void setRaiseDay(String raiseDays) {
+        this.raiseDays = raiseDays;
     }
 
     public String getWinNumber() {
@@ -179,12 +179,12 @@ public class Jewel extends ABaseDO {
         this.winUserId = winUserId;
     }
 
-    public String getLogAlg() {
-        return logAlg;
+    public String getLotAlg() {
+        return lotAlg;
     }
 
-    public void setLogAlg(String logAlg) {
-        this.logAlg = logAlg;
+    public void setLotAlg(String lotAlg) {
+        this.lotAlg = lotAlg;
     }
 
     public String getStatus() {

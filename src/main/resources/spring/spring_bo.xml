@@ -47,6 +47,14 @@
 	<bean id="jewelInteractBO" class="com.xnjr.mall.bo.impl.JewelInteractBOImpl">
 		<property name="paginableDAO" ref="jewelInteractDAOImpl"/>
 	</bean>	
+	
+	<bean id="jewelRecordBO" class="com.xnjr.mall.bo.impl.JewelRecordBOImpl">
+		<property name="paginableDAO" ref="jewelRecordDAOImpl"/>
+	</bean>	
+	
+	<bean id="jewelRecordNumberBO" class="com.xnjr.mall.bo.impl.JewelRecordNumberBOImpl">
+		<property name="paginableDAO" ref="jewelRecordNumberDAOImpl"/>
+	</bean>	
 
 	<bean id="storeBO" class="com.xnjr.mall.bo.impl.StoreBOImpl">
 		<property name="paginableDAO" ref="storeDAOImpl"/>

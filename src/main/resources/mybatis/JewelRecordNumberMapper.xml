@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xnjr.mall.dao.IJewelRecordNumberDAO">
-	<resultMap id="JewelRecordNumber_DB_Result" type="jewelRecordNumber">
+	<resultMap id="jewelRecordNumber_DB_Result" type="jewelRecordNumber">
 		<result column="id" property="id" />
 		<result column="record_code" property="recordCode" />
 		<result column="number" property="number" />
@@ -41,12 +41,12 @@
 		<include refid="where_condition" />
 	</select>
 
-	<insert id="insert_cart" parameterType="jewelRecordNumber">
+	<insert id="insert_jewelRecordNumber" parameterType="jewelRecordNumber">
 		INSERT INTO
 		tact_jewel_record_number(
-		t.id
-		,t.record_code
-		,t.number 
+		id
+		,record_code
+		,number 
 		)
 		VALUES(
 		#{id}
