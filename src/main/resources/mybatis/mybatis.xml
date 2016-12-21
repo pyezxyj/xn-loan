@@ -21,6 +21,8 @@
 	    <typeAlias alias="stock" type="com.xnjr.mall.domain.Stock" />
 	    <typeAlias alias="stockHold" type="com.xnjr.mall.domain.StockHold" />
 	    <typeAlias alias="stockBack" type="com.xnjr.mall.domain.StockBack" />
+	    <typeAlias alias="hzb" type="com.xnjr.mall.domain.Hzb" />
+	    <typeAlias alias="hzb" type="com.xnjr.mall.domain.HzbHold" />
 	</typeAliases>	
 </configuration>
 
