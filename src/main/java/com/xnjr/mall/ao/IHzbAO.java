@@ -10,7 +10,7 @@ public interface IHzbAO {
 
     public int dropHzb(String code);
 
-    // public int editHzb(Hzb data);
+    public int editHzb(Hzb data);
 
     public Paginable<Hzb> queryHzbPage(int start, int limit, Hzb condition);
 

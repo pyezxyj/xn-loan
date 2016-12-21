@@ -22,7 +22,7 @@
 	    <typeAlias alias="stockHold" type="com.xnjr.mall.domain.StockHold" />
 	    <typeAlias alias="stockBack" type="com.xnjr.mall.domain.StockBack" />
 	    <typeAlias alias="hzb" type="com.xnjr.mall.domain.Hzb" />
-	    <typeAlias alias="hzb" type="com.xnjr.mall.domain.HzbHold" />
+	    <typeAlias alias="hzbHold" type="com.xnjr.mall.domain.HzbHold" />
 	</typeAliases>	
 </configuration>
 

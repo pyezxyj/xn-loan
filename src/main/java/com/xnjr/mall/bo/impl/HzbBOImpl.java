@@ -39,14 +39,14 @@ public class HzbBOImpl extends PaginableBOImpl<Hzb> implements IHzbBO {
         return count;
     }
 
-    // @Override
-    // public int refreshHzb(Hzb data) {
-    // int count = 0;
-    // if (StringUtils.isNotBlank(data.getCode())) {
-    // count = hzbDAO.update(data);
-    // }
-    // return count;
-    // }
+    @Override
+    public int refreshHzb(Hzb data) {
+        int count = 0;
+        if (StringUtils.isNotBlank(data.getCode())) {
+            count = hzbDAO.update(data);
+        }
+        return count;
+    }
 
     @Override
     public List<Hzb> queryHzbList(Hzb condition) {

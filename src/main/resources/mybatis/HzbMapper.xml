@@ -16,6 +16,9 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="systemCode != null and systemCode != '' ">
+				AND t.system_code = #{systemCode}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_hzb" parameterType="hzb" resultMap="hzb_DB_Result">
@@ -73,7 +76,6 @@
 		,description = #{description}
 		,price = #{price}
 		,currency = #{currency}
-		,system_code = #{systemCode}
 		WHERE code = #{code}
 	</update>
 

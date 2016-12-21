@@ -11,6 +11,8 @@ public interface IHzbBO extends IPaginableBO<Hzb> {
 
     public int removeHzb(String code);
 
+    public int refreshHzb(Hzb data);
+
     public List<Hzb> queryHzbList(Hzb condition);
 
     public Hzb getHzb(String code);

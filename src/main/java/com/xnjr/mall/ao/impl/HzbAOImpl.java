@@ -17,13 +17,13 @@ public class HzbAOImpl implements IHzbAO {
     @Autowired
     private IHzbBO hzbBO;
 
-    // @Override
-    // public int editHzb(Hzb data) {
-    // if (!hzbBO.isHzbExist(data.getCode())) {
-    // throw new BizException("xn0000", "记录编号不存在");
-    // }
-    // return hzbBO.refreshHzb(data);
-    // }
+    @Override
+    public int editHzb(Hzb data) {
+        if (!hzbBO.isHzbExist(data.getCode())) {
+            throw new BizException("xn0000", "记录编号不存在");
+        }
+        return hzbBO.refreshHzb(data);
+    }
 
     @Override
     public int dropHzb(String code) {
