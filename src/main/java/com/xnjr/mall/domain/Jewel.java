@@ -67,6 +67,9 @@ public class Jewel extends ABaseDO {
     // 系统编号
     public String systemCode;
 
+    // 活动截止时间
+    public Date endDatetime;
+
     public String getCode() {
         return code;
     }
@@ -201,5 +204,13 @@ public class Jewel extends ABaseDO {
 
     public void setSystemCode(String systemCode) {
         this.systemCode = systemCode;
+    }
+
+    public Date getEndDatetime() {
+        return endDatetime;
+    }
+
+    public void setEndDatetime(Date endDatetime) {
+        this.endDatetime = endDatetime;
     }
 }

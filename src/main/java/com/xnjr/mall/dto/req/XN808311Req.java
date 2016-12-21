@@ -1,13 +1,12 @@
 package com.xnjr.mall.dto.req;
 
-
 /**
- * 宝贝分页查询
- * @author: shan 
- * @since: 2016年12月20日 下午6:00:23 
+ * 宝贝列表查询
+ * @author: asus 
+ * @since: 2016年12月21日 下午4:38:44 
  * @history:
  */
-public class XN808310Req extends APageReq {
+public class XN808311Req extends APageReq {
     /** 
      * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
      */

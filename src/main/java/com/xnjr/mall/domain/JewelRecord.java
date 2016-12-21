@@ -1,6 +1,7 @@
 package com.xnjr.mall.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import com.xnjr.mall.dao.base.ABaseDO;
 
@@ -43,6 +44,8 @@ public class JewelRecord extends ABaseDO {
 
     // 系统编号
     public String systemCode;
+
+    public List<JewelRecordNumber> jewelRecordNumberList;
 
     public String getCode() {
         return code;
@@ -114,5 +117,14 @@ public class JewelRecord extends ABaseDO {
 
     public void setSystemCode(String systemCode) {
         this.systemCode = systemCode;
+    }
+
+    public List<JewelRecordNumber> getJewelRecordNumberList() {
+        return jewelRecordNumberList;
+    }
+
+    public void setJewelRecordNumberList(
+            List<JewelRecordNumber> jewelRecordNumberList) {
+        this.jewelRecordNumberList = jewelRecordNumberList;
     }
 }

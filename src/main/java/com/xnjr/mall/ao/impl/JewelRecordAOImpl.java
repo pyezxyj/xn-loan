@@ -2,13 +2,16 @@ package com.xnjr.mall.ao.impl;
 
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xnjr.mall.ao.IJewelRecordAO;
 import com.xnjr.mall.bo.IJewelRecordBO;
+import com.xnjr.mall.bo.IJewelRecordNumberBO;
 import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.JewelRecord;
+import com.xnjr.mall.domain.JewelRecordNumber;
 import com.xnjr.mall.enums.EJewelRecordStart;
 import com.xnjr.mall.exception.BizException;
 
@@ -22,6 +25,9 @@ import com.xnjr.mall.exception.BizException;
 public class JewelRecordAOImpl implements IJewelRecordAO {
     @Autowired
     private IJewelRecordBO jewelRecordBO;
+
+    @Autowired
+    private IJewelRecordNumberBO jewelRecordNumberBO;
 
     @Override
     public String addJewelRecord(String userId, String jewelCode,
@@ -62,7 +68,18 @@ public class JewelRecordAOImpl implements IJewelRecordAO {
     @Override
     public Paginable<JewelRecord> queryJewelRecordPage(int start, int limit,
             JewelRecord condition) {
-        return jewelRecordBO.getPaginable(start, start, condition);
+        Paginable<JewelRecord> page = jewelRecordBO.getPaginable(start, limit,
+            condition);
+        if (page != null && CollectionUtils.isNotEmpty(page.getList())) {
+            for (JewelRecord jewelRecord : page.getList()) {
+                JewelRecordNumber imCondition = new JewelRecordNumber();
+                imCondition.setRecordCode(jewelRecord.getCode());
+                List<JewelRecordNumber> recordNumberList = jewelRecordNumberBO
+                    .queryJewelRecordNumberList(imCondition);
+                jewelRecord.setJewelRecordNumberList(recordNumberList);
+            }
+        }
+        return page;
     }
 
     @Override
@@ -71,11 +88,17 @@ public class JewelRecordAOImpl implements IJewelRecordAO {
     }
 
     @Override
-    public JewelRecord getJewelRecord(String code) {
+    public JewelRecord getJewelRecord(String code, String userId) {
         if (!jewelRecordBO.isJewelRecordExist(code)) {
             throw new BizException("xn0000", "不存在该记录");
         }
-        return jewelRecordBO.getJewelRecord(code);
+        JewelRecord jewelRecode = jewelRecordBO.getJewelRecord(code);
+        if (!jewelRecode.getUserId().equals(userId)) {
+            throw new BizException("xn0000", "您没有这个号码");
+        }
+        JewelRecordNumber jewelRecordNumber = new JewelRecordNumber();
+        jewelRecordNumber.setRecordCode(code);
+        jewelRecordNumberBO.queryJewelRecordNumberList(jewelRecordNumber);
+        return null;
     }
-
 }

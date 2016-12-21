@@ -50,6 +50,12 @@
 			<if test="systemCode != null and systemCode != '' ">
 				AND t.system_code = #{systemCode}
 			</if>
+			<if test="startDatetime != null and startDatetime != '' ">
+				<![CDATA[AND t.start_datetime <= #{startDatetime}]]>
+			</if>
+			<if test="endDatetime != null and endDatetime != '' ">
+				<![CDATA[AND t.start_datetime <= #{endDatetime}]]>
+			</if>
 		</trim>
 	</sql>
 	<select id="select_jewel" parameterType="jewel" resultMap="jewel_DB_Result">
@@ -83,7 +89,7 @@
 			</if>
 		</trim>
 	</select>
-
+	
 	<select id="select_jewel_count" parameterType="jewel"
 		resultType="java.lang.Long">
 		SELECT count(1) FROM tact_jewel t 

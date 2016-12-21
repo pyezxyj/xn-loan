@@ -1,10 +1,13 @@
 package com.xnjr.mall.ao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xnjr.mall.ao.IJewelAO;
 import com.xnjr.mall.bo.IJewelBO;
+import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Jewel;
 import com.xnjr.mall.enums.EBoolean;
 import com.xnjr.mall.enums.EJewelStart;
@@ -60,5 +63,23 @@ public class JewelAOImpl implements IJewelAO {
         } else {
             throw new BizException("xn0000", "宝贝已通过审核，不用重复提交");
         }
+    }
+
+    @Override
+    public Paginable<Jewel> queryJewelPage(int start, int limit, Jewel condition) {
+        return jewelBO.getPaginable(start, limit, condition);
+    }
+
+    @Override
+    public List<Jewel> queryJewelList(Jewel condition) {
+        return jewelBO.queryJewelList(condition);
+    }
+
+    @Override
+    public Jewel getJewel(String code) {
+        if (code == null) {
+            throw new BizException("xn0000", "宝贝编号不存在");
+        }
+        return jewelBO.getJewel(code);
     }
 }

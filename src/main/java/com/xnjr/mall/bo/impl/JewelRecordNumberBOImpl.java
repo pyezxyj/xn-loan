@@ -8,10 +8,8 @@ import org.springframework.stereotype.Component;
 
 import com.xnjr.mall.bo.IJewelRecordNumberBO;
 import com.xnjr.mall.bo.base.PaginableBOImpl;
-import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.IJewelRecordNumberDAO;
 import com.xnjr.mall.domain.JewelRecordNumber;
-import com.xnjr.mall.enums.EGeneratePrefix;
 import com.xnjr.mall.exception.BizException;
 
 /**
@@ -40,10 +38,6 @@ public class JewelRecordNumberBOImpl extends PaginableBOImpl<JewelRecordNumber>
     public String saveJewelRecordNumber(JewelRecordNumber data) {
         String code = null;
         if (data != null) {
-            code = OrderNoGenerater.generateME(EGeneratePrefix.IEWEL_NUMBER
-                .getCode());
-            data.setId((long) 1212);
-            System.out.println(code);
             jewelRecordNumberDAO.insert(data);
         }
         return code;

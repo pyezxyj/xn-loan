@@ -1,5 +1,8 @@
 package com.xnjr.mall.ao;
 
+import java.util.List;
+
+import com.xnjr.mall.bo.base.Paginable;
 import com.xnjr.mall.domain.Jewel;
 
 /**
@@ -40,4 +43,26 @@ public interface IJewelAO {
      * @history:
      */
     public void reApplyJewel(Jewel data);
+
+    /**
+     * 分页查询
+     * @param start
+     * @param limit
+     * @param condition
+     * @return 
+     * @create: 2016年12月21日 下午3:59:41 asus
+     * @history:
+     */
+    public Paginable<Jewel> queryJewelPage(int start, int limit, Jewel condition);
+
+    /**
+     * 列表
+     * @param condition
+     * @return 
+     * @create: 2016年12月21日 下午4:45:57 asus
+     * @history:
+     */
+    public List<Jewel> queryJewelList(Jewel condition);
+
+    public Jewel getJewel(String code);
 }
