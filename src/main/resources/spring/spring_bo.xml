@@ -87,4 +87,12 @@
 	<bean id="stockBackBO" class="com.xnjr.mall.bo.impl.StockBackBOImpl">
 		<property name="paginableDAO" ref="stockBackDAOImpl"/>
 	</bean>
+	
+	<bean id="hzbBO" class="com.xnjr.mall.bo.impl.HzbBOImpl">
+		<property name="paginableDAO" ref="hzbDAOImpl"/>
+	</bean>
+	
+	<bean id="hzbHoldBO" class="com.xnjr.mall.bo.impl.HzbHoldBOImpl">
+		<property name="paginableDAO" ref="hzbHoldDAOImpl"/>
+	</bean>
 </beans>
