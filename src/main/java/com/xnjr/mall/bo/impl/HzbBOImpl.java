@@ -61,7 +61,7 @@ public class HzbBOImpl extends PaginableBOImpl<Hzb> implements IHzbBO {
             condition.setCode(code);
             data = hzbDAO.select(condition);
             if (data == null) {
-                throw new BizException("xn0000", "异常");
+                throw new BizException("xn0000", "汇赚宝记录不存在");
             }
         }
         return data;

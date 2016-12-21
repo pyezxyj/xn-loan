@@ -61,9 +61,21 @@ public class HzbHoldBOImpl extends PaginableBOImpl<HzbHold> implements
             condition.setId(id);
             data = hzbHoldDAO.select(condition);
             if (data == null) {
-                throw new BizException("xn0000", "异常");
+                throw new BizException("xn0000", "汇赚宝购买记录不存在");
             }
         }
         return data;
+    }
+
+    @Override
+    public int refreshStatus(Long id, String status) {
+        int count = 0;
+        if (id != null) {
+            HzbHold data = new HzbHold();
+            data.setId(id);
+            data.setStatus(status);
+            count = hzbHoldDAO.updateStatus(data);
+        }
+        return count;
     }
 }

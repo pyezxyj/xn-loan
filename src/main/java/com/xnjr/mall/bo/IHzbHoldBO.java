@@ -13,6 +13,8 @@ public interface IHzbHoldBO extends IPaginableBO<HzbHold> {
 
     public int removeHzbHold(Long id);
 
+    public int refreshStatus(Long id, String status);
+
     public List<HzbHold> queryHzbHoldList(HzbHold condition);
 
     public HzbHold getHzbHold(Long id);

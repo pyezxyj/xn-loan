@@ -15,8 +15,17 @@
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
-			<if test="code != null and code != '' ">
-				AND t.code = #{code}
+		<if test="id != null and id != '' ">
+				AND t.id = #{id}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="userId != null and userId != '' ">
+				AND t.user_id = #{userId}
+			</if>
+			<if test="systemCode != null and systemCode != '' ">
+				AND t.system_code = #{systemCode}
 			</if>
 		</trim>
 	</sql>
@@ -50,8 +59,7 @@
 	<insert id="insert_hzbHold" parameterType="hzbHold">
 		INSERT INTO
 		tact_hzb_hold(
-		id
-		,user_id
+		user_id
 		,hzb_code
 		,status
 		,price
@@ -61,8 +69,7 @@
 		,system_code
 		)
 		VALUES(
-		#{id}
-		,#{userId}
+		#{userId}
 		,#{hzbCode}
 		,#{status}
 		,#{price}
@@ -85,6 +92,13 @@
 		,total_rock_num = #{totalRockNum}
 		,system_code = #{systemCode}
 		WHERE code = #{code}
+	</update>
+	
+	<update id="update_status" parameterType="hzbHold">
+		UPDATE tact_hzb_hold
+		SET
+		status = #{status}
+		WHERE id = #{id}
 	</update>
 
 
