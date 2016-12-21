@@ -14,6 +14,7 @@ import com.xnjr.mall.common.JsonUtil;
 import com.xnjr.mall.core.StringValidater;
 import com.xnjr.mall.domain.Hzb;
 import com.xnjr.mall.dto.req.XN808450Req;
+import com.xnjr.mall.dto.res.BooleanRes;
 import com.xnjr.mall.exception.BizException;
 import com.xnjr.mall.exception.ParaException;
 import com.xnjr.mall.spring.SpringContextHolder;
@@ -41,7 +42,8 @@ public class XN808450 extends AProcessor {
         data.setDescription(req.getDescription());
         data.setPrice(StringValidater.toLong(req.getPrice()));
         data.setCurrency(req.getCurrency());
-        return hzbAO.editHzb(data);
+        hzbAO.editHzb(data);
+        return new BooleanRes(true);
     }
 
     /** 
