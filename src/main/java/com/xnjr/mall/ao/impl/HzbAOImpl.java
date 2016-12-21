@@ -87,7 +87,7 @@ public class HzbAOImpl implements IHzbAO {
             HzbHold hzbHold = list.get(0);
             if (EHzbHoldStatus.NONACTIVATED.getCode().equals(
                 hzbHold.getStatus())) {
-                throw new BizException("xn0000", "该用户汇赚宝处于未激活状态，不能进行上下架操作");
+                throw new BizException("xn0000", "该用户汇赚宝处于未激活状态，不能进行冻结/解冻操作");
             }
             if (EHzbHoldStatus.ACTIVATED.getCode().equals(hzbHold.getStatus())) {
                 count = hzbHoldBO.refreshStatus(hzbHold.getId(),
