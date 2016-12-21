@@ -14,7 +14,7 @@ package com.xnjr.mall.enums;
  * @history:
  */
 public enum EHzbHoldStatus {
-    NONACTIVATED("0", "未激活"), ACTIVATED("1", "激活"), OFFLINE("2", "已下架");
+    NONACTIVATED("0", "未激活"), ACTIVATED("1", "激活"), OFFLINE("2", "已冻结");
 
     EHzbHoldStatus(String code, String value) {
         this.code = code;
