@@ -25,6 +25,9 @@ public class XN808314 extends AProcessor {
     public Object doBusiness() throws BizException {
         return jewelRecordAO.getJewelRecord(req.getRecordCode(),
             req.getUserId());
+        // JewelRecordNumber condition = new JewelRecordNumber();
+        // condition.setRecordCode(req.getRecordCode());
+        // return jewelRecordNumberAO.queryJewelRecordNumberList(condition);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.xnjr.mall.bo.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -8,10 +9,8 @@ import org.springframework.stereotype.Component;
 
 import com.xnjr.mall.bo.IJewelInteractBO;
 import com.xnjr.mall.bo.base.PaginableBOImpl;
-import com.xnjr.mall.core.OrderNoGenerater;
 import com.xnjr.mall.dao.IJewelInteractDAO;
 import com.xnjr.mall.domain.JewelInteract;
-import com.xnjr.mall.enums.EGeneratePrefix;
 import com.xnjr.mall.exception.BizException;
 
 /**
@@ -40,8 +39,7 @@ public class JewelInteractBOImpl extends PaginableBOImpl<JewelInteract>
     public String saveJewelInteract(JewelInteract data) {
         String code = null;
         if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.IEWEL.getCode());
-            data.setId(Long.valueOf(code));
+            data.setInteractDatetime(new Date());
             jewelInteractDAO.insert(data);
         }
         return code;

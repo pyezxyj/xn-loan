@@ -23,10 +23,15 @@ public class JewelInteractAOImpl implements IJewelInteractAO {
     IJewelInteractBO jewelInteractBO;
 
     @Override
-    public String addJewelInteract(JewelInteract data) {
-        if (!jewelInteractBO.isJewelInteractExist(data.getId())) {
-            throw new BizException("xn0000", "产品编号不存在");
+    public String addJewelInteract(String interacter, String jewelCode,
+            String systemCode) {
+        if (interacter == null && jewelCode == null && systemCode == null) {
+            throw new BizException("xn0000", "添加不能为空");
         }
+        JewelInteract data = new JewelInteract();
+        data.setInteracter(interacter);
+        data.setJewelCode(jewelCode);
+        data.setSystemCode(systemCode);
         return jewelInteractBO.saveJewelInteract(data);
     }
 

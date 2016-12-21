@@ -98,7 +98,10 @@ public class JewelRecordAOImpl implements IJewelRecordAO {
         }
         JewelRecordNumber jewelRecordNumber = new JewelRecordNumber();
         jewelRecordNumber.setRecordCode(code);
-        jewelRecordNumberBO.queryJewelRecordNumberList(jewelRecordNumber);
-        return null;
+        List<JewelRecordNumber> jewelRecordNumberList = jewelRecordNumberBO
+            .queryJewelRecordNumberList(jewelRecordNumber);
+        JewelRecord jewelRecord = jewelRecordBO.getJewelRecord(code);
+        jewelRecord.setJewelRecordNumberList(jewelRecordNumberList);
+        return jewelRecord;
     }
 }

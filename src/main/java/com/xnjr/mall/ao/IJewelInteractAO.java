@@ -21,7 +21,8 @@ public interface IJewelInteractAO {
      * @create: 2016年12月19日 下午8:21:52 shan
      * @history:
      */
-    public String addJewelInteract(JewelInteract data);
+    public String addJewelInteract(String interacter, String jewelCode,
+            String systemCode);
 
     /**
      * 修改互动
