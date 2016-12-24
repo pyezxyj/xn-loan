@@ -11,72 +11,20 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
 	
-	<!-- 分页BO层注入paginableDao -->
-	<bean id="sysDictBO" class="com.xnjr.mall.bo.impl.SYSDictBOImpl">
+	<!-- 分页BO层注入paginableDao  -->
+	<bean id="sysDictBO" class="com.cdkj.loan.bo.impl.SYSDictBOImpl">
 		<property name="paginableDAO" ref="sysDictDAOImpl"/>
 	</bean>	
 	
-	<bean id="sysConfigBO" class="com.xnjr.mall.bo.impl.SYSConfigBOImpl">
+	<bean id="sysConfigBO" class="com.cdkj.loan.bo.impl.SYSConfigBOImpl">
 		<property name="paginableDAO" ref="sysConfigDAOImpl"/>
 	</bean>	
 	
-	<bean id="categoryBO" class="com.xnjr.mall.bo.impl.CategoryBOImpl">
-		<property name="paginableDAO" ref="categoryDAOImpl" />
-	</bean>
-	
-	<bean id="productBO" class="com.xnjr.mall.bo.impl.ProductBOImpl">
-		<property name="paginableDAO" ref="productDAOImpl"/>
+	<bean id="creditOrderBO" class="com.cdkj.loan.bo.impl.CreditOrderBOImpl">
+		<property name="paginableDAO" ref="creditOrderDAOImpl"/>
 	</bean>	
 	
-	<bean id="cartBO" class="com.xnjr.mall.bo.impl.CartBOImpl">
-		<property name="paginableDAO" ref="cartDAOImpl"/>
+	<bean id="creditAuditBO" class="com.cdkj.loan.bo.impl.CreditAuditBOImpl">
+		<property name="paginableDAO" ref="creditAuditDAOImpl"/>
 	</bean>	
-	
-	<bean id="orderBO" class="com.xnjr.mall.bo.impl.OrderBOImpl">
-		<property name="paginableDAO" ref="orderDAOImpl"/>
-	</bean>	
-	
-	<bean id="productOrderBO" class="com.xnjr.mall.bo.impl.ProductOrderBOImpl">
-		<property name="paginableDAO" ref="productOrderDAOImpl"/>
-	</bean>	
-	
-	<bean id="jewelBO" class="com.xnjr.mall.bo.impl.JewelBOImpl">
-		<property name="paginableDAO" ref="jewelDAOImpl"/>
-	</bean>	
-	
-	<bean id="jewelInteractBO" class="com.xnjr.mall.bo.impl.JewelInteractBOImpl">
-		<property name="paginableDAO" ref="jewelInteractDAOImpl"/>
-	</bean>	
-
-	<bean id="storeBO" class="com.xnjr.mall.bo.impl.StoreBOImpl">
-		<property name="paginableDAO" ref="storeDAOImpl"/>
-	</bean>
-	
-	<bean id="storeTicketBO" class="com.xnjr.mall.bo.impl.StoreTicketBOImpl">
-		<property name="paginableDAO" ref="storeTicketDAOImpl"/>
-	</bean>
-	
-	<bean id="userTicketBO" class="com.xnjr.mall.bo.impl.UserTicketBOImpl">
-		<property name="paginableDAO" ref="userTicketDAOImpl"/>
-	</bean>
-	
-	<bean id="storeActionBO" class="com.xnjr.mall.bo.impl.StoreActionBOImpl">
-		<property name="paginableDAO" ref="storeActionDAOImpl"/>
-	</bean>
-	
-	<bean id="storePurchaseBO" class="com.xnjr.mall.bo.impl.StorePurchaseBOImpl">
-		<property name="paginableDAO" ref="storePurchaseDAOImpl"/>
-	</bean>
-	
-	<bean id="stockBO" class="com.xnjr.mall.bo.impl.StockBOImpl">
-		<property name="paginableDAO" ref="stockDAOImpl"/>
-	</bean>
-	
-	<bean id="stockHoldBO" class="com.xnjr.mall.bo.impl.StockHoldBOImpl">
-		<property name="paginableDAO" ref="stockHoldDAOImpl"/>
-	</bean>
-	
-	<bean id="stockBackBO" class="com.xnjr.mall.bo.impl.StockBackBOImpl">
-		<property name="paginableDAO" ref="stockBackDAOImpl"/>
-	</bean>
 </beans>

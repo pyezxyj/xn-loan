@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.loan.dao.ICreditAuditDAO">
+	<resultMap id="creditAudit_DB_Result" type="creditAudit">
+		<result column="code" property="code" />
+		<result column="real_name" property="realName" />
+		<result column="relation" property="relation" />
+		<result column="ref_user" property="refUser" />
+		<result column="id_kind" property="idKind" />
+		<result column="id_no" property="idNo" />
+		<result column="credit_result" property="creditResult" />
+		<result column="credit_code" property="creditCode" />
+		<result column="credit_descript" property="creditDescript" />
+		<result column="court_result" property="courtResult" />
+		<result column="court_descript" property="courtDescript" />
+		<result column="status" property="status" />
+		<result column="create_datetime" property="createDatetime" />
+		<result column="mobile" property="mobile" />
+		<result column="work_unit" property="workUnit" />
+		<result column="work_phone" property="workPhone" />
+		<result column="work_address" property="workAddress" />
+		<result column="detail" property="detail" />
+		<result column="approver" property="approver" />
+		<result column="approve_datetime" property="approveDatetime" />
+		<result column="approve_note" property="approveNote" />
+		<result column="remark" property="remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="refUser != null and refUser != '' ">
+				AND t.ref_user = #{refUser}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_creditAudit" parameterType="creditAudit" resultMap="creditAudit_DB_Result">
+		SELECT
+		t.code
+		,t.relation
+		,t.ref_user
+		,t.id_kind
+		,t.id_no
+		,t.real_name
+		,t.credit_result
+		,t.credit_code
+		,t.credit_descript
+		,t.court_result
+		,t.court_descript
+		,t.status
+		,t.create_datetime
+		,t.mobile
+		,t.work_unit
+		,t.work_phone
+		,t.work_address
+		,t.detail
+		,t.approver
+		,t.approve_datetime
+		,t.approve_note
+		,t.remark
+		FROM
+		credit_audit t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_creditAudit_count" parameterType="creditAudit"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM credit_audit t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_creditAudit" parameterType="creditAudit">
+		INSERT INTO
+		credit_audit(
+		code
+		,relation
+		,ref_user
+		,id_kind
+		,id_no
+		,real_name
+		,accredit_pdf
+		,credit_result
+		,credit_code
+		,credit_descript
+		,court_result
+		,court_descript
+		,status
+		,create_datetime
+		,mobile
+		,work_unit
+		,work_phone
+		,work_address
+		,detail
+		,approver
+		,approve_datetime
+		,approve_note
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{relation}
+		,#{refUser}
+		,#{idKind}
+		,#{idNo}
+		,#{realName}
+		,#{accreditPdf}
+		,#{creditResult}
+		,#{creditCode}
+		,#{creditDescript}
+		,#{courtResult}
+		,#{courtDescript}
+		,#{status}
+		,#{createDatetime}
+		,#{mobile}
+		,#{workUnit}
+		,#{workPhone}
+		,#{workAddress}
+		,#{detail}
+		,#{approver}
+		,#{approveDatetime}
+		,#{approveNote}
+		,#{remark}
+		)
+	</insert>
+
+	<update id="update_creditAudit" parameterType="creditAudit">
+		UPDATE credit_audit
+		SET
+		credit_result = #{creditResult}
+		,credit_descript = #{creditDescript}
+		,court_result = #{courtResult}
+		,court_descript = #{courtDescript}
+		,status = #{status}
+		WHERE code = #{code}
+	</update>
+
+	<delete id="delete_creditAudit" parameterType="creditAudit">
+		DELETE FROM credit_audit
+		WHERE
+		code = #{code}
+	</delete>
+	
+<!-- 	<update id="update_creditAudit" parameterType="creditAudit">
+		UPDATE credit_audit
+		SET
+		relation = #{relation}
+		,ref_user = #{refUser}
+		,id_kind = #{idKind}
+		,id_no = #{idNo}
+		,real_name=#{realName}
+		,credit_result = #{creditResult}
+		,credit_code = #{creditCode}
+		,credit_descript = #{creditDescript}
+		,court_result = #{courtResult}
+		,court_descript = #{courtDescript}
+		,status = #{status}
+		,create_datetime = #{createDatetime}
+		,mobile = #{mobile}
+		,work_unit = #{workUnit}
+		,work_phone = #{workPhone}
+		,work_address = #{workAddress}
+		,detail = #{detail}
+		,approver = #{approver}
+		,approve_datetime = #{approveDatetime}
+		,approve_note = #{approveNote}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update> -->
+	
+<!-- 	<update id="update_creditAudit" parameterType="creditAudit">
+		UPDATE credit_audit
+		SET
+		relation = #{relation}
+		,ref_user = #{refUser}
+		,id_kind = #{idKind}
+		,id_no = #{idNo}
+		,real_name=#{realName}
+		,credit_result = #{creditResult}
+		,credit_code = #{creditCode}
+		,credit_descript = #{creditDescript}
+		,court_result = #{courtResult}
+		,court_descript = #{courtDescript}
+		,status = #{status}
+		,create_datetime = #{createDatetime}
+		,mobile = #{mobile}
+		,work_unit = #{workUnit}
+		,work_phone = #{workPhone}
+		,work_address = #{workAddress}
+		,detail = #{detail}
+		,approver = #{approver}
+		,approve_datetime = #{approveDatetime}
+		,approve_note = #{approveNote}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update> -->
+	
+<!-- 	<update id="update_creditAudit" parameterType="creditAudit">
+		UPDATE credit_audit
+		SET
+		relation = #{relation}
+		,ref_user = #{refUser}
+		,id_kind = #{idKind}
+		,id_no = #{idNo}
+		,real_name=#{realName}
+		,credit_result = #{creditResult}
+		,credit_code = #{creditCode}
+		,credit_descript = #{creditDescript}
+		,court_result = #{courtResult}
+		,court_descript = #{courtDescript}
+		,status = #{status}
+		,create_datetime = #{createDatetime}
+		,mobile = #{mobile}
+		,work_unit = #{workUnit}
+		,work_phone = #{workPhone}
+		,work_address = #{workAddress}
+		,detail = #{detail}
+		,approver = #{approver}
+		,approve_datetime = #{approveDatetime}
+		,approve_note = #{approveNote}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update> -->
+</mapper>

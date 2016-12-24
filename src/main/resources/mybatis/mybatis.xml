@@ -2,25 +2,10 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>	
-	    <typeAlias alias="category" type="com.xnjr.mall.domain.Category" />
-		<typeAlias alias="product" type="com.xnjr.mall.domain.Product" />
-		<typeAlias alias="cart" type="com.xnjr.mall.domain.Cart" />
-		<typeAlias alias="order" type="com.xnjr.mall.domain.Order" />
-		<typeAlias alias="productOrder" type="com.xnjr.mall.domain.ProductOrder" />
-		<typeAlias alias="sysDict" type="com.xnjr.mall.domain.SYSDict" />
-	    <typeAlias alias="sysConfig" type="com.xnjr.mall.domain.SYSConfig" />
-	    <typeAlias alias="jewel" type="com.xnjr.mall.domain.Jewel" />
-	    <typeAlias alias="jewelInteract" type="com.xnjr.mall.domain.JewelInteract" />
-	    <typeAlias alias="jewelRecord" type="com.xnjr.mall.domain.JewelRecord" />
-	    <typeAlias alias="jewelRecordNumber" type="com.xnjr.mall.domain.JewelRecordNumber" />
-	    <typeAlias alias="store" type="com.xnjr.mall.domain.Store" />
-	    <typeAlias alias="storeTicket" type="com.xnjr.mall.domain.StoreTicket" />
-	    <typeAlias alias="userTicket" type="com.xnjr.mall.domain.UserTicket" />
-	    <typeAlias alias="storeAction" type="com.xnjr.mall.domain.StoreAction" />
-	    <typeAlias alias="storePurchase" type="com.xnjr.mall.domain.StorePurchase" />
-	    <typeAlias alias="stock" type="com.xnjr.mall.domain.Stock" />
-	    <typeAlias alias="stockHold" type="com.xnjr.mall.domain.StockHold" />
-	    <typeAlias alias="stockBack" type="com.xnjr.mall.domain.StockBack" />
+		<typeAlias alias="sysDict" type="com.cdkj.loan.domain.SYSDict" />
+	    <typeAlias alias="sysConfig" type="com.cdkj.loan.domain.SYSConfig" />
+	    <typeAlias alias="creditAudit" type="com.cdkj.loan.domain.CreditAudit" />
+	    <typeAlias alias="creditOrder" type="com.cdkj.loan.domain.CreditOrder" />
 	</typeAliases>	
 </configuration>
 
