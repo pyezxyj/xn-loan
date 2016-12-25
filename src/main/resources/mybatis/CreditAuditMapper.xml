@@ -4,11 +4,14 @@
 <mapper namespace="com.cdkj.loan.dao.ICreditAuditDAO">
 	<resultMap id="creditAudit_DB_Result" type="creditAudit">
 		<result column="code" property="code" />
-		<result column="real_name" property="realName" />
+		<result column="loan_type" property="loanType" />
+		<result column="loan_amount" property="loanAmount" />
+		<result column="user_name" property="userName" />
 		<result column="relation" property="relation" />
 		<result column="ref_user" property="refUser" />
 		<result column="id_kind" property="idKind" />
 		<result column="id_no" property="idNo" />
+		<result column="accredit_pdf" property="accreditPdf" />
 		<result column="credit_result" property="creditResult" />
 		<result column="credit_code" property="creditCode" />
 		<result column="credit_descript" property="creditDescript" />
@@ -42,11 +45,14 @@
 	<select id="select_creditAudit" parameterType="creditAudit" resultMap="creditAudit_DB_Result">
 		SELECT
 		t.code
+		,t.loan_type
+		,t.loan_amount
 		,t.relation
 		,t.ref_user
 		,t.id_kind
 		,t.id_no
-		,t.real_name
+		,t.accredit_pdf
+		,t.user_name
 		,t.credit_result
 		,t.credit_code
 		,t.credit_descript
@@ -83,11 +89,13 @@
 		INSERT INTO
 		credit_audit(
 		code
+		,loan_type
+		,loan_amount
 		,relation
 		,ref_user
 		,id_kind
 		,id_no
-		,real_name
+		,user_name
 		,accredit_pdf
 		,credit_result
 		,credit_code
@@ -108,11 +116,13 @@
 		)
 		VALUES(
 		#{code}
+		,#{loanType}
+		,#{loanAmount}
 		,#{relation}
 		,#{refUser}
 		,#{idKind}
 		,#{idNo}
-		,#{realName}
+		,#{userName}
 		,#{accreditPdf}
 		,#{creditResult}
 		,#{creditCode}

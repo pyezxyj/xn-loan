@@ -41,6 +41,8 @@ public interface ICreditOrderBO extends IPaginableBO<CreditOrder> {
 
     public int refreshDownload(String code);
 
+    public int refreshReceipt(String code, String receiptPdf);
+
     public List<CreditOrder> queryCreditOrderList(CreditOrder condition);
 
     public CreditOrder getCreditOrder(String code);

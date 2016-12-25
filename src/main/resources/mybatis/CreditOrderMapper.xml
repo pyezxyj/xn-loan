@@ -47,6 +47,7 @@
 		<result column="cw_pdf" property="cwPdf" />
 		<result column="play_pdf" property="playPdf" />
 		<result column="receipt_pdf" property="receiptPdf" />
+		<result column="receipt_datetime" property="receiptDatetime" />
 		<result column="payroll_pdf" property="payrollPdf" />
 		<result column="remark" property="remark" />
 	</resultMap>
@@ -380,6 +381,14 @@
 		UPDATE credit_order
 		SET
 		download_times = #{downloadTimes}
+		WHERE code = #{code}
+	</update> 
+	<update id="update_receiptPdf" parameterType="creditOrder">
+		UPDATE credit_order
+		SET
+		status=#{status}
+		,receipt_pdf = #{receiptPdf}
+		,receipt_datetime=#{receiptDatetime}
 		WHERE code = #{code}
 	</update> 
 </mapper>

@@ -200,7 +200,7 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
             if (EBoolean.YES.getCode().equals(approveResult)) {
                 data.setStatus(ECreditOrderStatus.CWTG.getCode());
             } else {
-                data.setStatus(ECreditOrderStatus.NO_CWTG.getCode());
+                data.setStatus(ECreditOrderStatus.FH.getCode());
             }
             data.setRemark(remark);
             count = creditOrderDAO.updateFinancial(data);
@@ -214,7 +214,7 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
         CreditOrder data = new CreditOrder();
         if (StringUtils.isNotBlank(code)) {
             data.setCode(code);
-            data.setStatus(ECreditOrderStatus.TO_WAIT.getCode());
+            data.setStatus(ECreditOrderStatus.DH.getCode());
             data.setCwPdf(cwPdf);
             count = creditOrderDAO.updatePayout(data);
         }
@@ -227,7 +227,7 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
         CreditOrder data = new CreditOrder();
         if (StringUtils.isNotBlank(code)) {
             data.setCode(code);
-            data.setStatus(ECreditOrderStatus.TO_WAIT.getCode());
+            data.setStatus(ECreditOrderStatus.YDK.getCode());
             data.setPlayPdf(playPdf);
             count = creditOrderDAO.updateMoneyback(data);
         }
@@ -241,7 +241,7 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
         CreditOrder data = new CreditOrder();
         if (StringUtils.isNotBlank(code)) {
             data.setCode(code);
-            data.setStatus(ECreditOrderStatus.TO_WAIT.getCode());
+            data.setStatus(ECreditOrderStatus.FBH.getCode());
             data.setReceipt(receipt);
             data.setPolicy(policy);
             data.setCertification(certification);
@@ -257,9 +257,23 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
         if (StringUtils.isNotBlank(code)) {
             data.setCode(code);
             CreditOrder condition = getCreditOrder(code);
-            String times = condition.getDownloadTimes();
+            int times = condition.getDownloadTimes();
             data.setDownloadTimes(times + 1);
             count = creditOrderDAO.updateDownload(data);
+        }
+        return count;
+    }
+
+    @Override
+    public int refreshReceipt(String code, String receiptPdf) {
+        int count = 0;
+        CreditOrder data = new CreditOrder();
+        if (StringUtils.isNotBlank(code)) {
+            data.setCode(code);
+            data.setReceiptPdf(receiptPdf);
+            data.setReceiptDatetime(new Date());
+            data.setStatus(ECreditOrderStatus.YSK.getCode());
+            count = creditOrderDAO.updateReceiptPdf(data);
         }
         return count;
     }

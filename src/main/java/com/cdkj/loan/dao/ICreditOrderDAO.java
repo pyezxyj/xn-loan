@@ -123,4 +123,13 @@ public interface ICreditOrderDAO extends IBaseDAO<CreditOrder> {
      * @history:
      */
     public int updateDownload(CreditOrder data);
+
+    /**
+     * 打款回录
+     * @param data
+     * @return 
+     * @create: 2016年12月25日 下午2:41:09 asus
+     * @history:
+     */
+    public int updateReceiptPdf(CreditOrder data);
 }

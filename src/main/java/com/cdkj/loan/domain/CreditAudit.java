@@ -18,13 +18,19 @@ public class CreditAudit extends ABaseDO {
     private String code;
 
     // 姓名
-    public String realName;
+    public String userName;
 
     // 关系
     private String relation;
 
     // 所属人
     private String refUser;
+
+    // 贷款品种
+    private String loanType;
+
+    // 贷款金额
+    private Long loanAmount;
 
     // 证件类型
     private String idKind;
@@ -243,14 +249,6 @@ public class CreditAudit extends ABaseDO {
         return remark;
     }
 
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
-
     public Date getCreateDatetime() {
         return createDatetime;
     }
@@ -265,6 +263,30 @@ public class CreditAudit extends ABaseDO {
 
     public Date getApproveDatetime() {
         return approveDatetime;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getLoanType() {
+        return loanType;
+    }
+
+    public void setLoanType(String loanType) {
+        this.loanType = loanType;
+    }
+
+    public Long getLoanAmount() {
+        return loanAmount;
+    }
+
+    public void setLoanAmount(Long loanAmount) {
+        this.loanAmount = loanAmount;
     }
 
 }

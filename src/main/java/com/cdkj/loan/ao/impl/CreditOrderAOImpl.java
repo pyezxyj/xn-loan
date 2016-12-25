@@ -12,6 +12,7 @@ import com.cdkj.loan.bo.base.Paginable;
 import com.cdkj.loan.domain.CreditAudit;
 import com.cdkj.loan.domain.CreditOrder;
 import com.cdkj.loan.enums.EBoolean;
+import com.cdkj.loan.enums.ECreditOrderStatus;
 import com.cdkj.loan.exception.BizException;
 
 @Service
@@ -32,11 +33,13 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         }
         for (CreditAudit creditAudit : creditAuditList) {
             if (EBoolean.NO.getCode().equals(creditAudit.getRelation())) {
-                data.setUserName(creditAudit.getRealName());
+                data.setUserName(creditAudit.getUserName());
                 data.setIdKind(creditAudit.getIdKind());
                 data.setIdNo(creditAudit.getIdNo());
                 code = creditOrderBO.saveCreditOrder(data);
             }
+            creditAudit.setLoanType(data.getLoanType());
+            creditAudit.setLoanAmount(data.getLoanAmount());
             creditAudit.setRefUser(code);
             creditAuditBO.saveCreditAudit(creditAudit);
         }
@@ -61,7 +64,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             creditAudit.setRefUser(data.getCode());
             creditAuditBO.saveCreditAudit(creditAudit);
             if (EBoolean.NO.getCode().equals(creditAudit.getRelation())) {
-                data.setUserName(creditAudit.getRealName());
+                data.setUserName(creditAudit.getUserName());
                 data.setIdKind(creditAudit.getIdKind());
                 data.setIdNo(creditAudit.getIdNo());
                 creditOrderBO.refreshCreditOrder(data);
@@ -139,6 +142,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         if (!creditOrderBO.isCreditOrderExist(data.getCode())) {
             throw new BizException("xn0000", "记录编号不存在");
         }
+        data.setStatus(ECreditOrderStatus.TO_SC.getCode());
         creditOrderBO.refreshZLBack(data);
         for (CreditAudit creditAudit : creditAuditList) {
             creditAuditBO.refreshCreditAudit(creditAudit);
@@ -209,5 +213,13 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             throw new BizException("xn0000", "记录编号不存在");
         }
         creditOrderBO.refreshDownload(code);
+    }
+
+    @Override
+    public void editReceiptPdf(String code, String receiptPdf) {
+        if (!creditOrderBO.isCreditOrderExist(code)) {
+            throw new BizException("xn0000", "记录编号不存在");
+        }
+        creditOrderBO.refreshReceipt(code, receiptPdf);
     }
 }

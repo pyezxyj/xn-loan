@@ -133,7 +133,7 @@ public class CreditOrder extends ABaseDO {
     private String lendOtherData;
 
     // 下载次数
-    private String downloadTimes;
+    private Integer downloadTimes;
 
     // 放款附件
     private String lendPdf;
@@ -146,6 +146,9 @@ public class CreditOrder extends ABaseDO {
 
     // 收款水单
     private String receiptPdf;
+
+    // 收款时间
+    private Date receiptDatetime;
 
     // 工资单附件
     private String payrollPdf;
@@ -403,14 +406,6 @@ public class CreditOrder extends ABaseDO {
         return approveNote;
     }
 
-    public void setDownloadTimes(String downloadTimes) {
-        this.downloadTimes = downloadTimes;
-    }
-
-    public String getDownloadTimes() {
-        return downloadTimes;
-    }
-
     public void setLendPdf(String lendPdf) {
         this.lendPdf = lendPdf;
     }
@@ -529,6 +524,22 @@ public class CreditOrder extends ABaseDO {
 
     public void setFee(String fee) {
         this.fee = fee;
+    }
+
+    public Date getReceiptDatetime() {
+        return receiptDatetime;
+    }
+
+    public void setReceiptDatetime(Date receiptDatetime) {
+        this.receiptDatetime = receiptDatetime;
+    }
+
+    public Integer getDownloadTimes() {
+        return downloadTimes;
+    }
+
+    public void setDownloadTimes(Integer downloadTimes) {
+        this.downloadTimes = downloadTimes;
     }
 
 }

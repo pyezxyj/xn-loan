@@ -41,6 +41,8 @@ public interface ICreditOrderAO {
 
     public void editDownload(String code);
 
+    public void editReceiptPdf(String code, String receiptPdf);
+
     public Paginable<CreditOrder> queryCreditOrderPage(int start, int limit,
             CreditOrder condition);
 

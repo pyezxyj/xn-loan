@@ -12,7 +12,7 @@ import com.cdkj.loan.domain.CreditAudit;
  */
 public class XN617000Req {
     // 业务员（必填）
-    public String saleman;
+    public String salesman;
 
     // 车行（必填）
     public String car;
@@ -28,14 +28,6 @@ public class XN617000Req {
 
     // 贷款人关系列表（必填）
     public List<CreditAudit> creditList;
-
-    public String getSaleman() {
-        return saleman;
-    }
-
-    public void setSaleman(String saleman) {
-        this.saleman = saleman;
-    }
 
     public String getCar() {
         return car;
@@ -75,5 +67,13 @@ public class XN617000Req {
 
     public void setCreditList(List<CreditAudit> creditList) {
         this.creditList = creditList;
+    }
+
+    public String getSalesman() {
+        return salesman;
+    }
+
+    public void setSalesman(String salesman) {
+        this.salesman = salesman;
     }
 }
