@@ -29,6 +29,7 @@ public class XN617003 extends AProcessor {
         CreditOrder condition = new CreditOrder();
         condition.setStatus(req.getStatus());
         condition.setUserName(req.getUserName());
+        condition.setStatusList(req.getStatusList());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = ICreditOrderAO.DEFAULT_ORDER_COLUMN;

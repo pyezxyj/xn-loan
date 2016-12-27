@@ -38,7 +38,6 @@ public class XN617012 extends AProcessor {
         data.setSupplyInfo(req.getSupplyInfo());
         data.setCardBank(req.getCardBank());
         data.setCardNumber(req.getCardNumber());
-        data.setLendOtherData(req.getLendOtherData());
         creditOrderAO.editZLBack(data, req.getCreditAuditList());
         return new Boolean(true);
     }
@@ -49,8 +48,8 @@ public class XN617012 extends AProcessor {
         StringValidater.validateBlank(req.getCode(), req.getBrand(),
             req.getModel(), req.getPrice(), req.getFirstPay(),
             req.getRealLoanAmount(), req.getLoanTerm(), req.getSumRate(),
-            req.getFee(), req.getUrgency(), req.getSupplyInfo(),
-            req.getCardBank(), req.getCardNumber());
+            req.getFee(), req.getUrgency(), req.getCardBank(),
+            req.getCardNumber());
     }
 
 }

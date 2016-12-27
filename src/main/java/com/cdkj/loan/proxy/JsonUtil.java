@@ -1,8 +1,8 @@
 package com.cdkj.loan.proxy;
 
 import com.cdkj.loan.exception.ParaException;
+import com.cdkj.loan.http.JsonValidator;
 import com.google.gson.Gson;
-import comcdkj.loan.http.JsonValidator;
 
 public class JsonUtil {
 

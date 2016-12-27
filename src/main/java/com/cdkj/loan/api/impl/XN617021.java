@@ -17,13 +17,17 @@ public class XN617021 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        creditOrderAO.editReceiptPdf(req.getCode(), req.getReceiptPdf());
+        creditOrderAO
+            .editReceiptPdf(req.getCode(),
+                StringValidater.toLong(req.getReceiptAmount()),
+                req.getReceiptPdf());
         return new Boolean(true);
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN617021Req.class);
-        StringValidater.validateBlank(req.getCode(), req.getReceiptPdf());
+        StringValidater.validateBlank(req.getCode(), req.getReceiptPdf(),
+            req.getReceiptAmount());
     }
 }

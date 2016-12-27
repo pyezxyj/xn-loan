@@ -8,4 +8,6 @@ public interface ICreditAuditDAO extends IBaseDAO<CreditAudit> {
     String NAMESPACE = ICreditAuditDAO.class.getName().concat(".");
 
     public int update(CreditAudit data);
+
+    public int updateMobile(CreditAudit data);
 }

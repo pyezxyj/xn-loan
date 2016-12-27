@@ -1,4 +1,4 @@
-package comcdkj.loan.http;
+package com.cdkj.loan.http;
 
 import com.google.gson.Gson;
 

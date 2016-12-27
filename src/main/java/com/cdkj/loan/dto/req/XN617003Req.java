@@ -1,5 +1,7 @@
 package com.cdkj.loan.dto.req;
 
+import java.util.List;
+
 /**
  * 分页查询资质申请
  * @author: asus 
@@ -18,6 +20,9 @@ public class XN617003Req extends APageReq {
     // 状态
     public String status;
 
+    // 查询条件
+    private List<String> statusList;
+
     public String getUserName() {
         return userName;
     }
@@ -32,5 +37,13 @@ public class XN617003Req extends APageReq {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<String> getStatusList() {
+        return statusList;
+    }
+
+    public void setStatusList(List<String> statusList) {
+        this.statusList = statusList;
     }
 }

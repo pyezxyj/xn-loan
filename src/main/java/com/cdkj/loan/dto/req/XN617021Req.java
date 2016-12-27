@@ -10,6 +10,9 @@ public class XN617021Req {
     // 编号
     public String code;
 
+    // 收款金额
+    public String receiptAmount;
+
     // 收款回录
     public String receiptPdf;
 
@@ -27,5 +30,13 @@ public class XN617021Req {
 
     public void setReceiptPdf(String receiptPdf) {
         this.receiptPdf = receiptPdf;
+    }
+
+    public String getReceiptAmount() {
+        return receiptAmount;
+    }
+
+    public void setReceiptAmount(String receiptAmount) {
+        this.receiptAmount = receiptAmount;
     }
 }

@@ -6,7 +6,7 @@
  * @date 2015-2-6 下午2:14:29 
  * @version V1.0   
  */
-package com.xnjr.mall.base;
+package com.cdkj.loan.base;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

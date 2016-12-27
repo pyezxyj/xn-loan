@@ -30,6 +30,7 @@ public class XN617004 extends AProcessor {
         CreditAudit condition = new CreditAudit();
         condition.setStatus(req.getStatus());
         condition.setRefUser(req.getUserName());
+        condition.setStatusList(req.getStatusList());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = ICreditOrderAO.DEFAULT_ORDER_COLUMN;

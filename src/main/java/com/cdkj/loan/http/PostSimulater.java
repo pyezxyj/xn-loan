@@ -6,7 +6,7 @@
  * @date 2015-5-12 下午4:34:54 
  * @version V1.0   
  */
-package comcdkj.loan.http;
+package com.cdkj.loan.http;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

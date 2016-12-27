@@ -40,6 +40,12 @@
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
 			</if>
+			<if test="statusList != null and statusList != '' ">
+				AND t.status in 
+                <foreach item="item" index="index" collection="statusList" open="(" separator="," close=")">
+	            	#{item}
+                </foreach> 
+			</if>
 		</trim>
 	</sql>
 	<select id="select_creditAudit" parameterType="creditAudit" resultMap="creditAudit_DB_Result">
@@ -160,32 +166,12 @@
 		code = #{code}
 	</delete>
 	
-<!-- 	<update id="update_creditAudit" parameterType="creditAudit">
+	<update id="update_mobile" parameterType="creditAudit">
 		UPDATE credit_audit
 		SET
-		relation = #{relation}
-		,ref_user = #{refUser}
-		,id_kind = #{idKind}
-		,id_no = #{idNo}
-		,real_name=#{realName}
-		,credit_result = #{creditResult}
-		,credit_code = #{creditCode}
-		,credit_descript = #{creditDescript}
-		,court_result = #{courtResult}
-		,court_descript = #{courtDescript}
-		,status = #{status}
-		,create_datetime = #{createDatetime}
-		,mobile = #{mobile}
-		,work_unit = #{workUnit}
-		,work_phone = #{workPhone}
-		,work_address = #{workAddress}
-		,detail = #{detail}
-		,approver = #{approver}
-		,approve_datetime = #{approveDatetime}
-		,approve_note = #{approveNote}
-		,remark = #{remark}
+		mobile = #{mobile}
 		WHERE code = #{code}
-	</update> -->
+	</update>
 	
 <!-- 	<update id="update_creditAudit" parameterType="creditAudit">
 		UPDATE credit_audit

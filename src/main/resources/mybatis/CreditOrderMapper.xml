@@ -41,12 +41,12 @@
 		<result column="approver" property="approver" />
 		<result column="approve_datetime" property="approveDatetime" />
 		<result column="approve_note" property="approveNote" />
-		<result column="lend_other_data" property="lendOtherData" />
 		<result column="download_times" property="downloadTimes" />
 		<result column="lend_pdf" property="lendPdf" />
 		<result column="cw_pdf" property="cwPdf" />
 		<result column="play_pdf" property="playPdf" />
 		<result column="receipt_pdf" property="receiptPdf" />
+		<result column="receipt_amount" property="receiptAmount" />
 		<result column="receipt_datetime" property="receiptDatetime" />
 		<result column="payroll_pdf" property="payrollPdf" />
 		<result column="remark" property="remark" />
@@ -58,6 +58,15 @@
 			</if>
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
+			</if>
+			<if test="statusList != null and statusList != '' ">
+				AND t.status in 
+                <foreach item="item" index="index" collection="statusList" open="(" separator="," close=")">
+	            	#{item}
+                </foreach> 
+			</if>
+			<if test="userName != null and userName != '' ">
+				AND t.user_name = #{userName}
 			</if>
 		</trim>
 	</sql>
@@ -106,6 +115,8 @@
 		,t.cw_pdf
 		,t.play_pdf
 		,t.receipt_pdf
+		,t.receipt_amount
+		,t.receipt_datetime
 		,t.payroll_pdf
 		,t.remark
 		FROM
@@ -323,7 +334,6 @@
 		,supply_info = #{supplyInfo}
 		,card_bank = #{cardBank}
 		,card_number = #{cardNumber}
-		,lend_other_data=#{lendOtherData}
 		WHERE code = #{code}
 	</update> 
 	<update id="update_Approve" parameterType="creditOrder">
@@ -337,7 +347,7 @@
 		UPDATE credit_order
 		SET
 		status = #{status}
-		,payroll_pdf = #{payrollPdf}
+		,supply_info = #{supplyInfo}
 		WHERE code = #{code}
 	</update> 
 	<update id="update_Visit" parameterType="creditOrder">
@@ -388,6 +398,7 @@
 		SET
 		status=#{status}
 		,receipt_pdf = #{receiptPdf}
+		,receipt_amount=#{receiptAmount}
 		,receipt_datetime=#{receiptDatetime}
 		WHERE code = #{code}
 	</update> 

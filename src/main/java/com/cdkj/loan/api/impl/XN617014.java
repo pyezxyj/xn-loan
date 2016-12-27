@@ -9,6 +9,12 @@ import com.cdkj.loan.exception.BizException;
 import com.cdkj.loan.exception.ParaException;
 import com.cdkj.loan.spring.SpringContextHolder;
 
+/**
+ * 补充附件（作废）
+ * @author: asus 
+ * @since: 2016年12月26日 下午4:14:09 
+ * @history:
+ */
 public class XN617014 extends AProcessor {
     private ICreditOrderAO creditOrderAO = SpringContextHolder
         .getBean(ICreditOrderAO.class);
@@ -17,13 +23,13 @@ public class XN617014 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        creditOrderAO.editPayroll(req.getCode(), req.getPayrollPdf());
+        creditOrderAO.editPayroll(req.getCode(), req.getSupplyInfo());
         return new Boolean(true);
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN617014Req.class);
-        StringValidater.validateBlank(req.getCode(), req.getPayrollPdf());
+        StringValidater.validateBlank(req.getCode(), req.getSupplyInfo());
     }
 }

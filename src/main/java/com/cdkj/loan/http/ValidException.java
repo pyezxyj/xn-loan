@@ -1,4 +1,4 @@
-package comcdkj.loan.http;
+package com.cdkj.loan.http;
 
 import java.util.ArrayList;
 import java.util.Arrays;

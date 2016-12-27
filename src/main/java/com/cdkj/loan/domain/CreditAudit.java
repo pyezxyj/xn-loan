@@ -1,6 +1,7 @@
 package com.cdkj.loan.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import com.cdkj.loan.dao.base.ABaseDO;
 
@@ -88,6 +89,9 @@ public class CreditAudit extends ABaseDO {
 
     // 备注
     private String remark;
+
+    // 查询条件
+    private List<String> statusList;
 
     public void setCode(String code) {
         this.code = code;
@@ -287,6 +291,14 @@ public class CreditAudit extends ABaseDO {
 
     public void setLoanAmount(Long loanAmount) {
         this.loanAmount = loanAmount;
+    }
+
+    public List<String> getStatusList() {
+        return statusList;
+    }
+
+    public void setStatusList(List<String> statusList) {
+        this.statusList = statusList;
     }
 
 }

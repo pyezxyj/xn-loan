@@ -36,6 +36,9 @@ public class CreditOrder extends ABaseDO {
     // 姓名
     private String userName;
 
+    // 查询条件
+    private List<String> statusList;
+
     // 证件类型
     private String idKind;
 
@@ -129,9 +132,6 @@ public class CreditOrder extends ABaseDO {
     // 审批说明
     private String approveNote;
 
-    // 放款其他资料
-    private String lendOtherData;
-
     // 下载次数
     private Integer downloadTimes;
 
@@ -149,6 +149,9 @@ public class CreditOrder extends ABaseDO {
 
     // 收款时间
     private Date receiptDatetime;
+
+    // 收款金额
+    private Long receiptAmount;
 
     // 工资单附件
     private String payrollPdf;
@@ -510,14 +513,6 @@ public class CreditOrder extends ABaseDO {
         this.creditAuditList = creditAuditList;
     }
 
-    public String getLendOtherData() {
-        return lendOtherData;
-    }
-
-    public void setLendOtherData(String lendOtherData) {
-        this.lendOtherData = lendOtherData;
-    }
-
     public String getFee() {
         return fee;
     }
@@ -540,6 +535,22 @@ public class CreditOrder extends ABaseDO {
 
     public void setDownloadTimes(Integer downloadTimes) {
         this.downloadTimes = downloadTimes;
+    }
+
+    public Long getReceiptAmount() {
+        return receiptAmount;
+    }
+
+    public void setReceiptAmount(Long receiptAmount) {
+        this.receiptAmount = receiptAmount;
+    }
+
+    public void setStatusList(List<String> statusList) {
+        this.statusList = statusList;
+    }
+
+    public List<String> getStatusList() {
+        return statusList;
     }
 
 }

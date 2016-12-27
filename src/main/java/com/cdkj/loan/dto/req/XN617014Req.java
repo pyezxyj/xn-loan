@@ -9,7 +9,7 @@ package com.cdkj.loan.dto.req;
 public class XN617014Req {
     public String code;
 
-    public String payrollPdf;
+    public String supplyInfo;
 
     public String getCode() {
         return code;
@@ -19,12 +19,12 @@ public class XN617014Req {
         this.code = code;
     }
 
-    public String getPayrollPdf() {
-        return payrollPdf;
+    public String getSupplyInfo() {
+        return supplyInfo;
     }
 
-    public void setPayrollPdf(String payrollPdf) {
-        this.payrollPdf = payrollPdf;
+    public void setSupplyInfo(String supplyInfo) {
+        this.supplyInfo = supplyInfo;
     }
 
 }

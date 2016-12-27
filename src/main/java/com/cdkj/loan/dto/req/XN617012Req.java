@@ -37,8 +37,6 @@ public class XN617012Req {
 
     public String cardNumber;
 
-    public String lendOtherData;
-
     public List<CreditAudit> creditAuditList;
 
     public String getCode() {
@@ -135,14 +133,6 @@ public class XN617012Req {
 
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
-    }
-
-    public String getLendOtherData() {
-        return lendOtherData;
-    }
-
-    public void setLendOtherData(String lendOtherData) {
-        this.lendOtherData = lendOtherData;
     }
 
     public List<CreditAudit> getCreditAuditList() {

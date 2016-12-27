@@ -14,6 +14,7 @@ import com.cdkj.loan.dao.ICreditOrderDAO;
 import com.cdkj.loan.domain.CreditOrder;
 import com.cdkj.loan.enums.EBoolean;
 import com.cdkj.loan.enums.ECreditOrderStatus;
+import com.cdkj.loan.enums.ECreditStatusApprove;
 import com.cdkj.loan.enums.EGeneratePrefix;
 import com.cdkj.loan.exception.BizException;
 
@@ -109,7 +110,8 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
             data.setMobile(mobile);
             data.setInvestigator(investigator);
             data.setRemark(remark);
-            if (ECreditOrderStatus.TO_WAIT.equals(condition.getStatus())) {
+            if (ECreditOrderStatus.TO_WAIT.getCode().equals(
+                condition.getStatus())) {
                 data.setStatus(ECreditOrderStatus.TO_FP.getCode());
                 count = creditOrderDAO.updateSurvey(data);
             } else {
@@ -152,8 +154,19 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
             data.setCode(code);
             if (EBoolean.YES.getCode().equals(approveResult)) {
                 data.setStatus(ECreditOrderStatus.PASS.getCode());
-            } else {
+            } else if (EBoolean.NO.getCode().equals(approveResult)) {
                 data.setStatus(ECreditOrderStatus.NOPASS.getCode());
+            } else if (ECreditStatusApprove.VETO.getCode()
+                .equals(approveResult)) {
+                data.setStatus(ECreditOrderStatus.END.getCode());
+            } else if (ECreditStatusApprove.SUPPLEMENT.getCode().equals(
+                approveResult)) {
+                data.setStatus(ECreditOrderStatus.BC.getCode());
+            } else if (ECreditStatusApprove.CHANGE.getCode().equals(
+                approveResult)) {
+                data.setStatus(ECreditOrderStatus.TE.getCode());
+            } else {
+                data.setStatus(ECreditOrderStatus.TG.getCode());
             }
             data.setRemark(remark);
             count = creditOrderDAO.updateApprove(data);
@@ -165,11 +178,16 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
     public int refreshPayroll(String code, String payrollPdf) {
         int count = 0;
         CreditOrder data = new CreditOrder();
+        CreditOrder creditOrder = getCreditOrder(code);
         if (StringUtils.isNotBlank(code)) {
             data.setCode(code);
-            data.setStatus(ECreditOrderStatus.TO_SC.getCode());
-            data.setPayrollPdf(payrollPdf);
-            count = creditOrderDAO.updatePayroll(data);
+            if (ECreditOrderStatus.BC.getCode().equals(creditOrder.getStatus())) {
+                data.setStatus(ECreditOrderStatus.TO_SC.getCode());
+                data.setPayrollPdf(payrollPdf);
+                count = creditOrderDAO.updatePayroll(data);
+            } else {
+                throw new BizException("xn0000", "该用户展示不能补充新资料");
+            }
         }
         return count;
     }
@@ -198,7 +216,7 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
         if (StringUtils.isNotBlank(code)) {
             data.setCode(code);
             if (EBoolean.YES.getCode().equals(approveResult)) {
-                data.setStatus(ECreditOrderStatus.CWTG.getCode());
+                data.setStatus(ECreditOrderStatus.PASS_CWTG.getCode());
             } else {
                 data.setStatus(ECreditOrderStatus.FH.getCode());
             }
@@ -265,13 +283,15 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
     }
 
     @Override
-    public int refreshReceipt(String code, String receiptPdf) {
+    public int refreshReceipt(String code, Long receiptAmount, String receiptPdf) {
         int count = 0;
         CreditOrder data = new CreditOrder();
+        CreditOrder condition = getCreditOrder(code);
         if (StringUtils.isNotBlank(code)) {
             data.setCode(code);
             data.setReceiptPdf(receiptPdf);
             data.setReceiptDatetime(new Date());
+            data.setReceiptAmount(receiptAmount);
             data.setStatus(ECreditOrderStatus.YSK.getCode());
             count = creditOrderDAO.updateReceiptPdf(data);
         }
