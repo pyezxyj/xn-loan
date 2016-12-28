@@ -155,7 +155,7 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
             if (EBoolean.YES.getCode().equals(approveResult)) {
                 data.setStatus(ECreditOrderStatus.PASS.getCode());
             } else if (EBoolean.NO.getCode().equals(approveResult)) {
-                data.setStatus(ECreditOrderStatus.NOPASS.getCode());
+                data.setStatus(ECreditOrderStatus.TO_HR.getCode());
             } else if (ECreditStatusApprove.VETO.getCode()
                 .equals(approveResult)) {
                 data.setStatus(ECreditOrderStatus.END.getCode());
@@ -201,7 +201,7 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
             if (EBoolean.YES.getCode().equals(approveResult)) {
                 data.setStatus(ECreditOrderStatus.TO_DH.getCode());
             } else {
-                data.setStatus(ECreditOrderStatus.NO_DH.getCode());
+                data.setStatus(ECreditOrderStatus.TO_SC.getCode());
             }
             data.setRemark(remark);
             count = creditOrderDAO.updateVisit(data);
@@ -218,7 +218,7 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
             if (EBoolean.YES.getCode().equals(approveResult)) {
                 data.setStatus(ECreditOrderStatus.PASS_CWTG.getCode());
             } else {
-                data.setStatus(ECreditOrderStatus.FH.getCode());
+                data.setStatus(ECreditOrderStatus.TO_DH.getCode());
             }
             data.setRemark(remark);
             count = creditOrderDAO.updateFinancial(data);
@@ -232,7 +232,7 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
         CreditOrder data = new CreditOrder();
         if (StringUtils.isNotBlank(code)) {
             data.setCode(code);
-            data.setStatus(ECreditOrderStatus.DH.getCode());
+            data.setStatus(ECreditOrderStatus.TO_DH.getCode());
             data.setCwPdf(cwPdf);
             count = creditOrderDAO.updatePayout(data);
         }
@@ -259,7 +259,7 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
         CreditOrder data = new CreditOrder();
         if (StringUtils.isNotBlank(code)) {
             data.setCode(code);
-            data.setStatus(ECreditOrderStatus.FBH.getCode());
+            data.setStatus(ECreditOrderStatus.YSK.getCode());
             data.setReceipt(receipt);
             data.setPolicy(policy);
             data.setCertification(certification);
@@ -292,7 +292,7 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
             data.setReceiptPdf(receiptPdf);
             data.setReceiptDatetime(new Date());
             data.setReceiptAmount(receiptAmount);
-            data.setStatus(ECreditOrderStatus.YSK.getCode());
+            data.setStatus(ECreditOrderStatus.END.getCode());
             count = creditOrderDAO.updateReceiptPdf(data);
         }
         return count;

@@ -34,7 +34,7 @@ public class CreditAuditAOImpl implements ICreditAuditAO {
             throw new BizException("xn0000", "记录编号不存在");
         }
         if (EBoolean.YES.getCode().equals(data.getCourtResult())
-                || EBoolean.YES.getCode().equals(data.getCreditResult())) {
+                && EBoolean.YES.getCode().equals(data.getCreditResult())) {
             data.setStatus(ECreditAuditStatus.APPROVE_YES.getCode());
         } else {
             data.setStatus(ECreditAuditStatus.APPROVE_NO.getCode());

@@ -10,7 +10,7 @@ import com.cdkj.loan.exception.ParaException;
 import com.cdkj.loan.spring.SpringContextHolder;
 
 /**
- * 补充附件（作废）
+ * 补充附件
  * @author: asus 
  * @since: 2016年12月26日 下午4:14:09 
  * @history:
