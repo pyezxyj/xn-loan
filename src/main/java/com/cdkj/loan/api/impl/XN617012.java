@@ -38,6 +38,7 @@ public class XN617012 extends AProcessor {
         data.setSupplyInfo(req.getSupplyInfo());
         data.setCardBank(req.getCardBank());
         data.setCardNumber(req.getCardNumber());
+        data.setRemark("已录入放款资料，待合规性审查");
         creditOrderAO.editZLBack(data, req.getCreditAuditList());
         return new Boolean(true);
     }
