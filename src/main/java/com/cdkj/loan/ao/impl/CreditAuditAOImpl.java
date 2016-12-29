@@ -49,7 +49,9 @@ public class CreditAuditAOImpl implements ICreditAuditAO {
         boolean isAllPass = true;
         for (CreditAudit creditAudit : creditAuditList) {
             if (ECreditAuditStatus.TO_APPROVE.getCode().equals(
-                creditAudit.getStatus())) {
+                creditAudit.getStatus())
+                    || ECreditAuditStatus.APPROVE_NO.getCode().equals(
+                        creditAudit.getStatus())) {
                 isAllPass = false;
                 break;
             }

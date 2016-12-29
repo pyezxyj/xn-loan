@@ -130,8 +130,10 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         List<CreditAudit> CreditAuditList = creditAuditBO
             .queryCreditAuditList(condition);
         for (CreditAudit creditAudit : CreditAuditList) {
-            creditAudit.setMobile(mobile);
-            creditAuditBO.refreshMobile(creditAudit);
+            if (EBoolean.NO.getCode().equals(creditAudit.getRelation())) {
+                creditAudit.setMobile(mobile);
+                creditAuditBO.refreshMobile(creditAudit);
+            }
         }
         creditOrderBO.refreshSurvey(code, mobile, investigator, remark);
     }
@@ -150,6 +152,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         if (!creditOrderBO.isCreditOrderExist(data.getCode())) {
             throw new BizException("xn0000", "记录编号不存在");
         }
+
         data.setStatus(ECreditOrderStatus.TO_SC.getCode());
         creditOrderBO.refreshZLBack(data);
         for (CreditAudit creditAudit : creditAuditList) {

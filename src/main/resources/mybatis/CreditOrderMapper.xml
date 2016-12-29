@@ -316,6 +316,7 @@
 		,report = #{report}
 		,other_data = #{otherData}
 		,home_address = #{homeAddress}
+		,remark=#{remark}
 		WHERE code = #{code}
 	</update> 
 	<update id="update_ZLBack" parameterType="creditOrder">
@@ -348,6 +349,7 @@
 		SET
 		status = #{status}
 		,supply_info = #{supplyInfo}
+		,remark=#{remark}
 		WHERE code = #{code}
 	</update> 
 	<update id="update_Visit" parameterType="creditOrder">
