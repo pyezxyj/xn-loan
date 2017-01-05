@@ -1,0 +1,32 @@
+package com.cdkj.loan.bo;
+
+import java.util.List;
+
+import com.cdkj.loan.bo.base.IPaginableBO;
+import com.cdkj.loan.domain.Repay;
+
+
+
+//CHECK ��鲢��ע�� 
+public interface IRepayBO extends IPaginableBO<Repay> {
+
+
+	public boolean isRepayExist(String code);
+
+
+	public String saveRepay(Repay data);
+
+
+	public int removeRepay(String code);
+
+
+	public int refreshRepay(Repay data);
+
+
+	public List<Repay> queryRepayList(Repay condition);
+
+
+	public Repay getRepay(String code);
+
+
+}

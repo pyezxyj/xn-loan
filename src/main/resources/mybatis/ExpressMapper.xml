@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.loan.dao.IExpressDAO">
+	<resultMap id="Express_DB_Result" type="Express">
+		<result column="code" property="code" />
+		<result column="credit_order_code" property="creditOrderCode" />
+		<result column="type" property="type" />
+		<result column="type_note" property="typeNote" />
+		<result column="deliver_company" property="deliverCompany" />
+		<result column="deliverer" property="deliverer" />
+		<result column="deliver_datetime" property="deliverDatetime" />
+		<result column="receive_company" property="receiveCompany" />
+		<result column="receiver" property="receiver" />
+		<result column="receive_datetime" property="receiveDatetime" />
+		<result column="logi_company" property="logiCompany" />
+		<result column="logi_code" property="logiCode" />
+		<result column="deliver_pdf" property="deliverPdf" />
+		<result column="status" property="status" />
+		<result column="check_user" property="checkUser" />
+		<result column="check_datetime" property="checkDatetime" />
+		<result column="remark" property="remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_Express" parameterType="Express" resultMap="Express_DB_Result">
+		SELECT
+		t.code
+		,t.credit_order_code
+		,t.type
+		,t.type_note
+		,t.deliver_company
+		,t.deliverer
+		,t.deliver_datetime
+		,t.receive_company
+		,t.receiver
+		,t.receive_datetime
+		,t.logi_company
+		,t.logi_code
+		,t.deliver_pdf
+		,t.status
+		,t.check_user
+		,t.check_datetime
+		,t.remark
+		FROM
+		tloan_express t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_Express_count" parameterType="Express"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tloan_express t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_Express" parameterType="Express">
+		INSERT INTO
+		tloan_express(
+		code
+		,credit_order_code
+		,type
+		,type_note
+		,deliver_company
+		,deliverer
+		,deliver_datetime
+		,receive_company
+		,receiver
+		,receive_datetime
+		,logi_company
+		,logi_code
+		,deliver_pdf
+		,status
+		,check_user
+		,check_datetime
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{creditOrderCode}
+		,#{type}
+		,#{typeNote}
+		,#{deliverCompany}
+		,#{deliverer}
+		,#{deliverDatetime}
+		,#{receiveCompany}
+		,#{receiver}
+		,#{receiveDatetime}
+		,#{logiCompany}
+		,#{logiCode}
+		,#{deliverPdf}
+		,#{status}
+		,#{checkUser}
+		,#{checkDatetime}
+		,#{remark}
+		)
+	</insert>
+
+	<update id="update_Express" parameterType="Express">
+		UPDATE tloan_express
+		SET
+		credit_order_code = #{creditOrderCode}
+		,type = #{type}
+		,type_note = #{typeNote}
+		,deliver_company = #{deliverCompany}
+		,deliverer = #{deliverer}
+		,deliver_datetime = #{deliverDatetime}
+		,receive_company = #{receiveCompany}
+		,receiver = #{receiver}
+		,receive_datetime = #{receiveDatetime}
+		,logi_company = #{logiCompany}
+		,logi_code = #{logiCode}
+		,deliver_pdf = #{deliverPdf}
+		,status = #{status}
+		,check_user = #{checkUser}
+		,check_datetime = #{checkDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>

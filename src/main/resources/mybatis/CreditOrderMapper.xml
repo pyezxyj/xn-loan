@@ -4,52 +4,45 @@
 <mapper namespace="com.cdkj.loan.dao.ICreditOrderDAO">
 	<resultMap id="creditOrder_DB_Result" type="creditOrder">
 		<result column="code" property="code" />
+		<result column="area" property="area" />
 		<result column="salesman" property="salesman" />
-		<result column="car" property="car" />
-		<result column="jbBank" property="jbBank" />
+		<result column="car_store" property="car" />
+		<result column="jb_bank" property="jbBank" />
 		<result column="loan_type" property="loanType" />
 		<result column="loan_amount" property="loanAmount" />
-		<result column="user_name" property="userName" />
+		<result column="loan_term" property="loanTerm" />
+		<result column="real_name" property="realName" />
 		<result column="id_kind" property="idKind" />
 		<result column="id_no" property="idNo" />
 		<result column="mobile" property="mobile" />
-		<result column="investigator" property="investigator" />
+		<result column="dc_user" property="dcUser" />
 		<result column="status" property="status" />
-		<result column="create_datetime" property="createDatetime" />
 		<result column="sign_pic" property="signPic" />
 		<result column="home_pic" property="homePic" />
 		<result column="id_info" property="idInfo" />
 		<result column="video" property="video" />
-		<result column="report" property="report" />
-		<result column="other_data" property="otherData" />
-		<result column="home_address" property="homeAddress" />
-		<result column="brand" property="brand" />
-		<result column="model" property="model" />
-		<result column="price" property="price" />
-		<result column="first_pay" property="firstPay" />
-		<result column="real_loan_amount" property="realLoanAmount" />
-		<result column="loan_term" property="loanTerm" />
-		<result column="sum_rate" property="sumRate" />
+		<result column="dc_report" property="dcReport" />
+		<result column="dc_data" property="dcData" />
+		<result column="address" property="address" />
+		
+		<result column="rate" property="rate" />
 		<result column="fee" property="fee" />
-		<result column="urgency" property="urgency" />
-		<result column="supply_info" property="supplyInfo" />
-		<result column="card_bank" property="cardBank" />
-		<result column="card_number" property="cardNumber" />
-		<result column="receipt" property="receipt" />
-		<result column="policy" property="policy" />
-		<result column="certification" property="certification" />
-		<result column="approver" property="approver" />
-		<result column="approve_datetime" property="approveDatetime" />
-		<result column="approve_note" property="approveNote" />
-		<result column="download_times" property="downloadTimes" />
-		<result column="lend_pdf" property="lendPdf" />
-		<result column="cw_pdf" property="cwPdf" />
-		<result column="play_pdf" property="playPdf" />
-		<result column="receipt_pdf" property="receiptPdf" />
-		<result column="receipt_amount" property="receiptAmount" />
-		<result column="receipt_datetime" property="receiptDatetime" />
-		<result column="payroll_pdf" property="payrollPdf" />
+		<result column="urgent" property="urgent" />
+		<result column="bank" property="bank" />
+		<result column="branch" property="branch" />
+		<result column="bankcard_no" property="bankcardNo" />
+		<result column="last_node" property="lastNode" />
+		<result column="fk_pdf" property="fkPdf" />
+		<result column="qk_pdf" property="qkPdf" />
+		<result column="dk_pdf" property="dkPdf" />
+		<result column="sk_pdf" property="skPdf" />
+		<result column="sk_amount" property="skAmount" />
+		<result column="sk_datetime" property="skDatetime" />
+		<result column="status" property="status" />
+		<result column="create_datetime" property="createDatetime" />
 		<result column="remark" property="remark" />
+		<result column="access_level" property="accessLevel" />
+		<result column="consume" property="consume" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -73,52 +66,50 @@
 	<select id="select_creditOrder" parameterType="creditOrder" resultMap="creditOrder_DB_Result">
 		SELECT
 		t.code
+		,t.area
 		,t.salesman
-		,t.car
-		,t.jbBank
+		,t.car_store
+		,t.jb_bank
+		
 		,t.loan_type
 		,t.loan_amount
-		,t.user_name
+		,t.loan_term
+		,t.real_name
 		,t.id_kind
+		
 		,t.id_no
 		,t.mobile
-		,t.investigator
-		,t.status
-		,t.create_datetime
+		,t.dc_user
 		,t.sign_pic
 		,t.home_pic
+		
 		,t.id_info
 		,t.video
-		,t.report
-		,t.other_data
-		,t.home_address
-		,t.brand
-		,t.model
-		,t.price
-		,t.first_pay
-		,t.real_loan_amount
-		,t.loan_term
-		,t.sum_rate
+		,t.dc_report
+		,t.dc_data
+		,t.address
+		
+		,t.rate
 		,t.fee
-		,t.urgency
-		,t.supply_info
-		,t.card_bank
-		,t.card_number
-		,t.receipt
-		,t.policy
-		,t.certification
-		,t.approver
-		,t.approve_datetime
-		,t.approve_note
-		,t.download_times
-		,t.lend_pdf
-		,t.cw_pdf
-		,t.play_pdf
-		,t.receipt_pdf
-		,t.receipt_amount
-		,t.receipt_datetime
-		,t.payroll_pdf
+		,t.urgent
+		,t.bank
+		,t.branch
+		
+		,t.backcard_no
+		,t.last_node
+		,t.fk_pdf
+		,t.qk_pdf
+		,t.dk_pdf
+		
+		,t.sk_pdf
+		,t.sk_amount
+		,t.sk_datetime
+		,t.status
+		,t.create_datetime
+		
 		,t.remark
+		,t.access_level
+		,t.consume
 		FROM
 		credit_order t
 		<include refid="where_condition" />
@@ -139,147 +130,136 @@
 		INSERT INTO
 		credit_order(
 		code
+		,area
 		,salesman
-		,car
-		,jbBank
+		,car_store
+		,jb_bank
+		
 		,loan_type
 		,loan_amount
-		,user_name
+		,loan_term
+		,real_name
 		,id_kind
+		
 		,id_no
 		,mobile
-		,investigator
-		,status
-		,create_datetime
+		,dc_user
 		,sign_pic
 		,home_pic
+		
 		,id_info
 		,video
-		,report
-		,other_data
-		,home_address
-		,brand
-		,model
-		,price
-		,first_pay
-		,real_loan_amount
-		,loan_term
-		,sum_rate
+		,dc_report
+		,dc_data
+		,address
+		
+		,rate
 		,fee
-		,urgency
-		,supply_info
-		,card_bank
-		,card_number
-		,receipt
-		,policy
-		,certification
-		,approver
-		,approve_datetime
-		,approve_note
-		,download_times
-		,lend_pdf
-		,cw_pdf
-		,play_pdf
-		,receipt_pdf
-		,payroll_pdf
+		,urgent
+		,bank
+		,branch
+		
+		,backcard_no
+		,last_node
+		,fk_pdf
+		,qk_pdf
+		,dk_pdf
+		
+		,sk_pdf
+		,sk_amount
+		,sk_datetime
+		,status
+		,create_datetime
+		
 		,remark
+		,access_level
+		,consume
 		)
 		VALUES(
 		#{code}
+		,#{area}
 		,#{salesman}
-		,#{car}
+		,#{carStore}
 		,#{jbBank}
+		
 		,#{loanType}
 		,#{loanAmount}
-		,#{userName}
+		,#{loanTerm}
+		,#{realName}
 		,#{idKind}
+		
 		,#{idNo}
 		,#{mobile}
-		,#{investigator}
-		,#{status}
-		,#{createDatetime}
+		,#{dcUser}
 		,#{signPic}
 		,#{homePic}
+		
 		,#{idInfo}
 		,#{video}
-		,#{report}
-		,#{otherData}
-		,#{homeAddress}
-		,#{brand}
-		,#{model}
-		,#{price}
-		,#{firstPay}
-		,#{realLoanAmount}
-		,#{loanTerm}
-		,#{sumRate}
+		,#{dcReport}
+		,#{dcData}
+		,#{address}
+		
+		,#{rate}
 		,#{fee}
-		,#{urgency}
-		,#{supplyInfo}
-		,#{cardBank}
-		,#{cardNumber}
-		,#{receipt}
-		,#{policy}
-		,#{certification}
-		,#{approver}
-		,#{approveDatetime}
-		,#{approveNote}
-		,#{downloadTimes}
-		,#{lendPdf}
-		,#{cwPdf}
-		,#{playPdf}
-		,#{receiptPdf}
-		,#{payrollPdf}
+		,#{urgent}
+		,#{bank}
+		,#{branch}
+		
+		,#{backcardNo}
+		,#{lastNode}
+		,#{fkPdf}
+		,#{qkPdf}
+		,#{dkPdf}
+		
+		,#{skPdf}
+		,#{skAmount}
+		,#{skDatetime}
+		,#{status}
+		,#{createDatetime}
+		
 		,#{remark}
+		,#{accessLevel}
+		,#{consume}
 		)
 	</insert>
 
 	<update id="update_creditOrder" parameterType="creditOrder">
 		UPDATE credit_order
 		SET
-		salesman = #{salesman}
-		,car = #{car}
-		,jbBank = #{jbBank}
-		,loan_type = #{loanType}
-		,loan_amount = #{loanAmount}
-		,user_name = #{userName}
-		,id_kind = #{idKind}
-		,id_no = #{idNo}
-		,mobile = #{mobile}
-		,investigator = #{investigator}
-		,status = #{status}
-		,create_datetime = #{createDatetime}
-		,sign_pic = #{signPic}
-		,home_pic = #{homePic}
-		,id_info = #{idInfo}
-		,video = #{video}
-		,report = #{report}
-		,other_data = #{otherData}
-		,home_address = #{homeAddress}
-		,brand = #{brand}
-		,model = #{model}
-		,price = #{price}
-		,first_pay = #{firstPay}
-		,real_loan_amount = #{realLoanAmount}
-		,loan_term = #{loanTerm}
-		,sum_rate = #{sumRate}
-		,fee = #{fee}
-		,urgency = #{urgency}
-		,supply_info = #{supplyInfo}
-		,card_bank = #{cardBank}
-		,card_number = #{cardNumber}
-		,receipt = #{receipt}
-		,policy = #{policy}
-		,certification = #{certification}
-		,approver = #{approver}
-		,approve_datetime = #{approveDatetime}
-		,approve_note = #{approveNote}
-		,download_times = #{downloadTimes}
-		,lend_pdf = #{lendPdf}
-		,cw_pdf = #{cwPdf}
-		,play_pdf = #{playPdf}
-		,receipt_pdf = #{receiptPdf}
-		,payroll_pdf = #{payrollPdf}
-		,remark = #{remark}
+		area=#{area}
+		,salesman=#{saleman}
+		,car_store=#{carStore}
+		,jb_bank=#{jbBank}
+		
+		,loan_type=#{loanType}
+		,loan_amount=#{loanAmount}
+		,loan_term=#{loanTerm}
+		,real_name=#{realName}
+		,id_kind=#{idKind}
+		
+		,id_no=#{idNo}
+		,mobile=#{mobile}
+		,dc_user=#{dcUser}
+		,sign_pic=#{signPic}
+		,home_pic=#{homePic}
+		
+		,id_info=#{idInfo}
+		,video=#{video}
+		,dc_report=#{dcReport}
+		,dc_data=#{dcData}
+		,address=#{address}
+		
+		,rate=#{rate}
+		,fee=#{fee}
+		,urgent=#{urgent}
+		,bank=#{bank}
+		,branch=#{branch}
+		
+		,backcard_no=#{backcardNo}
+		,last_node=#{lastNode}
+		,status=#{status}
+		,remark
 		WHERE code = #{code}
 	</update>
 
@@ -300,7 +280,7 @@
 		UPDATE credit_order
 		SET
 		mobile = #{mobile}
-		,investigator = #{investigator}
+		,dc_user = #{dcUser}
 		,status = #{status}
 		,remark = #{remark}
 		WHERE code = #{code}
@@ -313,9 +293,9 @@
 		,home_pic = #{homePic}
 		,id_info = #{idInfo}
 		,video = #{video}
-		,report = #{report}
-		,other_data = #{otherData}
-		,home_address = #{homeAddress}
+		,dc_report = #{dcReport}
+		,dc_data = #{dcData}
+		,address = #{address}
 		,remark=#{remark}
 		WHERE code = #{code}
 	</update> 
@@ -323,18 +303,14 @@
 		UPDATE credit_order
 		SET
 		status = #{status}
-		,brand = #{brand}
-		,model = #{model}
-		,price = #{price}
-		,first_pay = #{firstPay}
-		,real_loan_amount = #{realLoanAmount}
+		,loan_amount = #{loanAmount}
 		,loan_term = #{loanTerm}
-		,sum_rate = #{sumRate}
+		,rate = #{rate}
 		,fee = #{fee}
-		,urgency = #{urgency}
-		,supply_info = #{supplyInfo}
-		,card_bank = #{cardBank}
-		,card_number = #{cardNumber}
+		,urgent = #{urgent}
+		,bank = #{bank}
+		,branch=#{branch}
+		,bankcard_no = #{bankcardNo}
 		WHERE code = #{code}
 	</update> 
 	<update id="update_Approve" parameterType="creditOrder">
@@ -380,7 +356,7 @@
 		,play_pdf = #{playPdf}
 		WHERE code = #{code}
 	</update> 
-	<update id="update_FBH" parameterType="creditOrder">
+	<!-- <update id="update_FBH" parameterType="creditOrder">
 		UPDATE credit_order
 		SET
 		status = #{status}
@@ -388,7 +364,7 @@
 		,policy = #{policy}
 		,certification = #{certification}
 		WHERE code = #{code}
-	</update> 
+	</update>  -->
 	<update id="update_Download" parameterType="creditOrder">
 		UPDATE credit_order
 		SET

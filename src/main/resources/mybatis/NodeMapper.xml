@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.loan.dao.INodeDAO">
+	<resultMap id="Node_DB_Result" type="Node">
+		<result column="code" property="code" />
+		<result column="type" property="type" />
+		<result column="credit_order_code" property="creditOrderCode" />
+		<result column="start_datetime" property="startDatetime" />
+		<result column="end_datetime" property="endDatetime" />
+		<result column="distance" property="distance" />
+		<result column="updater" property="updater" />
+		<result column="remark" property="remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_Node" parameterType="Node" resultMap="Node_DB_Result">
+		SELECT
+		t.code
+		,t.type
+		,t.credit_order_code
+		,t.start_datetime
+		,t.end_datetime
+		,t.distance
+		,t.updater
+		,t.remark
+		FROM
+		tloan_node t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_Node_count" parameterType="Node"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tloan_node t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_Node" parameterType="Node">
+		INSERT INTO
+		tloan_node(
+		code
+		,type
+		,credit_order_code
+		,start_datetime
+		,end_datetime
+		,distance
+		,updater
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{type}
+		,#{creditOrderCode}
+		,#{startDatetime}
+		,#{endDatetime}
+		,#{distance}
+		,#{updater}
+		,#{remark}
+		)
+	</insert>
+
+	<update id="update_Node" parameterType="Node">
+		UPDATE tloan_node
+		SET
+		type = #{type}
+		,credit_order_code = #{creditOrderCode}
+		,start_datetime = #{startDatetime}
+		,end_datetime = #{endDatetime}
+		,distance = #{distance}
+		,updater = #{updater}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>

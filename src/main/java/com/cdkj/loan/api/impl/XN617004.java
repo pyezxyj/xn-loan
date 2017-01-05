@@ -28,8 +28,9 @@ public class XN617004 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         CreditAudit condition = new CreditAudit();
+        condition.setUserName(req.getUserName());
+        condition.setRelation(req.getRelation());
         condition.setStatus(req.getStatus());
-        condition.setRefUser(req.getUserName());
         condition.setStatusList(req.getStatusList());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {

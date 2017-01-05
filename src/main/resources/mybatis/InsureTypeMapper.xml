@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.loan.dao.IInsureTypeDAO">
+	<resultMap id="InsureType_DB_Result" type="InsureType">
+		<result column="code" property="code" />
+		<result column="insure_code" property="insureCode" />
+		<result column="type" property="type" />
+		<result column="amount" property="amount" />
+		<result column="remark" property="remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_InsureType" parameterType="InsureType" resultMap="InsureType_DB_Result">
+		SELECT
+		t.code
+		,t.insure_code
+		,t.type
+		,t.amount
+		,t.remark
+		FROM
+		tloan_insure_type t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_InsureType_count" parameterType="InsureType"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tloan_insure_type t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_InsureType" parameterType="InsureType">
+		INSERT INTO
+		tloan_insure_type(
+		code
+		,insure_code
+		,type
+		,amount
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{insureCode}
+		,#{type}
+		,#{amount}
+		,#{remark}
+		)
+	</insert>
+
+	<update id="update_InsureType" parameterType="InsureType">
+		UPDATE tloan_insure_type
+		SET
+		insure_code = #{insureCode}
+		,type = #{type}
+		,amount = #{amount}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>

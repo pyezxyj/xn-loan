@@ -16,6 +16,8 @@ public interface ICreditAuditBO extends IPaginableBO<CreditAudit> {
 
     public int refreshCreditAudit(CreditAudit data);
 
+    public int refreshAddress(CreditAudit data);
+
     public int refreshMobile(CreditAudit data);
 
     public List<CreditAudit> queryCreditAuditList(CreditAudit condition);

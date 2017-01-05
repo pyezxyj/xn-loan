@@ -27,7 +27,7 @@ public class XN617002 extends AProcessor {
         CreditOrder data = new CreditOrder();
         data.setCode(req.getCode());
         data.setSalesman(req.getSaleman());
-        data.setCar(req.getCar());
+        data.setCarStore(req.getCar());
         data.setJbBank(req.getJbBank());
         data.setLoanType(req.getLoanType());
         data.setLoanAmount(StringValidater.toLong(req.getLoanAmount()));

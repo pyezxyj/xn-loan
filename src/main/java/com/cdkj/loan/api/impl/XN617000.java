@@ -27,18 +27,18 @@ public class XN617000 extends AProcessor {
     public Object doBusiness() throws BizException {
         CreditOrder data = new CreditOrder();
         data.setSalesman(req.getSalesman());
-        data.setCar(req.getCar());
+        data.setCarStore(req.getCarStore());
         data.setJbBank(req.getJbBank());
         data.setLoanType(req.getLoanType());
         data.setLoanAmount(StringValidater.toLong(req.getLoanAmount()));
         return new PKCodeRes(creditOrderAO.addCreditOrder(data,
-            req.getCreditList()));
+            req.getCreditPeopleList()));
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN617000Req.class);
-        StringValidater.validateBlank(req.getSalesman(), req.getCar(),
+        StringValidater.validateBlank(req.getSalesman(), req.getCarStore(),
             req.getJbBank(), req.getLoanType(), req.getLoanAmount());
     }
 

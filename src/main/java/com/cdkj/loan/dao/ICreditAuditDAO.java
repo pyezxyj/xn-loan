@@ -10,4 +10,6 @@ public interface ICreditAuditDAO extends IBaseDAO<CreditAudit> {
     public int update(CreditAudit data);
 
     public int updateMobile(CreditAudit data);
+
+    public int updateAddress(CreditAudit data);
 }

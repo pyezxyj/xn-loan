@@ -12,497 +12,350 @@ import com.cdkj.loan.dao.base.ABaseDO;
 * @history:
 */
 public class CreditOrder extends ABaseDO {
-
     private static final long serialVersionUID = 1L;
 
-    // 编号
     private String code;
 
-    // 业务员
+    private String area;
+
     private String salesman;
 
-    // 车行
-    private String car;
+    private String carStore;
 
-    // 经办银行
     private String jbBank;
 
-    // 贷款品种
     private String loanType;
 
-    // 贷款金额
     private Long loanAmount;
 
-    // 姓名
-    private String userName;
-
-    // 查询条件
-    private List<String> statusList;
-
-    // 证件类型
-    private String idKind;
-
-    // 证件号
-    private String idNo;
-
-    // 手机号
-    private String mobile;
-
-    // 调查员
-    private String investigator;
-
-    // 状态
-    private String status;
-
-    // 创建时间
-    private Date createDatetime;
-
-    // 签字照
-    private String signPic;
-
-    // 家访照
-    private String homePic;
-
-    // 身份资料
-    private String idInfo;
-
-    // 视频
-    private String video;
-
-    // 调查报告
-    private String report;
-
-    // 其他
-    private String otherData;
-
-    // 家庭地址
-    private String homeAddress;
-
-    // 品牌
-    private String brand;
-
-    // 型号
-    private String model;
-
-    // 车价
-    private Long price;
-
-    // 首付
-    private Long firstPay;
-
-    // 贷款额
-    private Long realLoanAmount;
-
-    // 贷款期限
     private String loanTerm;
 
-    // 综合费率
-    private String sumRate;
+    private String realName;
 
-    // 费率
-    private String fee;
+    private String idKind;
 
-    // 紧急度
-    private String urgency;
+    private String idNo;
 
-    // 其他资料
-    private String supplyInfo;
+    private String mobile;
 
-    // 代扣卡开户行
-    private String cardBank;
+    private String dcUser;
 
-    // 代扣卡号码
-    private String cardNumber;
+    private String signPic;
 
-    // 发票
-    private String receipt;
+    private String homePic;
 
-    // 保单
-    private String policy;
+    private String idInfo;
 
-    // 合格证
-    private String certification;
+    private String video;
 
-    // 审批人
-    private String approver;
+    private String dcReport;
 
-    // 审批时间
-    private Date approveDatetime;
+    private String dcData;
 
-    // 审批说明
-    private String approveNote;
+    private String address;
 
-    // 下载次数
-    private Integer downloadTimes;
+    private Long rate;
 
-    // 放款附件
-    private String lendPdf;
+    private Long fee;
 
-    // 请款附件
-    private String cwPdf;
+    private String urgent;
 
-    // 打款水单
-    private String playPdf;
+    private String bank;
 
-    // 收款水单
-    private String receiptPdf;
+    private String branch;
 
-    // 收款时间
-    private Date receiptDatetime;
+    private String backcardNo;
 
-    // 收款金额
-    private Long receiptAmount;
+    private String lastNode;
 
-    // 工资单附件
-    private String payrollPdf;
+    private String fkPdf;
 
-    // 备注
+    private String qkPdf;
+
+    private String dkPdf;
+
+    private String skPdf;
+
+    private String skAmount;
+
+    private Date skDatetime;
+
+    private String status;
+
+    private Date createDatetime;
+
     private String remark;
+
+    private String accessLevel;
+
+    private String consume;
 
     private List<CreditAudit> creditAuditList;
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+    private List<String> statusList;
 
     public String getCode() {
         return code;
     }
 
-    public void setSalesman(String salesman) {
-        this.salesman = salesman;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 
     public String getSalesman() {
         return salesman;
     }
 
-    public void setCar(String car) {
-        this.car = car;
+    public void setSalesman(String salesman) {
+        this.salesman = salesman;
     }
 
-    public String getCar() {
-        return car;
+    public String getCarStore() {
+        return carStore;
     }
 
-    public void setJbBank(String jbBank) {
-        this.jbBank = jbBank;
+    public void setCarStore(String carStore) {
+        this.carStore = carStore;
     }
 
     public String getJbBank() {
         return jbBank;
     }
 
-    public void setLoanType(String loanType) {
-        this.loanType = loanType;
+    public void setJbBank(String jbBank) {
+        this.jbBank = jbBank;
     }
 
     public String getLoanType() {
         return loanType;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setIdKind(String idKind) {
-        this.idKind = idKind;
-    }
-
-    public String getIdKind() {
-        return idKind;
-    }
-
-    public void setIdNo(String idNo) {
-        this.idNo = idNo;
-    }
-
-    public String getIdNo() {
-        return idNo;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setInvestigator(String investigator) {
-        this.investigator = investigator;
-    }
-
-    public String getInvestigator() {
-        return investigator;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setSignPic(String signPic) {
-        this.signPic = signPic;
-    }
-
-    public String getSignPic() {
-        return signPic;
-    }
-
-    public void setHomePic(String homePic) {
-        this.homePic = homePic;
-    }
-
-    public String getHomePic() {
-        return homePic;
-    }
-
-    public void setIdInfo(String idInfo) {
-        this.idInfo = idInfo;
-    }
-
-    public String getIdInfo() {
-        return idInfo;
-    }
-
-    public void setVideo(String video) {
-        this.video = video;
-    }
-
-    public String getVideo() {
-        return video;
-    }
-
-    public void setReport(String report) {
-        this.report = report;
-    }
-
-    public String getReport() {
-        return report;
-    }
-
-    public void setOtherData(String otherData) {
-        this.otherData = otherData;
-    }
-
-    public String getOtherData() {
-        return otherData;
-    }
-
-    public void setHomeAddress(String homeAddress) {
-        this.homeAddress = homeAddress;
-    }
-
-    public String getHomeAddress() {
-        return homeAddress;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setLoanTerm(String loanTerm) {
-        this.loanTerm = loanTerm;
+    public void setLoanType(String loanType) {
+        this.loanType = loanType;
     }
 
     public String getLoanTerm() {
         return loanTerm;
     }
 
-    public void setSumRate(String sumRate) {
-        this.sumRate = sumRate;
+    public void setLoanTerm(String loanTerm) {
+        this.loanTerm = loanTerm;
     }
 
-    public String getSumRate() {
-        return sumRate;
+    public String getRealName() {
+        return realName;
     }
 
-    public void setUrgency(String urgency) {
-        this.urgency = urgency;
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
-    public String getUrgency() {
-        return urgency;
+    public String getIdKind() {
+        return idKind;
     }
 
-    public void setSupplyInfo(String supplyInfo) {
-        this.supplyInfo = supplyInfo;
+    public void setIdKind(String idKind) {
+        this.idKind = idKind;
     }
 
-    public String getSupplyInfo() {
-        return supplyInfo;
+    public String getIdNo() {
+        return idNo;
     }
 
-    public void setCardBank(String cardBank) {
-        this.cardBank = cardBank;
+    public void setIdNo(String idNo) {
+        this.idNo = idNo;
     }
 
-    public String getCardBank() {
-        return cardBank;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
-    public String getCardNumber() {
-        return cardNumber;
+    public String getDcUser() {
+        return dcUser;
     }
 
-    public void setReceipt(String receipt) {
-        this.receipt = receipt;
+    public void setDcUser(String dcUser) {
+        this.dcUser = dcUser;
     }
 
-    public String getReceipt() {
-        return receipt;
+    public String getSignPic() {
+        return signPic;
     }
 
-    public void setPolicy(String policy) {
-        this.policy = policy;
+    public void setSignPic(String signPic) {
+        this.signPic = signPic;
     }
 
-    public String getPolicy() {
-        return policy;
+    public String getHomePic() {
+        return homePic;
     }
 
-    public void setCertification(String certification) {
-        this.certification = certification;
+    public void setHomePic(String homePic) {
+        this.homePic = homePic;
     }
 
-    public String getCertification() {
-        return certification;
+    public String getIdInfo() {
+        return idInfo;
     }
 
-    public void setApprover(String approver) {
-        this.approver = approver;
+    public void setIdInfo(String idInfo) {
+        this.idInfo = idInfo;
     }
 
-    public String getApprover() {
-        return approver;
+    public String getVideo() {
+        return video;
     }
 
-    public void setApproveNote(String approveNote) {
-        this.approveNote = approveNote;
+    public void setVideo(String video) {
+        this.video = video;
     }
 
-    public String getApproveNote() {
-        return approveNote;
+    public String getDcReport() {
+        return dcReport;
     }
 
-    public void setLendPdf(String lendPdf) {
-        this.lendPdf = lendPdf;
+    public void setDcReport(String dcReport) {
+        this.dcReport = dcReport;
     }
 
-    public String getLendPdf() {
-        return lendPdf;
+    public String getDcData() {
+        return dcData;
     }
 
-    public void setCwPdf(String cwPdf) {
-        this.cwPdf = cwPdf;
+    public void setDcData(String dcData) {
+        this.dcData = dcData;
     }
 
-    public String getCwPdf() {
-        return cwPdf;
+    public String getAddress() {
+        return address;
     }
 
-    public void setPlayPdf(String playPdf) {
-        this.playPdf = playPdf;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getPlayPdf() {
-        return playPdf;
+    public String getUrgent() {
+        return urgent;
     }
 
-    public void setReceiptPdf(String receiptPdf) {
-        this.receiptPdf = receiptPdf;
+    public void setUrgent(String urgent) {
+        this.urgent = urgent;
     }
 
-    public String getReceiptPdf() {
-        return receiptPdf;
+    public String getBank() {
+        return bank;
     }
 
-    public void setPayrollPdf(String payrollPdf) {
-        this.payrollPdf = payrollPdf;
+    public void setBank(String bank) {
+        this.bank = bank;
     }
 
-    public String getPayrollPdf() {
-        return payrollPdf;
+    public String getBranch() {
+        return branch;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
+    public String getBackcardNo() {
+        return backcardNo;
+    }
+
+    public void setBackcardNo(String backcardNo) {
+        this.backcardNo = backcardNo;
+    }
+
+    public String getLastNode() {
+        return lastNode;
+    }
+
+    public void setLastNode(String lastNode) {
+        this.lastNode = lastNode;
+    }
+
+    public String getFkPdf() {
+        return fkPdf;
+    }
+
+    public void setFkPdf(String fkPdf) {
+        this.fkPdf = fkPdf;
+    }
+
+    public String getQkPdf() {
+        return qkPdf;
+    }
+
+    public void setQkPdf(String qkPdf) {
+        this.qkPdf = qkPdf;
+    }
+
+    public String getDkPdf() {
+        return dkPdf;
+    }
+
+    public void setDkPdf(String dkPdf) {
+        this.dkPdf = dkPdf;
+    }
+
+    public String getSkPdf() {
+        return skPdf;
+    }
+
+    public void setSkPdf(String skPdf) {
+        this.skPdf = skPdf;
+    }
+
+    public String getSkAmount() {
+        return skAmount;
+    }
+
+    public void setSkAmount(String skAmount) {
+        this.skAmount = skAmount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getRemark() {
         return remark;
     }
 
-    public Long getLoanAmount() {
-        return loanAmount;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
-    public void setLoanAmount(Long loanAmount) {
-        this.loanAmount = loanAmount;
+    public String getAccessLevel() {
+        return accessLevel;
     }
 
-    public Date getCreateDatetime() {
-        return createDatetime;
+    public void setAccessLevel(String accessLevel) {
+        this.accessLevel = accessLevel;
     }
 
-    public void setCreateDatetime(Date createDatetime) {
-        this.createDatetime = createDatetime;
+    public String getConsume() {
+        return consume;
     }
 
-    public Long getPrice() {
-        return price;
-    }
-
-    public void setPrice(Long price) {
-        this.price = price;
-    }
-
-    public Long getFirstPay() {
-        return firstPay;
-    }
-
-    public void setFirstPay(Long firstPay) {
-        this.firstPay = firstPay;
-    }
-
-    public Long getRealLoanAmount() {
-        return realLoanAmount;
-    }
-
-    public void setRealLoanAmount(Long realLoanAmount) {
-        this.realLoanAmount = realLoanAmount;
-    }
-
-    public Date getApproveDatetime() {
-        return approveDatetime;
-    }
-
-    public void setApproveDatetime(Date approveDatetime) {
-        this.approveDatetime = approveDatetime;
+    public void setConsume(String consume) {
+        this.consume = consume;
     }
 
     public List<CreditAudit> getCreditAuditList() {
@@ -513,44 +366,52 @@ public class CreditOrder extends ABaseDO {
         this.creditAuditList = creditAuditList;
     }
 
-    public String getFee() {
+    public Long getLoanAmount() {
+        return loanAmount;
+    }
+
+    public void setLoanAmount(Long loanAmount) {
+        this.loanAmount = loanAmount;
+    }
+
+    public Long getRate() {
+        return rate;
+    }
+
+    public void setRate(Long rate) {
+        this.rate = rate;
+    }
+
+    public Long getFee() {
         return fee;
     }
 
-    public void setFee(String fee) {
+    public void setFee(Long fee) {
         this.fee = fee;
     }
 
-    public Date getReceiptDatetime() {
-        return receiptDatetime;
+    public Date getSkDatetime() {
+        return skDatetime;
     }
 
-    public void setReceiptDatetime(Date receiptDatetime) {
-        this.receiptDatetime = receiptDatetime;
+    public void setSkDatetime(Date skDatetime) {
+        this.skDatetime = skDatetime;
     }
 
-    public Integer getDownloadTimes() {
-        return downloadTimes;
+    public Date getCreateDatetime() {
+        return createDatetime;
     }
 
-    public void setDownloadTimes(Integer downloadTimes) {
-        this.downloadTimes = downloadTimes;
-    }
-
-    public Long getReceiptAmount() {
-        return receiptAmount;
-    }
-
-    public void setReceiptAmount(Long receiptAmount) {
-        this.receiptAmount = receiptAmount;
-    }
-
-    public void setStatusList(List<String> statusList) {
-        this.statusList = statusList;
+    public void setCreateDatetime(Date createDatetime) {
+        this.createDatetime = createDatetime;
     }
 
     public List<String> getStatusList() {
         return statusList;
+    }
+
+    public void setStatusList(List<String> statusList) {
+        this.statusList = statusList;
     }
 
 }

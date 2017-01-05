@@ -26,13 +26,13 @@ public class XN617011 extends AProcessor {
     public Object doBusiness() throws BizException {
         CreditOrder data = new CreditOrder();
         data.setCode(req.getCode());
-        data.setHomeAddress(req.getHomeAddress());
+        data.setAddress(req.getHomeAddress());
         data.setHomePic(req.getHomePic());
         data.setIdInfo(req.getIdInfo());
-        data.setReport(req.getReport());
+        data.setDcReport(req.getReport());
         data.setSignPic(req.getSignPic());
         data.setVideo(req.getVideo());
-        data.setOtherData(req.getOtherData());
+        data.setDcData(req.getOtherData());
         creditOrderAO.editSBack(data);
         return new Boolean(true);
     }

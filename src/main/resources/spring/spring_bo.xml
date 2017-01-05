@@ -26,5 +26,25 @@
 	
 	<bean id="creditAuditBO" class="com.cdkj.loan.bo.impl.CreditAuditBOImpl">
 		<property name="paginableDAO" ref="creditAuditDAOImpl"/>
-	</bean>	
+	</bean>
+	
+	<bean id="carBO" class="com.cdkj.loan.bo.impl.CarBOImpl">
+		<property name="paginableDAO" ref="carDAOImpl"/>
+	</bean>
+	
+	<bean id="expressBO" class="com.cdkj.loan.bo.impl.ExpressBOImpl">
+		<property name="paginableDAO" ref="expressDAOImpl"/>
+	</bean>
+	
+	<bean id="insureTypeBO" class="com.cdkj.loan.bo.impl.InsureTypeBOImpl">
+		<property name="paginableDAO" ref="insureTypeDAOImpl"/>
+	</bean>
+	
+	<bean id="nodeBO" class="com.cdkj.loan.bo.impl.NodeBOImpl">
+		<property name="paginableDAO" ref="nodeDAOImpl"/>
+	</bean>
+	
+	<bean id="repayBO" class="com.cdkj.loan.bo.impl.RepayBOImpl">
+		<property name="paginableDAO" ref="repayDAOImpl"/>
+	</bean>
 </beans>

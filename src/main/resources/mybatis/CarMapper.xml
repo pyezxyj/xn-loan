@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.loan.dao.ICarDAO">
+	<resultMap id="Car_DB_Result" type="Car">
+		<result column="code" property="code" />
+		<result column="credit_order_code" property="creditOrderCode" />
+		<result column="real_name" property="realName" />
+		<result column="brand" property="brand" />
+		<result column="model" property="model" />
+		<result column="price" property="price" />
+		<result column="first_amount" property="firstAmount" />
+		<result column="license_no" property="licenseNo" />
+		<result column="chassis_no" property="chassisNo" />
+		<result column="engine_no" property="engineNo" />
+		<result column="seat_num" property="seatNum" />
+		<result column="invoice" property="invoice" />
+		<result column="policy" property="policy" />
+		<result column="certification" property="certification" />
+		<result column="invoice_no" property="invoiceNo" />
+		<result column="buy_datetime" property="buyDatetime" />
+		<result column="buy_tax" property="buyTax" />
+		<result column="gps_vendor" property="gpsVendor" />
+		<result column="gps_no" property="gpsNo" />
+		<result column="dy_start_datetime" property="dyStartDatetime" />
+		<result column="dy_end_datetime" property="dyEndDatetime" />
+		<result column="agent" property="agent" />
+		<result column="tax_pdf" property="taxPdf" />
+		<result column="guaranty_pdf" property="guarantyPdf" />
+		<result column="regist_pdf" property="registPdf" />
+		<result column="status" property="status" />
+		<result column="loan_settle_datetime" property="loanSettleDatetime" />
+		<result column="property_out_datetime" property="propertyOutDatetime" />
+		<result column="approver" property="approver" />
+		<result column="approve_datetime" property="approveDatetime" />
+		<result column="remark" property="remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_Car" parameterType="Car" resultMap="Car_DB_Result">
+		SELECT
+		t.code
+		,t.credit_order_code
+		,t.real_name
+		,t.brand
+		,t.model
+		,t.price
+		,t.first_amount
+		,t.license_no
+		,t.chassis_no
+		,t.engine_no
+		,t.seat_num
+		,t.invoice
+		,t.policy
+		,t.certification
+		,t.invoice_no
+		,t.buy_datetime
+		,t.buy_tax
+		,t.gps_vendor
+		,t.gps_no
+		,t.dy_start_datetime
+		,t.dy_end_datetime
+		,t.agent
+		,t.tax_pdf
+		,t.guaranty_pdf
+		,t.regist_pdf
+		,t.status
+		,t.loan_settle_datetime
+		,t.property_out_datetime
+		,t.approver
+		,t.approve_datetime
+		,t.remark
+		FROM
+		tloan_car t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_Car_count" parameterType="Car"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tloan_car t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_Car" parameterType="Car">
+		INSERT INTO
+		tloan_car(
+		code
+		,credit_order_code
+		,real_name
+		,brand
+		,model
+		,price
+		,first_amount
+		,license_no
+		,chassis_no
+		,engine_no
+		,seat_num
+		,invoice
+		,policy
+		,certification
+		,invoice_no
+		,buy_datetime
+		,buy_tax
+		,gps_vendor
+		,gps_no
+		,dy_start_datetime
+		,dy_end_datetime
+		,agent
+		,tax_pdf
+		,guaranty_pdf
+		,regist_pdf
+		,status
+		,loan_settle_datetime
+		,property_out_datetime
+		,approver
+		,approve_datetime
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{creditOrderCode}
+		,#{realName}
+		,#{brand}
+		,#{model}
+		,#{price}
+		,#{firstAmount}
+		,#{licenseNo}
+		,#{chassisNo}
+		,#{engineNo}
+		,#{seatNum}
+		,#{invoice}
+		,#{policy}
+		,#{certification}
+		,#{invoiceNo}
+		,#{buyDatetime}
+		,#{buyTax}
+		,#{gpsVendor}
+		,#{gpsNo}
+		,#{dyStartDatetime}
+		,#{dyEndDatetime}
+		,#{agent}
+		,#{taxPdf}
+		,#{guarantyPdf}
+		,#{registPdf}
+		,#{status}
+		,#{loanSettleDatetime}
+		,#{propertyOutDatetime}
+		,#{approver}
+		,#{approveDatetime}
+		,#{remark}
+		)
+	</insert>
+
+	<update id="update_Car" parameterType="Car">
+		UPDATE tloan_car
+		SET
+		credit_order_code = #{creditOrderCode}
+		,real_name = #{realName}
+		,brand = #{brand}
+		,model = #{model}
+		,price = #{price}
+		,first_amount = #{firstAmount}
+		,license_no = #{licenseNo}
+		,chassis_no = #{chassisNo}
+		,engine_no = #{engineNo}
+		,seat_num = #{seatNum}
+		,invoice = #{invoice}
+		,policy = #{policy}
+		,certification = #{certification}
+		,invoice_no = #{invoiceNo}
+		,buy_datetime = #{buyDatetime}
+		,buy_tax = #{buyTax}
+		,gps_vendor = #{gpsVendor}
+		,gps_no = #{gpsNo}
+		,dy_start_datetime = #{dyStartDatetime}
+		,dy_end_datetime = #{dyEndDatetime}
+		,agent = #{agent}
+		,tax_pdf = #{taxPdf}
+		,guaranty_pdf = #{guarantyPdf}
+		,regist_pdf = #{registPdf}
+		,status = #{status}
+		,loan_settle_datetime = #{loanSettleDatetime}
+		,property_out_datetime = #{propertyOutDatetime}
+		,approver = #{approver}
+		,approve_datetime = #{approveDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>

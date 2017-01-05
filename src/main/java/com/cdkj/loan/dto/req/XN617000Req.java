@@ -11,31 +11,29 @@ import com.cdkj.loan.domain.CreditAudit;
  * @history:
  */
 public class XN617000Req {
+    // 地区
+    private String area;
+
     // 业务员（必填）
-    public String salesman;
+    private String salesman;
 
     // 车行（必填）
-    public String car;
+    private String carStore;
 
     // 经办银行（必填）
-    public String jbBank;
+    private String jbBank;
 
     // 贷款类型（必填）
-    public String loanType;
+    private String loanType;
 
     // 贷款金额（必填）
-    public String loanAmount;
+    private String loanAmount;
+
+    // 更新人
+    private String updater;
 
     // 贷款人关系列表（必填）
-    public List<CreditAudit> creditList;
-
-    public String getCar() {
-        return car;
-    }
-
-    public void setCar(String car) {
-        this.car = car;
-    }
+    private List<CreditAudit> creditPeopleList;
 
     public String getJbBank() {
         return jbBank;
@@ -61,19 +59,43 @@ public class XN617000Req {
         this.loanAmount = loanAmount;
     }
 
-    public List<CreditAudit> getCreditList() {
-        return creditList;
-    }
-
-    public void setCreditList(List<CreditAudit> creditList) {
-        this.creditList = creditList;
-    }
-
     public String getSalesman() {
         return salesman;
     }
 
     public void setSalesman(String salesman) {
         this.salesman = salesman;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getCarStore() {
+        return carStore;
+    }
+
+    public void setCarStore(String carStore) {
+        this.carStore = carStore;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
+
+    public List<CreditAudit> getCreditPeopleList() {
+        return creditPeopleList;
+    }
+
+    public void setCreditPeopleList(List<CreditAudit> creditPeopleList) {
+        this.creditPeopleList = creditPeopleList;
     }
 }

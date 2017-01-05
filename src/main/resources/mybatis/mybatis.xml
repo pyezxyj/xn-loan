@@ -6,6 +6,11 @@
 	    <typeAlias alias="sysConfig" type="com.cdkj.loan.domain.SYSConfig" />
 	    <typeAlias alias="creditAudit" type="com.cdkj.loan.domain.CreditAudit" />
 	    <typeAlias alias="creditOrder" type="com.cdkj.loan.domain.CreditOrder" />
+	    <typeAlias alias="car" type="com.cdkj.loan.domain.Car" />
+	    <typeAlias alias="express" type="com.cdkj.loan.domain.Express" />
+	    <typeAlias alias="insureType" type="com.cdkj.loan.domain.InsureType" />
+	    <typeAlias alias="node" type="com.cdkj.loan.domain.Node" />
+	    <typeAlias alias="repay" type="com.cdkj.loan.domain.Repay" />
 	</typeAliases>	
 </configuration>
 

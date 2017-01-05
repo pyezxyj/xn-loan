@@ -28,7 +28,7 @@ public class XN617003 extends AProcessor {
     public Object doBusiness() throws BizException {
         CreditOrder condition = new CreditOrder();
         condition.setStatus(req.getStatus());
-        condition.setUserName(req.getUserName());
+        condition.setRealName(req.getUserName());
         condition.setStatusList(req.getStatusList());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {

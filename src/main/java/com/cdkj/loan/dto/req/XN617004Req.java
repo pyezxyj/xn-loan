@@ -19,6 +19,8 @@ public class XN617004Req extends APageReq {
 
     public String status;
 
+    public String relation;
+
     // 查询条件
     private List<String> statusList;
 
@@ -44,6 +46,14 @@ public class XN617004Req extends APageReq {
 
     public void setStatusList(List<String> statusList) {
         this.statusList = statusList;
+    }
+
+    public String getRelation() {
+        return relation;
+    }
+
+    public void setRelation(String relation) {
+        this.relation = relation;
     }
 
 }

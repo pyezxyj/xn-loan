@@ -95,4 +95,13 @@ public class CreditAuditBOImpl extends PaginableBOImpl<CreditAudit> implements
         }
         return count;
     }
+
+    @Override
+    public int refreshAddress(CreditAudit data) {
+        int count = 0;
+        if (StringUtils.isNotBlank(data.getCode())) {
+            count = creditAuditDAO.updateAddress(data);
+        }
+        return count;
+    }
 }

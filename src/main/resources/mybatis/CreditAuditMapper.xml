@@ -40,6 +40,12 @@
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
 			</if>
+			<!-- <if test="userName != null and userName != '' ">
+				AND t.user_name = #{userName}
+			</if> -->
+			<if test="userName != null and userName != '' ">
+				AND t.user_name like "%"#{userName}"%"
+			</if>
 			<if test="statusList != null and statusList != '' ">
 				AND t.status in 
                 <foreach item="item" index="index" collection="statusList" open="(" separator="," close=")">
@@ -48,9 +54,6 @@
 			</if>
 			<if test="relation != null and relation != '' ">
 				AND t.relation = #{relation}
-			</if>
-			<if test="userName != null and userName != '' ">
-				AND t.user_name = #{userName}
 			</if>
 		</trim>
 	</sql>
@@ -179,32 +182,14 @@
 		WHERE code = #{code}
 	</update>
 	
-<!-- 	<update id="update_creditAudit" parameterType="creditAudit">
+		<update id="update_address" parameterType="creditAudit">
 		UPDATE credit_audit
 		SET
-		relation = #{relation}
-		,ref_user = #{refUser}
-		,id_kind = #{idKind}
-		,id_no = #{idNo}
-		,real_name=#{realName}
-		,credit_result = #{creditResult}
-		,credit_code = #{creditCode}
-		,credit_descript = #{creditDescript}
-		,court_result = #{courtResult}
-		,court_descript = #{courtDescript}
-		,status = #{status}
-		,create_datetime = #{createDatetime}
-		,mobile = #{mobile}
-		,work_unit = #{workUnit}
+		work_unit = #{workUnit}
 		,work_phone = #{workPhone}
 		,work_address = #{workAddress}
-		,detail = #{detail}
-		,approver = #{approver}
-		,approve_datetime = #{approveDatetime}
-		,approve_note = #{approveNote}
-		,remark = #{remark}
 		WHERE code = #{code}
-	</update> -->
+	</update>
 	
 <!-- 	<update id="update_creditAudit" parameterType="creditAudit">
 		UPDATE credit_audit

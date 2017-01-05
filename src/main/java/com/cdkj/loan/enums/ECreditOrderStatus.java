@@ -31,6 +31,7 @@ public enum ECreditOrderStatus {
             "直接通过/待电话回访"), TO_DH("9", "电话回访通过/待补充请款资料/财务复核不通过"), DH("10",
             "已补充资料/待垫款复核"), PASS_CWTG("11", "垫款复核通过/待打款"), YDK("12",
             "已打款/发保合未上传"), YSK("13", "发保合已上传/待收款"), END("14", "已收款/结束");
+
     public static Map<String, ECreditOrderStatus> getResultMap() {
         Map<String, ECreditOrderStatus> map = new HashMap<String, ECreditOrderStatus>();
         for (ECreditOrderStatus status : ECreditOrderStatus.values()) {

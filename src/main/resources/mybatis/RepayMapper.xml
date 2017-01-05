@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.loan.dao.IRepayDAO">
+	<resultMap id="Repay_DB_Result" type="Repay">
+		<result column="code" property="code" />
+		<result column="credit_order_code" property="creditOrderCode" />
+		<result column="jb_bank" property="jbBank" />
+		<result column="real_name" property="realName" />
+		<result column="id_no" property="idNo" />
+		<result column="yh_amount" property="yhAmount" />
+		<result column="yh_datetime" property="yhDatetime" />
+		<result column="sh_amount" property="shAmount" />
+		<result column="sh_datetime" property="shDatetime" />
+		<result column="over_amount" property="overAmount" />
+		<result column="over_days" property="overDays" />
+		<result column="sms_count" property="smsCount" />
+		<result column="status" property="status" />
+		<result column="remark" property="remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_Repay" parameterType="Repay" resultMap="Repay_DB_Result">
+		SELECT
+		t.code
+		,t.credit_order_code
+		,t.jb_bank
+		,t.real_name
+		,t.id_no
+		,t.yh_amount
+		,t.yh_datetime
+		,t.sh_amount
+		,t.sh_datetime
+		,t.over_amount
+		,t.over_days
+		,t.sms_count
+		,t.status
+		,t.remark
+		FROM
+		tloan_repay t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_Repay_count" parameterType="Repay"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tloan_repay t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_Repay" parameterType="Repay">
+		INSERT INTO
+		tloan_repay(
+		code
+		,credit_order_code
+		,jb_bank
+		,real_name
+		,id_no
+		,yh_amount
+		,yh_datetime
+		,sh_amount
+		,sh_datetime
+		,over_amount
+		,over_days
+		,sms_count
+		,status
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{creditOrderCode}
+		,#{jbBank}
+		,#{realName}
+		,#{idNo}
+		,#{yhAmount}
+		,#{yhDatetime}
+		,#{shAmount}
+		,#{shDatetime}
+		,#{overAmount}
+		,#{overDays}
+		,#{smsCount}
+		,#{status}
+		,#{remark}
+		)
+	</insert>
+
+	<update id="update_Repay" parameterType="Repay">
+		UPDATE tloan_repay
+		SET
+		credit_order_code = #{creditOrderCode}
+		,jb_bank = #{jbBank}
+		,real_name = #{realName}
+		,id_no = #{idNo}
+		,yh_amount = #{yhAmount}
+		,yh_datetime = #{yhDatetime}
+		,sh_amount = #{shAmount}
+		,sh_datetime = #{shDatetime}
+		,over_amount = #{overAmount}
+		,over_days = #{overDays}
+		,sms_count = #{smsCount}
+		,status = #{status}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>

@@ -26,19 +26,9 @@ public class XN617012 extends AProcessor {
     public Object doBusiness() throws BizException {
         CreditOrder data = new CreditOrder();
         data.setCode(req.getCode());
-        data.setBrand(req.getBrand());
-        data.setModel(req.getModel());
-        data.setPrice(StringValidater.toLong(req.getPrice()));
-        data.setFirstPay(StringValidater.toLong(req.getFirstPay()));
-        data.setRealLoanAmount(StringValidater.toLong(req.getRealLoanAmount()));
+
         data.setLoanTerm(req.getLoanTerm());
-        data.setSumRate(req.getSumRate());
-        data.setFee(req.getFee());
-        data.setUrgency(req.getUrgency());
-        data.setSupplyInfo(req.getSupplyInfo());
-        data.setCardBank(req.getCardBank());
-        data.setCardNumber(req.getCardNumber());
-        data.setRemark("已录入放款资料，待合规性审查");
+
         creditOrderAO.editZLBack(data, req.getCreditAuditList());
         return new Boolean(true);
     }

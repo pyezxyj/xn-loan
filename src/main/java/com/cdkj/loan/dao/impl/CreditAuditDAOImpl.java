@@ -57,4 +57,9 @@ public class CreditAuditDAOImpl extends AMybatisTemplate implements
     public int updateMobile(CreditAudit data) {
         return super.update(NAMESPACE.concat("update_mobile"), data);
     }
+
+    @Override
+    public int updateAddress(CreditAudit data) {
+        return super.update(NAMESPACE.concat("update_address"), data);
+    }
 }

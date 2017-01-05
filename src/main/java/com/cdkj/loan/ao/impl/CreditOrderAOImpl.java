@@ -33,7 +33,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         }
         for (CreditAudit creditAudit : creditAuditList) {
             if (EBoolean.NO.getCode().equals(creditAudit.getRelation())) {
-                data.setUserName(creditAudit.getUserName());
+                data.setRealName(creditAudit.getUserName());
                 data.setIdKind(creditAudit.getIdKind());
                 data.setIdNo(creditAudit.getIdNo());
                 code = creditOrderBO.saveCreditOrder(data);
@@ -64,7 +64,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             creditAudit.setRefUser(data.getCode());
             creditAuditBO.saveCreditAudit(creditAudit);
             if (EBoolean.NO.getCode().equals(creditAudit.getRelation())) {
-                data.setUserName(creditAudit.getUserName());
+                data.setRealName(creditAudit.getUserName());
                 data.setIdKind(creditAudit.getIdKind());
                 data.setIdNo(creditAudit.getIdNo());
                 creditOrderBO.refreshCreditOrder(data);
@@ -156,7 +156,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         data.setStatus(ECreditOrderStatus.TO_SC.getCode());
         creditOrderBO.refreshZLBack(data);
         for (CreditAudit creditAudit : creditAuditList) {
-            creditAuditBO.refreshCreditAudit(creditAudit);
+            creditAuditBO.refreshAddress(creditAudit);
         }
     }
 
