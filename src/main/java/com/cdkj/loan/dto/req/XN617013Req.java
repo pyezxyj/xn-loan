@@ -1,17 +1,22 @@
 package com.cdkj.loan.dto.req;
 
 /**
- * 合规审查
+ * 录入发保合
  * @author: asus 
- * @since: 2016年12月24日 下午6:19:05 
+ * @since: 2016年12月24日 下午7:50:23 
  * @history:
  */
-public class XN617013Req {
+public class XN617019Req {
     public String code;
 
-    public String approveResult;
+    // 发票
+    public String receipt;
 
-    public String remark;
+    // 保单
+    public String policy;
+
+    // 合格证
+    public String certification;
 
     public String getCode() {
         return code;
@@ -21,19 +26,27 @@ public class XN617013Req {
         this.code = code;
     }
 
-    public String getApproveResult() {
-        return approveResult;
+    public String getReceipt() {
+        return receipt;
     }
 
-    public void setApproveResult(String approveResult) {
-        this.approveResult = approveResult;
+    public void setReceipt(String receipt) {
+        this.receipt = receipt;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getPolicy() {
+        return policy;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setPolicy(String policy) {
+        this.policy = policy;
+    }
+
+    public String getCertification() {
+        return certification;
+    }
+
+    public void setCertification(String certification) {
+        this.certification = certification;
     }
 }

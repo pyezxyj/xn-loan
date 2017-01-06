@@ -1,49 +1,53 @@
 package com.cdkj.loan.dto.req;
 
-import java.util.List;
-
 /**
- * 分页查询资质申请
+ * 分配调查岗
  * @author: asus 
- * @since: 2016年12月24日 下午2:02:07 
+ * @since: 2016年12月24日 下午5:15:22 
  * @history:
  */
-public class XN617003Req extends APageReq {
-    /** 
-     * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
-     */
-    private static final long serialVersionUID = 1L;
+public class XN617010Req {
+    // 编号
+    public String code;
 
-    // 姓名
-    public String userName;
+    // 手机号
+    public String mobile;
 
-    // 状态
-    public String status;
+    // 调查员
+    public String investigator;
 
-    // 查询条件
-    private List<String> statusList;
+    // 备注
+    public String remark;
 
-    public String getUserName() {
-        return userName;
+    public String getCode() {
+        return code;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getStatus() {
-        return status;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
-    public List<String> getStatusList() {
-        return statusList;
+    public String getInvestigator() {
+        return investigator;
     }
 
-    public void setStatusList(List<String> statusList) {
-        this.statusList = statusList;
+    public void setInvestigator(String investigator) {
+        this.investigator = investigator;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

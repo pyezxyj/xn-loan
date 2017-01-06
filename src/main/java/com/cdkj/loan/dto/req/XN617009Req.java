@@ -1,26 +1,15 @@
 package com.cdkj.loan.dto.req;
 
 /**
- * 征信调查
+ * 请款资料补充
  * @author: asus 
- * @since: 2016年12月24日 下午2:53:14 
+ * @since: 2016年12月24日 下午7:41:22 
  * @history:
  */
-public class XN617009Req {
-    // 编号
+public class XN617017Req {
     public String code;
 
-    // 征信结果
-    public String creditResult;
-
-    // 征信描述
-    public String creditDescript;
-
-    // 法院结果
-    public String courtResult;
-
-    // 法院描述
-    public String courtDescript;
+    public String cwPdf;
 
     public String getCode() {
         return code;
@@ -30,35 +19,11 @@ public class XN617009Req {
         this.code = code;
     }
 
-    public String getCreditResult() {
-        return creditResult;
+    public String getCwPdf() {
+        return cwPdf;
     }
 
-    public void setCreditResult(String creditResult) {
-        this.creditResult = creditResult;
-    }
-
-    public String getCreditDescript() {
-        return creditDescript;
-    }
-
-    public void setCreditDescript(String creditDescript) {
-        this.creditDescript = creditDescript;
-    }
-
-    public String getCourtResult() {
-        return courtResult;
-    }
-
-    public void setCourtResult(String courtResult) {
-        this.courtResult = courtResult;
-    }
-
-    public String getCourtDescript() {
-        return courtDescript;
-    }
-
-    public void setCourtDescript(String courtDescript) {
-        this.courtDescript = courtDescript;
+    public void setCwPdf(String cwPdf) {
+        this.cwPdf = cwPdf;
     }
 }

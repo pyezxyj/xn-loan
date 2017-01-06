@@ -1,14 +1,15 @@
 package com.cdkj.loan.dto.req;
 
 /**
- * 详情查询资质申请人及关系人
+ * 补充附件
  * @author: asus 
- * @since: 2016年12月24日 下午1:14:49 
+ * @since: 2016年12月24日 下午6:28:42 
  * @history:
  */
-public class XN617008Req {
-    // 编号
+public class XN617014Req {
     public String code;
+
+    public String supplyInfo;
 
     public String getCode() {
         return code;
@@ -17,4 +18,13 @@ public class XN617008Req {
     public void setCode(String code) {
         this.code = code;
     }
+
+    public String getSupplyInfo() {
+        return supplyInfo;
+    }
+
+    public void setSupplyInfo(String supplyInfo) {
+        this.supplyInfo = supplyInfo;
+    }
+
 }

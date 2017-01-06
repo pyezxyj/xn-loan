@@ -1,22 +1,17 @@
 package com.cdkj.loan.dto.req;
 
 /**
- * 分配调查岗
+ * 电话回访
  * @author: asus 
- * @since: 2016年12月24日 下午5:15:22 
+ * @since: 2016年12月24日 下午6:33:12 
  * @history:
  */
-public class XN617010Req {
-    // 编号
+public class XN617015Req {
+
     public String code;
 
-    // 手机号
-    public String mobile;
+    public String approveResult;
 
-    // 调查员
-    public String investigator;
-
-    // 备注
     public String remark;
 
     public String getCode() {
@@ -27,20 +22,12 @@ public class XN617010Req {
         this.code = code;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getApproveResult() {
+        return approveResult;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getInvestigator() {
-        return investigator;
-    }
-
-    public void setInvestigator(String investigator) {
-        this.investigator = investigator;
+    public void setApproveResult(String approveResult) {
+        this.approveResult = approveResult;
     }
 
     public String getRemark() {
@@ -50,4 +37,5 @@ public class XN617010Req {
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
 }

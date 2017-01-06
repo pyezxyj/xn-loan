@@ -1,17 +1,14 @@
 package com.cdkj.loan.dto.req;
 
 /**
- * 复核
+ * 详情查询资质申请
  * @author: asus 
- * @since: 2016年12月24日 下午7:19:44 
+ * @since: 2016年12月24日 下午1:14:49 
  * @history:
  */
-public class XN617016Req {
+public class XN617006Req {
+    // 编号
     public String code;
-
-    public String approveResult;
-
-    public String remark;
 
     public String getCode() {
         return code;
@@ -19,21 +16,5 @@ public class XN617016Req {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public String getApproveResult() {
-        return approveResult;
-    }
-
-    public void setApproveResult(String approveResult) {
-        this.approveResult = approveResult;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
     }
 }

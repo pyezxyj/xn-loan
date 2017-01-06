@@ -1,36 +1,26 @@
 package com.cdkj.loan.dto.req;
 
-import java.util.List;
-
-import com.cdkj.loan.domain.CreditAudit;
-
 /**
- * 修改资质申请
+ * 征信调查
  * @author: asus 
- * @since: 2016年12月24日 下午1:34:52 
+ * @since: 2016年12月24日 下午2:53:14 
  * @history:
  */
-public class XN617002Req {
+public class XN617009Req {
     // 编号
     public String code;
 
-    // 业务员（必填）
-    public String saleman;
+    // 征信结果
+    public String creditResult;
 
-    // 车行（必填）
-    public String car;
+    // 征信描述
+    public String creditDescript;
 
-    // 经办银行（必填）
-    public String jbBank;
+    // 法院结果
+    public String courtResult;
 
-    // 贷款类型（必填）
-    public String loanType;
-
-    // 贷款金额（必填）
-    public String loanAmount;
-
-    // 贷款人关系列表（必填）
-    public List<CreditAudit> creditList;
+    // 法院描述
+    public String courtDescript;
 
     public String getCode() {
         return code;
@@ -40,51 +30,35 @@ public class XN617002Req {
         this.code = code;
     }
 
-    public String getSaleman() {
-        return saleman;
+    public String getCreditResult() {
+        return creditResult;
     }
 
-    public void setSaleman(String saleman) {
-        this.saleman = saleman;
+    public void setCreditResult(String creditResult) {
+        this.creditResult = creditResult;
     }
 
-    public String getCar() {
-        return car;
+    public String getCreditDescript() {
+        return creditDescript;
     }
 
-    public void setCar(String car) {
-        this.car = car;
+    public void setCreditDescript(String creditDescript) {
+        this.creditDescript = creditDescript;
     }
 
-    public String getJbBank() {
-        return jbBank;
+    public String getCourtResult() {
+        return courtResult;
     }
 
-    public void setJbBank(String jbBank) {
-        this.jbBank = jbBank;
+    public void setCourtResult(String courtResult) {
+        this.courtResult = courtResult;
     }
 
-    public String getLoanType() {
-        return loanType;
+    public String getCourtDescript() {
+        return courtDescript;
     }
 
-    public void setLoanType(String loanType) {
-        this.loanType = loanType;
-    }
-
-    public String getLoanAmount() {
-        return loanAmount;
-    }
-
-    public void setLoanAmount(String loanAmount) {
-        this.loanAmount = loanAmount;
-    }
-
-    public List<CreditAudit> getCreditList() {
-        return creditList;
-    }
-
-    public void setCreditList(List<CreditAudit> creditList) {
-        this.creditList = creditList;
+    public void setCourtDescript(String courtDescript) {
+        this.courtDescript = courtDescript;
     }
 }

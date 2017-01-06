@@ -1,29 +1,59 @@
 package com.cdkj.loan.dto.req;
 
+import java.util.List;
+
 /**
- * 请款资料补充
+ * 分页查询资质申请人及关系人
  * @author: asus 
- * @since: 2016年12月24日 下午7:41:22 
+ * @since: 2016年12月24日 下午2:32:16 
  * @history:
  */
-public class XN617017Req {
-    public String code;
+public class XN617004Req extends APageReq {
 
-    public String cwPdf;
+    /** 
+     * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
+     */
+    private static final long serialVersionUID = 1L;
 
-    public String getCode() {
-        return code;
+    public String userName;
+
+    public String status;
+
+    public String relation;
+
+    // 查询条件
+    private List<String> statusList;
+
+    public String getUserName() {
+        return userName;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getCwPdf() {
-        return cwPdf;
+    public String getStatus() {
+        return status;
     }
 
-    public void setCwPdf(String cwPdf) {
-        this.cwPdf = cwPdf;
+    public void setStatus(String status) {
+        this.status = status;
     }
+
+    public List<String> getStatusList() {
+        return statusList;
+    }
+
+    public void setStatusList(List<String> statusList) {
+        this.statusList = statusList;
+    }
+
+    public String getRelation() {
+        return relation;
+    }
+
+    public void setRelation(String relation) {
+        this.relation = relation;
+    }
+
 }
