@@ -5,5 +5,7 @@ import com.cdkj.loan.domain.Node;
 
 //dao层 
 public interface INodeDAO extends IBaseDAO<Node> {
-	String NAMESPACE = INodeDAO.class.getName().concat(".");
+    String NAMESPACE = INodeDAO.class.getName().concat(".");
+
+    public int update(Node data);
 }

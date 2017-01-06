@@ -1,5 +1,7 @@
 package com.cdkj.loan.domain;
 
+import java.util.Date;
+
 import com.cdkj.loan.dao.base.ABaseDO;
 
 /**
@@ -10,94 +12,94 @@ import com.cdkj.loan.dao.base.ABaseDO;
 */
 public class Node extends ABaseDO {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	// 编号
-	private String code;
+    // 编号
+    private String code;
 
-	// 节点代号
-	private String type;
+    // 节点代号
+    private String type;
 
-	// 业务编号
-	private String creditOrderCode;
+    // 业务编号
+    private String creditOrderCode;
 
-	// 开始时间
-	private String startDatetime;
+    // 开始时间
+    private Date startDatetime;
 
-	// 结束时间
-	private String endDatetime;
+    // 结束时间
+    private Date endDatetime;
 
-	// 间隔时间
-	private String distance;
+    // 间隔时间
+    private int distance;
 
-	// 操作人
-	private String updater;
+    // 操作人
+    private String updater;
 
-	// 备注
-	private String remark;
+    // 备注
+    private String remark;
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setCreditOrderCode(String creditOrderCode) {
-		this.creditOrderCode = creditOrderCode;
-	}
+    public void setCreditOrderCode(String creditOrderCode) {
+        this.creditOrderCode = creditOrderCode;
+    }
 
-	public String getCreditOrderCode() {
-		return creditOrderCode;
-	}
+    public String getCreditOrderCode() {
+        return creditOrderCode;
+    }
 
-	public void setStartDatetime(String startDatetime) {
-		this.startDatetime = startDatetime;
-	}
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
 
-	public String getStartDatetime() {
-		return startDatetime;
-	}
+    public String getUpdater() {
+        return updater;
+    }
 
-	public void setEndDatetime(String endDatetime) {
-		this.endDatetime = endDatetime;
-	}
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
-	public String getEndDatetime() {
-		return endDatetime;
-	}
+    public String getRemark() {
+        return remark;
+    }
 
-	public void setDistance(String distance) {
-		this.distance = distance;
-	}
+    public Date getStartDatetime() {
+        return startDatetime;
+    }
 
-	public String getDistance() {
-		return distance;
-	}
+    public void setStartDatetime(Date startDatetime) {
+        this.startDatetime = startDatetime;
+    }
 
-	public void setUpdater(String updater) {
-		this.updater = updater;
-	}
+    public Date getEndDatetime() {
+        return endDatetime;
+    }
 
-	public String getUpdater() {
-		return updater;
-	}
+    public void setEndDatetime(Date endDatetime) {
+        this.endDatetime = endDatetime;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    public int getDistance() {
+        return distance;
+    }
 
-	public String getRemark() {
-		return remark;
-	}
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
 
 }

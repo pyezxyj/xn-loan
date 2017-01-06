@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum ECreditStatusApprove {
-    VETO("2", "直接否决"), SUPPLEMENT("3", "补充资料"), CHANGE("4", "调额通过"), PASS("5",
+    VETO("1", "直接否决"), SUPPLEMENT("2", "补充资料"), CHANGE("3", "调额通过"), PASS("4",
             "直接通过");
     public static Map<String, ECreditStatusApprove> getResultMap() {
         Map<String, ECreditStatusApprove> map = new HashMap<String, ECreditStatusApprove>();

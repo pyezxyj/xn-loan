@@ -6,11 +6,16 @@ package com.cdkj.loan.dto.req;
  * @since: 2016年12月24日 下午7:46:16 
  * @history:
  */
-public class XN617018Req {
-    public String code;
+public class XN617012Req {
+
+    private String code;
 
     // 打款水单
-    public String playPdf;
+    private String data;
+
+    private String updater;
+
+    private String remark;
 
     public String getCode() {
         return code;
@@ -20,11 +25,28 @@ public class XN617018Req {
         this.code = code;
     }
 
-    public String getPlayPdf() {
-        return playPdf;
+    public String getData() {
+        return data;
     }
 
-    public void setPlayPdf(String playPdf) {
-        this.playPdf = playPdf;
+    public void setData(String data) {
+        this.data = data;
     }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
 }

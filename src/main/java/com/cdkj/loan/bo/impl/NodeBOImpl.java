@@ -1,5 +1,6 @@
 package com.cdkj.loan.bo.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.cdkj.loan.bo.INodeBO;
 import com.cdkj.loan.bo.base.PaginableBOImpl;
+import com.cdkj.loan.common.DateUtil;
 import com.cdkj.loan.core.OrderNoGenerater;
 import com.cdkj.loan.dao.INodeDAO;
 import com.cdkj.loan.domain.Node;
@@ -20,6 +22,33 @@ public class NodeBOImpl extends PaginableBOImpl<Node> implements INodeBO {
 
     @Autowired
     private INodeDAO NodeDAO;
+
+    @Override
+    public void editNode(String refUser, String type, String updater,
+            String remark) {
+        // 先查找node
+        Node node = new Node();
+        node.setCreditOrderCode(refUser);
+        node.setType(type);
+        List<Node> nodeList = queryNodeList(node);
+        Node Inode = new Node();
+        int distance;
+        Date date = new Date();
+        // 计算时间差
+        for (Node node2 : nodeList) {
+            Inode.setCode(node2.getCode());
+            Date start = node2.getStartDatetime();
+            distance = DateUtil.timeBetween(start, new Date());
+            // 更新时间差
+            Inode.setCreditOrderCode(refUser);
+            Inode.setEndDatetime(date);
+            Inode.setDistance(distance);
+            Inode.setUpdater(updater);
+            Inode.setRemark(remark);
+            refreshNode(Inode);
+        }
+
+    }
 
     @Override
     public boolean isNodeExist(String code) {
@@ -37,6 +66,7 @@ public class NodeBOImpl extends PaginableBOImpl<Node> implements INodeBO {
         if (data != null) {
             code = OrderNoGenerater.generateM(EGeneratePrefix.NODE.getCode());
             data.setCode(code);
+            data.setStartDatetime(new Date());
             NodeDAO.insert(data);
         }
         return code;
@@ -57,7 +87,7 @@ public class NodeBOImpl extends PaginableBOImpl<Node> implements INodeBO {
     public int refreshNode(Node data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
-            // count = NodeDAO.update(data);
+            count = NodeDAO.update(data);
         }
         return count;
     }

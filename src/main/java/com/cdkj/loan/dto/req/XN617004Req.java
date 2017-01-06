@@ -6,7 +6,8 @@ package com.cdkj.loan.dto.req;
  * @since: 2016年12月24日 下午5:29:14 
  * @history:
  */
-public class XN617011Req {
+public class XN617004Req {
+
     // 编号
     public String code;
 
@@ -23,13 +24,17 @@ public class XN617011Req {
     public String video;
 
     // 调查报告
-    public String report;
+    public String deReport;
 
     // 其他
-    public String otherData;
+    public String dcData;
 
     // 借款人家庭地址
-    public String homeAddress;
+    public String address;
+
+    private String updater;
+
+    private String remark;
 
     public String getCode() {
         return code;
@@ -71,27 +76,43 @@ public class XN617011Req {
         this.video = video;
     }
 
-    public String getReport() {
-        return report;
+    public String getDeReport() {
+        return deReport;
     }
 
-    public void setReport(String report) {
-        this.report = report;
+    public void setDeReport(String deReport) {
+        this.deReport = deReport;
     }
 
-    public String getOtherData() {
-        return otherData;
+    public String getDcData() {
+        return dcData;
     }
 
-    public void setOtherData(String otherData) {
-        this.otherData = otherData;
+    public void setDcData(String dcData) {
+        this.dcData = dcData;
     }
 
-    public String getHomeAddress() {
-        return homeAddress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setHomeAddress(String homeAddress) {
-        this.homeAddress = homeAddress;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

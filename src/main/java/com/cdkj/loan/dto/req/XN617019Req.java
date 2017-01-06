@@ -6,7 +6,7 @@ package com.cdkj.loan.dto.req;
  * @since: 2016年12月24日 下午1:14:49 
  * @history:
  */
-public class XN617008Req {
+public class XN617019Req {
     // 编号
     public String code;
 

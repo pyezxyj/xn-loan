@@ -46,4 +46,9 @@ public class NodeDAOImpl extends AMybatisTemplate implements INodeDAO {
             condition, Node.class);
     }
 
+    @Override
+    public int update(Node data) {
+        return super.update(NAMESPACE.concat("update_Node"), data);
+    }
+
 }

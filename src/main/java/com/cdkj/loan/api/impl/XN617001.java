@@ -5,7 +5,7 @@ import com.cdkj.loan.api.AProcessor;
 import com.cdkj.loan.common.JsonUtil;
 import com.cdkj.loan.core.StringValidater;
 import com.cdkj.loan.domain.CreditOrder;
-import com.cdkj.loan.dto.req.XN617002Req;
+import com.cdkj.loan.dto.req.XN617001Req;
 import com.cdkj.loan.exception.BizException;
 import com.cdkj.loan.exception.ParaException;
 import com.cdkj.loan.spring.SpringContextHolder;
@@ -16,30 +16,31 @@ import com.cdkj.loan.spring.SpringContextHolder;
  * @since: 2016年12月24日 下午1:36:29 
  * @history:
  */
-public class XN617002 extends AProcessor {
+public class XN617001 extends AProcessor {
     private ICreditOrderAO creditOrderAO = SpringContextHolder
         .getBean(ICreditOrderAO.class);
 
-    private XN617002Req req = null;
+    private XN617001Req req = null;
 
     @Override
     public Object doBusiness() throws BizException {
         CreditOrder data = new CreditOrder();
         data.setCode(req.getCode());
+        data.setArea(req.getArea());
         data.setSalesman(req.getSaleman());
-        data.setCarStore(req.getCar());
+        data.setCarStore(req.getCarStore());
         data.setJbBank(req.getJbBank());
         data.setLoanType(req.getLoanType());
         data.setLoanAmount(StringValidater.toLong(req.getLoanAmount()));
-        creditOrderAO.editCreditOrder(data, req.getCreditList());
+        creditOrderAO.editCreditOrder(data, req.getCreditPeopleList());
         return new Boolean(true);
     }
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN617002Req.class);
+        req = JsonUtil.json2Bean(inputparams, XN617001Req.class);
         StringValidater.validateBlank(req.getCode(), req.getSaleman(),
-            req.getCar(), req.getJbBank(), req.getLoanType(),
+            req.getCarStore(), req.getJbBank(), req.getLoanType(),
             req.getLoanAmount());
     }
 

@@ -6,4 +6,8 @@ import com.cdkj.loan.domain.Car;
 //dao层 
 public interface ICarDAO extends IBaseDAO<Car> {
     String NAMESPACE = ICarDAO.class.getName().concat(".");
+
+    public int update(Car data);
+
+    public int updateFBH(Car data);
 }

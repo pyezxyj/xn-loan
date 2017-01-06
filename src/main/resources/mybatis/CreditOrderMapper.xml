@@ -6,7 +6,7 @@
 		<result column="code" property="code" />
 		<result column="area" property="area" />
 		<result column="salesman" property="salesman" />
-		<result column="car_store" property="car" />
+		<result column="car_store" property="carStore" />
 		<result column="jb_bank" property="jbBank" />
 		<result column="loan_type" property="loanType" />
 		<result column="loan_amount" property="loanAmount" />
@@ -58,8 +58,8 @@
 	            	#{item}
                 </foreach> 
 			</if>
-			<if test="userName != null and userName != '' ">
-				AND t.user_name = #{userName}
+			<if test="realName != null and realName != '' ">
+				AND t.real_name = #{realName}
 			</if>
 		</trim>
 	</sql>
@@ -95,7 +95,7 @@
 		,t.bank
 		,t.branch
 		
-		,t.backcard_no
+		,t.bankcard_no
 		,t.last_node
 		,t.fk_pdf
 		,t.qk_pdf
@@ -111,7 +111,7 @@
 		,t.access_level
 		,t.consume
 		FROM
-		credit_order t
+		tloan_credit_order t
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -122,13 +122,13 @@
 
 	<select id="select_creditOrder_count" parameterType="creditOrder"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM credit_order t
+		SELECT count(1) FROM tloan_credit_order t
 		<include refid="where_condition" />
 	</select>
 
 	<insert id="insert_creditOrder" parameterType="creditOrder">
 		INSERT INTO
-		credit_order(
+		tloan_credit_order(
 		code
 		,area
 		,salesman
@@ -159,7 +159,7 @@
 		,bank
 		,branch
 		
-		,backcard_no
+		,bankcard_no
 		,last_node
 		,fk_pdf
 		,qk_pdf
@@ -206,7 +206,7 @@
 		,#{bank}
 		,#{branch}
 		
-		,#{backcardNo}
+		,#{bankcardNo}
 		,#{lastNode}
 		,#{fkPdf}
 		,#{qkPdf}
@@ -225,10 +225,10 @@
 	</insert>
 
 	<update id="update_creditOrder" parameterType="creditOrder">
-		UPDATE credit_order
+		UPDATE tloan_credit_order
 		SET
 		area=#{area}
-		,salesman=#{saleman}
+		,salesman=#{salesman}
 		,car_store=#{carStore}
 		,jb_bank=#{jbBank}
 		
@@ -256,39 +256,41 @@
 		,bank=#{bank}
 		,branch=#{branch}
 		
-		,backcard_no=#{backcardNo}
+		,bankcard_no=#{bankcardNo}
 		,last_node=#{lastNode}
 		,status=#{status}
-		,remark
+		,remark=#{remark}
 		WHERE code = #{code}
 	</update>
 
 	<delete id="delete_creditOrder" parameterType="creditOrder">
-		DELETE FROM credit_order
+		DELETE FROM tloan_credit_order
 		WHERE
 		code = #{code}
 	</delete>
 	
 		<update id="update_Status" parameterType="creditOrder">
-		UPDATE credit_order
+		UPDATE tloan_credit_order
 		SET
 		status = #{status}
 		WHERE code = #{code}
 	</update>
 	
 		<update id="update_Survey" parameterType="creditOrder">
-		UPDATE credit_order
+		UPDATE tloan_credit_order
 		SET
 		mobile = #{mobile}
+		,last_node=#{lastNode}
 		,dc_user = #{dcUser}
 		,status = #{status}
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update>
 	<update id="update_SBack" parameterType="creditOrder">
-		UPDATE credit_order
+		UPDATE tloan_credit_order
 		SET
 		status = #{status}
+		,last_node=#{lastNode}
 		,sign_pic = #{signPic}
 		,home_pic = #{homePic}
 		,id_info = #{idInfo}
@@ -300,9 +302,10 @@
 		WHERE code = #{code}
 	</update> 
 	<update id="update_ZLBack" parameterType="creditOrder">
-		UPDATE credit_order
+		UPDATE tloan_credit_order
 		SET
 		status = #{status}
+		,last_node=#{lastNode}
 		,loan_amount = #{loanAmount}
 		,loan_term = #{loanTerm}
 		,rate = #{rate}
@@ -314,70 +317,76 @@
 		WHERE code = #{code}
 	</update> 
 	<update id="update_Approve" parameterType="creditOrder">
-		UPDATE credit_order
+		UPDATE tloan_credit_order
 		SET
 		status = #{status}
+		,loan_amount=#{loanAmount}
+		,last_node=#{lastNode}
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update> 
 	<update id="update_Payroll" parameterType="creditOrder">
-		UPDATE credit_order
+		UPDATE tloan_credit_order
 		SET
 		status = #{status}
-		,supply_info = #{supplyInfo}
+		,fk_pdf = #{fkPdf}
 		,remark=#{remark}
 		WHERE code = #{code}
 	</update> 
 	<update id="update_Visit" parameterType="creditOrder">
-		UPDATE credit_order
+		UPDATE tloan_credit_order
 		SET
 		status = #{status}
+		,last_node=#{lastNode}
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update> 
 	<update id="update_Financial" parameterType="creditOrder">
-		UPDATE credit_order
+		UPDATE tloan_credit_order
 		SET
 		status = #{status}
+		,last_node=#{lastNode}
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update> 
 	<update id="update_Payout" parameterType="creditOrder">
-		UPDATE credit_order
+		UPDATE tloan_credit_order
 		SET
 		status = #{status}
-		,cw_pdf = #{cwPdf}
+		,last_node=#{lastNode}
+		,qk_pdf = #{qkPdf}
+		,remark=#{remark}
 		WHERE code = #{code}
 	</update> 
 	<update id="update_Moneyback" parameterType="creditOrder">
-		UPDATE credit_order
+		UPDATE tloan_credit_order
 		SET
 		status = #{status}
-		,play_pdf = #{playPdf}
+		,last_node=#{lastNode}
+		,dk_pdf = #{dkPdf}
 		WHERE code = #{code}
 	</update> 
-	<!-- <update id="update_FBH" parameterType="creditOrder">
-		UPDATE credit_order
+	<update id="update_FBH" parameterType="creditOrder">
+		UPDATE tloan_credit_order
 		SET
 		status = #{status}
-		,receipt = #{receipt}
-		,policy = #{policy}
-		,certification = #{certification}
 		WHERE code = #{code}
-	</update>  -->
+	</update> 
 	<update id="update_Download" parameterType="creditOrder">
-		UPDATE credit_order
+		UPDATE tloan_credit_order
 		SET
 		download_times = #{downloadTimes}
 		WHERE code = #{code}
 	</update> 
 	<update id="update_receiptPdf" parameterType="creditOrder">
-		UPDATE credit_order
+		UPDATE tloan_credit_order
 		SET
 		status=#{status}
-		,receipt_pdf = #{receiptPdf}
-		,receipt_amount=#{receiptAmount}
-		,receipt_datetime=#{receiptDatetime}
+		,sk_pdf = #{skPdf}
+		,sk_amount=#{skAmount}
+		,sk_datetime=#{skDatetime}
+		,remark=#{remark}
+		,consume=#{consume}
 		WHERE code = #{code}
 	</update> 
 </mapper>

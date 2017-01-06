@@ -6,7 +6,7 @@ package com.cdkj.loan.dto.req;
  * @since: 2016年12月24日 下午7:50:23 
  * @history:
  */
-public class XN617019Req {
+public class XN617013Req {
     public String code;
 
     // 发票

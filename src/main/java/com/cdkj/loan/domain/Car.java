@@ -28,10 +28,10 @@ public class Car extends ABaseDO {
     private String model;
 
     // 车价
-    private String price;
+    private Long price;
 
     // 首付
-    private String firstAmount;
+    private Long firstAmount;
 
     // 车牌号码
     private String licenseNo;
@@ -143,22 +143,6 @@ public class Car extends ABaseDO {
 
     public String getModel() {
         return model;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setFirstAmount(String firstAmount) {
-        this.firstAmount = firstAmount;
-    }
-
-    public String getFirstAmount() {
-        return firstAmount;
     }
 
     public void setLicenseNo(String licenseNo) {
@@ -351,6 +335,22 @@ public class Car extends ABaseDO {
 
     public String getRemark() {
         return remark;
+    }
+
+    public Long getFirstAmount() {
+        return firstAmount;
+    }
+
+    public void setFirstAmount(Long firstAmount) {
+        this.firstAmount = firstAmount;
+    }
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
     }
 
 }

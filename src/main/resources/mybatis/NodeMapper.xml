@@ -17,6 +17,12 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="creditOrderCode != null and creditOrderCode != '' ">
+				AND t.credit_order_code = #{creditOrderCode}
+			</if>
+			<if test="type != null and type != '' ">
+				AND t.type = #{type}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_Node" parameterType="Node" resultMap="Node_DB_Result">
@@ -72,10 +78,7 @@
 	<update id="update_Node" parameterType="Node">
 		UPDATE tloan_node
 		SET
-		type = #{type}
-		,credit_order_code = #{creditOrderCode}
-		,start_datetime = #{startDatetime}
-		,end_datetime = #{endDatetime}
+		end_datetime = #{endDatetime}
 		,distance = #{distance}
 		,updater = #{updater}
 		,remark = #{remark}

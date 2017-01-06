@@ -6,13 +6,15 @@ package com.cdkj.loan.dto.req;
  * @since: 2016年12月24日 下午6:33:12 
  * @history:
  */
-public class XN617015Req {
+public class XN617010Req {
 
-    public String code;
+    private String code;
 
-    public String approveResult;
+    private String approveResult;
 
-    public String remark;
+    private String approverUser;
+
+    private String approveNote;
 
     public String getCode() {
         return code;
@@ -30,12 +32,20 @@ public class XN617015Req {
         this.approveResult = approveResult;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getApproverUser() {
+        return approverUser;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setApproverUser(String approverUser) {
+        this.approverUser = approverUser;
+    }
+
+    public String getApproveNote() {
+        return approveNote;
+    }
+
+    public void setApproveNote(String approveNote) {
+        this.approveNote = approveNote;
     }
 
 }

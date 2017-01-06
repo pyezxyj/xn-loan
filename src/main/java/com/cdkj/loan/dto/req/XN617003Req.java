@@ -6,7 +6,7 @@ package com.cdkj.loan.dto.req;
  * @since: 2016年12月24日 下午5:15:22 
  * @history:
  */
-public class XN617010Req {
+public class XN617003Req {
     // 编号
     public String code;
 
@@ -14,7 +14,10 @@ public class XN617010Req {
     public String mobile;
 
     // 调查员
-    public String investigator;
+    public String dcUser;
+
+    // 调查人
+    private String updater;
 
     // 备注
     public String remark;
@@ -35,19 +38,27 @@ public class XN617010Req {
         this.mobile = mobile;
     }
 
-    public String getInvestigator() {
-        return investigator;
-    }
-
-    public void setInvestigator(String investigator) {
-        this.investigator = investigator;
-    }
-
     public String getRemark() {
         return remark;
     }
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getDcUser() {
+        return dcUser;
+    }
+
+    public void setDcUser(String dcUser) {
+        this.dcUser = dcUser;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
     }
 }

@@ -1,6 +1,5 @@
 package com.cdkj.loan.domain;
 
-import java.util.Date;
 import java.util.List;
 
 import com.cdkj.loan.dao.base.ABaseDO;
@@ -18,20 +17,20 @@ public class CreditAudit extends ABaseDO {
     // 编号
     private String code;
 
-    // 姓名
-    public String userName;
-
-    // 关系
-    private String relation;
-
-    // 所属人
-    private String refUser;
+    // 业务编号
+    private String creditOrderCode;
 
     // 贷款品种
     private String loanType;
 
     // 贷款金额
     private Long loanAmount;
+
+    // 姓名
+    public String realName;
+
+    // 关系
+    private String relation;
 
     // 证件类型
     private String idKind;
@@ -45,9 +44,6 @@ public class CreditAudit extends ABaseDO {
     // 资信结果
     private String creditResult;
 
-    // 资信编号
-    private String creditCode;
-
     // 资信描述
     private String creditDescript;
 
@@ -60,9 +56,6 @@ public class CreditAudit extends ABaseDO {
     // 状态
     private String status;
 
-    // 创建时间
-    private Date createDatetime;
-
     // 手机号
     private String mobile;
 
@@ -73,22 +66,12 @@ public class CreditAudit extends ABaseDO {
     private String workPhone;
 
     // 单位地址
-    private String workAddress;
-
-    // 详情
-    private String detail;
-
-    // 审批人
-    private String approver;
-
-    // 审批时间
-    private Date approveDatetime;
-
-    // 审批说明
-    private String approveNote;
+    private String address;
 
     // 备注
     private String remark;
+
+    private String updater;
 
     // 查询条件
     private List<String> statusList;
@@ -107,14 +90,6 @@ public class CreditAudit extends ABaseDO {
 
     public String getRelation() {
         return relation;
-    }
-
-    public void setRefUser(String refUser) {
-        this.refUser = refUser;
-    }
-
-    public String getRefUser() {
-        return refUser;
     }
 
     public void setIdKind(String idKind) {
@@ -147,14 +122,6 @@ public class CreditAudit extends ABaseDO {
 
     public String getCreditResult() {
         return creditResult;
-    }
-
-    public void setCreditCode(String creditCode) {
-        this.creditCode = creditCode;
-    }
-
-    public String getCreditCode() {
-        return creditCode;
     }
 
     public void setCreditDescript(String creditDescript) {
@@ -213,68 +180,12 @@ public class CreditAudit extends ABaseDO {
         return workPhone;
     }
 
-    public void setWorkAddress(String workAddress) {
-        this.workAddress = workAddress;
-    }
-
-    public String getWorkAddress() {
-        return workAddress;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
-
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setApprover(String approver) {
-        this.approver = approver;
-    }
-
-    public String getApprover() {
-        return approver;
-    }
-
-    public void setApproveNote(String approveNote) {
-        this.approveNote = approveNote;
-    }
-
-    public String getApproveNote() {
-        return approveNote;
-    }
-
     public void setRemark(String remark) {
         this.remark = remark;
     }
 
     public String getRemark() {
         return remark;
-    }
-
-    public Date getCreateDatetime() {
-        return createDatetime;
-    }
-
-    public void setCreateDatetime(Date createDatetime) {
-        this.createDatetime = createDatetime;
-    }
-
-    public void setApproveDatetime(Date approveDatetime) {
-        this.approveDatetime = approveDatetime;
-    }
-
-    public Date getApproveDatetime() {
-        return approveDatetime;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getLoanType() {
@@ -299,6 +210,38 @@ public class CreditAudit extends ABaseDO {
 
     public void setStatusList(List<String> statusList) {
         this.statusList = statusList;
+    }
+
+    public String getCreditOrderCode() {
+        return creditOrderCode;
+    }
+
+    public void setCreditOrderCode(String creditOrderCode) {
+        this.creditOrderCode = creditOrderCode;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
     }
 
 }

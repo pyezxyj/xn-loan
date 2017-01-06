@@ -26,11 +26,13 @@ public class XN617000 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         CreditOrder data = new CreditOrder();
+        data.setArea(req.getArea());
         data.setSalesman(req.getSalesman());
         data.setCarStore(req.getCarStore());
         data.setJbBank(req.getJbBank());
         data.setLoanType(req.getLoanType());
         data.setLoanAmount(StringValidater.toLong(req.getLoanAmount()));
+        data.setUpdater(req.getUpdater());
         return new PKCodeRes(creditOrderAO.addCreditOrder(data,
             req.getCreditPeopleList()));
     }

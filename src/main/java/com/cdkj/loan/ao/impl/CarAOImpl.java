@@ -4,11 +4,18 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cdkj.loan.ao.ICarAO;
 import com.cdkj.loan.bo.ICarBO;
+import com.cdkj.loan.bo.ICreditOrderBO;
+import com.cdkj.loan.bo.INodeBO;
 import com.cdkj.loan.bo.base.Paginable;
 import com.cdkj.loan.domain.Car;
+import com.cdkj.loan.domain.CreditOrder;
+import com.cdkj.loan.domain.Node;
+import com.cdkj.loan.enums.ECreditOrderStatus;
+import com.cdkj.loan.enums.ENodeType;
 import com.cdkj.loan.exception.BizException;
 
 //CHECK ��鲢��ע�� 
@@ -17,6 +24,12 @@ public class CarAOImpl implements ICarAO {
 
     @Autowired
     private ICarBO carBO;
+
+    @Autowired
+    private ICreditOrderBO creditOrderBO;
+
+    @Autowired
+    private INodeBO nodeBO;
 
     @Override
     public String addCar(Car data) {
@@ -52,5 +65,32 @@ public class CarAOImpl implements ICarAO {
     @Override
     public Car getCar(String code) {
         return carBO.getCar(code);
+    }
+
+    // 发保合登记
+    @Override
+    @Transactional
+    public int editFBH(String code, String invoice, String policy,
+            String certification) {
+        int count = 0;
+        Car car = getCar(code);
+        CreditOrder creditOrder = creditOrderBO.getCreditOrder(car
+            .getCreditOrderCode());
+        if (ECreditOrderStatus.FBH.getCode().equals(creditOrder.getStatus())) {
+            Car data = new Car();
+            data.setCode(code);
+            data.setInvoice(invoice);
+            data.setPolicy(policy);
+            data.setCertification(certification);
+            count = carBO.refreshFBH(data);
+            creditOrderBO.refreshFBH(car.getCreditOrderCode());
+            nodeBO.editNode(car.getCreditOrderCode(), ENodeType.DK.getCode(),
+                null, null);
+            Node node = new Node();
+            node.setCreditOrderCode(car.getCreditOrderCode());
+            node.setType(ENodeType.DK.getCode());
+            nodeBO.saveNode(node);
+        }
+        return count;
     }
 }

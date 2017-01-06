@@ -197,5 +197,13 @@
 		WHERE code = #{code}
 	</update>
 
+	<update id="update_FBH" parameterType="Car">
+		UPDATE tloan_car
+		SET
+		invoice = #{invoice}
+		,policy = #{policy}
+		,certification = #{certification}
+		WHERE code = #{code}
+	</update>
 
 </mapper>

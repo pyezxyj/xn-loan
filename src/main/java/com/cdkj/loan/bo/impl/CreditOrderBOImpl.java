@@ -12,9 +12,7 @@ import com.cdkj.loan.bo.base.PaginableBOImpl;
 import com.cdkj.loan.core.OrderNoGenerater;
 import com.cdkj.loan.dao.ICreditOrderDAO;
 import com.cdkj.loan.domain.CreditOrder;
-import com.cdkj.loan.enums.EBoolean;
 import com.cdkj.loan.enums.ECreditOrderStatus;
-import com.cdkj.loan.enums.ECreditStatusApprove;
 import com.cdkj.loan.enums.EGeneratePrefix;
 import com.cdkj.loan.exception.BizException;
 
@@ -99,8 +97,20 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
     }
 
     @Override
-    public int refreshSurvey(String code, String mobile, String investigator,
-            String remark) {
+    public int refreshOrder(String code) {
+        int count = 0;
+        CreditOrder data = new CreditOrder();
+        if (StringUtils.isNotBlank(code)) {
+            data.setCode(code);
+            data.setStatus(ECreditOrderStatus.NO.getCode());
+            count = creditOrderDAO.updateStatus(data);
+        }
+        return count;
+    }
+
+    @Override
+    public int refreshSurvey(String code, String time, String mobile,
+            String investigator, String remark) {
         int count = 0;
         // CreditOrder condition = getCreditOrder(code);
         CreditOrder data = new CreditOrder();
@@ -109,16 +119,10 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
             data.setMobile(mobile);
             data.setDcUser(investigator);
             data.setRemark(remark);
-            /*
-             * if (ECreditOrderStatus.TO_WAIT.getCode().equals(
-             * condition.getStatus())) {
-             */
+            data.setLastNode(time);
             data.setRemark(remark);
             data.setStatus(ECreditOrderStatus.TO_FP.getCode());
             count = creditOrderDAO.updateSurvey(data);
-            /*
-             * } else { throw new BizException("xn0000", "该用户不能被分配"); }
-             */
         }
         return count;
     }
@@ -126,16 +130,8 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
     @Override
     public int refreshSBack(CreditOrder data) {
         int count = 0;
-        CreditOrder condition = getCreditOrder(data.getCode());
         if (StringUtils.isNotBlank(data.getCode())) {
-            if (ECreditOrderStatus.TO_FP.getCode()
-                .equals(condition.getStatus())) {
-                data.setStatus(ECreditOrderStatus.TO_HR.getCode());
-                data.setRemark("已上门调查，待录入放款资料");
-                count = creditOrderDAO.updateSBack(data);
-            } else {
-                throw new BizException("xn0000", "该订单不能被回录");
-            }
+            count = creditOrderDAO.updateSBack(data);
         }
         return count;
     }
@@ -157,143 +153,88 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
     }
 
     @Override
-    public int refreshApprove(String code, String approveResult, String remark) {
+    public int refreshApprove(CreditOrder data) {
         int count = 0;
-        CreditOrder data = new CreditOrder();
-        CreditOrder condition = getCreditOrder(code);
-        if (StringUtils.isNotBlank(code)) {
-            data.setCode(code);
-            if (ECreditOrderStatus.TO_SC.getCode()
-                .equals(condition.getStatus())
-                    || ECreditOrderStatus.PASS.getCode().equals(
-                        condition.getStatus())) {
-                if (ECreditOrderStatus.TO_SC.getCode().equals(
-                    condition.getStatus())) {
-                    if (EBoolean.YES.getCode().equals(approveResult)) {
-                        data.setStatus(ECreditOrderStatus.PASS.getCode());
-                    } else if (EBoolean.NO.getCode().equals(approveResult)) {
-                        data.setStatus(ECreditOrderStatus.TO_HR.getCode());
-                    }
-                } else {
-                    if (ECreditStatusApprove.VETO.getCode().equals(
-                        approveResult)) {
-                        data.setStatus(ECreditOrderStatus.END.getCode());
-                    } else if (ECreditStatusApprove.SUPPLEMENT.getCode()
-                        .equals(approveResult)) {
-                        data.setStatus(ECreditOrderStatus.BC.getCode());
-                    } else if (ECreditStatusApprove.CHANGE.getCode().equals(
-                        approveResult)) {
-                        data.setStatus(ECreditOrderStatus.TE.getCode());
-                    } else {
-                        data.setStatus(ECreditOrderStatus.TG.getCode());
-                    }
-                }
-                data.setRemark(remark);
-                count = creditOrderDAO.updateApprove(data);
-            } else {
-                throw new BizException("xn0000", "该订单不能被审查");
-            }
+        if (StringUtils.isNotBlank(data.getCode())) {
+            count = creditOrderDAO.updateApprove(data);
         }
         return count;
     }
 
     @Override
-    public int refreshPayroll(String code, String payrollPdf) {
+    public int refreshPayroll(CreditOrder data) {
         int count = 0;
-        CreditOrder data = new CreditOrder();
-        CreditOrder creditOrder = getCreditOrder(code);
-        if (StringUtils.isNotBlank(code)) {
-            data.setCode(code);
-            if (ECreditOrderStatus.BC.getCode().equals(creditOrder.getStatus())) {
-                data.setStatus(ECreditOrderStatus.TO_SC.getCode());
-                data.setRemark("资料已补充,待审查");
-                count = creditOrderDAO.updatePayroll(data);
-            } else {
-                throw new BizException("xn0000", "该用户展示不能补充新资料");
-            }
+        if (StringUtils.isNotBlank(data.getCode())) {
+            count = creditOrderDAO.updatePayroll(data);
         }
         return count;
     }
 
     @Override
-    public int refreshVisit(String code, String approveResult, String remark) {
+    public int refreshVisit(String code, String status, String time,
+            String remark) {
         int count = 0;
         CreditOrder data = new CreditOrder();
-        CreditOrder creditOrder = getCreditOrder(code);
         if (StringUtils.isNotBlank(code)) {
             data.setCode(code);
-            if (ECreditOrderStatus.TE.getCode().equals(creditOrder.getStatus())
-                    || ECreditOrderStatus.TG.getCode().equals(
-                        creditOrder.getStatus())) {
-                if (EBoolean.YES.getCode().equals(approveResult)) {
-                    data.setStatus(ECreditOrderStatus.TO_DH.getCode());
-                } else {
-                    data.setStatus(ECreditOrderStatus.TO_SC.getCode());
-                }
-                data.setRemark(remark);
-                count = creditOrderDAO.updateVisit(data);
-            } else {
-                throw new BizException("xn0000", "该用户暂时不能被操作");
-            }
+            data.setStatus(status);
+            data.setLastNode(time);
+            data.setRemark(remark);
+            count = creditOrderDAO.updateVisit(data);
         }
         return count;
     }
 
     @Override
-    public int refreshFinancial(String code, String approveResult, String remark) {
+    public int refreshFinancial(String code, String status, String lastNode,
+            String remark) {
         int count = 0;
         CreditOrder data = new CreditOrder();
         if (StringUtils.isNotBlank(code)) {
             data.setCode(code);
-            CreditOrder creditOrder = getCreditOrder(code);
-            if (ECreditOrderStatus.DH.getCode().equals(creditOrder.getStatus())) {
-                if (EBoolean.YES.getCode().equals(approveResult)) {
-                    data.setStatus(ECreditOrderStatus.PASS_CWTG.getCode());
-                } else {
-                    data.setStatus(ECreditOrderStatus.TO_DH.getCode());
-                }
-                data.setRemark(remark);
-                count = creditOrderDAO.updateFinancial(data);
-            } else {
-                throw new BizException("xn0000", "该用户暂时不能被操作");
-            }
+            data.setStatus(status);
+            data.setLastNode(lastNode);
+            data.setRemark(remark);
+            count = creditOrderDAO.updateFinancial(data);
         }
         return count;
     }
 
     @Override
-    public int refreshPayout(String code, String cwPdf) {
+    public int refreshPayout(String code, String time, String cwPdf,
+            String remark) {
         int count = 0;
         CreditOrder data = new CreditOrder();
         if (StringUtils.isNotBlank(code)) {
             data.setCode(code);
-            data.setStatus(ECreditOrderStatus.DH.getCode());
+            data.setStatus(ECreditOrderStatus.HF.getCode());
+            data.setQkPdf(cwPdf);
+            data.setRemark(remark);
+            data.setLastNode(time);
             count = creditOrderDAO.updatePayout(data);
         }
         return count;
     }
 
     @Override
-    public int refreshMoneyback(String code, String playPdf) {
+    public int refreshMoneyback(String code, String time, String dkPdf,
+            String remark) {
         int count = 0;
         CreditOrder data = new CreditOrder();
         if (StringUtils.isNotBlank(code)) {
             data.setCode(code);
-            data.setStatus(ECreditOrderStatus.YDK.getCode());
             count = creditOrderDAO.updateMoneyback(data);
         }
         return count;
     }
 
     @Override
-    public int refreshFBH(String code, String receipt, String policy,
-            String certification) {
+    public int refreshFBH(String code) {
         int count = 0;
         CreditOrder data = new CreditOrder();
         if (StringUtils.isNotBlank(code)) {
             data.setCode(code);
-            data.setStatus(ECreditOrderStatus.YSK.getCode());
-
+            data.setStatus(ECreditOrderStatus.TSK.getCode());
             count = creditOrderDAO.updateFBH(data);
         }
         return count;
@@ -312,17 +253,10 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
     }
 
     @Override
-    public int refreshReceipt(String code, Long receiptAmount, String receiptPdf) {
+    public int refreshReceipt(CreditOrder data) {
         int count = 0;
-        CreditOrder data = new CreditOrder();
-        CreditOrder condition = getCreditOrder(code);
-        if (StringUtils.isNotBlank(code)) {
-            if (ECreditOrderStatus.YSK.getCode().equals(condition.getStatus())) {
-                data.setCode(code);
-
-                data.setStatus(ECreditOrderStatus.END.getCode());
-                count = creditOrderDAO.updateReceiptPdf(data);
-            }
+        if (StringUtils.isNotBlank(data.getCode())) {
+            count = creditOrderDAO.updateReceiptPdf(data);
         }
         return count;
     }

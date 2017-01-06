@@ -57,7 +57,7 @@ public class CarBOImpl extends PaginableBOImpl<Car> implements ICarBO {
     public int refreshCar(Car data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
-            // count = CarDAO.update(data);
+            count = CarDAO.update(data);
         }
         return count;
     }
@@ -79,5 +79,14 @@ public class CarBOImpl extends PaginableBOImpl<Car> implements ICarBO {
             }
         }
         return data;
+    }
+
+    @Override
+    public int refreshFBH(Car data) {
+        int count = 0;
+        if (StringUtils.isNotBlank(data.getCode())) {
+            count = CarDAO.updateFBH(data);
+        }
+        return count;
     }
 }

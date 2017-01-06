@@ -64,7 +64,7 @@ public class CreditOrder extends ABaseDO {
 
     private String branch;
 
-    private String backcardNo;
+    private String bankcardNo;
 
     private String lastNode;
 
@@ -76,7 +76,7 @@ public class CreditOrder extends ABaseDO {
 
     private String skPdf;
 
-    private String skAmount;
+    private Long skAmount;
 
     private Date skDatetime;
 
@@ -88,11 +88,26 @@ public class CreditOrder extends ABaseDO {
 
     private String accessLevel;
 
-    private String consume;
+    private Integer consume;
 
     private List<CreditAudit> creditAuditList;
 
     private List<String> statusList;
+
+    private String updater;
+
+    // -------------------------
+    private String brand;
+
+    private String model;
+
+    private Long price;
+
+    private Long fistAmount;
+
+    private Long termAmount;
+
+    private String approveResult;
 
     public String getCode() {
         return code;
@@ -270,14 +285,6 @@ public class CreditOrder extends ABaseDO {
         this.branch = branch;
     }
 
-    public String getBackcardNo() {
-        return backcardNo;
-    }
-
-    public void setBackcardNo(String backcardNo) {
-        this.backcardNo = backcardNo;
-    }
-
     public String getLastNode() {
         return lastNode;
     }
@@ -318,14 +325,6 @@ public class CreditOrder extends ABaseDO {
         this.skPdf = skPdf;
     }
 
-    public String getSkAmount() {
-        return skAmount;
-    }
-
-    public void setSkAmount(String skAmount) {
-        this.skAmount = skAmount;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -348,14 +347,6 @@ public class CreditOrder extends ABaseDO {
 
     public void setAccessLevel(String accessLevel) {
         this.accessLevel = accessLevel;
-    }
-
-    public String getConsume() {
-        return consume;
-    }
-
-    public void setConsume(String consume) {
-        this.consume = consume;
     }
 
     public List<CreditAudit> getCreditAuditList() {
@@ -412,6 +403,86 @@ public class CreditOrder extends ABaseDO {
 
     public void setStatusList(List<String> statusList) {
         this.statusList = statusList;
+    }
+
+    public String getBankcardNo() {
+        return bankcardNo;
+    }
+
+    public void setBankcardNo(String bankcardNo) {
+        this.bankcardNo = bankcardNo;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public Long getFistAmount() {
+        return fistAmount;
+    }
+
+    public void setFistAmount(Long fistAmount) {
+        this.fistAmount = fistAmount;
+    }
+
+    public Long getSkAmount() {
+        return skAmount;
+    }
+
+    public void setSkAmount(Long skAmount) {
+        this.skAmount = skAmount;
+    }
+
+    public Long getTermAmount() {
+        return termAmount;
+    }
+
+    public void setTermAmount(Long termAmount) {
+        this.termAmount = termAmount;
+    }
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
+    }
+
+    public String getApproveResult() {
+        return approveResult;
+    }
+
+    public void setApproveResult(String approveResult) {
+        this.approveResult = approveResult;
+    }
+
+    public Integer getConsume() {
+        return consume;
+    }
+
+    public void setConsume(Integer consume) {
+        this.consume = consume;
     }
 
 }

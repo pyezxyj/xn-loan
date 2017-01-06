@@ -8,10 +8,13 @@ import org.springframework.stereotype.Service;
 import com.cdkj.loan.ao.ICreditAuditAO;
 import com.cdkj.loan.bo.ICreditAuditBO;
 import com.cdkj.loan.bo.ICreditOrderBO;
+import com.cdkj.loan.bo.INodeBO;
 import com.cdkj.loan.bo.base.Paginable;
 import com.cdkj.loan.domain.CreditAudit;
+import com.cdkj.loan.domain.Node;
 import com.cdkj.loan.enums.EBoolean;
 import com.cdkj.loan.enums.ECreditAuditStatus;
+import com.cdkj.loan.enums.ENodeType;
 import com.cdkj.loan.exception.BizException;
 
 @Service
@@ -23,6 +26,9 @@ public class CreditAuditAOImpl implements ICreditAuditAO {
     @Autowired
     private ICreditOrderBO creditOrderBO;
 
+    @Autowired
+    private INodeBO nodeBO;
+
     @Override
     public String addCreditAudit(CreditAudit data) {
         return creditAuditBO.saveCreditAudit(data);
@@ -33,31 +39,32 @@ public class CreditAuditAOImpl implements ICreditAuditAO {
         if (!creditAuditBO.isCreditAuditExist(data.getCode())) {
             throw new BizException("xn0000", "记录编号不存在");
         }
+        CreditAudit condition = creditAuditBO.getCreditAudit(data.getCode());
+        String refUser = condition.getCreditOrderCode();
         if (EBoolean.YES.getCode().equals(data.getCourtResult())
                 && EBoolean.YES.getCode().equals(data.getCreditResult())) {
             data.setStatus(ECreditAuditStatus.APPROVE_YES.getCode());
+            creditOrderBO.refreshCreditOrder(condition.getCreditOrderCode());
+            nodeBO.editNode(refUser, ENodeType.ZX.getCode(), data.getUpdater(),
+                data.getRemark());
+            // 进行下一进程
+            Node node3 = new Node();
+            node3.setType(ENodeType.FP.getCode());
+            node3.setUpdater(data.getUpdater());
+            node3.setRemark(data.getRemark());
+            nodeBO.saveNode(node3);
         } else {
             data.setStatus(ECreditAuditStatus.APPROVE_NO.getCode());
+            creditOrderBO.refreshOrder(condition.getCreditOrderCode());
         }
-        creditAuditBO.refreshCreditAudit(data);
-        CreditAudit condition = creditAuditBO.getCreditAudit(data.getCode());
-        String refUser = condition.getRefUser();
+
         CreditAudit credit = new CreditAudit();
-        credit.setRefUser(refUser);
+        credit.setCreditOrderCode(refUser);
         List<CreditAudit> creditAuditList = creditAuditBO
             .queryCreditAuditList(credit);
-        boolean isAllPass = true;
+        data.setCreditOrderCode(refUser);
         for (CreditAudit creditAudit : creditAuditList) {
-            if (ECreditAuditStatus.TO_APPROVE.getCode().equals(
-                creditAudit.getStatus())
-                    || ECreditAuditStatus.APPROVE_NO.getCode().equals(
-                        creditAudit.getStatus())) {
-                isAllPass = false;
-                break;
-            }
-        }
-        if (isAllPass) {
-            creditOrderBO.refreshCreditOrder(condition.getRefUser());
+            creditAuditBO.refreshCreditAudit(data);
         }
     }
 

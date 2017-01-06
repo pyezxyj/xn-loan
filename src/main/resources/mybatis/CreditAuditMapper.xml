@@ -4,29 +4,26 @@
 <mapper namespace="com.cdkj.loan.dao.ICreditAuditDAO">
 	<resultMap id="creditAudit_DB_Result" type="creditAudit">
 		<result column="code" property="code" />
+		<result column="credit_order_code" property="creditOrderCode" />
 		<result column="loan_type" property="loanType" />
 		<result column="loan_amount" property="loanAmount" />
-		<result column="user_name" property="userName" />
+		<result column="real_name" property="realName" />
+		
 		<result column="relation" property="relation" />
-		<result column="ref_user" property="refUser" />
 		<result column="id_kind" property="idKind" />
 		<result column="id_no" property="idNo" />
 		<result column="accredit_pdf" property="accreditPdf" />
 		<result column="credit_result" property="creditResult" />
-		<result column="credit_code" property="creditCode" />
+			
 		<result column="credit_descript" property="creditDescript" />
 		<result column="court_result" property="courtResult" />
 		<result column="court_descript" property="courtDescript" />
 		<result column="status" property="status" />
-		<result column="create_datetime" property="createDatetime" />
 		<result column="mobile" property="mobile" />
+		
 		<result column="work_unit" property="workUnit" />
 		<result column="work_phone" property="workPhone" />
-		<result column="work_address" property="workAddress" />
-		<result column="detail" property="detail" />
-		<result column="approver" property="approver" />
-		<result column="approve_datetime" property="approveDatetime" />
-		<result column="approve_note" property="approveNote" />
+		<result column="address" property="address" />
 		<result column="remark" property="remark" />
 	</resultMap>
 	<sql id="where_condition">
@@ -34,17 +31,11 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
-			<if test="refUser != null and refUser != '' ">
-				AND t.ref_user = #{refUser}
-			</if>
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
 			</if>
-			<!-- <if test="userName != null and userName != '' ">
-				AND t.user_name = #{userName}
-			</if> -->
-			<if test="userName != null and userName != '' ">
-				AND t.user_name like "%"#{userName}"%"
+			<if test="realName != null and realName != '' ">
+				AND t.real_name like "%"#{realName}"%"
 			</if>
 			<if test="statusList != null and statusList != '' ">
 				AND t.status in 
@@ -60,32 +51,26 @@
 	<select id="select_creditAudit" parameterType="creditAudit" resultMap="creditAudit_DB_Result">
 		SELECT
 		t.code
+		,t.credit_order_code
 		,t.loan_type
 		,t.loan_amount
+		,t.real_name
 		,t.relation
-		,t.ref_user
 		,t.id_kind
 		,t.id_no
 		,t.accredit_pdf
-		,t.user_name
 		,t.credit_result
-		,t.credit_code
 		,t.credit_descript
 		,t.court_result
 		,t.court_descript
 		,t.status
-		,t.create_datetime
 		,t.mobile
 		,t.work_unit
 		,t.work_phone
-		,t.work_address
-		,t.detail
-		,t.approver
-		,t.approve_datetime
-		,t.approve_note
+		,t.address
 		,t.remark
 		FROM
-		credit_audit t
+		tloan_credit_people t
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -96,103 +81,91 @@
 
 	<select id="select_creditAudit_count" parameterType="creditAudit"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM credit_audit t
+		SELECT count(1) FROM tloan_credit_people t
 		<include refid="where_condition" />
 	</select>
 
 	<insert id="insert_creditAudit" parameterType="creditAudit">
 		INSERT INTO
-		credit_audit(
+		tloan_credit_people(
 		code
+		,credit_order_code
 		,loan_type
 		,loan_amount
+		,real_name
 		,relation
-		,ref_user
 		,id_kind
 		,id_no
-		,user_name
 		,accredit_pdf
 		,credit_result
-		,credit_code
 		,credit_descript
 		,court_result
 		,court_descript
 		,status
-		,create_datetime
 		,mobile
 		,work_unit
 		,work_phone
-		,work_address
-		,detail
-		,approver
-		,approve_datetime
-		,approve_note
+		,address
 		,remark
 		)
 		VALUES(
 		#{code}
+		,#{creditOrderCode}
 		,#{loanType}
 		,#{loanAmount}
+		,#{realName}
 		,#{relation}
-		,#{refUser}
 		,#{idKind}
 		,#{idNo}
-		,#{userName}
 		,#{accreditPdf}
 		,#{creditResult}
-		,#{creditCode}
 		,#{creditDescript}
 		,#{courtResult}
 		,#{courtDescript}
 		,#{status}
-		,#{createDatetime}
 		,#{mobile}
 		,#{workUnit}
 		,#{workPhone}
-		,#{workAddress}
-		,#{detail}
-		,#{approver}
-		,#{approveDatetime}
-		,#{approveNote}
+		,#{address}
 		,#{remark}
 		)
 	</insert>
 
 	<update id="update_creditAudit" parameterType="creditAudit">
-		UPDATE credit_audit
+		UPDATE tloan_credit_people
 		SET
 		credit_result = #{creditResult}
 		,credit_descript = #{creditDescript}
 		,court_result = #{courtResult}
 		,court_descript = #{courtDescript}
 		,status = #{status}
-		WHERE code = #{code}
+		WHERE credit_order_code = #{creditOrderCode}
 	</update>
 
 	<delete id="delete_creditAudit" parameterType="creditAudit">
-		DELETE FROM credit_audit
+		DELETE FROM tloan_credit_people
 		WHERE
 		code = #{code}
 	</delete>
 	
 	<update id="update_mobile" parameterType="creditAudit">
-		UPDATE credit_audit
+		UPDATE tloan_credit_people
 		SET
 		mobile = #{mobile}
 		WHERE code = #{code}
 	</update>
 	
 		<update id="update_address" parameterType="creditAudit">
-		UPDATE credit_audit
+		UPDATE tloan_credit_people
 		SET
 		work_unit = #{workUnit}
 		,work_phone = #{workPhone}
-		,work_address = #{workAddress}
+		,address = #{address}
 		WHERE code = #{code}
 	</update>
 	
 <!-- 	<update id="update_creditAudit" parameterType="creditAudit">
-		UPDATE credit_audit
+		UPDATE tloan_credit_people
 		SET
 		relation = #{relation}
 		,ref_user = #{refUser}

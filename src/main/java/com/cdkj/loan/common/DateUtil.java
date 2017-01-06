@@ -209,4 +209,17 @@ public class DateUtil {
         long times = endDate.getTime() - beginDate.getTime();
         return (int) (times / 60 / 60 / 1000 / 24);
     }
+
+    /**
+     * 统计两个时间差，返回的是分钟数
+     * @param beginDate
+     * @param endDate
+     * @return 
+     * @create: 2017年1月6日 上午11:20:51 shan
+     * @history:
+     */
+    public static int timeBetween(Date beginDate, Date endDate) {
+        long times = endDate.getTime() - beginDate.getTime();
+        return (int) (times / 60 / 24);
+    }
 }

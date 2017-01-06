@@ -1,6 +1,5 @@
 package com.cdkj.loan.bo.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -42,7 +41,6 @@ public class CreditAuditBOImpl extends PaginableBOImpl<CreditAudit> implements
                 .getCode());
             data.setCode(code);
             data.setStatus(ECreditAuditStatus.TO_APPROVE.getCode());
-            data.setCreateDatetime(new Date());
             creditAuditDAO.insert(data);
         }
         return code;

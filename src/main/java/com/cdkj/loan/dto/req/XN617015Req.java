@@ -3,12 +3,12 @@ package com.cdkj.loan.dto.req;
 import java.util.List;
 
 /**
- * 分页查询资质申请
+ * 分页查询资信对象
  * @author: asus 
  * @since: 2016年12月24日 下午2:02:07 
  * @history:
  */
-public class XN617003Req extends APageReq {
+public class XN617015Req extends APageReq {
     /** 
      * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
      */

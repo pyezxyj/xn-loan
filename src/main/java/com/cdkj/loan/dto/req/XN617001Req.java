@@ -10,27 +10,30 @@ import com.cdkj.loan.domain.CreditAudit;
  * @since: 2016年12月24日 下午1:34:52 
  * @history:
  */
-public class XN617002Req {
+public class XN617001Req {
     // 编号
-    public String code;
+    private String code;
+
+    // 地区
+    private String area;
 
     // 业务员（必填）
-    public String saleman;
+    private String saleman;
 
     // 车行（必填）
-    public String car;
+    private String carStore;
 
     // 经办银行（必填）
-    public String jbBank;
+    private String jbBank;
 
     // 贷款类型（必填）
-    public String loanType;
+    private String loanType;
 
     // 贷款金额（必填）
-    public String loanAmount;
+    private String loanAmount;
 
     // 贷款人关系列表（必填）
-    public List<CreditAudit> creditList;
+    private List<CreditAudit> creditPeopleList;
 
     public String getCode() {
         return code;
@@ -38,22 +41,6 @@ public class XN617002Req {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public String getSaleman() {
-        return saleman;
-    }
-
-    public void setSaleman(String saleman) {
-        this.saleman = saleman;
-    }
-
-    public String getCar() {
-        return car;
-    }
-
-    public void setCar(String car) {
-        this.car = car;
     }
 
     public String getJbBank() {
@@ -80,11 +67,36 @@ public class XN617002Req {
         this.loanAmount = loanAmount;
     }
 
-    public List<CreditAudit> getCreditList() {
-        return creditList;
+    public String getArea() {
+        return area;
     }
 
-    public void setCreditList(List<CreditAudit> creditList) {
-        this.creditList = creditList;
+    public void setArea(String area) {
+        this.area = area;
     }
+
+    public String getCarStore() {
+        return carStore;
+    }
+
+    public void setCarStore(String carStore) {
+        this.carStore = carStore;
+    }
+
+    public List<CreditAudit> getCreditPeopleList() {
+        return creditPeopleList;
+    }
+
+    public void setCreditPeopleList(List<CreditAudit> creditPeopleList) {
+        this.creditPeopleList = creditPeopleList;
+    }
+
+    public String getSaleman() {
+        return saleman;
+    }
+
+    public void setSaleman(String saleman) {
+        this.saleman = saleman;
+    }
+
 }

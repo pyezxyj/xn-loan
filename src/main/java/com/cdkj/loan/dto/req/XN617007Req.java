@@ -1,20 +1,23 @@
 package com.cdkj.loan.dto.req;
 
 /**
- * 合规审查
+ * 额度审批
  * @author: asus 
- * @since: 2016年12月24日 下午6:19:05 
+ * @since: 2016年12月24日 下午1:14:49 
  * @history:
  */
-public class XN617006Req {
+public class XN617007Req {
+    // 编号
+    private String code;
 
-    public String code;
-
-    public String approveResult;
+    // 贷款额
+    private String loanAmount;
 
     private String approverUser;
 
-    public String approveNote;
+    private String approveResult;
+
+    private String approveNote;
 
     public String getCode() {
         return code;
@@ -24,12 +27,12 @@ public class XN617006Req {
         this.code = code;
     }
 
-    public String getApproveResult() {
-        return approveResult;
+    public String getLoanAmount() {
+        return loanAmount;
     }
 
-    public void setApproveResult(String approveResult) {
-        this.approveResult = approveResult;
+    public void setLoanAmount(String loanAmount) {
+        this.loanAmount = loanAmount;
     }
 
     public String getApproverUser() {
@@ -38,6 +41,14 @@ public class XN617006Req {
 
     public void setApproverUser(String approverUser) {
         this.approverUser = approverUser;
+    }
+
+    public String getApproveResult() {
+        return approveResult;
+    }
+
+    public void setApproveResult(String approveResult) {
+        this.approveResult = approveResult;
     }
 
     public String getApproveNote() {

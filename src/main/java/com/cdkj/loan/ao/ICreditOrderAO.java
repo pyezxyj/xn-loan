@@ -18,31 +18,35 @@ public interface ICreditOrderAO {
             List<CreditAudit> creditAuditList);
 
     public void editSurvey(String code, String mobile, String investigator,
-            String remark);
+            String updater, String remark);
 
     public void editSBack(CreditOrder data);
 
     public void editZLBack(CreditOrder data, List<CreditAudit> creditAuditList);
 
-    public void editApprove(String code, String approveResult, String remark);
+    public void editApprove(String code, String approveResult, String updater,
+            String remark);
 
-    public void editPayroll(String code, String payrollPdf);
+    public void editApprove(CreditOrder data);
 
-    public void editVisit(String code, String approveResult, String remark);
+    public void editPayroll(String code, String data, String updater,
+            String remark);
 
-    public void editFinancial(String code, String ApproveResult, String remark);
+    public void editVisit(String code, String approveResult, String updater,
+            String remark);
 
-    public void editPayout(String code, String cwPdf);
+    public void editFinancial(String code, String ApproveResult,
+            String updater, String remark);
 
-    public void editMoneyback(String code, String playPdf);
+    public void editPayout(String code, String cwPdf, String updater,
+            String remark);
 
-    public void editFBH(String code, String receipt, String policy,
-            String certification);
+    public void editMoneyback(String code, String dkPdf, String updater,
+            String remark);
 
     public void editDownload(String code);
 
-    public void editReceiptPdf(String code, Long receiptAmount,
-            String receiptPdf);
+    public void editReceiptPdf(CreditOrder data);
 
     public Paginable<CreditOrder> queryCreditOrderPage(int start, int limit,
             CreditOrder condition);

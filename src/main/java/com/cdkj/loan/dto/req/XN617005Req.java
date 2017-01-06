@@ -10,34 +10,43 @@ import com.cdkj.loan.domain.CreditAudit;
  * @since: 2016年12月24日 下午5:39:02 
  * @history:
  */
-public class XN617012Req {
-    public String code;
+public class XN617005Req {
+    private String code;
 
-    public String brand;
+    private String brand;
 
-    public String model;
+    private String model;
 
-    public String price;
+    private String price;
 
-    public String firstPay;
+    private String firstAmount;
 
-    public String realLoanAmount;
+    private String loanAmount;
 
-    public String loanTerm;
+    private String loanTerm;
 
-    public String sumRate;
+    private String rate;
 
-    public String fee;
+    // 月供
+    private String termAmount;
 
-    public String urgency;
+    private String fee;
 
-    public String supplyInfo;
+    private String urgent;
 
-    public String cardBank;
+    private String bank;
 
-    public String cardNumber;
+    private String branch;
 
-    public List<CreditAudit> creditAuditList;
+    private String bankcardNo;
+
+    private String data;
+
+    private String updater;
+
+    private String remark;
+
+    public List<CreditAudit> creditPeopleList;
 
     public String getCode() {
         return code;
@@ -71,20 +80,20 @@ public class XN617012Req {
         this.price = price;
     }
 
-    public String getFirstPay() {
-        return firstPay;
+    public String getFirstAmount() {
+        return firstAmount;
     }
 
-    public void setFirstPay(String firstPay) {
-        this.firstPay = firstPay;
+    public void setFirstAmount(String firstAmount) {
+        this.firstAmount = firstAmount;
     }
 
-    public String getRealLoanAmount() {
-        return realLoanAmount;
+    public String getLoanAmount() {
+        return loanAmount;
     }
 
-    public void setRealLoanAmount(String realLoanAmount) {
-        this.realLoanAmount = realLoanAmount;
+    public void setLoanAmount(String loanAmount) {
+        this.loanAmount = loanAmount;
     }
 
     public String getLoanTerm() {
@@ -95,52 +104,20 @@ public class XN617012Req {
         this.loanTerm = loanTerm;
     }
 
-    public String getSumRate() {
-        return sumRate;
+    public String getRate() {
+        return rate;
     }
 
-    public void setSumRate(String sumRate) {
-        this.sumRate = sumRate;
+    public void setRate(String rate) {
+        this.rate = rate;
     }
 
-    public String getUrgency() {
-        return urgency;
+    public String getTermAmount() {
+        return termAmount;
     }
 
-    public void setUrgency(String urgency) {
-        this.urgency = urgency;
-    }
-
-    public String getSupplyInfo() {
-        return supplyInfo;
-    }
-
-    public void setSupplyInfo(String supplyInfo) {
-        this.supplyInfo = supplyInfo;
-    }
-
-    public String getCardBank() {
-        return cardBank;
-    }
-
-    public void setCardBank(String cardBank) {
-        this.cardBank = cardBank;
-    }
-
-    public String getCardNumber() {
-        return cardNumber;
-    }
-
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    public List<CreditAudit> getCreditAuditList() {
-        return creditAuditList;
-    }
-
-    public void setCreditAuditList(List<CreditAudit> creditAuditList) {
-        this.creditAuditList = creditAuditList;
+    public void setTermAmount(String termAmount) {
+        this.termAmount = termAmount;
     }
 
     public String getFee() {
@@ -150,4 +127,69 @@ public class XN617012Req {
     public void setFee(String fee) {
         this.fee = fee;
     }
+
+    public String getUrgent() {
+        return urgent;
+    }
+
+    public void setUrgent(String urgent) {
+        this.urgent = urgent;
+    }
+
+    public String getBank() {
+        return bank;
+    }
+
+    public void setBank(String bank) {
+        this.bank = bank;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
+    public String getBankcardNo() {
+        return bankcardNo;
+    }
+
+    public void setBankcardNo(String bankcardNo) {
+        this.bankcardNo = bankcardNo;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public List<CreditAudit> getCreditPeopleList() {
+        return creditPeopleList;
+    }
+
+    public void setCreditPeopleList(List<CreditAudit> creditPeopleList) {
+        this.creditPeopleList = creditPeopleList;
+    }
+
 }

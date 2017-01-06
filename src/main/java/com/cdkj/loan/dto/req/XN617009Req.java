@@ -6,10 +6,14 @@ package com.cdkj.loan.dto.req;
  * @since: 2016年12月24日 下午7:41:22 
  * @history:
  */
-public class XN617017Req {
-    public String code;
+public class XN617009Req {
+    private String code;
 
-    public String cwPdf;
+    private String data;
+
+    private String updater;
+
+    private String remark;
 
     public String getCode() {
         return code;
@@ -19,11 +23,27 @@ public class XN617017Req {
         this.code = code;
     }
 
-    public String getCwPdf() {
-        return cwPdf;
+    public String getData() {
+        return data;
     }
 
-    public void setCwPdf(String cwPdf) {
-        this.cwPdf = cwPdf;
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }
