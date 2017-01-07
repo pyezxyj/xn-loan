@@ -14,6 +14,9 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="insureCode != null and insureCode != '' ">
+				AND t.insure_code = #{insureCode}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_InsureType" parameterType="InsureType" resultMap="InsureType_DB_Result">
@@ -60,8 +63,7 @@
 	<update id="update_InsureType" parameterType="InsureType">
 		UPDATE tloan_insure_type
 		SET
-		insure_code = #{insureCode}
-		,type = #{type}
+		type = #{type}
 		,amount = #{amount}
 		,remark = #{remark}
 		WHERE code = #{code}

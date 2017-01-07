@@ -11,49 +11,55 @@ import com.cdkj.loan.bo.base.Paginable;
 import com.cdkj.loan.domain.InsureType;
 import com.cdkj.loan.exception.BizException;
 
-
-
 //CHECK ��鲢��ע�� 
 @Service
 public class InsureTypeAOImpl implements IInsureTypeAO {
 
-	@Autowired
-	private IInsureTypeBO insureTypeBO;
+    @Autowired
+    private IInsureTypeBO insureTypeBO;
 
-	@Override
-	public String addInsureType(InsureType data) {
-		return insureTypeBO.saveInsureType(data);
-	}
+    @Override
+    public String addInsureType(InsureType data) {
+        return insureTypeBO.saveInsureType(data);
+    }
 
-	@Override
-	public int editInsureType(InsureType data) {
-		if (!insureTypeBO.isInsureTypeExist(data.getCode())) {
-			throw new BizException("xn0000", "记录编号不存在");
-		}
-		return insureTypeBO.refreshInsureType(data);
-	}
+    @Override
+    public int editInsureType(InsureType data) {
+        if (!insureTypeBO.isInsureTypeExist(data.getCode())) {
+            throw new BizException("xn0000", "该保险类型不存在");
+        }
+        return insureTypeBO.refreshInsureType(data);
+    }
 
-	@Override
-	public int dropInsureType(String code) {
-		if (!insureTypeBO.isInsureTypeExist(code)) {
-			throw new BizException("xn0000", "记录编号不存在");
-		}
-		return insureTypeBO.removeInsureType(code);
-	}
+    @Override
+    public int dropInsureType(String code) {
+        if (!insureTypeBO.isInsureTypeExist(code)) {
+            throw new BizException("xn0000", "该保险类型不存在");
+        }
+        return insureTypeBO.removeInsureType(code);
+    }
 
-	@Override
-	public Paginable<InsureType> queryInsureTypePage(int start, int limit,
-			InsureType condition) {
-		return insureTypeBO.getPaginable(start, limit, condition);
-	}
+    @Override
+    public Paginable<InsureType> queryInsureTypePage(int start, int limit,
+            InsureType condition) {
+        return insureTypeBO.getPaginable(start, limit, condition);
+    }
 
-	@Override
-	public List<InsureType> queryInsureTypeList(InsureType condition) {
-		return insureTypeBO.queryInsureTypeList(condition);
-	}
+    @Override
+    public List<InsureType> queryInsureTypeList(String code) {
+        if (!insureTypeBO.isInsureTypeExist(code)) {
+            throw new BizException("xn0000", "该保险类型不存在");
+        }
+        InsureType condition = new InsureType();
+        condition.setInsureCode(code);
+        return insureTypeBO.queryInsureTypeList(condition);
+    }
 
-	@Override
-	public InsureType getInsureType(String code) {
-		return insureTypeBO.getInsureType(code);
-	}
+    @Override
+    public InsureType getInsureType(String code) {
+        if (!insureTypeBO.isInsureTypeExist(code)) {
+            throw new BizException("xn0000", "该保险类型不存在");
+        }
+        return insureTypeBO.getInsureType(code);
+    }
 }

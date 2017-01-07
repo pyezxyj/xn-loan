@@ -12,7 +12,7 @@ import com.cdkj.loan.domain.Repay;
 public interface IRepayAO {
     static final String DEFAULT_ORDER_COLUMN = "code";
 
-    public String addRepay(Repay data);
+    public String addRepay(List<Repay> repayList);
 
     public int dropRepay(String code);
 
@@ -24,4 +24,11 @@ public interface IRepayAO {
 
     public Repay getRepay(String code);
 
+    public int editSms(String code);
+
+    public int editSue(String code);
+
+    public int editAlso(String code);
+
+    public int editAdvance(String code, String updater, String remark);
 }

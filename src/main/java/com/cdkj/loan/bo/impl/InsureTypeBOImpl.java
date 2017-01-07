@@ -59,7 +59,7 @@ public class InsureTypeBOImpl extends PaginableBOImpl<InsureType> implements
     public int refreshInsureType(InsureType data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
-            // count = InsureTypeDAO.update(data);
+            count = InsureTypeDAO.update(data);
         }
         return count;
     }

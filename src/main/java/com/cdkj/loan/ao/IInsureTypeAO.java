@@ -21,7 +21,7 @@ public interface IInsureTypeAO {
     public Paginable<InsureType> queryInsureTypePage(int start, int limit,
             InsureType condition);
 
-    public List<InsureType> queryInsureTypeList(InsureType condition);
+    public List<InsureType> queryInsureTypeList(String code);
 
     public InsureType getInsureType(String code);
 

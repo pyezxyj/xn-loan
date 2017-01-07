@@ -5,5 +5,7 @@ import com.cdkj.loan.domain.InsureType;
 
 //dao层 
 public interface IInsureTypeDAO extends IBaseDAO<InsureType> {
-	String NAMESPACE = IInsureTypeDAO.class.getName().concat(".");
+    String NAMESPACE = IInsureTypeDAO.class.getName().concat(".");
+
+    public int update(InsureType data);
 }

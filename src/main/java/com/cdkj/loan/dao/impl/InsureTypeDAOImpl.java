@@ -48,4 +48,9 @@ public class InsureTypeDAOImpl extends AMybatisTemplate implements
             count, condition, InsureType.class);
     }
 
+    @Override
+    public int update(InsureType data) {
+        return super.update(NAMESPACE.concat("update_InsureType"), data);
+    }
+
 }
