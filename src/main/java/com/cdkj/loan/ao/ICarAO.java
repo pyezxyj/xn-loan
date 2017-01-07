@@ -26,4 +26,6 @@ public interface ICarAO {
 
     public int editFBH(String code, String invoice, String policy,
             String certification);
+
+    public int release(Car data);
 }

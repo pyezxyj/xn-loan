@@ -46,4 +46,14 @@ public class ExpressDAOImpl extends AMybatisTemplate implements IExpressDAO {
             count, condition, Express.class);
     }
 
+    @Override
+    public int update(Express data) {
+        return super.update(NAMESPACE.concat("update_Express"), data);
+    }
+
+    @Override
+    public int updateApprove(Express data) {
+        return super.update(NAMESPACE.concat("update_Approve"), data);
+    }
+
 }

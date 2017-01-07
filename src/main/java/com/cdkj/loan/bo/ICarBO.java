@@ -21,4 +21,6 @@ public interface ICarBO extends IPaginableBO<Car> {
     public Car getCar(String code);
 
     public int refreshFBH(Car data);
+
+    public int refreshRelease(Car data);
 }

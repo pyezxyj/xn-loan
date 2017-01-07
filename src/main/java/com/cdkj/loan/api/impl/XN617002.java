@@ -25,7 +25,7 @@ public class XN617002 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         CreditAudit condition = new CreditAudit();
-        condition.setCode(req.getCode());
+        condition.setCreditOrderCode(req.getCode());
         condition.setCourtDescript(req.getCourtDescript());
         condition.setCourtResult(req.getCourtResult());
         condition.setCreditResult(req.getCreditResult());

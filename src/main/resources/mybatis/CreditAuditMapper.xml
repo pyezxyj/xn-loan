@@ -46,6 +46,9 @@
 			<if test="relation != null and relation != '' ">
 				AND t.relation = #{relation}
 			</if>
+			<if test="creditOrderCode != null and creditOrderCode != '' ">
+				AND t.credit_order_code = #{creditOrderCode}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_creditAudit" parameterType="creditAudit" resultMap="creditAudit_DB_Result">
@@ -139,7 +142,7 @@
 		,court_result = #{courtResult}
 		,court_descript = #{courtDescript}
 		,status = #{status}
-		WHERE credit_order_code = #{creditOrderCode}
+		WHERE code = #{code}
 	</update>
 
 	<delete id="delete_creditAudit" parameterType="creditAudit">
@@ -158,7 +161,8 @@
 		<update id="update_address" parameterType="creditAudit">
 		UPDATE tloan_credit_people
 		SET
-		work_unit = #{workUnit}
+		mobile=#{mobile}
+		,work_unit = #{workUnit}
 		,work_phone = #{workPhone}
 		,address = #{address}
 		WHERE code = #{code}

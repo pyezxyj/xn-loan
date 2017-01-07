@@ -126,7 +126,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             imCondition.setCreditOrderCode(creditOrder.getCode());
             List<CreditAudit> creditAuditList = creditAuditBO
                 .queryCreditAuditList(imCondition);
-            creditOrder.setCreditAuditList(creditAuditList);
+            creditOrder.setCreditPeopleList(creditAuditList);
         }
         return page;
     }
@@ -143,7 +143,11 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         condition.setCreditOrderCode(code);
         List<CreditAudit> creditAuditList = creditAuditBO
             .queryCreditAuditList(condition);
-        data.setCreditAuditList(creditAuditList);
+        data.setCreditPeopleList(creditAuditList);
+        Car car = new Car();
+        car.setCreditOrderCode(code);
+        List<Car> carList = carBO.queryCarList(car);
+        data.setCarList(carList);
         return data;
     }
 

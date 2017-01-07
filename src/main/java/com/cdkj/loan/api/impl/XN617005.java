@@ -26,7 +26,7 @@ public class XN617005 extends AProcessor {
     public Object doBusiness() throws BizException {
         CreditOrder data = new CreditOrder();
         data.setCode(req.getCode());
-        data.setBank(req.getBank());
+        data.setBrand(req.getBrand());
         data.setModel(req.getModel());
         data.setPrice(StringValidater.toLong(req.getPrice()));
         data.setFistAmount(StringValidater.toLong(req.getFirstAmount()));

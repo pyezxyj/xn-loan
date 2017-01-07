@@ -11,6 +11,7 @@
 	    <typeAlias alias="insureType" type="com.cdkj.loan.domain.InsureType" />
 	    <typeAlias alias="node" type="com.cdkj.loan.domain.Node" />
 	    <typeAlias alias="repay" type="com.cdkj.loan.domain.Repay" />
+	    <typeAlias alias="insure" type="com.cdkj.loan.domain.Insure" />
 	</typeAliases>	
 </configuration>
 

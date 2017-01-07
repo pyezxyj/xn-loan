@@ -47,4 +47,8 @@
 	<bean id="repayBO" class="com.cdkj.loan.bo.impl.RepayBOImpl">
 		<property name="paginableDAO" ref="repayDAOImpl"/>
 	</bean>
+	
+	<bean id="insureBO" class="com.cdkj.loan.bo.impl.InsureBOImpl">
+		<property name="paginableDAO" ref="insureDAOImpl"/>
+	</bean>
 </beans>

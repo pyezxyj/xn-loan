@@ -9,11 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cdkj.loan.ao.ICarAO;
 import com.cdkj.loan.bo.ICarBO;
 import com.cdkj.loan.bo.ICreditOrderBO;
+import com.cdkj.loan.bo.IInsureBO;
 import com.cdkj.loan.bo.INodeBO;
 import com.cdkj.loan.bo.base.Paginable;
 import com.cdkj.loan.domain.Car;
 import com.cdkj.loan.domain.CreditOrder;
+import com.cdkj.loan.domain.Insure;
 import com.cdkj.loan.domain.Node;
+import com.cdkj.loan.enums.EBoolean;
+import com.cdkj.loan.enums.ECarStatus;
 import com.cdkj.loan.enums.ECreditOrderStatus;
 import com.cdkj.loan.enums.ENodeType;
 import com.cdkj.loan.exception.BizException;
@@ -31,6 +35,9 @@ public class CarAOImpl implements ICarAO {
     @Autowired
     private INodeBO nodeBO;
 
+    @Autowired
+    private IInsureBO insureBO;
+
     @Override
     public String addCar(Car data) {
         return carBO.saveCar(data);
@@ -38,10 +45,18 @@ public class CarAOImpl implements ICarAO {
 
     @Override
     public int editCar(Car data) {
+        int count = 0;
         if (!carBO.isCarExist(data.getCode())) {
             throw new BizException("xn0000", "记录编号不存在");
         }
-        return carBO.refreshCar(data);
+        Car car = getCar(data.getCode());
+        if (ECarStatus.WLR.getCode().equals(car.getStatus())) {
+            data.setStatus(ECarStatus.DY.getCode());
+            count = carBO.refreshCar(data);
+        } else {
+            throw new BizException("xn0000", "该汽车不能被登记");
+        }
+        return count;
     }
 
     @Override
@@ -68,6 +83,9 @@ public class CarAOImpl implements ICarAO {
     }
 
     // 发保合登记
+    // 更新节点
+    // 新增下一节点
+    // 同时新增保单
     @Override
     @Transactional
     public int editFBH(String code, String invoice, String policy,
@@ -90,6 +108,28 @@ public class CarAOImpl implements ICarAO {
             node.setCreditOrderCode(car.getCreditOrderCode());
             node.setType(ENodeType.DK.getCode());
             nodeBO.saveNode(node);
+            Insure insure = new Insure();
+            insure.setCarCode(code);
+            insure.setRealName(car.getRealName());
+            insureBO.saveInsure(insure);
+        }
+        return count;
+    }
+
+    @Override
+    public int release(Car data) {
+        int count = 0;
+        if (!carBO.isCarExist(data.getCode())) {
+            throw new BizException("xn0000", "记录编号不存在");
+        }
+        Car car = getCar(data.getCode());
+        if (ECarStatus.DY.getCode().equals(car.getStatus())) {
+            if (EBoolean.YES.getCode().equals(data.getApproveResult())) {
+                data.setStatus(ECarStatus.YSF.getCode());
+            } else {
+                data.setStatus(ECarStatus.DY.getCode());
+            }
+            count = carBO.refreshRelease(data);
         }
         return count;
     }

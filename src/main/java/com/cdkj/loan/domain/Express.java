@@ -1,5 +1,7 @@
 package com.cdkj.loan.domain;
 
+import java.util.Date;
+
 import com.cdkj.loan.dao.base.ABaseDO;
 
 /**
@@ -10,193 +12,215 @@ import com.cdkj.loan.dao.base.ABaseDO;
 */
 public class Express extends ABaseDO {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	// 编号
-	private String code;
+    // 编号
+    private String code;
 
-	// 业务编号
-	private String creditOrderCode;
+    // 业务编号
+    private String creditOrderCode;
 
-	// 移交事项
-	private String type;
+    // 移交事项
+    private String type;
 
-	// 移交说明
-	private String typeNote;
+    // 移交说明
+    private String typeNote;
 
-	// 发件公司
-	private String deliverCompany;
+    // 发件公司
+    private String deliverCompany;
 
-	// 发件人
-	private String deliverer;
+    // 发件人
+    private String deliverer;
 
-	// 发件时间
-	private String deliverDatetime;
+    // 发件时间
+    private Date deliverDatetime;
 
-	// 收件公司
-	private String receiveCompany;
+    // 收件公司
+    private String receiveCompany;
 
-	// 收件人
-	private String receiver;
+    // 收件人
+    private String receiver;
 
-	// 收件时间
-	private String receiveDatetime;
+    // 收件时间
+    private Date receiveDatetime;
 
-	// 快递公司
-	private String logiCompany;
+    // 快递公司
+    private String logiCompany;
 
-	// 快递单号
-	private String logiCode;
+    // 快递单号
+    private String logiCode;
 
-	// 快递单pdf
-	private String deliverPdf;
+    // 快递单pdf
+    private String deliverPdf;
 
-	// 状态
-	private String status;
+    // 状态
+    private String status;
 
-	// 复核人
-	private String checkUser;
+    // 复核人
+    private String checkUser;
 
-	// 复核时间
-	private String checkDatetime;
+    // 复核时间
+    private Date checkDatetime;
 
-	// 备注
-	private String remark;
+    // 备注
+    private String remark;
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    // 抄写员
+    private String copier;
 
-	public String getCode() {
-		return code;
-	}
+    // 审核结果
+    private String approveResult;
 
-	public void setCreditOrderCode(String creditOrderCode) {
-		this.creditOrderCode = creditOrderCode;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public String getCreditOrderCode() {
-		return creditOrderCode;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setCreditOrderCode(String creditOrderCode) {
+        this.creditOrderCode = creditOrderCode;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getCreditOrderCode() {
+        return creditOrderCode;
+    }
 
-	public void setTypeNote(String typeNote) {
-		this.typeNote = typeNote;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public String getTypeNote() {
-		return typeNote;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setDeliverCompany(String deliverCompany) {
-		this.deliverCompany = deliverCompany;
-	}
+    public void setTypeNote(String typeNote) {
+        this.typeNote = typeNote;
+    }
 
-	public String getDeliverCompany() {
-		return deliverCompany;
-	}
+    public String getTypeNote() {
+        return typeNote;
+    }
 
-	public void setDeliverer(String deliverer) {
-		this.deliverer = deliverer;
-	}
+    public void setDeliverCompany(String deliverCompany) {
+        this.deliverCompany = deliverCompany;
+    }
 
-	public String getDeliverer() {
-		return deliverer;
-	}
+    public String getDeliverCompany() {
+        return deliverCompany;
+    }
 
-	public void setDeliverDatetime(String deliverDatetime) {
-		this.deliverDatetime = deliverDatetime;
-	}
+    public void setDeliverer(String deliverer) {
+        this.deliverer = deliverer;
+    }
 
-	public String getDeliverDatetime() {
-		return deliverDatetime;
-	}
+    public String getDeliverer() {
+        return deliverer;
+    }
 
-	public void setReceiveCompany(String receiveCompany) {
-		this.receiveCompany = receiveCompany;
-	}
+    public void setReceiveCompany(String receiveCompany) {
+        this.receiveCompany = receiveCompany;
+    }
 
-	public String getReceiveCompany() {
-		return receiveCompany;
-	}
+    public String getReceiveCompany() {
+        return receiveCompany;
+    }
 
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
-	}
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
 
-	public String getReceiver() {
-		return receiver;
-	}
+    public String getReceiver() {
+        return receiver;
+    }
 
-	public void setReceiveDatetime(String receiveDatetime) {
-		this.receiveDatetime = receiveDatetime;
-	}
+    public void setLogiCompany(String logiCompany) {
+        this.logiCompany = logiCompany;
+    }
 
-	public String getReceiveDatetime() {
-		return receiveDatetime;
-	}
+    public String getLogiCompany() {
+        return logiCompany;
+    }
 
-	public void setLogiCompany(String logiCompany) {
-		this.logiCompany = logiCompany;
-	}
+    public void setLogiCode(String logiCode) {
+        this.logiCode = logiCode;
+    }
 
-	public String getLogiCompany() {
-		return logiCompany;
-	}
+    public String getLogiCode() {
+        return logiCode;
+    }
 
-	public void setLogiCode(String logiCode) {
-		this.logiCode = logiCode;
-	}
+    public void setDeliverPdf(String deliverPdf) {
+        this.deliverPdf = deliverPdf;
+    }
 
-	public String getLogiCode() {
-		return logiCode;
-	}
+    public String getDeliverPdf() {
+        return deliverPdf;
+    }
 
-	public void setDeliverPdf(String deliverPdf) {
-		this.deliverPdf = deliverPdf;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public String getDeliverPdf() {
-		return deliverPdf;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public void setCheckUser(String checkUser) {
+        this.checkUser = checkUser;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public String getCheckUser() {
+        return checkUser;
+    }
 
-	public void setCheckUser(String checkUser) {
-		this.checkUser = checkUser;
-	}
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
-	public String getCheckUser() {
-		return checkUser;
-	}
+    public String getRemark() {
+        return remark;
+    }
 
-	public void setCheckDatetime(String checkDatetime) {
-		this.checkDatetime = checkDatetime;
-	}
+    public Date getDeliverDatetime() {
+        return deliverDatetime;
+    }
 
-	public String getCheckDatetime() {
-		return checkDatetime;
-	}
+    public void setDeliverDatetime(Date deliverDatetime) {
+        this.deliverDatetime = deliverDatetime;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    public Date getReceiveDatetime() {
+        return receiveDatetime;
+    }
 
-	public String getRemark() {
-		return remark;
-	}
+    public void setReceiveDatetime(Date receiveDatetime) {
+        this.receiveDatetime = receiveDatetime;
+    }
+
+    public Date getCheckDatetime() {
+        return checkDatetime;
+    }
+
+    public void setCheckDatetime(Date checkDatetime) {
+        this.checkDatetime = checkDatetime;
+    }
+
+    public String getCopier() {
+        return copier;
+    }
+
+    public void setCopier(String copier) {
+        this.copier = copier;
+    }
+
+    public String getApproveResult() {
+        return approveResult;
+    }
+
+    public void setApproveResult(String approveResult) {
+        this.approveResult = approveResult;
+    }
 
 }

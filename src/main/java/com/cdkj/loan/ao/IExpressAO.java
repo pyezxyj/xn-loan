@@ -16,7 +16,7 @@ public interface IExpressAO {
 
     public int dropExpress(String code);
 
-    public int editExpress(Express data);
+    public int editExpress(String code);
 
     public Paginable<Express> queryExpressPage(int start, int limit,
             Express condition);
@@ -24,5 +24,7 @@ public interface IExpressAO {
     public List<Express> queryExpressList(Express condition);
 
     public Express getExpress(String code);
+
+    public int editApprove(Express data);
 
 }

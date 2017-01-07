@@ -40,6 +40,12 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="creditOrderCode != null and creditOrderCode != '' ">
+				AND t.credit_order_code = #{creditOrderCode}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_Car" parameterType="Car" resultMap="Car_DB_Result">
@@ -164,19 +170,10 @@
 	<update id="update_Car" parameterType="Car">
 		UPDATE tloan_car
 		SET
-		credit_order_code = #{creditOrderCode}
-		,real_name = #{realName}
-		,brand = #{brand}
-		,model = #{model}
-		,price = #{price}
-		,first_amount = #{firstAmount}
-		,license_no = #{licenseNo}
+		license_no = #{licenseNo}
 		,chassis_no = #{chassisNo}
 		,engine_no = #{engineNo}
 		,seat_num = #{seatNum}
-		,invoice = #{invoice}
-		,policy = #{policy}
-		,certification = #{certification}
 		,invoice_no = #{invoiceNo}
 		,buy_datetime = #{buyDatetime}
 		,buy_tax = #{buyTax}
@@ -189,10 +186,6 @@
 		,guaranty_pdf = #{guarantyPdf}
 		,regist_pdf = #{registPdf}
 		,status = #{status}
-		,loan_settle_datetime = #{loanSettleDatetime}
-		,property_out_datetime = #{propertyOutDatetime}
-		,approver = #{approver}
-		,approve_datetime = #{approveDatetime}
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update>
@@ -206,4 +199,16 @@
 		WHERE code = #{code}
 	</update>
 
+	<update id="update_relese" parameterType="Car">
+		UPDATE tloan_car
+		SET
+		status = #{status}
+		,loan_settle_datetime=#{loanSettleDatetime}
+		,property_out_datetime=#{propertyOutDatetime}
+		,approver=#{approver}
+		,approve_datetime=#{approveDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+	
 </mapper>

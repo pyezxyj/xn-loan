@@ -1,80 +1,79 @@
 package com.cdkj.loan.bo.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cdkj.loan.bo.ICarBO;
+import com.cdkj.loan.bo.IInsureBO;
 import com.cdkj.loan.bo.base.PaginableBOImpl;
 import com.cdkj.loan.core.OrderNoGenerater;
-import com.cdkj.loan.dao.ICarDAO;
-import com.cdkj.loan.domain.Car;
+import com.cdkj.loan.dao.IInsureDAO;
+import com.cdkj.loan.domain.Insure;
 import com.cdkj.loan.enums.EGeneratePrefix;
 import com.cdkj.loan.exception.BizException;
 
 //CHECK ��鲢��ע�� 
 @Component
-public class CarBOImpl extends PaginableBOImpl<Car> implements ICarBO {
+public class InsureBOImpl extends PaginableBOImpl<Insure> implements IInsureBO {
 
     @Autowired
-    private ICarDAO CarDAO;
+    private IInsureDAO InsureDAO;
 
     @Override
-    public boolean isCarExist(String code) {
-        Car condition = new Car();
+    public boolean isInsureExist(String code) {
+        Insure condition = new Insure();
         condition.setCode(code);
-        if (CarDAO.selectTotalCount(condition) > 0) {
+        if (InsureDAO.selectTotalCount(condition) > 0) {
             return true;
         }
         return false;
     }
 
     @Override
-    public String saveCar(Car data) {
+    public String saveInsure(Insure data) {
         String code = null;
         if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.CAR.getCode());
+            code = OrderNoGenerater.generateM(EGeneratePrefix.INSURE.getCode());
             data.setCode(code);
-            CarDAO.insert(data);
+            InsureDAO.insert(data);
         }
         return code;
     }
 
     @Override
-    public int removeCar(String code) {
+    public int removeInsure(String code) {
         int count = 0;
         if (StringUtils.isNotBlank(code)) {
-            Car data = new Car();
+            Insure data = new Insure();
             data.setCode(code);
-            count = CarDAO.delete(data);
+            count = InsureDAO.delete(data);
         }
         return count;
     }
 
     @Override
-    public int refreshCar(Car data) {
+    public int refreshInsure(Insure data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
-            count = CarDAO.update(data);
+            count = InsureDAO.update(data);
         }
         return count;
     }
 
     @Override
-    public List<Car> queryCarList(Car condition) {
-        return CarDAO.selectList(condition);
+    public List<Insure> queryInsureList(Insure condition) {
+        return InsureDAO.selectList(condition);
     }
 
     @Override
-    public Car getCar(String code) {
-        Car data = null;
+    public Insure getInsure(String code) {
+        Insure data = null;
         if (StringUtils.isNotBlank(code)) {
-            Car condition = new Car();
+            Insure condition = new Insure();
             condition.setCode(code);
-            data = CarDAO.select(condition);
+            data = InsureDAO.select(condition);
             if (data == null) {
                 throw new BizException("xn0000", "�� ��Ų�����");
             }
@@ -83,20 +82,10 @@ public class CarBOImpl extends PaginableBOImpl<Car> implements ICarBO {
     }
 
     @Override
-    public int refreshFBH(Car data) {
+    public int refreshSms(Insure data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
-            count = CarDAO.updateFBH(data);
-        }
-        return count;
-    }
-
-    @Override
-    public int refreshRelease(Car data) {
-        int count = 0;
-        if (StringUtils.isNotBlank(data.getCode())) {
-            data.setApproveDatetime(new Date());
-            count = CarDAO.updateRelease(data);
+            count = InsureDAO.updateSms(data);
         }
         return count;
     }

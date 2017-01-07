@@ -1,5 +1,6 @@
 package com.cdkj.loan.bo.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -11,6 +12,7 @@ import com.cdkj.loan.bo.base.PaginableBOImpl;
 import com.cdkj.loan.core.OrderNoGenerater;
 import com.cdkj.loan.dao.IExpressDAO;
 import com.cdkj.loan.domain.Express;
+import com.cdkj.loan.enums.EExpressStatus;
 import com.cdkj.loan.enums.EGeneratePrefix;
 import com.cdkj.loan.exception.BizException;
 
@@ -39,6 +41,7 @@ public class ExpressBOImpl extends PaginableBOImpl<Express> implements
             code = OrderNoGenerater
                 .generateM(EGeneratePrefix.EXPRESS.getCode());
             data.setCode(code);
+            data.setStatus(EExpressStatus.DQS.getCode());
             ExpressDAO.insert(data);
         }
         return code;
@@ -59,7 +62,7 @@ public class ExpressBOImpl extends PaginableBOImpl<Express> implements
     public int refreshExpress(Express data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
-            // count = ExpressDAO.update(data);
+            count = ExpressDAO.update(data);
         }
         return count;
     }
@@ -81,5 +84,15 @@ public class ExpressBOImpl extends PaginableBOImpl<Express> implements
             }
         }
         return data;
+    }
+
+    @Override
+    public int refreshApprove(Express data) {
+        int count = 0;
+        if (StringUtils.isNotBlank(data.getCode())) {
+            data.setCheckDatetime(new Date());
+            count = ExpressDAO.updateApprove(data);
+        }
+        return count;
     }
 }

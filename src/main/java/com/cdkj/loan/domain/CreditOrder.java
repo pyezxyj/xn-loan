@@ -90,7 +90,9 @@ public class CreditOrder extends ABaseDO {
 
     private Integer consume;
 
-    private List<CreditAudit> creditAuditList;
+    private List<CreditAudit> creditPeopleList;
+
+    private List<Car> carList;
 
     private List<String> statusList;
 
@@ -349,14 +351,6 @@ public class CreditOrder extends ABaseDO {
         this.accessLevel = accessLevel;
     }
 
-    public List<CreditAudit> getCreditAuditList() {
-        return creditAuditList;
-    }
-
-    public void setCreditAuditList(List<CreditAudit> creditAuditList) {
-        this.creditAuditList = creditAuditList;
-    }
-
     public Long getLoanAmount() {
         return loanAmount;
     }
@@ -483,6 +477,22 @@ public class CreditOrder extends ABaseDO {
 
     public void setConsume(Integer consume) {
         this.consume = consume;
+    }
+
+    public List<CreditAudit> getCreditPeopleList() {
+        return creditPeopleList;
+    }
+
+    public void setCreditPeopleList(List<CreditAudit> creditPeopleList) {
+        this.creditPeopleList = creditPeopleList;
+    }
+
+    public List<Car> getCarList() {
+        return carList;
+    }
+
+    public void setCarList(List<Car> carList) {
+        this.carList = carList;
     }
 
 }

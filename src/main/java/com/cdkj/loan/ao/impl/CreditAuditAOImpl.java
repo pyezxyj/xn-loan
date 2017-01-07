@@ -36,15 +36,17 @@ public class CreditAuditAOImpl implements ICreditAuditAO {
 
     @Override
     public void editCreditAudit(CreditAudit data) {
-        if (!creditAuditBO.isCreditAuditExist(data.getCode())) {
+        CreditAudit creditAudit = new CreditAudit();
+        creditAudit.setCreditOrderCode(data.getCreditOrderCode());
+        List<CreditAudit> audit = queryCreditAuditList(creditAudit);
+        if (audit == null) {
             throw new BizException("xn0000", "记录编号不存在");
         }
-        CreditAudit condition = creditAuditBO.getCreditAudit(data.getCode());
-        String refUser = condition.getCreditOrderCode();
+        String refUser = data.getCreditOrderCode();
         if (EBoolean.YES.getCode().equals(data.getCourtResult())
                 && EBoolean.YES.getCode().equals(data.getCreditResult())) {
             data.setStatus(ECreditAuditStatus.APPROVE_YES.getCode());
-            creditOrderBO.refreshCreditOrder(condition.getCreditOrderCode());
+            creditOrderBO.refreshCreditOrder(data.getCreditOrderCode());
             nodeBO.editNode(refUser, ENodeType.ZX.getCode(), data.getUpdater(),
                 data.getRemark());
             // 进行下一进程
@@ -55,16 +57,21 @@ public class CreditAuditAOImpl implements ICreditAuditAO {
             nodeBO.saveNode(node3);
         } else {
             data.setStatus(ECreditAuditStatus.APPROVE_NO.getCode());
-            creditOrderBO.refreshOrder(condition.getCreditOrderCode());
+            creditOrderBO.refreshOrder(data.getCreditOrderCode());
         }
 
         CreditAudit credit = new CreditAudit();
         credit.setCreditOrderCode(refUser);
         List<CreditAudit> creditAuditList = creditAuditBO
             .queryCreditAuditList(credit);
-        data.setCreditOrderCode(refUser);
-        for (CreditAudit creditAudit : creditAuditList) {
-            creditAuditBO.refreshCreditAudit(data);
+        for (CreditAudit creditaudit : creditAuditList) {
+            creditaudit.setCourtDescript(data.getCourtDescript());
+            creditaudit.setCourtResult(data.getCourtResult());
+            creditaudit.setCreditResult(data.getCreditResult());
+            creditaudit.setCreditDescript(data.getCreditDescript());
+            creditaudit.setUpdater(data.getUpdater());
+            creditaudit.setRemark(data.getRemark());
+            creditAuditBO.refreshCreditAudit(creditaudit);
         }
     }
 

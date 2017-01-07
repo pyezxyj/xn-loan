@@ -26,6 +26,12 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="creditOrderCode != null and creditOrderCode != '' ">
+				AND t.credit_order_code = #{creditOrderCode}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_Express" parameterType="Express" resultMap="Express_DB_Result">
@@ -108,24 +114,19 @@
 	<update id="update_Express" parameterType="Express">
 		UPDATE tloan_express
 		SET
-		credit_order_code = #{creditOrderCode}
-		,type = #{type}
-		,type_note = #{typeNote}
-		,deliver_company = #{deliverCompany}
-		,deliverer = #{deliverer}
-		,deliver_datetime = #{deliverDatetime}
-		,receive_company = #{receiveCompany}
-		,receiver = #{receiver}
-		,receive_datetime = #{receiveDatetime}
-		,logi_company = #{logiCompany}
-		,logi_code = #{logiCode}
-		,deliver_pdf = #{deliverPdf}
+		receive_datetime = #{receiveDatetime}
 		,status = #{status}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_Approve" parameterType="Express">
+		UPDATE tloan_express
+		SET
+		status = #{status}
 		,check_user = #{checkUser}
 		,check_datetime = #{checkDatetime}
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update>
-
 
 </mapper>

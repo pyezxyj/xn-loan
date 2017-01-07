@@ -1,5 +1,7 @@
 package com.cdkj.loan.domain;
 
+import java.util.Date;
+
 import com.cdkj.loan.dao.base.ABaseDO;
 
 /**
@@ -58,7 +60,7 @@ public class Car extends ABaseDO {
     private String invoiceNo;
 
     // 购车日期
-    private String buyDatetime;
+    private Date buyDatetime;
 
     // 购置税金额
     private String buyTax;
@@ -70,10 +72,10 @@ public class Car extends ABaseDO {
     private String gpsNo;
 
     // 抵押时间
-    private String dyStartDatetime;
+    private Date dyStartDatetime;
 
     // 抵押到期时间
-    private String dyEndDatetime;
+    private Date dyEndDatetime;
 
     // 经办人
     private String agent;
@@ -91,16 +93,19 @@ public class Car extends ABaseDO {
     private String status;
 
     // 贷款结清日期
-    private String loanSettleDatetime;
+    private Date loanSettleDatetime;
 
     // 产权取出日期
-    private String propertyOutDatetime;
+    private Date propertyOutDatetime;
 
     // 审核人
     private String approver;
 
     // 审核时
-    private String approveDatetime;
+    private Date approveDatetime;
+
+    // 审核结果
+    private String approveResult;
 
     // 备注
     private String remark;
@@ -209,14 +214,6 @@ public class Car extends ABaseDO {
         return invoiceNo;
     }
 
-    public void setBuyDatetime(String buyDatetime) {
-        this.buyDatetime = buyDatetime;
-    }
-
-    public String getBuyDatetime() {
-        return buyDatetime;
-    }
-
     public void setBuyTax(String buyTax) {
         this.buyTax = buyTax;
     }
@@ -239,22 +236,6 @@ public class Car extends ABaseDO {
 
     public String getGpsNo() {
         return gpsNo;
-    }
-
-    public void setDyStartDatetime(String dyStartDatetime) {
-        this.dyStartDatetime = dyStartDatetime;
-    }
-
-    public String getDyStartDatetime() {
-        return dyStartDatetime;
-    }
-
-    public void setDyEndDatetime(String dyEndDatetime) {
-        this.dyEndDatetime = dyEndDatetime;
-    }
-
-    public String getDyEndDatetime() {
-        return dyEndDatetime;
     }
 
     public void setAgent(String agent) {
@@ -297,36 +278,12 @@ public class Car extends ABaseDO {
         return status;
     }
 
-    public void setLoanSettleDatetime(String loanSettleDatetime) {
-        this.loanSettleDatetime = loanSettleDatetime;
-    }
-
-    public String getLoanSettleDatetime() {
-        return loanSettleDatetime;
-    }
-
-    public void setPropertyOutDatetime(String propertyOutDatetime) {
-        this.propertyOutDatetime = propertyOutDatetime;
-    }
-
-    public String getPropertyOutDatetime() {
-        return propertyOutDatetime;
-    }
-
     public void setApprover(String approver) {
         this.approver = approver;
     }
 
     public String getApprover() {
         return approver;
-    }
-
-    public void setApproveDatetime(String approveDatetime) {
-        this.approveDatetime = approveDatetime;
-    }
-
-    public String getApproveDatetime() {
-        return approveDatetime;
     }
 
     public void setRemark(String remark) {
@@ -351,6 +308,62 @@ public class Car extends ABaseDO {
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public Date getBuyDatetime() {
+        return buyDatetime;
+    }
+
+    public void setBuyDatetime(Date buyDatetime) {
+        this.buyDatetime = buyDatetime;
+    }
+
+    public Date getDyStartDatetime() {
+        return dyStartDatetime;
+    }
+
+    public void setDyStartDatetime(Date dyStartDatetime) {
+        this.dyStartDatetime = dyStartDatetime;
+    }
+
+    public Date getDyEndDatetime() {
+        return dyEndDatetime;
+    }
+
+    public void setDyEndDatetime(Date dyEndDatetime) {
+        this.dyEndDatetime = dyEndDatetime;
+    }
+
+    public Date getLoanSettleDatetime() {
+        return loanSettleDatetime;
+    }
+
+    public void setLoanSettleDatetime(Date loanSettleDatetime) {
+        this.loanSettleDatetime = loanSettleDatetime;
+    }
+
+    public Date getPropertyOutDatetime() {
+        return propertyOutDatetime;
+    }
+
+    public void setPropertyOutDatetime(Date propertyOutDatetime) {
+        this.propertyOutDatetime = propertyOutDatetime;
+    }
+
+    public Date getApproveDatetime() {
+        return approveDatetime;
+    }
+
+    public void setApproveDatetime(Date approveDatetime) {
+        this.approveDatetime = approveDatetime;
+    }
+
+    public String getApproveResult() {
+        return approveResult;
+    }
+
+    public void setApproveResult(String approveResult) {
+        this.approveResult = approveResult;
     }
 
 }
