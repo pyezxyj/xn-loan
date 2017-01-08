@@ -18,7 +18,7 @@ public class XN617001Req {
     private String area;
 
     // 业务员（必填）
-    private String saleman;
+    private String salesman;
 
     // 车行（必填）
     private String carStore;
@@ -91,12 +91,12 @@ public class XN617001Req {
         this.creditPeopleList = creditPeopleList;
     }
 
-    public String getSaleman() {
-        return saleman;
+    public String getSalesman() {
+        return salesman;
     }
 
-    public void setSaleman(String saleman) {
-        this.saleman = saleman;
+    public void setSalesman(String salesman) {
+        this.salesman = salesman;
     }
 
 }

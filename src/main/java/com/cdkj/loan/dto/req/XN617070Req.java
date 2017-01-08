@@ -2,8 +2,6 @@ package com.cdkj.loan.dto.req;
 
 import java.util.List;
 
-import com.cdkj.loan.domain.Repay;
-
 /**
  * 导入还款信息
  * @author: asus 
@@ -11,13 +9,14 @@ import com.cdkj.loan.domain.Repay;
  * @history:
  */
 public class XN617070Req {
-    private List<Repay> repayList;
+    private List<XN617084Req> repayList;
 
-    public List<Repay> getRepayList() {
+    public List<XN617084Req> getRepayList() {
         return repayList;
     }
 
-    public void setRepayList(List<Repay> repayList) {
+    public void setRepayList(List<XN617084Req> repayList) {
         this.repayList = repayList;
     }
+
 }

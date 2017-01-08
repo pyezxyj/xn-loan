@@ -9,13 +9,16 @@ package com.cdkj.loan.dto.req;
 public class XN617014Req {
 
     // 编号
-    public String code;
+    private String code;
 
     // 收款金额
-    public String amount;
+    private String amount;
 
     // 收款回录
-    public String pdf;
+    private String pdf;
+
+    // 应还时间
+    private String yhDatetime;
 
     // 更新人
     private String updater;
@@ -61,6 +64,14 @@ public class XN617014Req {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getYhDatetime() {
+        return yhDatetime;
+    }
+
+    public void setYhDatetime(String yhDatetime) {
+        this.yhDatetime = yhDatetime;
     }
 
 }

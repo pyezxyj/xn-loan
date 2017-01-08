@@ -54,4 +54,5 @@ public interface ICreditOrderBO extends IPaginableBO<CreditOrder> {
 
     public CreditOrder getCreditOrder(String code);
 
+    public int refreshBank(CreditOrder data);
 }

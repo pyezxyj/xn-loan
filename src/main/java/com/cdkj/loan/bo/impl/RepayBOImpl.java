@@ -12,6 +12,7 @@ import com.cdkj.loan.core.OrderNoGenerater;
 import com.cdkj.loan.dao.IRepayDAO;
 import com.cdkj.loan.domain.Repay;
 import com.cdkj.loan.enums.EGeneratePrefix;
+import com.cdkj.loan.enums.ERepayStatus;
 import com.cdkj.loan.exception.BizException;
 
 //CHECK ��鲢��ע�� 
@@ -37,6 +38,7 @@ public class RepayBOImpl extends PaginableBOImpl<Repay> implements IRepayBO {
         if (data != null) {
             code = OrderNoGenerater.generateM(EGeneratePrefix.REPAY.getCode());
             data.setCode(code);
+            data.setStatus(ERepayStatus.BEEN.getCode());
             RepayDAO.insert(data);
         }
         return code;
@@ -57,7 +59,7 @@ public class RepayBOImpl extends PaginableBOImpl<Repay> implements IRepayBO {
     public int refreshRepay(Repay data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
-            // count = RepayDAO.update(data);
+            count = RepayDAO.update(data);
         }
         return count;
     }
@@ -79,5 +81,50 @@ public class RepayBOImpl extends PaginableBOImpl<Repay> implements IRepayBO {
             }
         }
         return data;
+    }
+
+    @Override
+    public int refreshAlso(Repay data) {
+        int count = 0;
+        if (StringUtils.isNotBlank(data.getCode())) {
+            count = RepayDAO.updateAlso(data);
+        }
+        return count;
+    }
+
+    @Override
+    public int refreshSms(Repay data) {
+        int count = 0;
+        if (StringUtils.isNotBlank(data.getCode())) {
+            count = RepayDAO.updateSms(data);
+        }
+        return count;
+    }
+
+    @Override
+    public int refreshSue(Repay data) {
+        int count = 0;
+        if (StringUtils.isNotBlank(data.getCode())) {
+            count = RepayDAO.updateSue(data);
+        }
+        return count;
+    }
+
+    @Override
+    public int refreshAdvance(Repay data) {
+        int count = 0;
+        if (StringUtils.isNotBlank(data.getCode())) {
+            count = RepayDAO.updateAdvance(data);
+        }
+        return count;
+    }
+
+    @Override
+    public int refreshYhdate(Repay data) {
+        int count = 0;
+        if (StringUtils.isNotBlank(data.getCode())) {
+            count = RepayDAO.updateYhdate(data);
+        }
+        return count;
     }
 }

@@ -23,6 +23,27 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="creditOrderCode != null and creditOrderCode != '' ">
+				AND t.credit_order_code = #{creditOrderCode}
+			</if>
+			<if test="idNo != null and idNo != '' ">
+				AND t.id_no = #{idNo}
+			</if>
+			<if test="realName != null and realName != '' ">
+				AND t.real_name = #{realName}
+			</if>
+			<if test="realNameForLikeQuery != null and realNameForLikeQuery != '' ">
+				AND t.real_name like "%"#{realNameForLikeQuery}"%"
+			</if>
+			<if test="yhDatetime != null and yhDatetime != '' ">
+				AND t.yh_datetime = #{yhDatetime}
+			</if>
+			<if test="shDatetime != null and shDatetime != '' ">
+				AND t.sh_datetime = #{shDatetime}
+			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
 		</trim>
 	</sql>
 	<select id="select_Repay" parameterType="Repay" resultMap="Repay_DB_Result">
@@ -96,21 +117,51 @@
 	<update id="update_Repay" parameterType="Repay">
 		UPDATE tloan_repay
 		SET
-		credit_order_code = #{creditOrderCode}
-		,jb_bank = #{jbBank}
-		,real_name = #{realName}
-		,id_no = #{idNo}
-		,yh_amount = #{yhAmount}
-		,yh_datetime = #{yhDatetime}
-		,sh_amount = #{shAmount}
+		sh_amount = #{shAmount}
 		,sh_datetime = #{shDatetime}
-		,over_amount = #{overAmount}
-		,over_days = #{overDays}
-		,sms_count = #{smsCount}
 		,status = #{status}
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update>
 
+	<update id="update_Also" parameterType="Repay">
+		UPDATE tloan_repay
+		SET
+		over_amount=#{overAmount}
+		,over_days=#{overDays}
+		,status=#{status}
+		WHERE code = #{code}
+	</update>
+
+	<update id="update_Sms" parameterType="Repay">
+		UPDATE tloan_repay
+		SET
+		status=#{status}
+		,sms_count=#{smsCount}
+		,remark=#{remark}
+		WHERE code = #{code}
+	</update>
+
+	<update id="update_Sue" parameterType="Repay">
+		UPDATE tloan_repay
+		SET
+		status=#{status}
+		WHERE code = #{code}
+	</update>
+	
+	<update id="update_Advance" parameterType="Repay">
+		UPDATE tloan_repay
+		SET
+		status=#{status}
+		,remark=#{remark}
+		WHERE code = #{code}
+	</update>
+
+	<update id="update_Yhdate" parameterType="Repay">
+		UPDATE tloan_repay
+		SET
+		yh_datetime=#{yhDatetime}
+		WHERE code = #{code}
+	</update>
 
 </mapper>

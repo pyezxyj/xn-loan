@@ -269,14 +269,14 @@
 		code = #{code}
 	</delete>
 	
-		<update id="update_Status" parameterType="creditOrder">
+	<update id="update_Status" parameterType="creditOrder">
 		UPDATE tloan_credit_order
 		SET
 		status = #{status}
 		WHERE code = #{code}
 	</update>
 	
-		<update id="update_Survey" parameterType="creditOrder">
+	<update id="update_Survey" parameterType="creditOrder">
 		UPDATE tloan_credit_order
 		SET
 		mobile = #{mobile}
@@ -286,6 +286,7 @@
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update>
+	
 	<update id="update_SBack" parameterType="creditOrder">
 		UPDATE tloan_credit_order
 		SET
@@ -301,6 +302,7 @@
 		,remark=#{remark}
 		WHERE code = #{code}
 	</update> 
+	
 	<update id="update_ZLBack" parameterType="creditOrder">
 		UPDATE tloan_credit_order
 		SET
@@ -316,6 +318,7 @@
 		,bankcard_no = #{bankcardNo}
 		WHERE code = #{code}
 	</update> 
+	
 	<update id="update_Approve" parameterType="creditOrder">
 		UPDATE tloan_credit_order
 		SET
@@ -325,6 +328,7 @@
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update> 
+	
 	<update id="update_Payroll" parameterType="creditOrder">
 		UPDATE tloan_credit_order
 		SET
@@ -333,6 +337,7 @@
 		,remark=#{remark}
 		WHERE code = #{code}
 	</update> 
+	
 	<update id="update_Visit" parameterType="creditOrder">
 		UPDATE tloan_credit_order
 		SET
@@ -341,6 +346,7 @@
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update> 
+	
 	<update id="update_Financial" parameterType="creditOrder">
 		UPDATE tloan_credit_order
 		SET
@@ -349,6 +355,7 @@
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update> 
+	
 	<update id="update_Payout" parameterType="creditOrder">
 		UPDATE tloan_credit_order
 		SET
@@ -358,12 +365,14 @@
 		,remark=#{remark}
 		WHERE code = #{code}
 	</update> 
+	
 	<update id="update_Moneyback" parameterType="creditOrder">
 		UPDATE tloan_credit_order
 		SET
 		status = #{status}
 		,last_node=#{lastNode}
 		,dk_pdf = #{dkPdf}
+		,remark=#{remark}
 		WHERE code = #{code}
 	</update> 
 	<update id="update_FBH" parameterType="creditOrder">
@@ -372,12 +381,14 @@
 		status = #{status}
 		WHERE code = #{code}
 	</update> 
+	
 	<update id="update_Download" parameterType="creditOrder">
 		UPDATE tloan_credit_order
 		SET
 		download_times = #{downloadTimes}
 		WHERE code = #{code}
 	</update> 
+	
 	<update id="update_receiptPdf" parameterType="creditOrder">
 		UPDATE tloan_credit_order
 		SET
@@ -389,4 +400,16 @@
 		,consume=#{consume}
 		WHERE code = #{code}
 	</update> 
+	
+	<update id="update_bank" parameterType="creditOrder">
+		UPDATE tloan_credit_order
+		SET
+		status=#{status}
+		,sk_pdf = #{skPdf}
+		,sk_amount=#{skAmount}
+		,sk_datetime=#{skDatetime}
+		,remark=#{remark}
+		,consume=#{consume}
+		WHERE code = #{code}
+	</update>
 </mapper>

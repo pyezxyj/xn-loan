@@ -55,4 +55,6 @@ public interface ICreditOrderAO {
 
     public CreditOrder getCreditOrder(String code);
 
+    public void editBank(CreditOrder data);
+
 }

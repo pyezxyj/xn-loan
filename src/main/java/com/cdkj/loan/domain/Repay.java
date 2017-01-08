@@ -1,169 +1,181 @@
 package com.cdkj.loan.domain;
 
+import java.util.Date;
+
 import com.cdkj.loan.dao.base.ABaseDO;
 
 /**
-* 汽车抵押
+* 还款
 * @author: asus  
 * @since: 2017年01月05日
 * @history:
 */
 public class Repay extends ABaseDO {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	// 编号
-	private String code;
+    // 编号
+    private String code;
 
-	// 业务编号
-	private String creditOrderCode;
+    // 业务编号
+    private String creditOrderCode;
 
-	// 经办银行
-	private String jbBank;
+    // 经办银行
+    private String jbBank;
 
-	// 借款人
-	private String realName;
+    // 借款人
+    private String realName;
 
-	// 身份证
-	private String idNo;
+    // 身份证
+    private String idNo;
 
-	// 应还金额
-	private String yhAmount;
+    // 应还金额
+    private Long yhAmount;
 
-	// 应还时间
-	private String yhDatetime;
+    // 应还时间
+    private Date yhDatetime;
 
-	// 实还金额
-	private String shAmount;
+    // 实还金额
+    private Long shAmount;
 
-	// 实还时间
-	private String shDatetime;
+    // 实还时间
+    private Date shDatetime;
 
-	// 逾期金额
-	private String overAmount;
+    // 逾期金额
+    private Long overAmount;
 
-	// 逾期日期
-	private String overDays;
+    // 逾期日期
+    private String overDays;
 
-	// 发送催款次数
-	private String smsCount;
+    // 发送催款次数
+    private Integer smsCount;
 
-	// 状态
-	private String status;
+    // 状态
+    private String status;
 
-	// 备注
-	private String remark;
+    // 备注
+    private String remark;
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    private String realNameForLikeQuery;
 
-	public String getCode() {
-		return code;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public void setCreditOrderCode(String creditOrderCode) {
-		this.creditOrderCode = creditOrderCode;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public String getCreditOrderCode() {
-		return creditOrderCode;
-	}
+    public void setCreditOrderCode(String creditOrderCode) {
+        this.creditOrderCode = creditOrderCode;
+    }
 
-	public void setJbBank(String jbBank) {
-		this.jbBank = jbBank;
-	}
+    public String getCreditOrderCode() {
+        return creditOrderCode;
+    }
 
-	public String getJbBank() {
-		return jbBank;
-	}
+    public void setJbBank(String jbBank) {
+        this.jbBank = jbBank;
+    }
 
-	public void setRealName(String realName) {
-		this.realName = realName;
-	}
+    public String getJbBank() {
+        return jbBank;
+    }
 
-	public String getRealName() {
-		return realName;
-	}
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
 
-	public void setIdNo(String idNo) {
-		this.idNo = idNo;
-	}
+    public String getRealName() {
+        return realName;
+    }
 
-	public String getIdNo() {
-		return idNo;
-	}
+    public void setIdNo(String idNo) {
+        this.idNo = idNo;
+    }
 
-	public void setYhAmount(String yhAmount) {
-		this.yhAmount = yhAmount;
-	}
+    public String getIdNo() {
+        return idNo;
+    }
 
-	public String getYhAmount() {
-		return yhAmount;
-	}
+    public void setOverDays(String overDays) {
+        this.overDays = overDays;
+    }
 
-	public void setYhDatetime(String yhDatetime) {
-		this.yhDatetime = yhDatetime;
-	}
+    public String getOverDays() {
+        return overDays;
+    }
 
-	public String getYhDatetime() {
-		return yhDatetime;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public void setShAmount(String shAmount) {
-		this.shAmount = shAmount;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public String getShAmount() {
-		return shAmount;
-	}
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
-	public void setShDatetime(String shDatetime) {
-		this.shDatetime = shDatetime;
-	}
+    public String getRemark() {
+        return remark;
+    }
 
-	public String getShDatetime() {
-		return shDatetime;
-	}
+    public Long getYhAmount() {
+        return yhAmount;
+    }
 
-	public void setOverAmount(String overAmount) {
-		this.overAmount = overAmount;
-	}
+    public void setYhAmount(Long yhAmount) {
+        this.yhAmount = yhAmount;
+    }
 
-	public String getOverAmount() {
-		return overAmount;
-	}
+    public Long getShAmount() {
+        return shAmount;
+    }
 
-	public void setOverDays(String overDays) {
-		this.overDays = overDays;
-	}
+    public void setShAmount(Long shAmount) {
+        this.shAmount = shAmount;
+    }
 
-	public String getOverDays() {
-		return overDays;
-	}
+    public Long getOverAmount() {
+        return overAmount;
+    }
 
-	public void setSmsCount(String smsCount) {
-		this.smsCount = smsCount;
-	}
+    public void setOverAmount(Long overAmount) {
+        this.overAmount = overAmount;
+    }
 
-	public String getSmsCount() {
-		return smsCount;
-	}
+    public Date getYhDatetime() {
+        return yhDatetime;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public void setYhDatetime(Date yhDatetime) {
+        this.yhDatetime = yhDatetime;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public Date getShDatetime() {
+        return shDatetime;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    public void setShDatetime(Date shDatetime) {
+        this.shDatetime = shDatetime;
+    }
 
-	public String getRemark() {
-		return remark;
-	}
+    public Integer getSmsCount() {
+        return smsCount;
+    }
+
+    public void setSmsCount(Integer smsCount) {
+        this.smsCount = smsCount;
+    }
+
+    public String getRealNameForLikeQuery() {
+        return realNameForLikeQuery;
+    }
+
+    public void setRealNameForLikeQuery(String realNameForLikeQuery) {
+        this.realNameForLikeQuery = realNameForLikeQuery;
+    }
 
 }

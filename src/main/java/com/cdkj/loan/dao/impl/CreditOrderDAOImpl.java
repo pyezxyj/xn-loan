@@ -117,4 +117,9 @@ public class CreditOrderDAOImpl extends AMybatisTemplate implements
     public int updateReceiptPdf(CreditOrder data) {
         return super.update(NAMESPACE.concat("update_receiptPdf"), data);
     }
+
+    @Override
+    public int updateBank(CreditOrder data) {
+        return super.update(NAMESPACE.concat("update_bank"), data);
+    }
 }

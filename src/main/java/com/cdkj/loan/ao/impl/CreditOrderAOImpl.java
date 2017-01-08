@@ -12,12 +12,14 @@ import com.cdkj.loan.bo.ICarBO;
 import com.cdkj.loan.bo.ICreditAuditBO;
 import com.cdkj.loan.bo.ICreditOrderBO;
 import com.cdkj.loan.bo.INodeBO;
+import com.cdkj.loan.bo.IRepayBO;
 import com.cdkj.loan.bo.base.Paginable;
 import com.cdkj.loan.common.DateUtil;
 import com.cdkj.loan.domain.Car;
 import com.cdkj.loan.domain.CreditAudit;
 import com.cdkj.loan.domain.CreditOrder;
 import com.cdkj.loan.domain.Node;
+import com.cdkj.loan.domain.Repay;
 import com.cdkj.loan.enums.EBoolean;
 import com.cdkj.loan.enums.ECarStatus;
 import com.cdkj.loan.enums.ECreditOrderStatus;
@@ -39,6 +41,9 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
 
     @Autowired
     private ICarBO carBO;
+
+    @Autowired
+    private IRepayBO repayBO;
 
     @Override
     public String addCreditOrder(CreditOrder data,
@@ -127,6 +132,10 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             List<CreditAudit> creditAuditList = creditAuditBO
                 .queryCreditAuditList(imCondition);
             creditOrder.setCreditPeopleList(creditAuditList);
+            Car car = new Car();
+            car.setCreditOrderCode(creditOrder.getCode());
+            List<Car> carList = carBO.queryCarList(car);
+            creditOrder.setCarList(carList);
         }
         return page;
     }
@@ -247,6 +256,25 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             String time = nodeBO.saveNode(node);
             data.setLastNode(time);
             creditOrderBO.refreshZLBack(data);
+
+            // 记录还款资料
+            Repay repay = new Repay();
+            int loanTerm = Integer.valueOf(data.getLoanTerm());
+            int nowTerm = 1;
+            for (int i = 0; i < loanTerm; i++) {
+                repay.setCreditOrderCode(data.getCode());
+                repay.setRealName(creditOrder.getRealName());
+                repay.setJbBank(creditOrder.getJbBank());
+                repay.setIdNo(creditOrder.getIdNo());
+                repay.setYhAmount(data.getTermAmount());
+                repayBO.saveRepay(repay);
+            }
+            // while (true) {
+            // 干事情
+
+            // nowTearm+1
+            // nowTerm > loanTerm跳出这个循环；
+            // }
         }
     }
 
@@ -290,14 +318,20 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         if (ECreditOrderStatus.ED.getCode().equals(creditOrder.getStatus())) {
             if (ECreditStatusApprove.VETO.getCode().equals(
                 data.getApproveResult())) {
+                data.setLoanAmount(creditOrder.getLoanAmount());
                 data.setStatus(ECreditOrderStatus.VETO.getCode());
             } else if (ECreditStatusApprove.SUPPLEMENT.getCode().equals(
                 data.getApproveResult())) {
+                data.setLoanAmount(creditOrder.getLoanAmount());
                 data.setStatus(ECreditOrderStatus.BC.getCode());
             } else if (ECreditStatusApprove.CHANGE.getCode().equals(
                 data.getApproveResult())
                     || ECreditStatusApprove.PASS.getCode().equals(
                         data.getApproveResult())) {
+                if (ECreditStatusApprove.PASS.getCode().equals(
+                    data.getApproveResult())) {
+                    data.setLoanAmount(creditOrder.getLoanAmount());
+                }
                 data.setStatus(ECreditOrderStatus.QK.getCode());
                 nodeBO.editNode(data.getCode(), ENodeType.SC.getCode(),
                     data.getUpdater(), data.getRemark());
@@ -417,7 +451,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             throw new BizException("xn0000", "记录编号不存在");
         }
         CreditOrder creditOrder = getCreditOrder(code);
-        if (ECreditOrderStatus.HF.getCode().equals(creditOrder.getStatus())) {
+        if (ECreditOrderStatus.DK.getCode().equals(creditOrder.getStatus())) {
             nodeBO.editNode(code, ENodeType.FHHL.getCode(), updater, remark);
             Node node = new Node();
             node.setCreditOrderCode(code);
@@ -426,6 +460,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             node.setRemark(remark);
             String time = nodeBO.saveNode(node);
             creditOrderBO.refreshMoneyback(code, time, dkPdf, remark);
+        } else {
+            throw new BizException("xn0000", "该记录暂时不能打款");
         }
     }
 
@@ -453,6 +489,26 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
                 new Date());
             data.setConsume(consume);
             creditOrderBO.refreshReceipt(data);
+            Repay condition = new Repay();
+            condition.setCreditOrderCode(data.getCode());
+            List<Repay> repayList = repayBO.queryRepayList(condition);
+            int count = 0;
+            // 先查出还款的信息
+            for (Repay repay : repayList) {
+                repay.setYhDatetime(DateUtil.getFrontMonth(DateUtil.dateToStr(
+                    data.getYhDatetime(), DateUtil.FRONT_DATE_FORMAT_STRING),
+                    true, count));
+                repayBO.refreshYhdate(repay);
+                count++;
+            }
         }
+    }
+
+    @Override
+    public void editBank(CreditOrder data) {
+        if (!creditOrderBO.isCreditOrderExist(data.getCode())) {
+            throw new BizException("xn0000", "记录编号不存在");
+        }
+        creditOrderBO.refreshBank(data);
     }
 }

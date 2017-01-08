@@ -67,6 +67,7 @@
 		,#{realName}
 		,#{carCode}
 		,#{status}
+		,#{remark}
 		)
 	</insert>
 

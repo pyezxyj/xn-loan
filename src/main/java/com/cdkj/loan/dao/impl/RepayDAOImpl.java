@@ -46,4 +46,34 @@ public class RepayDAOImpl extends AMybatisTemplate implements IRepayDAO {
             condition, Repay.class);
     }
 
+    @Override
+    public int update(Repay data) {
+        return super.update(NAMESPACE.concat("update_Repay"), data);
+    }
+
+    @Override
+    public int updateAlso(Repay data) {
+        return super.update(NAMESPACE.concat("update_Also"), data);
+    }
+
+    @Override
+    public int updateSms(Repay data) {
+        return super.update(NAMESPACE.concat("update_Sms"), data);
+    }
+
+    @Override
+    public int updateSue(Repay data) {
+        return super.update(NAMESPACE.concat("update_Sue"), data);
+    }
+
+    @Override
+    public int updateAdvance(Repay data) {
+        return super.update(NAMESPACE.concat("update_Advance"), data);
+    }
+
+    @Override
+    public int updateYhdate(Repay data) {
+        return super.update(NAMESPACE.concat("update_Yhdate"), data);
+    }
+
 }

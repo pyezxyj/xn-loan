@@ -27,7 +27,7 @@ public class XN617001 extends AProcessor {
         CreditOrder data = new CreditOrder();
         data.setCode(req.getCode());
         data.setArea(req.getArea());
-        data.setSalesman(req.getSaleman());
+        data.setSalesman(req.getSalesman());
         data.setCarStore(req.getCarStore());
         data.setJbBank(req.getJbBank());
         data.setLoanType(req.getLoanType());
@@ -39,7 +39,7 @@ public class XN617001 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN617001Req.class);
-        StringValidater.validateBlank(req.getCode(), req.getSaleman(),
+        StringValidater.validateBlank(req.getCode(), req.getSalesman(),
             req.getCarStore(), req.getJbBank(), req.getLoanType(),
             req.getLoanAmount());
     }

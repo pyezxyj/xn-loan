@@ -5,28 +5,28 @@ import java.util.List;
 import com.cdkj.loan.bo.base.IPaginableBO;
 import com.cdkj.loan.domain.Repay;
 
-
-
 //CHECK ��鲢��ע�� 
 public interface IRepayBO extends IPaginableBO<Repay> {
 
+    public boolean isRepayExist(String code);
 
-	public boolean isRepayExist(String code);
+    public String saveRepay(Repay data);
 
+    public int removeRepay(String code);
 
-	public String saveRepay(Repay data);
+    public int refreshRepay(Repay data);
 
+    public List<Repay> queryRepayList(Repay condition);
 
-	public int removeRepay(String code);
+    public Repay getRepay(String code);
 
+    public int refreshAlso(Repay data);
 
-	public int refreshRepay(Repay data);
+    public int refreshSms(Repay data);
 
+    public int refreshSue(Repay data);
 
-	public List<Repay> queryRepayList(Repay condition);
+    public int refreshAdvance(Repay data);
 
-
-	public Repay getRepay(String code);
-
-
+    public int refreshYhdate(Repay data);
 }

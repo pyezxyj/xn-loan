@@ -10,7 +10,7 @@ public class XN617013Req {
     public String code;
 
     // 发票
-    public String receipt;
+    public String invoice;
 
     // 保单
     public String policy;
@@ -24,14 +24,6 @@ public class XN617013Req {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public String getReceipt() {
-        return receipt;
-    }
-
-    public void setReceipt(String receipt) {
-        this.receipt = receipt;
     }
 
     public String getPolicy() {
@@ -48,5 +40,13 @@ public class XN617013Req {
 
     public void setCertification(String certification) {
         this.certification = certification;
+    }
+
+    public String getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(String invoice) {
+        this.invoice = invoice;
     }
 }

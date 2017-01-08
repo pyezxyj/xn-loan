@@ -111,6 +111,8 @@ public class CreditOrder extends ABaseDO {
 
     private String approveResult;
 
+    private Date yhDatetime;
+
     public String getCode() {
         return code;
     }
@@ -493,6 +495,14 @@ public class CreditOrder extends ABaseDO {
 
     public void setCarList(List<Car> carList) {
         this.carList = carList;
+    }
+
+    public Date getYhDatetime() {
+        return yhDatetime;
+    }
+
+    public void setYhDatetime(Date yhDatetime) {
+        this.yhDatetime = yhDatetime;
     }
 
 }

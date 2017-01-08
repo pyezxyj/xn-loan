@@ -16,7 +16,7 @@ public class XN617013 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        carAO.editFBH(req.getCode(), req.getReceipt(), req.getPolicy(),
+        carAO.editFBH(req.getCode(), req.getInvoice(), req.getPolicy(),
             req.getCertification());
         return new Boolean(true);
     }
@@ -24,7 +24,7 @@ public class XN617013 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN617013Req.class);
-        StringValidater.validateBlank(req.getCode(), req.getReceipt(),
+        StringValidater.validateBlank(req.getCode(), req.getInvoice(),
             req.getPolicy(), req.getCertification());
     }
 }

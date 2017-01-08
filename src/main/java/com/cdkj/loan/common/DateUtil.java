@@ -222,4 +222,29 @@ public class DateUtil {
         long times = endDate.getTime() - beginDate.getTime();
         return (int) (times / 60 / 24);
     }
+
+    /**
+     * 
+     * @param date
+     * @param addMonth
+     * @return 
+     * @create: 2017年1月8日 下午7:03:44 asus
+     * @history:
+     */
+    public static Date getFrontMonth(String date, boolean addMonth, int count) {
+        Date returnDate = null;
+        try {
+            returnDate = new SimpleDateFormat(FRONT_DATE_FORMAT_STRING)
+                .parse(date);
+            if (addMonth) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(returnDate);
+                calendar.add(calendar.MONTH, 1 * count);
+                returnDate = calendar.getTime();
+            }
+        } catch (Exception e) {
+            // e.printStackTrace();
+        }
+        return returnDate;
+    }
 }
