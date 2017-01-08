@@ -1,6 +1,7 @@
 package com.cdkj.loan.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import com.cdkj.loan.dao.base.ABaseDO;
 
@@ -57,6 +58,8 @@ public class Repay extends ABaseDO {
     private String remark;
 
     private String realNameForLikeQuery;
+
+    private List<String> statusList;
 
     public void setCode(String code) {
         this.code = code;
@@ -176,6 +179,14 @@ public class Repay extends ABaseDO {
 
     public void setRealNameForLikeQuery(String realNameForLikeQuery) {
         this.realNameForLikeQuery = realNameForLikeQuery;
+    }
+
+    public List<String> getStatusList() {
+        return statusList;
+    }
+
+    public void setStatusList(List<String> statusList) {
+        this.statusList = statusList;
     }
 
 }

@@ -1,5 +1,7 @@
 package com.cdkj.loan.dto.req;
 
+import java.util.List;
+
 /**
  * 分页查询所有还款信息
  * @author: asus 
@@ -16,6 +18,8 @@ public class XN617083Req extends APageReq {
 
     private String status;
 
+    private List<String> statusList;
+
     public String getRealName() {
         return realName;
     }
@@ -30,5 +34,13 @@ public class XN617083Req extends APageReq {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<String> getStatusList() {
+        return statusList;
+    }
+
+    public void setStatusList(List<String> statusList) {
+        this.statusList = statusList;
     }
 }

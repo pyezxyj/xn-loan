@@ -404,12 +404,9 @@
 	<update id="update_bank" parameterType="creditOrder">
 		UPDATE tloan_credit_order
 		SET
-		status=#{status}
-		,sk_pdf = #{skPdf}
-		,sk_amount=#{skAmount}
-		,sk_datetime=#{skDatetime}
-		,remark=#{remark}
-		,consume=#{consume}
+		bank=#{bank}
+		,branch=#{branch}
+		,bankcard_no=#{bankcardNo}
 		WHERE code = #{code}
 	</update>
 </mapper>
