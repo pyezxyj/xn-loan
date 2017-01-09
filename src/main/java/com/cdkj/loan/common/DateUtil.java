@@ -220,7 +220,7 @@ public class DateUtil {
      */
     public static int timeBetween(Date beginDate, Date endDate) {
         long times = endDate.getTime() - beginDate.getTime();
-        return (int) (times / 60 / 24);
+        return (int) (times);
     }
 
     /**

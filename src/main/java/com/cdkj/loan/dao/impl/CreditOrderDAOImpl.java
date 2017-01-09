@@ -122,4 +122,29 @@ public class CreditOrderDAOImpl extends AMybatisTemplate implements
     public int updateBank(CreditOrder data) {
         return super.update(NAMESPACE.concat("update_bank"), data);
     }
+
+    @Override
+    public CreditOrder selectGroup(CreditOrder condition) {
+        return super.select(NAMESPACE.concat("select_creditOrder"), condition,
+            CreditOrder.class);
+    }
+
+    @Override
+    public Long selectGroupTotalCount(CreditOrder condition) {
+        return super.selectTotalCount(
+            NAMESPACE.concat("select_CreditOrder_count"), condition);
+    }
+
+    @Override
+    public List<CreditOrder> selectGroupList(CreditOrder condition) {
+        return super.selectList(NAMESPACE.concat("select_CreditOrder"),
+            condition, CreditOrder.class);
+    }
+
+    @Override
+    public List<CreditOrder> selectGroupList(CreditOrder condition, int start,
+            int count) {
+        return super.selectList(NAMESPACE.concat("select_CreditOrder"), start,
+            count, condition, CreditOrder.class);
+    }
 }

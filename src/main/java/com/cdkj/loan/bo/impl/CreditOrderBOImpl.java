@@ -12,6 +12,7 @@ import com.cdkj.loan.bo.base.PaginableBOImpl;
 import com.cdkj.loan.core.OrderNoGenerater;
 import com.cdkj.loan.dao.ICreditOrderDAO;
 import com.cdkj.loan.domain.CreditOrder;
+import com.cdkj.loan.enums.EAccessLevel;
 import com.cdkj.loan.enums.ECreditOrderStatus;
 import com.cdkj.loan.enums.EGeneratePrefix;
 import com.cdkj.loan.exception.BizException;
@@ -122,6 +123,7 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
             data.setLastNode(time);
             data.setRemark(remark);
             data.setStatus(ECreditOrderStatus.TO_FP.getCode());
+            data.setAccessLevel(EAccessLevel.DCY.getCode());
             count = creditOrderDAO.updateSurvey(data);
         }
         return count;
@@ -272,4 +274,21 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
         }
         return count;
     }
+
+    @Override
+    public List<CreditOrder> queryGroupCreditOrderList(CreditOrder condition) {
+        return creditOrderDAO.selectGroupList(condition);
+    }
+
+    @Override
+    public Long queryGroupList(CreditOrder condition) {
+        return creditOrderDAO.selectGroupTotalCount(condition);
+    }
+
+    @Override
+    public List<CreditOrder> selectGroupList(CreditOrder condition, int start,
+            int count) {
+        return creditOrderDAO.selectGroupList(condition, start, count);
+    }
+
 }

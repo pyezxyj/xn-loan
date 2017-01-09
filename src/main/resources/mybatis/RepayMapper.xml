@@ -4,6 +4,8 @@
 <mapper namespace="com.cdkj.loan.dao.IRepayDAO">
 	<resultMap id="Repay_DB_Result" type="Repay">
 		<result column="code" property="code" />
+		<result column="total_amount" property="totalAmount" />
+		<result column="total_term" property="totalTerm" />
 		<result column="credit_order_code" property="creditOrderCode" />
 		<result column="jb_bank" property="jbBank" />
 		<result column="real_name" property="realName" />
@@ -167,7 +169,42 @@
 		UPDATE tloan_repay
 		SET
 		yh_datetime=#{yhDatetime}
+		,status=#{status}
 		WHERE code = #{code}
 	</update>
-
+	
+	<select id="select_repay" parameterType="Repay" resultMap="Repay_DB_Result">
+		SELECT
+		SUM(yh_amount) as total_amount
+		,count(*) as total_term
+		,t.code
+		,t.credit_order_code
+		,t.jb_bank
+		,t.real_name
+		,t.id_no
+		,t.yh_amount
+		,t.yh_datetime
+		,t.sh_amount
+		,t.sh_datetime
+		,t.over_amount
+		,t.over_days
+		,t.sms_count
+		,t.status
+		,t.remark
+		FROM
+		tloan_repay t
+		<include refid="where_condition" />
+		<trim prefix="GROUP BY ">
+			 credit_order_code
+		</trim>
+	</select>
+	
+		<select id="select_repay_count" parameterType="Repay"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tloan_repay t group by 
+		<include refid="where_condition" />
+		<trim prefix="GROUP BY ">
+			 t.credit_order_code
+		</trim>
+	</select>
 </mapper>

@@ -54,8 +54,7 @@ public class XN617005 extends AProcessor {
             req.getModel(), req.getPrice(), req.getFirstAmount(),
             req.getLoanAmount(), req.getLoanTerm(), req.getTermAmount(),
             req.getRate(), req.getFee(), req.getUrgent(), req.getBank(),
-            req.getBranch(), req.getBankcardNo(), req.getData(),
-            req.getUpdater());
+            req.getBranch(), req.getBankcardNo(), req.getUpdater());
     }
 
 }

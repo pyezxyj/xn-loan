@@ -9,6 +9,8 @@ package com.cdkj.loan.dto.req;
 public class XN617075Req {
     private String code;
 
+    private String status;
+
     private String updater;
 
     private String remark;
@@ -35,5 +37,13 @@ public class XN617075Req {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

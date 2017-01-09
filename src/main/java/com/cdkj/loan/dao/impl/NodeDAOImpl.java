@@ -51,4 +51,27 @@ public class NodeDAOImpl extends AMybatisTemplate implements INodeDAO {
         return super.update(NAMESPACE.concat("update_Node"), data);
     }
 
+    @Override
+    public Node selectGroupNode(Node condition) {
+        return super.select(NAMESPACE.concat("select_node"), condition,
+            Node.class);
+    }
+
+    @Override
+    public Long selectGroupTotalCount(Node condition) {
+        return super.selectTotalCount(NAMESPACE.concat("select_node_count"),
+            condition);
+    }
+
+    @Override
+    public List<Node> selectGroupList(Node condition) {
+        return super.selectList(NAMESPACE.concat("select_node"), condition,
+            Node.class);
+    }
+
+    @Override
+    public List<Node> selectGroupList(Node condition, int start, int count) {
+        return super.selectList(NAMESPACE.concat("select_node"), start, count,
+            condition, Node.class);
+    }
 }

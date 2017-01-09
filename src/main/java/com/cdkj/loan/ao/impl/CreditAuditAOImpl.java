@@ -52,6 +52,7 @@ public class CreditAuditAOImpl implements ICreditAuditAO {
             // 进行下一进程
             Node node3 = new Node();
             node3.setType(ENodeType.FP.getCode());
+            node3.setCreditOrderCode(refUser);
             node3.setUpdater(data.getUpdater());
             node3.setRemark(data.getRemark());
             nodeBO.saveNode(node3);

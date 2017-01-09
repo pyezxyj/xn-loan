@@ -96,6 +96,8 @@ public class CreditOrder extends ABaseDO {
 
     private List<String> statusList;
 
+    private List<Node> nodeList;
+
     private String updater;
 
     // -------------------------
@@ -112,6 +114,18 @@ public class CreditOrder extends ABaseDO {
     private String approveResult;
 
     private Date yhDatetime;
+
+    // ------------查询新增字段
+    private String num;
+
+    private String time;
+
+    private String money;
+
+    private String sjAmount;
+
+    // --------外加字段
+    private String userId;
 
     public String getCode() {
         return code;
@@ -503,6 +517,54 @@ public class CreditOrder extends ABaseDO {
 
     public void setYhDatetime(Date yhDatetime) {
         this.yhDatetime = yhDatetime;
+    }
+
+    public List<Node> getNodeList() {
+        return nodeList;
+    }
+
+    public void setNodeList(List<Node> nodeList) {
+        this.nodeList = nodeList;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    public String getSjAmount() {
+        return sjAmount;
+    }
+
+    public void setSjAmount(String sjAmount) {
+        this.sjAmount = sjAmount;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
 }

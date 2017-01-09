@@ -1,5 +1,7 @@
 package com.cdkj.loan.dao;
 
+import java.util.List;
+
 import com.cdkj.loan.dao.base.IBaseDAO;
 import com.cdkj.loan.domain.CreditOrder;
 
@@ -141,4 +143,13 @@ public interface ICreditOrderDAO extends IBaseDAO<CreditOrder> {
      * @history:
      */
     public int updateBank(CreditOrder data);
+
+    public List<CreditOrder> selectGroupList(CreditOrder condition, int start,
+            int count);
+
+    public List<CreditOrder> selectGroupList(CreditOrder condition);
+
+    public Long selectGroupTotalCount(CreditOrder condition);
+
+    public CreditOrder selectGroup(CreditOrder condition);
 }

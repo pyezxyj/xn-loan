@@ -28,9 +28,14 @@ public interface IRepayAO {
 
     public void editSue(String code);
 
-    public void editAdvance(String code, String updater, String remark);
+    public void editAdvance(String code, String status, String updater,
+            String remark);
 
     public void editAlso();
 
     public void editAlready(String code);
+
+    Paginable<Repay> queryPageRepayGroup(int start, int limit, Repay condition);
+
+    public Repay getGroupRepay(String code);
 }

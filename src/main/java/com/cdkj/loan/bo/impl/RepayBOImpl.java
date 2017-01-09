@@ -36,7 +36,7 @@ public class RepayBOImpl extends PaginableBOImpl<Repay> implements IRepayBO {
     public String saveRepay(Repay data) {
         String code = null;
         if (data != null) {
-            code = OrderNoGenerater.generateM(EGeneratePrefix.REPAY.getCode());
+            code = OrderNoGenerater.generateME(EGeneratePrefix.REPAY.getCode());
             data.setCode(code);
             data.setStatus(ERepayStatus.BEEN.getCode());
             RepayDAO.insert(data);
@@ -126,5 +126,34 @@ public class RepayBOImpl extends PaginableBOImpl<Repay> implements IRepayBO {
             count = RepayDAO.updateYhdate(data);
         }
         return count;
+    }
+
+    @Override
+    public List<Repay> queryList(Repay condition) {
+        return RepayDAO.selectListRepay(condition);
+    }
+
+    @Override
+    public Long queryGroupList(Repay condition) {
+        return RepayDAO.selectGroupTotalCount(condition);
+    }
+
+    @Override
+    public List<Repay> selectGroupList(Repay condition, int start, int count) {
+        return RepayDAO.selectListRepay(condition, start, count);
+    }
+
+    @Override
+    public Repay getGroupRepay(String code) {
+        Repay data = null;
+        if (StringUtils.isNotBlank(code)) {
+            Repay condition = new Repay();
+            condition.setCode(code);
+            data = RepayDAO.selectRepay(condition);
+            if (data == null) {
+                throw new BizException("xn0000", "�� ��Ų�����");
+            }
+        }
+        return data;
     }
 }

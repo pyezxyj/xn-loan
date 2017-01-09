@@ -11,6 +11,12 @@ import com.cdkj.loan.domain.CreditAudit;
  * @history:
  */
 public class XN617000Req {
+    // 省份
+    private String province;
+
+    // 市
+    private String city;
+
     // 地区
     private String area;
 
@@ -97,5 +103,21 @@ public class XN617000Req {
 
     public void setCreditPeopleList(List<CreditAudit> creditPeopleList) {
         this.creditPeopleList = creditPeopleList;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

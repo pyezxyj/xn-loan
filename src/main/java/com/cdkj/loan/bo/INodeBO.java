@@ -23,4 +23,6 @@ public interface INodeBO extends IPaginableBO<Node> {
 
     public Node getNode(String code);
 
+    public List<Node> queryGroupNodeList(Node condition);
+
 }

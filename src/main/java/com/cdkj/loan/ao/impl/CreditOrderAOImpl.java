@@ -13,6 +13,8 @@ import com.cdkj.loan.bo.ICreditAuditBO;
 import com.cdkj.loan.bo.ICreditOrderBO;
 import com.cdkj.loan.bo.INodeBO;
 import com.cdkj.loan.bo.IRepayBO;
+import com.cdkj.loan.bo.IUserBO;
+import com.cdkj.loan.bo.base.Page;
 import com.cdkj.loan.bo.base.Paginable;
 import com.cdkj.loan.common.DateUtil;
 import com.cdkj.loan.domain.Car;
@@ -20,11 +22,13 @@ import com.cdkj.loan.domain.CreditAudit;
 import com.cdkj.loan.domain.CreditOrder;
 import com.cdkj.loan.domain.Node;
 import com.cdkj.loan.domain.Repay;
+import com.cdkj.loan.enums.EAccessLevel;
 import com.cdkj.loan.enums.EBoolean;
 import com.cdkj.loan.enums.ECarStatus;
 import com.cdkj.loan.enums.ECreditOrderStatus;
 import com.cdkj.loan.enums.ECreditStatusApprove;
 import com.cdkj.loan.enums.ENodeType;
+import com.cdkj.loan.enums.ERepayStatus;
 import com.cdkj.loan.exception.BizException;
 
 @Service
@@ -45,6 +49,9 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
     @Autowired
     private IRepayBO repayBO;
 
+    @Autowired
+    private IUserBO userBO;
+
     @Override
     public String addCreditOrder(CreditOrder data,
             List<CreditAudit> creditAuditList) {
@@ -58,6 +65,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
                 data.setRealName(creditAudit.getRealName());
                 data.setIdKind(creditAudit.getIdKind());
                 data.setIdNo(creditAudit.getIdNo());
+                data.setAccessLevel(EAccessLevel.YWY.getCode());
                 code = creditOrderBO.saveCreditOrder(data);
             }
             creditAudit.setLoanType(data.getLoanType());
@@ -124,6 +132,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
     @Override
     public Paginable<CreditOrder> queryCreditOrderPage(int start, int limit,
             CreditOrder condition) {
+        String area = userBO.getUserArea(condition.getUserId());
+        condition.setArea(area);
         Paginable<CreditOrder> page = creditOrderBO.getPaginable(start, limit,
             condition);
         for (CreditOrder creditOrder : page.getList()) {
@@ -136,6 +146,10 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             car.setCreditOrderCode(creditOrder.getCode());
             List<Car> carList = carBO.queryCarList(car);
             creditOrder.setCarList(carList);
+            Node node = new Node();
+            node.setCode(creditOrder.getLastNode());
+            List<Node> nodeList = nodeBO.queryNodeList(node);
+            creditOrder.setNodeList(nodeList);
         }
         return page;
     }
@@ -212,6 +226,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             node.setRemark(data.getRemark());
             String time = nodeBO.saveNode(node);
             data.setLastNode(time);
+            data.setAccessLevel(EAccessLevel.CJGL.getCode());
             creditOrderBO.refreshSBack(data);
         } else {
             throw new BizException("xn0000", "该订单不能被回录");
@@ -498,6 +513,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
                 repay.setYhDatetime(DateUtil.getFrontMonth(DateUtil.dateToStr(
                     data.getYhDatetime(), DateUtil.FRONT_DATE_FORMAT_STRING),
                     true, count));
+                repay.setStatus(ERepayStatus.TQ.getCode());
                 repayBO.refreshYhdate(repay);
                 count++;
             }
@@ -510,5 +526,17 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             throw new BizException("xn0000", "记录编号不存在");
         }
         creditOrderBO.refreshBank(data);
+    }
+
+    @Override
+    public Paginable<CreditOrder> queryGroupCreditOrderPage(int start,
+            int limit, CreditOrder condition) {
+        long totalCount = creditOrderBO.queryGroupList(condition);
+        Paginable<CreditOrder> page = new Page<CreditOrder>(start, limit,
+            totalCount);
+        List<CreditOrder> dataList = creditOrderBO.selectGroupList(condition,
+            page.getStart(), page.getPageSize());
+        page.setList(dataList);
+        return page;
     }
 }

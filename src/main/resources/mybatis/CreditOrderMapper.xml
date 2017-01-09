@@ -3,6 +3,10 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cdkj.loan.dao.ICreditOrderDAO">
 	<resultMap id="creditOrder_DB_Result" type="creditOrder">
+		<result column="num" property="num" />
+		<result column="time" property="time" />
+		<result column="money" property="money" />
+		<result column="sj_amount" property="sjAmount" />
 		<result column="code" property="code" />
 		<result column="area" property="area" />
 		<result column="salesman" property="salesman" />
@@ -59,7 +63,10 @@
                 </foreach> 
 			</if>
 			<if test="realName != null and realName != '' ">
-				AND t.real_name = #{realName}
+				AND t.real_name like "%"#{realName}"%"
+			</if>
+			<if test="accessLevel != null and accessLevel != '' ">
+				<![CDATA[ having access_level <= #{accessLevel}]]>
 			</if>
 		</trim>
 	</sql>
@@ -284,6 +291,7 @@
 		,dc_user = #{dcUser}
 		,status = #{status}
 		,remark = #{remark}
+		,access_level=#{accessLevel}
 		WHERE code = #{code}
 	</update>
 	
@@ -300,6 +308,7 @@
 		,dc_data = #{dcData}
 		,address = #{address}
 		,remark=#{remark}
+		,access_level=#{accessLevel}
 		WHERE code = #{code}
 	</update> 
 	
@@ -409,4 +418,28 @@
 		,bankcard_no=#{bankcardNo}
 		WHERE code = #{code}
 	</update>
+	
+	<select id="select_CreditOrder" parameterType="creditOrder" resultMap="creditOrder_DB_Result">
+		SELECT
+		area
+		,count(*) as num
+		,avg(consume) as time
+		,sum(loan_amount) as money
+		,sum(sk_amount) as sj_amount
+		FROM
+		tloan_credit_order t
+		<include refid="where_condition" />
+		<trim prefix="GROUP BY ">
+			area
+		</trim>
+	</select>
+
+	<select id="select_CreditOrder_count" parameterType="creditOrder"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tloan_credit_order t
+		<include refid="where_condition" />
+		<trim prefix="GROUP BY ">
+			area
+		</trim>
+	</select>
 </mapper>

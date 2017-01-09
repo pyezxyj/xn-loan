@@ -57,6 +57,10 @@ public class Repay extends ABaseDO {
     // 备注
     private String remark;
 
+    private String totalAmount;
+
+    private String totalTerm;
+
     private String realNameForLikeQuery;
 
     private List<String> statusList;
@@ -187,6 +191,22 @@ public class Repay extends ABaseDO {
 
     public void setStatusList(List<String> statusList) {
         this.statusList = statusList;
+    }
+
+    public String getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(String totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public String getTotalTerm() {
+        return totalTerm;
+    }
+
+    public void setTotalTerm(String totalTerm) {
+        this.totalTerm = totalTerm;
     }
 
 }

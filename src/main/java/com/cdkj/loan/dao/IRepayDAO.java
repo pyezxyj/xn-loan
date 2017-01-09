@@ -1,5 +1,7 @@
 package com.cdkj.loan.dao;
 
+import java.util.List;
+
 import com.cdkj.loan.dao.base.IBaseDAO;
 import com.cdkj.loan.domain.Repay;
 
@@ -18,4 +20,12 @@ public interface IRepayDAO extends IBaseDAO<Repay> {
     public int updateAdvance(Repay data);
 
     public int updateYhdate(Repay data);
+
+    public Repay selectRepay(Repay condition);
+
+    public List<Repay> selectListRepay(Repay condition, int start, int count);
+
+    public List<Repay> selectListRepay(Repay condition);
+
+    public Long selectGroupTotalCount(Repay condition);
 }

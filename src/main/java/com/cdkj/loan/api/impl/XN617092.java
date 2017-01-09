@@ -7,32 +7,28 @@ import com.cdkj.loan.api.AProcessor;
 import com.cdkj.loan.common.JsonUtil;
 import com.cdkj.loan.core.StringValidater;
 import com.cdkj.loan.domain.CreditOrder;
-import com.cdkj.loan.dto.req.XN617015Req;
+import com.cdkj.loan.dto.req.XN617092Req;
 import com.cdkj.loan.exception.BizException;
 import com.cdkj.loan.exception.ParaException;
 import com.cdkj.loan.spring.SpringContextHolder;
 
 /**
- * 分页查询资质申请
+ * 
  * @author: asus 
- * @since: 2016年12月24日 下午2:04:19 
+ * @since: 2017年1月9日 下午3:35:07 
  * @history:
  */
-public class XN617015 extends AProcessor {
+public class XN617092 extends AProcessor {
+
     private ICreditOrderAO creditOrderAO = SpringContextHolder
         .getBean(ICreditOrderAO.class);
 
-    private XN617015Req req = null;
+    private XN617092Req req = null;
 
     @Override
     public Object doBusiness() throws BizException {
         CreditOrder condition = new CreditOrder();
-        condition.setUserId(req.getUserId());
-        condition.setAccessLevel(req.getLevel());
-        condition.setStatus(req.getStatus());
-        condition.setStatusList(req.getStatusList());
-        condition.setRealName(req.getUserName());
-        condition.setStatusList(req.getStatusList());
+        condition.setStatus(req.getStart());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = ICreditOrderAO.DEFAULT_ORDER_COLUMN;
@@ -45,9 +41,8 @@ public class XN617015 extends AProcessor {
 
     @Override
     public void doCheck(String inputparams) throws ParaException {
-        req = JsonUtil.json2Bean(inputparams, XN617015Req.class);
-        StringValidater.validateNumber(req.getStart(), req.getLimit());
-        StringValidater.validateBlank(req.getUserId());
+        req = JsonUtil.json2Bean(inputparams, XN617092Req.class);
+        StringValidater.validateBlank(req.getStart(), req.getLimit());
     }
 
 }

@@ -110,4 +110,9 @@ public class NodeBOImpl extends PaginableBOImpl<Node> implements INodeBO {
         }
         return data;
     }
+
+    @Override
+    public List<Node> queryGroupNodeList(Node condition) {
+        return NodeDAO.selectGroupList(condition);
+    }
 }

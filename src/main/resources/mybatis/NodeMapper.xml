@@ -4,6 +4,7 @@
 <mapper namespace="com.cdkj.loan.dao.INodeDAO">
 	<resultMap id="Node_DB_Result" type="Node">
 		<result column="code" property="code" />
+		<result column="average" property="average" />
 		<result column="type" property="type" />
 		<result column="credit_order_code" property="creditOrderCode" />
 		<result column="start_datetime" property="startDatetime" />
@@ -84,6 +85,33 @@
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update>
+
+	<select id="select_node" parameterType="Node" resultMap="Node_DB_Result">
+		SELECT
+		avg(distance) as average
+		,t.type
+		,t.credit_order_code
+		,t.start_datetime
+		,t.end_datetime
+		,t.distance
+		,t.updater
+		,t.remark
+		FROM
+		tloan_node t
+		<include refid="where_condition" />
+		<trim prefix="GROUP BY ">
+			type
+		</trim>
+	</select>
+
+	<select id="select_node_count" parameterType="Node"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tloan_node t
+		<include refid="where_condition" />
+		<trim prefix="GROUP BY ">
+			type
+		</trim>
+	</select>
 
 
 </mapper>

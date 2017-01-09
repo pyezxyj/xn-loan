@@ -24,4 +24,6 @@ public interface INodeAO {
 
     public Node getNode(String code);
 
+    public List<Node> queryGroupNodeList(Node condition);
+
 }

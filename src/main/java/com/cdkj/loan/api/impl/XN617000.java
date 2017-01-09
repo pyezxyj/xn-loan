@@ -26,7 +26,7 @@ public class XN617000 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         CreditOrder data = new CreditOrder();
-        data.setArea(req.getArea());
+        data.setArea(req.getProvince() + req.getCity() + req.getArea());
         data.setSalesman(req.getSalesman());
         data.setCarStore(req.getCarStore());
         data.setJbBank(req.getJbBank());

@@ -32,6 +32,9 @@ public class Node extends ABaseDO {
     // 间隔时间
     private int distance;
 
+    // 平均耗时
+    private String average;
+
     // 操作人
     private String updater;
 
@@ -100,6 +103,14 @@ public class Node extends ABaseDO {
 
     public void setDistance(int distance) {
         this.distance = distance;
+    }
+
+    public String getAverage() {
+        return average;
+    }
+
+    public void setAverage(String average) {
+        this.average = average;
     }
 
 }

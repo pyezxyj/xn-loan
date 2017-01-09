@@ -57,4 +57,7 @@ public interface ICreditOrderAO {
 
     public void editBank(CreditOrder data);
 
+    public Paginable<CreditOrder> queryGroupCreditOrderPage(int start,
+            int limit, CreditOrder condition);
+
 }

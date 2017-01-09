@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cdkj.loan.ao.IRepayAO;
 import com.cdkj.loan.bo.IRepayBO;
+import com.cdkj.loan.bo.base.Page;
 import com.cdkj.loan.bo.base.Paginable;
 import com.cdkj.loan.common.DateUtil;
 import com.cdkj.loan.domain.Repay;
@@ -56,7 +57,8 @@ public class RepayAOImpl implements IRepayAO {
 
     @Override
     public Paginable<Repay> queryRepayPage(int start, int limit, Repay condition) {
-        return repayBO.getPaginable(start, limit, condition);
+        Paginable<Repay> page = repayBO.getPaginable(start, limit, condition);
+        return page;
     }
 
     @Override
@@ -103,13 +105,15 @@ public class RepayAOImpl implements IRepayAO {
     }
 
     @Override
-    public void editAdvance(String code, String updater, String remark) {
+    public void editAdvance(String code, String status, String updater,
+            String remark) {
         if (!repayBO.isRepayExist(code)) {
             throw new BizException("xn0000", "记录编号不存在");
         }
         Repay data = getRepay(code);
         Repay condition = new Repay();
         condition.setCreditOrderCode(data.getCreditOrderCode());
+        condition.setStatus(status);
         List<Repay> repayList = repayBO.queryRepayList(condition);
         for (Repay repay : repayList) {
             repay.setStatus(ERepayStatus.ALREAD.getCode());
@@ -122,20 +126,27 @@ public class RepayAOImpl implements IRepayAO {
     @Override
     public void editAlso() {
         Long overAmount = null;
+        Long count = (long) 0;
         Repay condition = new Repay();
         condition.setStatus(ERepayStatus.YLL.getCode());
         List<Repay> repayList = repayBO.queryRepayList(condition);
         for (Repay repay : repayList) {
-            overAmount = repay.getYhAmount() - repay.getShAmount();
-            if (overAmount > 0) {
-                repay.setOverAmount(overAmount);
-                repay.setStatus(ERepayStatus.YQ.getCode());
-                repay.setOverDays(Integer.toString(DateUtil.daysBetween(
-                    repay.getYhDatetime(), new Date())));
-            } else {
-                repay.setStatus(ERepayStatus.YQ.getCode());
+            if (ERepayStatus.TQ.getCode().equals(repay.getStatus())) {
+                overAmount = repay.getYhAmount() - repay.getShAmount();
+                if (overAmount > 0) {
+                    repay.setOverAmount(overAmount);
+                    repay.setStatus(ERepayStatus.YQ.getCode());
+                    repay.setOverDays(Integer.toString(DateUtil.daysBetween(
+                        repay.getYhDatetime(), new Date())));
+                } else {
+                    repay.setOverAmount(count);
+                    repay.setStatus(ERepayStatus.ALREAD.getCode());
+                    repay.setOverDays(Integer.toString(DateUtil.daysBetween(
+                        repay.getYhDatetime(), new Date())));
+                }
+                repayBO.refreshAlso(repay);
             }
-            repayBO.refreshAlso(repay);
+
         }
 
     }
@@ -154,5 +165,21 @@ public class RepayAOImpl implements IRepayAO {
             repay.setStatus(ERepayStatus.ALREAD.getCode());
             repayBO.refreshSue(repay);
         }
+    }
+
+    @Override
+    public Paginable<Repay> queryPageRepayGroup(int start, int limit,
+            Repay condition) {
+        long totalCount = repayBO.queryGroupList(condition);
+        Paginable<Repay> page = new Page<Repay>(start, limit, totalCount);
+        List<Repay> dataList = repayBO.selectGroupList(condition,
+            page.getStart(), page.getPageSize());
+        page.setList(dataList);
+        return page;
+    }
+
+    @Override
+    public Repay getGroupRepay(String code) {
+        return repayBO.getGroupRepay(code);
     }
 }
