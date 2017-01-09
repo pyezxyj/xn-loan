@@ -56,9 +56,7 @@ public interface ICreditOrderBO extends IPaginableBO<CreditOrder> {
 
     public int refreshBank(CreditOrder data);
 
-    public List<CreditOrder> queryGroupCreditOrderList(CreditOrder condition);
-
-    public Long queryGroupList(CreditOrder condition);
+    public List<CreditOrder> queryGroupList(CreditOrder condition);
 
     public List<CreditOrder> selectGroupList(CreditOrder condition, int start,
             int count);

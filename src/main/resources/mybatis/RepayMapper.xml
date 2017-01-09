@@ -201,10 +201,10 @@
 	
 		<select id="select_repay_count" parameterType="Repay"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tloan_repay t group by 
+		SELECT count(*) FROM tloan_repay t
 		<include refid="where_condition" />
 		<trim prefix="GROUP BY ">
-			 t.credit_order_code
+			 credit_order_code
 		</trim>
 	</select>
 </mapper>

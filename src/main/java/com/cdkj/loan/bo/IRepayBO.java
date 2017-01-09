@@ -5,7 +5,6 @@ import java.util.List;
 import com.cdkj.loan.bo.base.IPaginableBO;
 import com.cdkj.loan.domain.Repay;
 
-//CHECK ��鲢��ע�� 
 public interface IRepayBO extends IPaginableBO<Repay> {
 
     public boolean isRepayExist(String code);
@@ -20,9 +19,9 @@ public interface IRepayBO extends IPaginableBO<Repay> {
 
     public List<Repay> queryList(Repay condition);
 
-    public Long queryGroupList(Repay condition);
+    public List<Repay> queryGroupList(Repay condition);
 
-    public List<Repay> selectGroupList(Repay condition, int start, int count);
+    public List<Repay> queryGroupList(Repay condition, int start, int count);
 
     public Repay getRepay(String code);
 

@@ -433,13 +433,4 @@
 			area
 		</trim>
 	</select>
-
-	<select id="select_CreditOrder_count" parameterType="creditOrder"
-		resultType="java.lang.Long">
-		SELECT count(1) FROM tloan_credit_order t
-		<include refid="where_condition" />
-		<trim prefix="GROUP BY ">
-			area
-		</trim>
-	</select>
 </mapper>

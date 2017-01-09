@@ -8,7 +8,6 @@ import com.cdkj.loan.dao.IRepayDAO;
 import com.cdkj.loan.dao.base.support.AMybatisTemplate;
 import com.cdkj.loan.domain.Repay;
 
-//CHECK 。。。 
 @Repository("repayDAOImpl")
 public class RepayDAOImpl extends AMybatisTemplate implements IRepayDAO {
 
@@ -92,11 +91,5 @@ public class RepayDAOImpl extends AMybatisTemplate implements IRepayDAO {
     public List<Repay> selectListRepay(Repay condition) {
         return super.selectList(NAMESPACE.concat("select_repay"), condition,
             Repay.class);
-    }
-
-    @Override
-    public Long selectGroupTotalCount(Repay condition) {
-        return super.selectTotalCount(NAMESPACE.concat("select_repay_count"),
-            condition);
     }
 }

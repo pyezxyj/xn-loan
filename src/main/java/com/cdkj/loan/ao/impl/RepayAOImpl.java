@@ -3,6 +3,7 @@ package com.cdkj.loan.ao.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -170,11 +171,14 @@ public class RepayAOImpl implements IRepayAO {
     @Override
     public Paginable<Repay> queryPageRepayGroup(int start, int limit,
             Repay condition) {
-        long totalCount = repayBO.queryGroupList(condition);
-        Paginable<Repay> page = new Page<Repay>(start, limit, totalCount);
-        List<Repay> dataList = repayBO.selectGroupList(condition,
-            page.getStart(), page.getPageSize());
-        page.setList(dataList);
+        Paginable<Repay> page = null;
+        List<Repay> list = repayBO.queryGroupList(condition);
+        if (CollectionUtils.isNotEmpty(list)) {
+            page = new Page<Repay>(start, limit, list.size());
+            List<Repay> dataList = repayBO.queryGroupList(condition,
+                page.getStart(), page.getPageSize());
+            page.setList(dataList);
+        }
         return page;
     }
 

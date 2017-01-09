@@ -276,13 +276,8 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
     }
 
     @Override
-    public List<CreditOrder> queryGroupCreditOrderList(CreditOrder condition) {
+    public List<CreditOrder> queryGroupList(CreditOrder condition) {
         return creditOrderDAO.selectGroupList(condition);
-    }
-
-    @Override
-    public Long queryGroupList(CreditOrder condition) {
-        return creditOrderDAO.selectGroupTotalCount(condition);
     }
 
     @Override

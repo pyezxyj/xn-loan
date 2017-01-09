@@ -531,9 +531,9 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
     @Override
     public Paginable<CreditOrder> queryGroupCreditOrderPage(int start,
             int limit, CreditOrder condition) {
-        long totalCount = creditOrderBO.queryGroupList(condition);
+        List<CreditOrder> creditOrder = creditOrderBO.queryGroupList(condition);
         Paginable<CreditOrder> page = new Page<CreditOrder>(start, limit,
-            totalCount);
+            creditOrder.size());
         List<CreditOrder> dataList = creditOrderBO.selectGroupList(condition,
             page.getStart(), page.getPageSize());
         page.setList(dataList);

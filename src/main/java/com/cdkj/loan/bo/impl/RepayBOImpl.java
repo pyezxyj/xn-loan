@@ -134,12 +134,12 @@ public class RepayBOImpl extends PaginableBOImpl<Repay> implements IRepayBO {
     }
 
     @Override
-    public Long queryGroupList(Repay condition) {
-        return RepayDAO.selectGroupTotalCount(condition);
+    public List<Repay> queryGroupList(Repay condition) {
+        return RepayDAO.selectList(condition);
     }
 
     @Override
-    public List<Repay> selectGroupList(Repay condition, int start, int count) {
+    public List<Repay> queryGroupList(Repay condition, int start, int count) {
         return RepayDAO.selectListRepay(condition, start, count);
     }
 

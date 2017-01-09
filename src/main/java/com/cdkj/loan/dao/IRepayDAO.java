@@ -26,6 +26,4 @@ public interface IRepayDAO extends IBaseDAO<Repay> {
     public List<Repay> selectListRepay(Repay condition, int start, int count);
 
     public List<Repay> selectListRepay(Repay condition);
-
-    public Long selectGroupTotalCount(Repay condition);
 }
