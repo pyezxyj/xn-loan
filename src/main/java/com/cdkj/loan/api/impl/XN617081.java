@@ -29,6 +29,7 @@ public class XN617081 extends AProcessor {
         Repay condition = new Repay();
         condition.setRealNameForLikeQuery(req.getRealName());
         condition.setStatus(req.getStatus());
+        condition.setStatusList(req.getStatusList());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = ICreditOrderAO.DEFAULT_ORDER_COLUMN;

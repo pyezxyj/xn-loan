@@ -21,6 +21,12 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="status != null and status != '' ">
+				AND t.status = #{status}
+			</if>
+			<if test="realName != null and realName != '' ">
+				AND t.real_name like "%"#{realName}"%"
+			</if>
 		</trim>
 	</sql>
 	<select id="select_Insure" parameterType="Insure" resultMap="Insure_DB_Result">

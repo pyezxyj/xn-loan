@@ -16,6 +16,10 @@ public class CreditOrder extends ABaseDO {
 
     private String code;
 
+    private String province;
+
+    private String city;
+
     private String area;
 
     private String salesman;
@@ -565,6 +569,22 @@ public class CreditOrder extends ABaseDO {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
 }

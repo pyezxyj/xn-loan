@@ -84,4 +84,15 @@ public class SYSConfigBOImpl extends PaginableBOImpl<SYSConfig> implements
         }
         return result;
     }
+
+    @Override
+    public SYSConfig getConfigValue(String ckey) {
+        SYSConfig result = null;
+        if (ckey != null) {
+            SYSConfig condition = new SYSConfig();
+            condition.setCkey(ckey);
+            result = sysConfigDAO.select(condition);
+        }
+        return result;
+    }
 }

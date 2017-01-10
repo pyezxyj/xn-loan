@@ -58,6 +58,6 @@ public interface ICreditOrderBO extends IPaginableBO<CreditOrder> {
 
     public List<CreditOrder> queryGroupList(CreditOrder condition);
 
-    public List<CreditOrder> selectGroupList(CreditOrder condition, int start,
+    public List<CreditOrder> queryGroupList(CreditOrder condition, int start,
             int count);
 }

@@ -44,7 +44,16 @@
 				AND t.status = #{status}
 			</if>
 			<if test="creditOrderCode != null and creditOrderCode != '' ">
-				AND t.credit_order_code = #{creditOrderCode}
+				AND t.credit_order_code like "%"#{creditOrderCode}"%"
+			</if>
+			<if test="realName != null and realName != '' ">
+				AND t.real_name like "%"#{realName}"%"
+			</if>
+			<if test="statusList != null and statusList != '' ">
+				AND t.status in 
+                <foreach item="item" index="index" collection="statusList" open="(" separator="," close=")">
+	            	#{item}
+                </foreach> 
 			</if>
 		</trim>
 	</sql>

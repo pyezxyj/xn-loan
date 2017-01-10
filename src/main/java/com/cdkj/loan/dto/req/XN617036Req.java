@@ -1,5 +1,7 @@
 package com.cdkj.loan.dto.req;
 
+import java.util.List;
+
 /**
  * 分页查询车辆
  * @author: asus 
@@ -19,6 +21,10 @@ public class XN617036Req extends APageReq {
     // 状态
     private String status;
 
+    private List<String> statusList;
+
+    private String creditOrderCode;
+
     public String getCode() {
         return code;
     }
@@ -34,4 +40,21 @@ public class XN617036Req extends APageReq {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getCreditOrderCode() {
+        return creditOrderCode;
+    }
+
+    public void setCreditOrderCode(String creditOrderCode) {
+        this.creditOrderCode = creditOrderCode;
+    }
+
+    public List<String> getStatusList() {
+        return statusList;
+    }
+
+    public void setStatusList(List<String> statusList) {
+        this.statusList = statusList;
+    }
+
 }

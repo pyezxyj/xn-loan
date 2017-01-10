@@ -27,7 +27,7 @@
 				AND t.code = #{code}
 			</if>
 			<if test="creditOrderCode != null and creditOrderCode != '' ">
-				AND t.credit_order_code = #{creditOrderCode}
+				AND t.credit_order_code like "%"#{creditOrderCode}"%"
 			</if>
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}

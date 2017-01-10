@@ -147,8 +147,9 @@ public class RepayBOImpl extends PaginableBOImpl<Repay> implements IRepayBO {
     public Repay getGroupRepay(String code) {
         Repay data = null;
         if (StringUtils.isNotBlank(code)) {
+            Repay repay = getRepay(code);
             Repay condition = new Repay();
-            condition.setCode(code);
+            condition.setCreditOrderCode(repay.getCreditOrderCode());
             data = RepayDAO.selectRepay(condition);
             if (data == null) {
                 throw new BizException("xn0000", "�� ��Ų�����");

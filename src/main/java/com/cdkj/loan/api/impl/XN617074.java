@@ -23,7 +23,7 @@ public class XN617074 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        repayAO.editSue(req.getCode());
+        repayAO.editAlready(req.getCode());
         return new BooleanRes(true);
     }
 

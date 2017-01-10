@@ -34,7 +34,7 @@ public class XN617040 extends AProcessor {
             DateUtil.FRONT_DATE_FORMAT_STRING));
         data.setEndDatetime(DateUtil.strToDate(req.getEndDatetime(),
             DateUtil.FRONT_DATE_FORMAT_STRING));
-        data.setRemark(data.getRemark());
+        data.setRemark(req.getRemark());
         return insureAO.editInsure(data, req.getInsureTypeList());
     }
 

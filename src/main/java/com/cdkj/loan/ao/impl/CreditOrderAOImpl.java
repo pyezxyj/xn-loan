@@ -319,6 +319,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             }
             data.setCode(code);
             data.setLoanAmount(creditOrder.getLoanAmount());
+            data.setRemark(remark);
             creditOrderBO.refreshApprove(data);
         }
 
@@ -534,7 +535,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         List<CreditOrder> creditOrder = creditOrderBO.queryGroupList(condition);
         Paginable<CreditOrder> page = new Page<CreditOrder>(start, limit,
             creditOrder.size());
-        List<CreditOrder> dataList = creditOrderBO.selectGroupList(condition,
+        List<CreditOrder> dataList = creditOrderBO.queryGroupList(condition,
             page.getStart(), page.getPageSize());
         page.setList(dataList);
         return page;

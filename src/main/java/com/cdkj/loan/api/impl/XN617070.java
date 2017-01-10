@@ -37,8 +37,8 @@ public class XN617070 extends AProcessor {
             repay.setJbBank(Xreq.getJbBank());
             repay.setIdNo(Xreq.getIdNo());
             repay.setRealName(Xreq.getRealName());
-            repay.setYhAmount(StringValidater.toLong(Xreq.getYhAmount()));
-            repay.setYhDatetime(DateUtil.strToDate(Xreq.getYhDatetime(),
+            repay.setShAmount(StringValidater.toLong(Xreq.getYhAmount()));
+            repay.setShDatetime(DateUtil.strToDate(Xreq.getYhDatetime(),
                 DateUtil.FRONT_DATE_FORMAT_STRING));
             repayList.add(repay);
         }

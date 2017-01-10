@@ -43,6 +43,9 @@
 			<if test="shDatetime != null and shDatetime != '' ">
 				AND t.sh_datetime = #{shDatetime}
 			</if>
+			<if test="jbBank != null and jbBank != '' ">
+				AND t.jb_bank = #{jbBank}
+			</if>
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
 			</if>
@@ -128,6 +131,7 @@
 		sh_amount = #{shAmount}
 		,sh_datetime = #{shDatetime}
 		,status = #{status}
+		,sms_count=#{smsCount}
 		,remark = #{remark}
 		WHERE code = #{code}
 	</update>

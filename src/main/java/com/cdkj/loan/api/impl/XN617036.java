@@ -29,6 +29,8 @@ public class XN617036 extends AProcessor {
         Car condition = new Car();
         condition.setCode(req.getCode());
         condition.setStatus(req.getStatus());
+        condition.setStatusList(req.getStatusList());
+        condition.setCreditOrderCode(req.getCreditOrderCode());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = ICreditOrderAO.DEFAULT_ORDER_COLUMN;

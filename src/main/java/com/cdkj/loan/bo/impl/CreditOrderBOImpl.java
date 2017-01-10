@@ -143,13 +143,8 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
         int count = 0;
         CreditOrder condition = getCreditOrder(data.getCode());
         if (StringUtils.isNotBlank(data.getCode())) {
-            if (ECreditOrderStatus.TO_HR.getCode()
-                .equals(condition.getStatus())) {
-                data.setStatus(ECreditOrderStatus.TO_SC.getCode());
-                count = creditOrderDAO.updateZLBack(data);
-            } else {
-                throw new BizException("xn0000", "该订单不能被操作");
-            }
+            data.setStatus(ECreditOrderStatus.TO_SC.getCode());
+            count = creditOrderDAO.updateZLBack(data);
         }
         return count;
     }
@@ -281,7 +276,7 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
     }
 
     @Override
-    public List<CreditOrder> selectGroupList(CreditOrder condition, int start,
+    public List<CreditOrder> queryGroupList(CreditOrder condition, int start,
             int count) {
         return creditOrderDAO.selectGroupList(condition, start, count);
     }

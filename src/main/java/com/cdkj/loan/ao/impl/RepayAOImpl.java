@@ -9,10 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cdkj.loan.ao.IRepayAO;
+import com.cdkj.loan.bo.ICarBO;
+import com.cdkj.loan.bo.ICreditOrderBO;
 import com.cdkj.loan.bo.IRepayBO;
+import com.cdkj.loan.bo.ISmsOutBO;
 import com.cdkj.loan.bo.base.Page;
 import com.cdkj.loan.bo.base.Paginable;
 import com.cdkj.loan.common.DateUtil;
+import com.cdkj.loan.domain.CreditOrder;
 import com.cdkj.loan.domain.Repay;
 import com.cdkj.loan.enums.ERepayStatus;
 import com.cdkj.loan.exception.BizException;
@@ -23,6 +27,15 @@ public class RepayAOImpl implements IRepayAO {
 
     @Autowired
     private IRepayBO repayBO;
+
+    @Autowired
+    private ISmsOutBO smsOutBO;
+
+    @Autowired
+    private ICarBO carBO;
+
+    @Autowired
+    private ICreditOrderBO creditOrderBO;
 
     @Override
     public String addRepay(Repay data) {
@@ -36,13 +49,14 @@ public class RepayAOImpl implements IRepayAO {
             condition.setJbBank(repay.getJbBank());
             condition.setRealName(repay.getRealName());
             condition.setIdNo(repay.getIdNo());
-            condition.setYhDatetime(repay.getYhDatetime());
+            condition.setYhDatetime(repay.getShDatetime());
             List<Repay> list = repayBO.queryRepayList(condition);
             for (Repay repay2 : list) {
-                repay2.setShAmount(repay.getYhAmount());
-                repay2.setShDatetime(repay.getYhDatetime());
+                repay2.setShAmount(repay.getShAmount());
+                repay2.setShDatetime(repay.getShDatetime());
                 repay2.setRemark(repay.getRemark());
                 repay2.setStatus(ERepayStatus.YLL.getCode());
+                repay2.setSmsCount(0);
                 repayBO.refreshRepay(repay2);
             }
         }
@@ -80,14 +94,20 @@ public class RepayAOImpl implements IRepayAO {
         }
         // 先查出来sms的次数
         Repay data = getRepay(code);
+        CreditOrder creditOrder = creditOrderBO.getCreditOrder(data
+            .getCreditOrderCode());
+        String content = "尊敬的" + creditOrder.getRealName() + "先生/女士：" + "您好。"
+                + "您本期编号为" + data.getCode() + "的月供已到期，剩余。"
+                + data.getOverAmount() + "未还。若已还款可忽略此短信，谢谢！";
+        smsOutBO.sendSmsOut(creditOrder.getMobile(), content, "802182");
         int time = data.getSmsCount();
-        if (ERepayStatus.YQ.getCode().equals(data.getStatus())) {
-            Repay repay = new Repay();
-            repay.setCode(code);
-            repay.setSmsCount(time + 1);
-            repay.setStatus(ERepayStatus.YF.getCode());
-            repayBO.refreshSms(repay);
-        }
+
+        Repay repay = new Repay();
+        repay.setCode(code);
+        repay.setSmsCount(time + 1);
+        repay.setStatus(ERepayStatus.YF.getCode());
+        repayBO.refreshSms(repay);
+
     }
 
     @Override
@@ -132,7 +152,7 @@ public class RepayAOImpl implements IRepayAO {
         condition.setStatus(ERepayStatus.YLL.getCode());
         List<Repay> repayList = repayBO.queryRepayList(condition);
         for (Repay repay : repayList) {
-            if (ERepayStatus.TQ.getCode().equals(repay.getStatus())) {
+            if (ERepayStatus.YLL.getCode().equals(repay.getStatus())) {
                 overAmount = repay.getYhAmount() - repay.getShAmount();
                 if (overAmount > 0) {
                     repay.setOverAmount(overAmount);

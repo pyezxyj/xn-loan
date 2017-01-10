@@ -14,6 +14,12 @@ public class XN617001Req {
     // 编号
     private String code;
 
+    // 省份
+    private String province;
+
+    // 市区
+    private String city;
+
     // 地区
     private String area;
 
@@ -97,6 +103,22 @@ public class XN617001Req {
 
     public void setSalesman(String salesman) {
         this.salesman = salesman;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 
 }

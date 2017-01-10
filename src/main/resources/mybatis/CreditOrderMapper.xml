@@ -8,6 +8,8 @@
 		<result column="money" property="money" />
 		<result column="sj_amount" property="sjAmount" />
 		<result column="code" property="code" />
+		<result column="province" property="province" />
+		<result column="city" property="city" />
 		<result column="area" property="area" />
 		<result column="salesman" property="salesman" />
 		<result column="car_store" property="carStore" />
@@ -65,14 +67,19 @@
 			<if test="realName != null and realName != '' ">
 				AND t.real_name like "%"#{realName}"%"
 			</if>
+			<!-- <if test="accessLevel != null and accessLevel != '' ">
+				AND t.access_level =#{accessLevel}
+			</if> -->
 			<if test="accessLevel != null and accessLevel != '' ">
-				<![CDATA[ having access_level <= #{accessLevel}]]>
+				<![CDATA[AND access_level <= #{accessLevel}]]>
 			</if>
 		</trim>
 	</sql>
 	<select id="select_creditOrder" parameterType="creditOrder" resultMap="creditOrder_DB_Result">
 		SELECT
 		t.code
+		,t.province
+		,t.city
 		,t.area
 		,t.salesman
 		,t.car_store
@@ -137,6 +144,8 @@
 		INSERT INTO
 		tloan_credit_order(
 		code
+		,province
+		,city
 		,area
 		,salesman
 		,car_store
@@ -184,6 +193,8 @@
 		)
 		VALUES(
 		#{code}
+		,#{province}
+		,#{city}
 		,#{area}
 		,#{salesman}
 		,#{carStore}
@@ -430,7 +441,7 @@
 		tloan_credit_order t
 		<include refid="where_condition" />
 		<trim prefix="GROUP BY ">
-			area
+			province,city,area
 		</trim>
 	</select>
 </mapper>

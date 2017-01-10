@@ -36,7 +36,7 @@ public class XN617092 extends AProcessor {
         condition.setOrder(orderColumn, req.getOrderDir());
         int start = StringValidater.toInteger(req.getStart());
         int limit = StringValidater.toInteger(req.getLimit());
-        return creditOrderAO.queryCreditOrderPage(start, limit, condition);
+        return creditOrderAO.queryGroupCreditOrderPage(start, limit, condition);
     }
 
     @Override
