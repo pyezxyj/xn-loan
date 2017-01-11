@@ -19,6 +19,7 @@ import com.cdkj.loan.domain.Car;
 import com.cdkj.loan.domain.CreditOrder;
 import com.cdkj.loan.domain.Insure;
 import com.cdkj.loan.domain.InsureType;
+import com.cdkj.loan.enums.ECarStatus;
 import com.cdkj.loan.enums.EInsureStatus;
 import com.cdkj.loan.exception.BizException;
 
@@ -66,12 +67,18 @@ public class InsureAOImpl implements IInsureAO {
         if (!insureBO.isInsureExist(data.getCode())) {
             throw new BizException("xn0000", "记录编号不存在");
         }
-        data.setSmsCount(0);
-        data.setStatus(EInsureStatus.ZBQ.getCode());
-        code = insureBO.refreshInsure(data);
-        for (InsureType insureType : insureTypeList) {
-            insureType.setInsureCode(data.getCode());
-            insureTypeBO.saveInsureType(insureType);
+        Insure insure = insureBO.getInsure(data.getCode());
+        Car car = carBO.getCar(insure.getCarCode());
+        if (ECarStatus.DY.getCode().equals(car.getStatus())) {
+            data.setSmsCount(0);
+            data.setStatus(EInsureStatus.ZBQ.getCode());
+            code = insureBO.refreshInsure(data);
+            for (InsureType insureType : insureTypeList) {
+                insureType.setInsureCode(data.getCode());
+                insureTypeBO.saveInsureType(insureType);
+            }
+        } else {
+            throw new BizException("xn0000", "请先进行汽车登记");
         }
         return code;
     }

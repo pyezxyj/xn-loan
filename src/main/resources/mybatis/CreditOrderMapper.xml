@@ -55,6 +55,15 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="province != null and province != '' ">
+				AND t.province = #{province}
+			</if>
+			<if test="city != null and city != '' ">
+				AND t.city = #{city}
+			</if>
+			<if test="area != null and area != '' ">
+				AND t.area = #{area}
+			</if>
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
 			</if>
@@ -73,6 +82,7 @@
 			<if test="accessLevel != null and accessLevel != '' ">
 				<![CDATA[AND access_level <= #{accessLevel}]]>
 			</if>
+			
 		</trim>
 	</sql>
 	<select id="select_creditOrder" parameterType="creditOrder" resultMap="creditOrder_DB_Result">
@@ -430,9 +440,18 @@
 		WHERE code = #{code}
 	</update>
 	
+	<update id="update_last" parameterType="creditOrder">
+		UPDATE tloan_credit_order
+		SET
+		last_node=#{lastNode}
+		WHERE code = #{code}
+	</update>
+	
 	<select id="select_CreditOrder" parameterType="creditOrder" resultMap="creditOrder_DB_Result">
 		SELECT
-		area
+		province
+		,city
+		,area
 		,count(*) as num
 		,avg(consume) as time
 		,sum(loan_amount) as money

@@ -12,4 +12,6 @@ public interface ICarDAO extends IBaseDAO<Car> {
     public int updateFBH(Car data);
 
     public int updateRelease(Car data);
+
+    public int updateStatus(Car data);
 }

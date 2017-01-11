@@ -28,7 +28,7 @@ public class XN617092 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         CreditOrder condition = new CreditOrder();
-        condition.setStatus(req.getStart());
+        condition.setStatus(req.getStatus());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = ICreditOrderAO.DEFAULT_ORDER_COLUMN;

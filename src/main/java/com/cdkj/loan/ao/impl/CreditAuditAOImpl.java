@@ -34,6 +34,7 @@ public class CreditAuditAOImpl implements ICreditAuditAO {
         return creditAuditBO.saveCreditAudit(data);
     }
 
+    // 节点二
     @Override
     public void editCreditAudit(CreditAudit data) {
         CreditAudit creditAudit = new CreditAudit();
@@ -47,6 +48,8 @@ public class CreditAuditAOImpl implements ICreditAuditAO {
                 && EBoolean.YES.getCode().equals(data.getCreditResult())) {
             data.setStatus(ECreditAuditStatus.APPROVE_YES.getCode());
             creditOrderBO.refreshCreditOrder(data.getCreditOrderCode());
+            // 节点一结束
+            // 开始节点二
             nodeBO.editNode(refUser, ENodeType.ZX.getCode(), data.getUpdater(),
                 data.getRemark());
             // 进行下一进程

@@ -15,7 +15,7 @@ public class XN617015Req extends APageReq {
     private static final long serialVersionUID = 1L;
 
     // 姓名
-    private String userName;
+    private String realName;
 
     // 用户编号
     private String userId;
@@ -28,14 +28,6 @@ public class XN617015Req extends APageReq {
 
     // 查询条件
     private List<String> statusList;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getStatus() {
         return status;
@@ -67,5 +59,13 @@ public class XN617015Req extends APageReq {
 
     public void setLevel(String level) {
         this.level = level;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 }

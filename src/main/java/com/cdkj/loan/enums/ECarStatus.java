@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum ECarStatus {
-    WLR("0", "未录入"), DY("1", "未释放"), YSF("2", "已释放");
+    WLR("0", "未录入"), DY("1", "未释放"), YSF("2", "已释放"), KLL("3", "可录入");
     public static Map<String, ECarStatus> getBooleanResultMap() {
         Map<String, ECarStatus> map = new HashMap<String, ECarStatus>();
         for (ECarStatus status : ECarStatus.values()) {

@@ -22,6 +22,8 @@ import com.cdkj.loan.domain.CreditAudit;
 import com.cdkj.loan.domain.CreditOrder;
 import com.cdkj.loan.domain.Node;
 import com.cdkj.loan.domain.Repay;
+import com.cdkj.loan.dto.res.UserExt;
+import com.cdkj.loan.dto.res.XN805901Res;
 import com.cdkj.loan.enums.EAccessLevel;
 import com.cdkj.loan.enums.EBoolean;
 import com.cdkj.loan.enums.ECarStatus;
@@ -52,6 +54,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
     @Autowired
     private IUserBO userBO;
 
+    // 节点一
     @Override
     public String addCreditOrder(CreditOrder data,
             List<CreditAudit> creditAuditList) {
@@ -72,6 +75,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             creditAudit.setLoanAmount(data.getLoanAmount());
             creditAudit.setCreditOrderCode(code);
             creditAuditBO.saveCreditAudit(creditAudit);
+            // 添加节点一
             Node node = new Node();
             node.setType(ENodeType.ZX.getCode());
             node.setCreditOrderCode(code);
@@ -90,7 +94,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         }
         // 如果还在待审核
         CreditOrder creditO = getCreditOrder(data.getCode());
-        if (ECreditOrderStatus.TO_APPROVE.getCode().equals(creditO.getStatus())) {
+        if (ECreditOrderStatus.TO_APPROVE.getCode().equals(creditO.getStatus())
+                || ECreditOrderStatus.NO.getCode().equals(creditO.getStatus())) {
             CreditAudit condition = new CreditAudit();
             condition.setCreditOrderCode(data.getCode());
             List<CreditAudit> creditAuditlist = creditAuditBO
@@ -132,8 +137,15 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
     @Override
     public Paginable<CreditOrder> queryCreditOrderPage(int start, int limit,
             CreditOrder condition) {
-        String area = userBO.getUserArea(condition.getUserId());
-        condition.setArea(area);
+        XN805901Res res = userBO.getRemoteUser(condition.getUserId(),
+            condition.getUserId());
+        UserExt userExt = res.getUserExt();
+        // String area = userBO.getUserArea(condition.getUserId());
+        if (userExt != null) {
+            condition.setProvince(userExt.getProvince());
+            condition.setCity(userExt.getCity());
+            condition.setArea(userExt.getArea());
+        }
         Paginable<CreditOrder> page = creditOrderBO.getPaginable(start, limit,
             condition);
         for (CreditOrder creditOrder : page.getList()) {
@@ -193,7 +205,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
                 }
 
             }
-
+            // 节点二结束
+            // 开始节点三
             nodeBO.editNode(code, ENodeType.FP.getCode(), updater, remark);
             Node node = new Node();
             node.setCreditOrderCode(code);
@@ -207,6 +220,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         }
     }
 
+    // 节点三结束
+    // 开始节点四
     @Override
     @Transactional
     public void editSBack(CreditOrder data) {
@@ -217,11 +232,11 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         if (ECreditOrderStatus.TO_FP.getCode().equals(condition.getStatus())) {
             data.setStatus(ECreditOrderStatus.TO_HR.getCode());
 
-            nodeBO.editNode(data.getCode(), ENodeType.FP.getCode(),
+            nodeBO.editNode(data.getCode(), ENodeType.HL.getCode(),
                 data.getUpdater(), data.getRemark());
             Node node = new Node();
             node.setCreditOrderCode(data.getCode());
-            node.setType(ENodeType.HL.getCode());
+            node.setType(ENodeType.LR.getCode());
             node.setUpdater(data.getUpdater());
             node.setRemark(data.getRemark());
             String time = nodeBO.saveNode(node);
@@ -235,11 +250,13 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
     }
 
     // 先查询是否处于回录状态
+    // 节点四结束
+    // 开始节点五
     @Override
     @Transactional
     public void editZLBack(CreditOrder data, List<CreditAudit> creditAuditList) {
         if (!creditOrderBO.isCreditOrderExist(data.getCode())) {
-            throw new BizException("xn0000", "记录编号不存在");
+            throw new BizException("xn0000", "编号不存在");
         }
         CreditOrder creditOrder = getCreditOrder(data.getCode());
         if (ECreditOrderStatus.TO_HR.getCode().equals(creditOrder.getStatus())
@@ -261,11 +278,11 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             car.setStatus(ECarStatus.WLR.getCode());
             carBO.saveCar(car);
             // 节点更新
-            nodeBO.editNode(data.getCode(), ENodeType.HL.getCode(),
+            nodeBO.editNode(data.getCode(), ENodeType.LR.getCode(),
                 data.getUpdater(), data.getRemark());
             Node node = new Node();
             node.setCreditOrderCode(data.getCode());
-            node.setType(ENodeType.LR.getCode());
+            node.setType(ENodeType.SC.getCode());
             node.setUpdater(data.getUpdater());
             node.setRemark(data.getRemark());
             String time = nodeBO.saveNode(node);
@@ -290,9 +307,13 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             // nowTearm+1
             // nowTerm > loanTerm跳出这个循环；
             // }
+        } else {
+            throw new BizException("xn0000", "訂單張氏不能回錄");
         }
     }
 
+    // 节点五结束
+    // 开始节点六
     @Override
     public void editApprove(String code, String approveResult, String updater,
             String remark) {
@@ -308,10 +329,10 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             } else {
                 data.setStatus(ECreditOrderStatus.ED.getCode());
                 // 节点更新
-                nodeBO.editNode(code, ENodeType.LR.getCode(), updater, remark);
+                nodeBO.editNode(code, ENodeType.SC.getCode(), updater, remark);
                 Node node = new Node();
                 node.setCreditOrderCode(code);
-                node.setType(ENodeType.SC.getCode());
+                node.setType(ENodeType.SP.getCode());
                 node.setUpdater(updater);
                 node.setRemark(remark);
                 String time = nodeBO.saveNode(node);
@@ -325,6 +346,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
 
     }
 
+    // 节点六结束
+    // 开始节点七
     @Override
     public void editApprove(CreditOrder data) {
         if (!creditOrderBO.isCreditOrderExist(data.getCode())) {
@@ -348,12 +371,22 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
                     data.getApproveResult())) {
                     data.setLoanAmount(creditOrder.getLoanAmount());
                 }
+                if (ECreditStatusApprove.CHANGE.getCode().equals(
+                    data.getApproveResult())) {
+                    Repay condition = new Repay();
+                    condition.setCreditOrderCode(data.getCode());
+                    List<Repay> repayList = repayBO.queryGroupList(condition);
+                    for (Repay repay : repayList) {
+                        repay.setYhAmount(data.getTermAmount());
+                        repayBO.refreshTerm(repay);
+                    }
+                }
                 data.setStatus(ECreditOrderStatus.QK.getCode());
-                nodeBO.editNode(data.getCode(), ENodeType.SC.getCode(),
+                nodeBO.editNode(data.getCode(), ENodeType.SP.getCode(),
                     data.getUpdater(), data.getRemark());
                 Node node = new Node();
                 node.setCreditOrderCode(data.getCode());
-                node.setType(ENodeType.SP.getCode());
+                node.setType(ENodeType.QK.getCode());
                 node.setUpdater(data.getUpdater());
                 node.setRemark(data.getRemark());
                 String time = nodeBO.saveNode(node);
@@ -363,6 +396,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         }
     }
 
+    // 节点七结束
+    // 开始节点六
     @Override
     public void editPayroll(String code, String data, String updater,
             String remark) {
@@ -372,6 +407,16 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         CreditOrder creditOrder = getCreditOrder(code);
         CreditOrder condition = new CreditOrder();
         if (ECreditOrderStatus.BC.getCode().equals(creditOrder.getStatus())) {
+
+            nodeBO.editNode(code, ENodeType.BC.getCode(), updater, remark);
+            Node node = new Node();
+            node.setCreditOrderCode(code);
+            node.setType(ENodeType.SP.getCode());
+            node.setUpdater(updater);
+            node.setRemark(remark);
+            String time = nodeBO.saveNode(node);
+            condition.setLastNode(time);
+
             condition.setCode(code);
             condition.setFkPdf(data);
             condition.setStatus(ECreditOrderStatus.ED.getCode());
@@ -380,7 +425,32 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         }
     }
 
+    // 请款回录
+    // 节点八结束
+    // 开始节点九
+    @Override
+    @Transactional
+    public void editPayout(String code, String qkPdf, String updater,
+            String remark) {
+        if (!creditOrderBO.isCreditOrderExist(code)) {
+            throw new BizException("xn0000", "记录编号不存在");
+        }
+        CreditOrder creditOrder = getCreditOrder(code);
+        if (ECreditOrderStatus.QK.getCode().equals(creditOrder.getStatus())) {
+            nodeBO.editNode(code, ENodeType.QK.getCode(), updater, remark);
+            Node node = new Node();
+            node.setCreditOrderCode(code);
+            node.setType(ENodeType.DH.getCode());
+            node.setUpdater(updater);
+            node.setRemark(remark);
+            String time = nodeBO.saveNode(node);
+            creditOrderBO.refreshPayout(code, time, qkPdf, remark);
+        }
+    }
+
     // 电话回访
+    // 节点九结束
+    // 开始节点十
     @Override
     public void editVisit(String code, String approveResult, String updater,
             String remark) {
@@ -396,10 +466,10 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
                 time = creditOrder.getLastNode();
             } else {
                 status = ECreditOrderStatus.FH.getCode();
-                nodeBO.editNode(code, ENodeType.QK.getCode(), updater, remark);
+                nodeBO.editNode(code, ENodeType.DH.getCode(), updater, remark);
                 Node node = new Node();
                 node.setCreditOrderCode(code);
-                node.setType(ENodeType.DH.getCode());
+                node.setType(ENodeType.FH.getCode());
                 node.setUpdater(updater);
                 node.setRemark(remark);
                 time = nodeBO.saveNode(node);
@@ -409,6 +479,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
     }
 
     // 财务复核
+    // 节点十结束
+    // 开始节点十一
     @Override
     @Transactional
     public void editFinancial(String code, String approveResult,
@@ -425,10 +497,10 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             } else {
                 status = ECreditOrderStatus.DK.getCode();
             }
-            nodeBO.editNode(code, ENodeType.DH.getCode(), updater, remark);
+            nodeBO.editNode(code, ENodeType.FH.getCode(), updater, remark);
             Node node = new Node();
             node.setCreditOrderCode(code);
-            node.setType(ENodeType.FH.getCode());
+            node.setType(ENodeType.FHHL.getCode());
             node.setUpdater(updater);
             node.setRemark(remark);
             time = nodeBO.saveNode(node);
@@ -437,28 +509,9 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
 
     }
 
-    // 请款回录
-    @Override
-    @Transactional
-    public void editPayout(String code, String qkPdf, String updater,
-            String remark) {
-        if (!creditOrderBO.isCreditOrderExist(code)) {
-            throw new BizException("xn0000", "记录编号不存在");
-        }
-        CreditOrder creditOrder = getCreditOrder(code);
-        if (ECreditOrderStatus.QK.getCode().equals(creditOrder.getStatus())) {
-            nodeBO.editNode(code, ENodeType.SP.getCode(), updater, remark);
-            Node node = new Node();
-            node.setCreditOrderCode(code);
-            node.setType(ENodeType.QK.getCode());
-            node.setUpdater(updater);
-            node.setRemark(remark);
-            String time = nodeBO.saveNode(node);
-            creditOrderBO.refreshPayout(code, time, qkPdf, remark);
-        }
-    }
-
     // 打款回录
+    // 节点十一结束
+    // 开始节点十二
     @Override
     @Transactional
     public void editMoneyback(String code, String dkPdf, String updater,
@@ -471,11 +524,18 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             nodeBO.editNode(code, ENodeType.FHHL.getCode(), updater, remark);
             Node node = new Node();
             node.setCreditOrderCode(code);
-            node.setType(ENodeType.DK.getCode());
+            node.setType(ENodeType.FBH.getCode());
             node.setUpdater(updater);
             node.setRemark(remark);
             String time = nodeBO.saveNode(node);
             creditOrderBO.refreshMoneyback(code, time, dkPdf, remark);
+            Car condition = new Car();
+            condition.setCreditOrderCode(code);
+            List<Car> car = carBO.queryCarList(condition);
+            for (Car car2 : car) {
+                car2.setStatus(ECarStatus.KLL.getCode());
+                carBO.refreshStatus(car2);
+            }
         } else {
             throw new BizException("xn0000", "该记录暂时不能打款");
         }
@@ -490,6 +550,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
     }
 
     // 打款回录
+    // 节点十三
     @Override
     @Transactional
     public void editReceiptPdf(CreditOrder data) {
@@ -498,7 +559,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         }
         CreditOrder creditOrder = getCreditOrder(data.getCode());
         if (ECreditOrderStatus.TSK.getCode().equals(creditOrder.getStatus())) {
-            nodeBO.editNode(data.getCode(), ENodeType.FHHL.getCode(),
+            nodeBO.editNode(data.getCode(), ENodeType.SKHL.getCode(),
                 data.getUpdater(), data.getRemark());
             data.setStatus(ECreditOrderStatus.SK.getCode());
             int consume = DateUtil.timeBetween(creditOrder.getCreateDatetime(),

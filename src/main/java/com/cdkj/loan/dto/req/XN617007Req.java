@@ -13,6 +13,8 @@ public class XN617007Req {
     // 贷款额
     private String loanAmount;
 
+    private String termAmount;
+
     private String approverUser;
 
     private String approveResult;
@@ -57,5 +59,13 @@ public class XN617007Req {
 
     public void setApproveNote(String approveNote) {
         this.approveNote = approveNote;
+    }
+
+    public String getTermAmount() {
+        return termAmount;
+    }
+
+    public void setTermAmount(String termAmount) {
+        this.termAmount = termAmount;
     }
 }

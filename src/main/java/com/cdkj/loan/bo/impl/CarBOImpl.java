@@ -15,7 +15,6 @@ import com.cdkj.loan.domain.Car;
 import com.cdkj.loan.enums.EGeneratePrefix;
 import com.cdkj.loan.exception.BizException;
 
-//CHECK ��鲢��ע�� 
 @Component
 public class CarBOImpl extends PaginableBOImpl<Car> implements ICarBO {
 
@@ -97,6 +96,15 @@ public class CarBOImpl extends PaginableBOImpl<Car> implements ICarBO {
         if (StringUtils.isNotBlank(data.getCode())) {
             data.setApproveDatetime(new Date());
             count = CarDAO.updateRelease(data);
+        }
+        return count;
+    }
+
+    @Override
+    public int refreshStatus(Car data) {
+        int count = 0;
+        if (StringUtils.isNotBlank(data.getCode())) {
+            count = CarDAO.updateStatus(data);
         }
         return count;
     }

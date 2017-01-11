@@ -7,6 +7,7 @@ import com.cdkj.loan.common.JsonUtil;
 import com.cdkj.loan.core.StringValidater;
 import com.cdkj.loan.domain.Insure;
 import com.cdkj.loan.dto.req.XN617040Req;
+import com.cdkj.loan.dto.res.BooleanRes;
 import com.cdkj.loan.exception.BizException;
 import com.cdkj.loan.exception.ParaException;
 import com.cdkj.loan.spring.SpringContextHolder;
@@ -29,13 +30,14 @@ public class XN617040 extends AProcessor {
         data.setCompany(req.getCompany());
         data.setType(req.getType());
         data.setOrderNo(req.getOrderNo());
-        data.setAmount(req.getAmount());
+        data.setAmount(StringValidater.toLong(req.getAmount()));
         data.setStartDatetime(DateUtil.strToDate(req.getStartDatetime(),
             DateUtil.FRONT_DATE_FORMAT_STRING));
         data.setEndDatetime(DateUtil.strToDate(req.getEndDatetime(),
             DateUtil.FRONT_DATE_FORMAT_STRING));
         data.setRemark(req.getRemark());
-        return insureAO.editInsure(data, req.getInsureTypeList());
+        insureAO.editInsure(data, req.getInsureTypeList());
+        return new BooleanRes(true);
     }
 
     @Override
@@ -43,6 +45,6 @@ public class XN617040 extends AProcessor {
         req = JsonUtil.json2Bean(inputparams, XN617040Req.class);
         StringValidater.validateBlank(req.getCode(), req.getCompany(),
             req.getType(), req.getOrderNo(), req.getAmount(),
-            req.getStartDatetime(), req.getEndDatetime(), req.getRemark());
+            req.getStartDatetime(), req.getEndDatetime());
     }
 }

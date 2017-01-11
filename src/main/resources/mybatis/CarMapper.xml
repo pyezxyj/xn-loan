@@ -220,4 +220,10 @@
 		WHERE code = #{code}
 	</update>
 	
+	<update id="update_status" parameterType="Car">
+		UPDATE tloan_car
+		SET
+		status = #{status}
+		WHERE code = #{code}
+	</update>
 </mapper>

@@ -12,6 +12,7 @@ import com.cdkj.loan.exception.ParaException;
 import com.cdkj.loan.spring.SpringContextHolder;
 
 /**
+ * 
  * 增加资质申请
  * @author: asus 
  * @since: 2016年12月24日 下午12:09:02 

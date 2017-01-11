@@ -34,7 +34,7 @@ public class Insure extends ABaseDO {
     private String orderNo;
 
     // 保费
-    private String amount;
+    private Long amount;
 
     // 保险开始时间
     private Date startDatetime;
@@ -101,14 +101,6 @@ public class Insure extends ABaseDO {
         return orderNo;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
     public void setStatus(String status) {
         this.status = status;
     }
@@ -155,6 +147,14 @@ public class Insure extends ABaseDO {
 
     public void setSmsCount(int smsCount) {
         this.smsCount = smsCount;
+    }
+
+    public Long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 
 }

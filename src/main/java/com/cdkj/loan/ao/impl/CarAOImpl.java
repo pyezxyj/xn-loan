@@ -50,7 +50,7 @@ public class CarAOImpl implements ICarAO {
             throw new BizException("xn0000", "记录编号不存在");
         }
         Car car = getCar(data.getCode());
-        if (ECarStatus.WLR.getCode().equals(car.getStatus())) {
+        if (ECarStatus.KLL.getCode().equals(car.getStatus())) {
             data.setStatus(ECarStatus.DY.getCode());
             count = carBO.refreshCar(data);
         } else {
@@ -84,7 +84,7 @@ public class CarAOImpl implements ICarAO {
 
     // 发保合登记
     // 更新节点
-    // 新增下一节点
+    // 新增下一节点，节点十二
     // 同时新增保单
     @Override
     @Transactional
@@ -102,12 +102,18 @@ public class CarAOImpl implements ICarAO {
             data.setCertification(certification);
             count = carBO.refreshFBH(data);
             creditOrderBO.refreshFBH(car.getCreditOrderCode());
-            nodeBO.editNode(car.getCreditOrderCode(), ENodeType.DK.getCode(),
+            nodeBO.editNode(car.getCreditOrderCode(), ENodeType.FBH.getCode(),
                 null, null);
             Node node = new Node();
             node.setCreditOrderCode(car.getCreditOrderCode());
-            node.setType(ENodeType.DK.getCode());
-            nodeBO.saveNode(node);
+            node.setType(ENodeType.SKHL.getCode());
+            String time = nodeBO.saveNode(node);
+            // 更新节点
+            CreditOrder Order = new CreditOrder();
+            Order.setCode(creditOrder.getCode());
+            Order.setLastNode(time);
+            creditOrderBO.refreshLastNode(Order);
+
             Insure insure = new Insure();
             insure.setCarCode(code);
             insure.setRealName(car.getRealName());

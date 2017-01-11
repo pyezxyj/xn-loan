@@ -31,7 +31,7 @@ public class XN617015 extends AProcessor {
         condition.setAccessLevel(req.getLevel());
         condition.setStatus(req.getStatus());
         condition.setStatusList(req.getStatusList());
-        condition.setRealName(req.getUserName());
+        condition.setRealName(req.getRealName());
         condition.setStatusList(req.getStatusList());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {

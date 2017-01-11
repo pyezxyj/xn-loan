@@ -92,4 +92,9 @@ public class RepayDAOImpl extends AMybatisTemplate implements IRepayDAO {
         return super.selectList(NAMESPACE.concat("select_repay"), condition,
             Repay.class);
     }
+
+    @Override
+    public int updateTerm(Repay data) {
+        return super.update(NAMESPACE.concat("update_term"), data);
+    }
 }

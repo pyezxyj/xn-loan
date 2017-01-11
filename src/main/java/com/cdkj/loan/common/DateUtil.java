@@ -247,4 +247,44 @@ public class DateUtil {
         }
         return returnDate;
     }
+
+    /**
+     * 获取指定月的第一天
+     * @param date
+     * @return 
+     * @create: 2017年1月11日 下午12:39:09 asus
+     * @history:
+     */
+    public static Date getFirstDay(String datadate) throws Exception {
+        Date date = null;
+        String day_first = null;
+        SimpleDateFormat format = new SimpleDateFormat(
+            DateUtil.FRONT_DATE_FORMAT_STRING);
+        date = format.parse(datadate);
+        // 创建日历
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        day_first = format.format(calendar.getTime());
+        return strToDate(day_first + DateUtil.TIME_BEGIN,
+            DateUtil.DATA_TIME_PATTERN_1);
+    }
+
+    public static Date getLastDay(String datadate) throws Exception {
+        Date date = null;
+        String day_last = null;
+        SimpleDateFormat format = new SimpleDateFormat(
+            DateUtil.FRONT_DATE_FORMAT_STRING);
+        date = format.parse(datadate);
+
+        // 创建日历
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MONTH, 1); // 加一个月
+        calendar.set(Calendar.DATE, 1); // 设置为该月第一天
+        calendar.add(Calendar.DATE, -1); // 再减一天即为上个月最后一天
+        day_last = format.format(calendar.getTime());
+        return strToDate(day_last + DateUtil.TIME_END,
+            DateUtil.DATA_TIME_PATTERN_1);
+    }
 }

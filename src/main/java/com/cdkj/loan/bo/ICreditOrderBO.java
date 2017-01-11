@@ -60,4 +60,6 @@ public interface ICreditOrderBO extends IPaginableBO<CreditOrder> {
 
     public List<CreditOrder> queryGroupList(CreditOrder condition, int start,
             int count);
+
+    public int refreshLastNode(CreditOrder data);
 }

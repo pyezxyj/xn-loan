@@ -147,4 +147,9 @@ public class CreditOrderDAOImpl extends AMybatisTemplate implements
         return super.selectList(NAMESPACE.concat("select_CreditOrder"), start,
             count, condition, CreditOrder.class);
     }
+
+    @Override
+    public int updateLast(CreditOrder data) {
+        return super.update(NAMESPACE.concat("update_last"), data);
+    }
 }

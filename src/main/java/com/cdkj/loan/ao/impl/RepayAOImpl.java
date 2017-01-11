@@ -3,7 +3,6 @@ package com.cdkj.loan.ao.impl;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +38,9 @@ public class RepayAOImpl implements IRepayAO {
 
     @Override
     public String addRepay(Repay data) {
+        Long count = 0L;
+        data.setOverAmount(count);
+        data.setShAmount(count);
         return repayBO.saveRepay(data);
     }
 
@@ -72,6 +74,21 @@ public class RepayAOImpl implements IRepayAO {
 
     @Override
     public Paginable<Repay> queryRepayPage(int start, int limit, Repay condition) {
+        Repay repay = new Repay();
+        repay.setStatus(ERepayStatus.YLL.getCode());
+        List<Repay> repayList = repayBO.queryRepayList(repay);
+        if (repayList.size() != 0) {
+            try {
+                condition.setCxStarttime(DateUtil.getFirstDay(DateUtil
+                    .dateToStr(repayList.get(0).getYhDatetime(),
+                        DateUtil.FRONT_DATE_FORMAT_STRING)));
+                condition.setCxEndtime(DateUtil.getLastDay(DateUtil.dateToStr(
+                    repayList.get(0).getYhDatetime(),
+                    DateUtil.FRONT_DATE_FORMAT_STRING)));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         Paginable<Repay> page = repayBO.getPaginable(start, limit, condition);
         return page;
     }
@@ -98,7 +115,7 @@ public class RepayAOImpl implements IRepayAO {
             .getCreditOrderCode());
         String content = "尊敬的" + creditOrder.getRealName() + "先生/女士：" + "您好。"
                 + "您本期编号为" + data.getCode() + "的月供已到期，剩余。"
-                + data.getOverAmount() + "未还。若已还款可忽略此短信，谢谢！";
+                + data.getOverAmount() / 1000 + "未还。若已还款可忽略此短信，谢谢！";
         smsOutBO.sendSmsOut(creditOrder.getMobile(), content, "802182");
         int time = data.getSmsCount();
 
@@ -147,7 +164,7 @@ public class RepayAOImpl implements IRepayAO {
     @Override
     public void editAlso() {
         Long overAmount = null;
-        Long count = (long) 0;
+        Long count = 0L;
         Repay condition = new Repay();
         condition.setStatus(ERepayStatus.YLL.getCode());
         List<Repay> repayList = repayBO.queryRepayList(condition);
@@ -193,12 +210,10 @@ public class RepayAOImpl implements IRepayAO {
             Repay condition) {
         Paginable<Repay> page = null;
         List<Repay> list = repayBO.queryGroupList(condition);
-        if (CollectionUtils.isNotEmpty(list)) {
-            page = new Page<Repay>(start, limit, list.size());
-            List<Repay> dataList = repayBO.queryGroupList(condition,
-                page.getStart(), page.getPageSize());
-            page.setList(dataList);
-        }
+        page = new Page<Repay>(start, limit, list.size());
+        List<Repay> dataList = repayBO.queryGroupList(condition,
+            page.getStart(), page.getPageSize());
+        page.setList(dataList);
         return page;
     }
 

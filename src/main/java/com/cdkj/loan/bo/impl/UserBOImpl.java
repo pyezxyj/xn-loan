@@ -31,8 +31,9 @@ public class UserBOImpl implements IUserBO {
         XN805901Res res = this.getRemoteUser(userId, userId);
         UserExt userExt = res.getUserExt();
         if (userExt != null) {
-            result = userExt.getProvince() + userExt.getCity()
-                    + userExt.getArea();
+            userExt.getProvince();
+            userExt.getCity();
+            userExt.getArea();
         }
         return result;
     }

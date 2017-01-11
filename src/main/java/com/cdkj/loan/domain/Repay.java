@@ -57,13 +57,18 @@ public class Repay extends ABaseDO {
     // 备注
     private String remark;
 
-    private String totalAmount;
+    private Long totalAmount;
 
     private String totalTerm;
 
     private String realNameForLikeQuery;
 
     private List<String> statusList;
+
+    // -------------
+    private Date cxStarttime;
+
+    private Date cxEndtime;
 
     public void setCode(String code) {
         this.code = code;
@@ -193,20 +198,36 @@ public class Repay extends ABaseDO {
         this.statusList = statusList;
     }
 
-    public String getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(String totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
     public String getTotalTerm() {
         return totalTerm;
     }
 
     public void setTotalTerm(String totalTerm) {
         this.totalTerm = totalTerm;
+    }
+
+    public Long getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(Long totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public Date getCxStarttime() {
+        return cxStarttime;
+    }
+
+    public void setCxStarttime(Date cxStarttime) {
+        this.cxStarttime = cxStarttime;
+    }
+
+    public Date getCxEndtime() {
+        return cxEndtime;
+    }
+
+    public void setCxEndtime(Date cxEndtime) {
+        this.cxEndtime = cxEndtime;
     }
 
 }

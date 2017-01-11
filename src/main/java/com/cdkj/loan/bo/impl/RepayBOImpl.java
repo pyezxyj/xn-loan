@@ -15,7 +15,6 @@ import com.cdkj.loan.enums.EGeneratePrefix;
 import com.cdkj.loan.enums.ERepayStatus;
 import com.cdkj.loan.exception.BizException;
 
-//CHECK ��鲢��ע�� 
 @Component
 public class RepayBOImpl extends PaginableBOImpl<Repay> implements IRepayBO {
 
@@ -35,9 +34,11 @@ public class RepayBOImpl extends PaginableBOImpl<Repay> implements IRepayBO {
     @Override
     public String saveRepay(Repay data) {
         String code = null;
+        Long amount = 0L;
         if (data != null) {
             code = OrderNoGenerater.generateME(EGeneratePrefix.REPAY.getCode());
             data.setCode(code);
+            data.setOverAmount(amount);
             data.setStatus(ERepayStatus.BEEN.getCode());
             RepayDAO.insert(data);
         }
@@ -135,7 +136,7 @@ public class RepayBOImpl extends PaginableBOImpl<Repay> implements IRepayBO {
 
     @Override
     public List<Repay> queryGroupList(Repay condition) {
-        return RepayDAO.selectList(condition);
+        return RepayDAO.selectListRepay(condition);
     }
 
     @Override
@@ -156,5 +157,14 @@ public class RepayBOImpl extends PaginableBOImpl<Repay> implements IRepayBO {
             }
         }
         return data;
+    }
+
+    @Override
+    public int refreshTerm(Repay data) {
+        int count = 0;
+        if (StringUtils.isNotBlank(data.getCode())) {
+            count = RepayDAO.updateTerm(data);
+        }
+        return count;
     }
 }

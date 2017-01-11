@@ -223,7 +223,6 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
             data.setLastNode(time);
             data.setDkPdf(dkPdf);
             data.setStatus(ECreditOrderStatus.FBH.getCode());
-            System.out.println(ECreditOrderStatus.FBH.getCode());
             data.setRemark(remark);
             count = creditOrderDAO.updateMoneyback(data);
         }
@@ -281,4 +280,12 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
         return creditOrderDAO.selectGroupList(condition, start, count);
     }
 
+    @Override
+    public int refreshLastNode(CreditOrder data) {
+        int count = 0;
+        if (StringUtils.isNotBlank(data.getCode())) {
+            count = creditOrderDAO.updateLast(data);
+        }
+        return count;
+    }
 }

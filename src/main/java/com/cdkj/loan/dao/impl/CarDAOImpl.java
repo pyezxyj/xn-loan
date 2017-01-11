@@ -61,4 +61,9 @@ public class CarDAOImpl extends AMybatisTemplate implements ICarDAO {
         return super.update(NAMESPACE.concat("update_relese"), data);
     }
 
+    @Override
+    public int updateStatus(Car data) {
+        return super.update(NAMESPACE.concat("update_status"), data);
+    }
+
 }

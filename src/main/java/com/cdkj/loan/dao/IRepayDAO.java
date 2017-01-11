@@ -21,9 +21,11 @@ public interface IRepayDAO extends IBaseDAO<Repay> {
 
     public int updateYhdate(Repay data);
 
-    public Repay selectRepay(Repay condition);
-
     public List<Repay> selectListRepay(Repay condition, int start, int count);
 
     public List<Repay> selectListRepay(Repay condition);
+
+    public int updateTerm(Repay data);
+
+    public Repay selectRepay(Repay condition);
 }

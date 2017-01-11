@@ -37,4 +37,5 @@ public interface IRepayBO extends IPaginableBO<Repay> {
 
     public Repay getGroupRepay(String code);
 
+    public int refreshTerm(Repay data);
 }

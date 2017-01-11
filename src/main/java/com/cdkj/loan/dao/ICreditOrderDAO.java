@@ -152,4 +152,6 @@ public interface ICreditOrderDAO extends IBaseDAO<CreditOrder> {
     public Long selectGroupTotalCount(CreditOrder condition);
 
     public CreditOrder selectGroup(CreditOrder condition);
+
+    public int updateLast(CreditOrder condition);
 }
