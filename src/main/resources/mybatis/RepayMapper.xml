@@ -171,6 +171,8 @@
 		UPDATE tloan_repay
 		SET
 		status=#{status}
+		,sh_datetime=#{shDatetime}
+        ,sh_amount=#{shAmount}
 		,remark=#{remark}
 		WHERE code = #{code}
 	</update>
@@ -188,9 +190,10 @@
 		yh_amount=#{yhAmount}
 		WHERE code = #{code}
 	</update>
+	
 	<select id="select_repay" parameterType="Repay" resultMap="Repay_DB_Result">
-	SELECT SUM(yh_amount)+(SELECT SUM(over_amount) FROM tloan_repay WHERE STATUS=5) AS total_amount ,
-	COUNT(*) AS total_term
+	SELECT SUM(yh_amount+over_amount) AS total_amount ,
+	(SELECT COUNT(*) FROM tloan_repay tr WHERE tr.credit_order_code = t.credit_order_code AND tr.over_amount = 0) AS total_term
 		,t.code
 		,t.credit_order_code
 		,t.jb_bank
@@ -204,42 +207,19 @@
 		,t.over_days
 		,t.sms_count
 		,t.status
-		,t.remark FROM tloan_repay t WHERE STATUS=6
+		,t.remark FROM tloan_repay t WHERE STATUS IN(5,6)
 		<if test="realNameForLikeQuery != null and realNameForLikeQuery != '' ">
 				AND t.real_name like "%"#{realNameForLikeQuery}"%"
 		</if>
-		<if test="statusList != null and statusList != '' ">
-				AND t.status in 
-                <foreach item="item" index="index" collection="statusList" open="(" separator="," close=")">
-	            	#{item}
-                </foreach> 
-			</if>
+		<if test="code != null and code != '' ">
+				AND t.code = #{code}
+		</if>
+		<if test="creditOrderCode != null and creditOrderCode != '' ">
+			AND t.credit_order_code = #{creditOrderCode}
+		</if>
 		<trim prefix="GROUP BY ">
-			 credit_order_code
+			 t.credit_order_code
 		</trim>
-		<!-- SELECT
-		SUM(yh_amount) as total_amount
-		count(*) as total_term
-		,t.code
-		,t.credit_order_code
-		,t.jb_bank
-		,t.real_name
-		,t.id_no
-		,t.yh_amount
-		,t.yh_datetime
-		,t.sh_amount
-		,t.sh_datetime
-		,t.over_amount
-		,t.over_days
-		,t.sms_count
-		,t.status
-		,t.remark
-		FROM
-		tloan_repay t
-		<include refid="where_condition" />
-		<trim prefix="GROUP BY ">
-			 credit_order_code
-		</trim> -->
 	</select>
 	
 		<select id="select_repay_count" parameterType="Repay"

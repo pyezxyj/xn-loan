@@ -150,6 +150,7 @@ public class RepayBOImpl extends PaginableBOImpl<Repay> implements IRepayBO {
         if (StringUtils.isNotBlank(code)) {
             Repay repay = getRepay(code);
             Repay condition = new Repay();
+            // condition.setCode(code);
             condition.setCreditOrderCode(repay.getCreditOrderCode());
             data = RepayDAO.selectRepay(condition);
             if (data == null) {

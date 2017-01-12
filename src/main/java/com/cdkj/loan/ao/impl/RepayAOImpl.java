@@ -1,5 +1,6 @@
 package com.cdkj.loan.ao.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,6 +42,7 @@ public class RepayAOImpl implements IRepayAO {
         Long count = 0L;
         data.setOverAmount(count);
         data.setShAmount(count);
+        data.setSmsCount(0);
         return repayBO.saveRepay(data);
     }
 
@@ -75,7 +77,12 @@ public class RepayAOImpl implements IRepayAO {
     @Override
     public Paginable<Repay> queryRepayPage(int start, int limit, Repay condition) {
         Repay repay = new Repay();
-        repay.setStatus(ERepayStatus.YLL.getCode());
+        ArrayList<String> status = new ArrayList<String>();
+        status.add(ERepayStatus.YLL.getCode());
+        status.add(ERepayStatus.ALREAD.getCode());
+        status.add(ERepayStatus.YQ.getCode());
+        status.add(ERepayStatus.YQ.getCode());
+        repay.setStatusList(status);
         List<Repay> repayList = repayBO.queryRepayList(repay);
         if (repayList.size() != 0) {
             try {
@@ -154,7 +161,9 @@ public class RepayAOImpl implements IRepayAO {
         condition.setStatus(status);
         List<Repay> repayList = repayBO.queryRepayList(condition);
         for (Repay repay : repayList) {
-            repay.setStatus(ERepayStatus.ALREAD.getCode());
+            repay.setStatus(ERepayStatus.YTQ.getCode());
+            repay.setShDatetime(new Date());
+            repay.setShAmount(repay.getYhAmount());
             repay.setRemark(remark);
             repayBO.refreshAdvance(repay);
         }
