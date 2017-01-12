@@ -211,7 +211,7 @@ public class DateUtil {
     }
 
     /**
-     * 统计两个时间差，返回的是分钟数
+     * 统计两个时间差，返回的是毫秒数
      * @param beginDate
      * @param endDate
      * @return 

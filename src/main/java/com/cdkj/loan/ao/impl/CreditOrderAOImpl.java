@@ -64,10 +64,20 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         }
         for (CreditAudit creditAudit : creditAuditList) {
             if (EBoolean.NO.getCode().equals(creditAudit.getRelation())) {
+                // 添加节点一
+                Node node = new Node();
+                node.setType(ENodeType.ZX.getCode());
+                node.setCreditOrderCode(code);
+                node.setUpdater(data.getUpdater());
+                node.setRemark(data.getRemark());
+                String time = nodeBO.saveNode(node);
+
                 data.setStatus(ECreditOrderStatus.TO_APPROVE.getCode());
                 data.setRealName(creditAudit.getRealName());
                 data.setIdKind(creditAudit.getIdKind());
                 data.setIdNo(creditAudit.getIdNo());
+                data.setLastNode(time);
+                data.setConsume(0);
                 data.setAccessLevel(EAccessLevel.YWY.getCode());
                 code = creditOrderBO.saveCreditOrder(data);
             }
@@ -75,13 +85,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             creditAudit.setLoanAmount(data.getLoanAmount());
             creditAudit.setCreditOrderCode(code);
             creditAuditBO.saveCreditAudit(creditAudit);
-            // 添加节点一
-            Node node = new Node();
-            node.setType(ENodeType.ZX.getCode());
-            node.setCreditOrderCode(code);
-            node.setUpdater(data.getUpdater());
-            node.setRemark(data.getRemark());
-            nodeBO.saveNode(node);
+
         }
         return code;
     }
@@ -215,8 +219,18 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             node.setRemark(remark);
             nodeBO.saveNode(node);
             String time = nodeBO.saveNode(node);
-            creditOrderBO.refreshSurvey(code, time, mobile, investigator,
-                remark);
+            CreditOrder creditOrder = getCreditOrder(code);
+            int consume = DateUtil.timeBetween(new Date(),
+                creditOrder.getCreateDatetime());
+            CreditOrder order = new CreditOrder();
+            order.setCode(code);
+            order.setMobile(mobile);
+            order.setDcUser(investigator);
+            order.setRemark(remark);
+            order.setConsume(consume);
+            order.setLastNode(time);
+            order.setRemark(remark);
+            creditOrderBO.refreshSurvey(order);
         }
     }
 
@@ -241,6 +255,10 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             node.setRemark(data.getRemark());
             String time = nodeBO.saveNode(node);
             data.setLastNode(time);
+            CreditOrder creditOrder = getCreditOrder(data.getCode());
+            int consume = DateUtil.timeBetween(new Date(),
+                creditOrder.getCreateDatetime());
+            data.setConsume(consume);
             data.setAccessLevel(EAccessLevel.CJGL.getCode());
             creditOrderBO.refreshSBack(data);
         } else {
@@ -287,6 +305,9 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             node.setRemark(data.getRemark());
             String time = nodeBO.saveNode(node);
             data.setLastNode(time);
+            int consume = DateUtil.timeBetween(new Date(),
+                creditOrder.getCreateDatetime());
+            data.setConsume(consume);
             creditOrderBO.refreshZLBack(data);
 
             // 记录还款资料
@@ -341,6 +362,9 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             data.setCode(code);
             data.setLoanAmount(creditOrder.getLoanAmount());
             data.setRemark(remark);
+            int consume = DateUtil.timeBetween(new Date(),
+                creditOrder.getCreateDatetime());
+            data.setConsume(consume);
             creditOrderBO.refreshApprove(data);
         }
 
@@ -391,6 +415,9 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
                 node.setRemark(data.getRemark());
                 String time = nodeBO.saveNode(node);
                 data.setLastNode(time);
+                int consume = DateUtil.timeBetween(new Date(),
+                    creditOrder.getCreateDatetime());
+                data.setConsume(consume);
             }
             creditOrderBO.refreshApprove(data);
         }
@@ -421,6 +448,9 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             condition.setFkPdf(data);
             condition.setStatus(ECreditOrderStatus.ED.getCode());
             condition.setRemark(remark);
+            int consume = DateUtil.timeBetween(new Date(),
+                creditOrder.getCreateDatetime());
+            condition.setConsume(consume);
             creditOrderBO.refreshPayroll(condition);
         }
     }
@@ -436,6 +466,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             throw new BizException("xn0000", "记录编号不存在");
         }
         CreditOrder creditOrder = getCreditOrder(code);
+        CreditOrder data = new CreditOrder();
         if (ECreditOrderStatus.QK.getCode().equals(creditOrder.getStatus())) {
             nodeBO.editNode(code, ENodeType.QK.getCode(), updater, remark);
             Node node = new Node();
@@ -444,7 +475,16 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             node.setUpdater(updater);
             node.setRemark(remark);
             String time = nodeBO.saveNode(node);
-            creditOrderBO.refreshPayout(code, time, qkPdf, remark);
+            // 统计耗时
+            int consume = DateUtil.timeBetween(new Date(),
+                creditOrder.getCreateDatetime());
+            data.setConsume(consume);
+            data.setCode(code);
+            data.setStatus(ECreditOrderStatus.HF.getCode());
+            data.setQkPdf(qkPdf);
+            data.setRemark(remark);
+            data.setLastNode(time);
+            creditOrderBO.refreshPayout(data);
         }
     }
 
@@ -474,7 +514,9 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
                 node.setRemark(remark);
                 time = nodeBO.saveNode(node);
             }
-            creditOrderBO.refreshVisit(code, status, time, remark);
+            int consume = DateUtil.timeBetween(new Date(),
+                creditOrder.getCreateDatetime());
+            creditOrderBO.refreshVisit(code, status, time, remark, consume);
         }
     }
 
@@ -504,7 +546,9 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             node.setUpdater(updater);
             node.setRemark(remark);
             time = nodeBO.saveNode(node);
-            creditOrderBO.refreshFinancial(code, status, time, remark);
+            int consume = DateUtil.timeBetween(new Date(),
+                creditOrder.getCreateDatetime());
+            creditOrderBO.refreshFinancial(code, status, time, remark, consume);
         }
 
     }
@@ -528,7 +572,9 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             node.setUpdater(updater);
             node.setRemark(remark);
             String time = nodeBO.saveNode(node);
-            creditOrderBO.refreshMoneyback(code, time, dkPdf, remark);
+            int consume = DateUtil.timeBetween(new Date(),
+                creditOrder.getCreateDatetime());
+            creditOrderBO.refreshMoneyback(code, time, dkPdf, remark, consume);
             Car condition = new Car();
             condition.setCreditOrderCode(code);
             List<Car> car = carBO.queryCarList(condition);

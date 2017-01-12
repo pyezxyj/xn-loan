@@ -21,8 +21,7 @@ public interface ICreditOrderBO extends IPaginableBO<CreditOrder> {
     // 审核不通过
     public int refreshOrder(String code);
 
-    public int refreshSurvey(String code, String time, String mobile,
-            String investigator, String remark);
+    public int refreshSurvey(CreditOrder data);
 
     public int refreshSBack(CreditOrder data);
 
@@ -33,16 +32,15 @@ public interface ICreditOrderBO extends IPaginableBO<CreditOrder> {
     public int refreshPayroll(CreditOrder data);
 
     public int refreshVisit(String code, String status, String time,
-            String remark);
+            String remark, Integer consume);
 
     public int refreshFinancial(String code, String approveResult,
-            String updater, String remark);
+            String updater, String remark, Integer consume);
 
-    public int refreshPayout(String code, String time, String cwPdf,
-            String remark);
+    public int refreshPayout(CreditOrder data);
 
     public int refreshMoneyback(String code, String time, String dkPdf,
-            String remark);
+            String remark, Integer consume);
 
     public int refreshFBH(String code);
 

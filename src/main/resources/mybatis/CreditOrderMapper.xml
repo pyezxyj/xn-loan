@@ -313,6 +313,7 @@
 		,status = #{status}
 		,remark = #{remark}
 		,access_level=#{accessLevel}
+		,consume=#{consume}
 		WHERE code = #{code}
 	</update>
 	
@@ -330,6 +331,7 @@
 		,address = #{address}
 		,remark=#{remark}
 		,access_level=#{accessLevel}
+		,consume=#{consume}
 		WHERE code = #{code}
 	</update> 
 	
@@ -346,6 +348,7 @@
 		,bank = #{bank}
 		,branch=#{branch}
 		,bankcard_no = #{bankcardNo}
+		,consume=#{consume}
 		WHERE code = #{code}
 	</update> 
 	
@@ -356,6 +359,7 @@
 		,loan_amount=#{loanAmount}
 		,last_node=#{lastNode}
 		,remark = #{remark}
+		,consume=#{consume}
 		WHERE code = #{code}
 	</update> 
 	
@@ -365,6 +369,7 @@
 		status = #{status}
 		,fk_pdf = #{fkPdf}
 		,remark=#{remark}
+		,consume=#{consume}
 		WHERE code = #{code}
 	</update> 
 	
@@ -374,6 +379,7 @@
 		status = #{status}
 		,last_node=#{lastNode}
 		,remark = #{remark}
+		,consume=#{consume}
 		WHERE code = #{code}
 	</update> 
 	
@@ -383,6 +389,7 @@
 		status = #{status}
 		,last_node=#{lastNode}
 		,remark = #{remark}
+		,consume=#{consume}
 		WHERE code = #{code}
 	</update> 
 	
@@ -393,6 +400,7 @@
 		,last_node=#{lastNode}
 		,qk_pdf = #{qkPdf}
 		,remark=#{remark}
+		,consume=#{consume}
 		WHERE code = #{code}
 	</update> 
 	
@@ -403,12 +411,14 @@
 		,last_node=#{lastNode}
 		,dk_pdf = #{dkPdf}
 		,remark=#{remark}
+		,consume=#{consume}
 		WHERE code = #{code}
 	</update> 
 	<update id="update_FBH" parameterType="creditOrder">
 		UPDATE tloan_credit_order
 		SET
 		status = #{status}
+		,consume=#{consume}
 		WHERE code = #{code}
 	</update> 
 	
