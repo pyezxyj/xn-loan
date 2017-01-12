@@ -85,15 +85,19 @@ public class RepayAOImpl implements IRepayAO {
         repay.setStatusList(status);
         List<Repay> repayList = repayBO.queryRepayList(repay);
         if (repayList.size() != 0) {
-            try {
-                condition.setCxStarttime(DateUtil.getFirstDay(DateUtil
-                    .dateToStr(repayList.get(0).getYhDatetime(),
-                        DateUtil.FRONT_DATE_FORMAT_STRING)));
-                condition.setCxEndtime(DateUtil.getLastDay(DateUtil.dateToStr(
-                    repayList.get(0).getYhDatetime(),
-                    DateUtil.FRONT_DATE_FORMAT_STRING)));
-            } catch (Exception e) {
-                e.printStackTrace();
+            for (Repay repay2 : repayList) {
+                if (ERepayStatus.YLL.getCode().equals(repay2.getStatus())) {
+                    try {
+                        condition.setCxStarttime(DateUtil.getFirstDay(DateUtil
+                            .dateToStr(repayList.get(0).getYhDatetime(),
+                                DateUtil.FRONT_DATE_FORMAT_STRING)));
+                        condition.setCxEndtime(DateUtil.getLastDay(DateUtil
+                            .dateToStr(repayList.get(0).getYhDatetime(),
+                                DateUtil.FRONT_DATE_FORMAT_STRING)));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
         Paginable<Repay> page = repayBO.getPaginable(start, limit, condition);
