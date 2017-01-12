@@ -30,6 +30,9 @@ public class XN617015 extends AProcessor {
         condition.setUserId(req.getUserId());
         condition.setAccessLevel(req.getLevel());
         condition.setStatus(req.getStatus());
+        condition.setProvinces(req.getProvince());
+        condition.setCitys(req.getCity());
+        condition.setAreas(req.getArea());
         condition.setStatusList(req.getStatusList());
         condition.setRealName(req.getRealName());
         condition.setStatusList(req.getStatusList());

@@ -64,6 +64,15 @@
 			<if test="area != null and area != '' ">
 				AND t.area = #{area}
 			</if>
+			<if test="provinces != null and provinces != '' ">
+				AND t.province = #{provinces}
+			</if>
+			<if test="citys != null and citys != '' ">
+				AND t.city = #{citys}
+			</if>
+			<if test="areas != null and areas != '' ">
+				AND t.area = #{areas}
+			</if>
 			<if test="status != null and status != '' ">
 				AND t.status = #{status}
 			</if>

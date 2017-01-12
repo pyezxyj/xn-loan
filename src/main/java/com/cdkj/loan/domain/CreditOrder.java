@@ -131,6 +131,12 @@ public class CreditOrder extends ABaseDO {
     // --------外加字段
     private String userId;
 
+    private String provinces;
+
+    private String citys;
+
+    private String areas;
+
     public String getCode() {
         return code;
     }
@@ -585,6 +591,30 @@ public class CreditOrder extends ABaseDO {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getProvinces() {
+        return provinces;
+    }
+
+    public void setProvinces(String provinces) {
+        this.provinces = provinces;
+    }
+
+    public String getCitys() {
+        return citys;
+    }
+
+    public void setCitys(String citys) {
+        this.citys = citys;
+    }
+
+    public String getAreas() {
+        return areas;
+    }
+
+    public void setAreas(String areas) {
+        this.areas = areas;
     }
 
 }

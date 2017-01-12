@@ -102,8 +102,12 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
     public int refreshOrder(String code) {
         int count = 0;
         CreditOrder data = new CreditOrder();
+        CreditOrder condition = getCreditOrder(code);
         if (StringUtils.isNotBlank(code)) {
             data.setCode(code);
+            Integer consume = DateUtil.timeBetween(
+                condition.getCreateDatetime(), new Date());
+            data.setConsume(consume);
             data.setStatus(ECreditOrderStatus.NO.getCode());
             count = creditOrderDAO.updateStatus(data);
         }
@@ -229,8 +233,8 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
         if (StringUtils.isNotBlank(code)) {
             data.setCode(code);
             data.setStatus(ECreditOrderStatus.TSK.getCode());
-            int consume = DateUtil.timeBetween(new Date(),
-                creditOrder.getCreateDatetime());
+            int consume = DateUtil.timeBetween(creditOrder.getCreateDatetime(),
+                new Date());
             data.setConsume(consume);
             count = creditOrderDAO.updateFBH(data);
         }

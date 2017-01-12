@@ -38,6 +38,7 @@ public class CreditAuditAOImpl implements ICreditAuditAO {
     @Override
     public void editCreditAudit(CreditAudit data) {
         CreditAudit creditAudit = new CreditAudit();
+        String status = null;
         creditAudit.setCreditOrderCode(data.getCreditOrderCode());
         List<CreditAudit> audit = queryCreditAuditList(creditAudit);
         if (audit == null) {
@@ -46,6 +47,7 @@ public class CreditAuditAOImpl implements ICreditAuditAO {
         String refUser = data.getCreditOrderCode();
         if (EBoolean.YES.getCode().equals(data.getCourtResult())
                 && EBoolean.YES.getCode().equals(data.getCreditResult())) {
+            status = ECreditAuditStatus.APPROVE_YES.getCode();
             data.setStatus(ECreditAuditStatus.APPROVE_YES.getCode());
             creditOrderBO.refreshCreditOrder(data.getCreditOrderCode());
             // 节点一结束
@@ -60,6 +62,7 @@ public class CreditAuditAOImpl implements ICreditAuditAO {
             node3.setRemark(data.getRemark());
             nodeBO.saveNode(node3);
         } else {
+            status = ECreditAuditStatus.APPROVE_NO.getCode();
             data.setStatus(ECreditAuditStatus.APPROVE_NO.getCode());
             creditOrderBO.refreshOrder(data.getCreditOrderCode());
         }
@@ -74,6 +77,7 @@ public class CreditAuditAOImpl implements ICreditAuditAO {
             creditaudit.setCreditResult(data.getCreditResult());
             creditaudit.setCreditDescript(data.getCreditDescript());
             creditaudit.setUpdater(data.getUpdater());
+            creditaudit.setStatus(status);
             creditaudit.setRemark(data.getRemark());
             creditAuditBO.refreshCreditAudit(creditaudit);
         }

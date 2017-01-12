@@ -40,6 +40,7 @@ public class XN617070 extends AProcessor {
             repay.setShAmount(StringValidater.toLong(Xreq.getYhAmount()));
             repay.setShDatetime(DateUtil.strToDate(Xreq.getYhDatetime(),
                 DateUtil.FRONT_DATE_FORMAT_STRING));
+            repay.setRemark(Xreq.getRemark());
             repayList.add(repay);
         }
         repayAO.editRepay(repayList);

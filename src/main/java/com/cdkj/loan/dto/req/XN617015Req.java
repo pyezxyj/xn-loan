@@ -29,6 +29,12 @@ public class XN617015Req extends APageReq {
     // 查询条件
     private List<String> statusList;
 
+    private String province;
+
+    private String city;
+
+    private String area;
+
     public String getStatus() {
         return status;
     }
@@ -67,5 +73,29 @@ public class XN617015Req extends APageReq {
 
     public void setRealName(String realName) {
         this.realName = realName;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

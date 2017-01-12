@@ -64,6 +64,14 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
         }
         for (CreditAudit creditAudit : creditAuditList) {
             if (EBoolean.NO.getCode().equals(creditAudit.getRelation())) {
+
+                data.setStatus(ECreditOrderStatus.TO_APPROVE.getCode());
+                data.setRealName(creditAudit.getRealName());
+                data.setIdKind(creditAudit.getIdKind());
+                data.setIdNo(creditAudit.getIdNo());
+                data.setConsume(0);
+                data.setAccessLevel(EAccessLevel.YWY.getCode());
+                code = creditOrderBO.saveCreditOrder(data);
                 // 添加节点一
                 Node node = new Node();
                 node.setType(ENodeType.ZX.getCode());
@@ -71,15 +79,10 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
                 node.setUpdater(data.getUpdater());
                 node.setRemark(data.getRemark());
                 String time = nodeBO.saveNode(node);
-
-                data.setStatus(ECreditOrderStatus.TO_APPROVE.getCode());
-                data.setRealName(creditAudit.getRealName());
-                data.setIdKind(creditAudit.getIdKind());
-                data.setIdNo(creditAudit.getIdNo());
-                data.setLastNode(time);
-                data.setConsume(0);
-                data.setAccessLevel(EAccessLevel.YWY.getCode());
-                code = creditOrderBO.saveCreditOrder(data);
+                CreditOrder creditOrder = new CreditOrder();
+                creditOrder.setCode(code);
+                creditOrder.setLastNode(time);
+                creditOrderBO.refreshLastNode(creditOrder);
             }
             creditAudit.setLoanType(data.getLoanType());
             creditAudit.setLoanAmount(data.getLoanAmount());
@@ -217,11 +220,10 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             node.setType(ENodeType.HL.getCode());
             node.setUpdater(updater);
             node.setRemark(remark);
-            nodeBO.saveNode(node);
             String time = nodeBO.saveNode(node);
             CreditOrder creditOrder = getCreditOrder(code);
-            int consume = DateUtil.timeBetween(new Date(),
-                creditOrder.getCreateDatetime());
+            int consume = DateUtil.timeBetween(creditOrder.getCreateDatetime(),
+                new Date());
             CreditOrder order = new CreditOrder();
             order.setCode(code);
             order.setMobile(mobile);
@@ -256,8 +258,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             String time = nodeBO.saveNode(node);
             data.setLastNode(time);
             CreditOrder creditOrder = getCreditOrder(data.getCode());
-            int consume = DateUtil.timeBetween(new Date(),
-                creditOrder.getCreateDatetime());
+            int consume = DateUtil.timeBetween(creditOrder.getCreateDatetime(),
+                new Date());
             data.setConsume(consume);
             data.setAccessLevel(EAccessLevel.CJGL.getCode());
             creditOrderBO.refreshSBack(data);
@@ -305,8 +307,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             node.setRemark(data.getRemark());
             String time = nodeBO.saveNode(node);
             data.setLastNode(time);
-            int consume = DateUtil.timeBetween(new Date(),
-                creditOrder.getCreateDatetime());
+            int consume = DateUtil.timeBetween(creditOrder.getCreateDatetime(),
+                new Date());
             data.setConsume(consume);
             creditOrderBO.refreshZLBack(data);
 
@@ -362,8 +364,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             data.setCode(code);
             data.setLoanAmount(creditOrder.getLoanAmount());
             data.setRemark(remark);
-            int consume = DateUtil.timeBetween(new Date(),
-                creditOrder.getCreateDatetime());
+            int consume = DateUtil.timeBetween(creditOrder.getCreateDatetime(),
+                new Date());
             data.setConsume(consume);
             creditOrderBO.refreshApprove(data);
         }
@@ -415,8 +417,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
                 node.setRemark(data.getRemark());
                 String time = nodeBO.saveNode(node);
                 data.setLastNode(time);
-                int consume = DateUtil.timeBetween(new Date(),
-                    creditOrder.getCreateDatetime());
+                int consume = DateUtil.timeBetween(
+                    creditOrder.getCreateDatetime(), new Date());
                 data.setConsume(consume);
             }
             creditOrderBO.refreshApprove(data);
@@ -448,8 +450,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             condition.setFkPdf(data);
             condition.setStatus(ECreditOrderStatus.ED.getCode());
             condition.setRemark(remark);
-            int consume = DateUtil.timeBetween(new Date(),
-                creditOrder.getCreateDatetime());
+            int consume = DateUtil.timeBetween(creditOrder.getCreateDatetime(),
+                new Date());
             condition.setConsume(consume);
             creditOrderBO.refreshPayroll(condition);
         }
@@ -476,8 +478,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             node.setRemark(remark);
             String time = nodeBO.saveNode(node);
             // 统计耗时
-            int consume = DateUtil.timeBetween(new Date(),
-                creditOrder.getCreateDatetime());
+            int consume = DateUtil.timeBetween(creditOrder.getCreateDatetime(),
+                new Date());
             data.setConsume(consume);
             data.setCode(code);
             data.setStatus(ECreditOrderStatus.HF.getCode());
@@ -514,8 +516,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
                 node.setRemark(remark);
                 time = nodeBO.saveNode(node);
             }
-            int consume = DateUtil.timeBetween(new Date(),
-                creditOrder.getCreateDatetime());
+            int consume = DateUtil.timeBetween(creditOrder.getCreateDatetime(),
+                new Date());
             creditOrderBO.refreshVisit(code, status, time, remark, consume);
         }
     }
@@ -546,8 +548,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             node.setUpdater(updater);
             node.setRemark(remark);
             time = nodeBO.saveNode(node);
-            int consume = DateUtil.timeBetween(new Date(),
-                creditOrder.getCreateDatetime());
+            int consume = DateUtil.timeBetween(creditOrder.getCreateDatetime(),
+                new Date());
             creditOrderBO.refreshFinancial(code, status, time, remark, consume);
         }
 
@@ -572,8 +574,8 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
             node.setUpdater(updater);
             node.setRemark(remark);
             String time = nodeBO.saveNode(node);
-            int consume = DateUtil.timeBetween(new Date(),
-                creditOrder.getCreateDatetime());
+            int consume = DateUtil.timeBetween(creditOrder.getCreateDatetime(),
+                new Date());
             creditOrderBO.refreshMoneyback(code, time, dkPdf, remark, consume);
             Car condition = new Car();
             condition.setCreditOrderCode(code);
