@@ -1,23 +1,23 @@
 /**
- * @Title XNlh5013Req.java 
+ * @Title XNlh5014Req.java 
  * @Package com.xnjr.moom.dto.req 
  * @Description 
  * @author haiqingzheng  
- * @date 2016年4月17日 下午7:41:38 
+ * @date 2016年4月17日 下午8:07:53 
  * @version V1.0   
  */
 package com.cdkj.loan.dto.req;
 
 /** 
  * @author: haiqingzheng 
- * @since: 2016年4月17日 下午7:41:38 
+ * @since: 2016年4月17日 下午8:07:53 
  * @history:
  */
-public class XN808905Req extends APageReq {
+public class XN617136Req extends APageReq {
     /** 
      * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
      */
-    private static final long serialVersionUID = 5780013307270124748L;
+    private static final long serialVersionUID = 2796572107342038372L;
 
     // 类型（第一层/第二层）（选填）
     private String type;
