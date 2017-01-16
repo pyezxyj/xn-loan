@@ -13,7 +13,7 @@ package com.cdkj.loan.dto.req;
  * @since: 2016年4月17日 下午5:00:54 
  * @history:
  */
-public class XN808900Req {
+public class XN617130Req {
 
     // 类型（第一层/第二层）（必填）
     private String type;
