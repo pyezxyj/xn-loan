@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.loan.dao.IBankCardDAO">
+	<resultMap id="bankCard_DB_Result" type="bankCard">
+		<result column="code" property="code" />
+		<result column="car_store_code" property="carStoreCode" />
+		<result column="bank" property="bank" />
+		<result column="branch" property="branch" />
+		<result column=" account_name" property=" accountName" />
+		<result column=" account" property=" account" />
+		<result column=" type" property=" type" />
+		<result column=" status" property=" status" />
+		<result column=" remark" property=" remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+			<if test="carStoreCode != null and carStoreCode != '' ">
+				AND t.car_store_code = #{carStoreCode}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_bankCard" parameterType="bankCard" resultMap="bankCard_DB_Result">
+		SELECT
+		t.code
+		,t.car_store_code
+		,t.bank
+		,t.branch
+		,t.account_name
+		,t.account
+		,t.type
+		,t.status
+		,t.remark
+		FROM
+		tloan_bank t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_bankCard_count" parameterType="bankCard"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tloan_bank t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_bankCard" parameterType="bankCard">
+		INSERT INTO
+		tloan_bank(
+		code
+		,car_store_code
+		,bank
+		,branch
+		,account_name
+		,account
+		,type
+		,status
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{carStoreCode}
+		,#{bank}
+		,#{branch}
+		,#{accountName}
+		,#{account}
+		,#{type}
+		,#{status}
+		,#{remark}
+		)
+	</insert>
+
+	<update id="update_bankCard" parameterType="bankCard">
+		UPDATE tloan_bank
+		SET
+		car_store_code = #{carStoreCode}
+		,bank = #{bank}
+		,branch = #{branch}
+		,account_name = #{accountName}
+		,account = #{account}
+		,type = #{type}
+		,status = #{status}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>

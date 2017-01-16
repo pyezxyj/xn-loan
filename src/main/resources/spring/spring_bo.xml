@@ -51,4 +51,20 @@
 	<bean id="insureBO" class="com.cdkj.loan.bo.impl.InsureBOImpl">
 		<property name="paginableDAO" ref="insureDAOImpl"/>
 	</bean>
+	
+	<bean id="areaBO" class="com.cdkj.loan.bo.impl.AreaBOImpl">
+		<property name="paginableDAO" ref="areaDAOImpl"/>
+	</bean>
+	
+	<bean id="bankCardBO" class="com.cdkj.loan.bo.impl.BankCardBOImpl">
+		<property name="paginableDAO" ref="bankCardDAOImpl"/>
+	</bean>
+	
+	<bean id="carStoreDetailBO" class="com.cdkj.loan.bo.impl.CarStoreDetailBOImpl">
+		<property name="paginableDAO" ref="carStoreDetailDAOImpl"/>
+	</bean>
+	
+	<bean id="insureCompanyBO" class="com.cdkj.loan.bo.impl.InsureCompanyBOImpl">
+		<property name="paginableDAO" ref="insureCompanyDAOImpl"/>
+	</bean>
 </beans>

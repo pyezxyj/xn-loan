@@ -39,6 +39,9 @@ public class SYSDict extends ABaseDO {
     // 备注
     private String remark;
 
+    // 系统编号
+    private String systemCode;
+
     public Long getId() {
         return id;
     }
@@ -85,5 +88,13 @@ public class SYSDict extends ABaseDO {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getSystemCode() {
+        return systemCode;
+    }
+
+    public void setSystemCode(String systemCode) {
+        this.systemCode = systemCode;
     }
 }

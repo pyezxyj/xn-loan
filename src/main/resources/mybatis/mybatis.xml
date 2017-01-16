@@ -12,6 +12,10 @@
 	    <typeAlias alias="node" type="com.cdkj.loan.domain.Node" />
 	    <typeAlias alias="repay" type="com.cdkj.loan.domain.Repay" />
 	    <typeAlias alias="insure" type="com.cdkj.loan.domain.Insure" />
+	    <typeAlias alias="area" type="com.cdkj.loan.domain.Area"/>
+	    <typeAlias alias="carStoreDetail" type="com.cdkj.loan.domain.CarStoreDetail"/>
+	    <typeAlias alias="bankCard" type="com.cdkj.loan.domain.BankCard"/>
+	    <typeAlias alias="insureCompany" type="com.cdkj.loan.domain.InsureCompany"/>
 	</typeAliases>	
 </configuration>
 

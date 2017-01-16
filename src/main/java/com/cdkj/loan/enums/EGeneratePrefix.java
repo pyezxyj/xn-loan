@@ -12,7 +12,8 @@ public enum EGeneratePrefix {
 
     ORDER("CO", "资信订单"), CREDITAUDIT("CA", "资信审核关系人"), CAR("CA", "汽车登记"), REPAY(
             "RP", "还款信息"), NODE("ND", "节点"), INSURETYPE("IN", "保险类型"), EXPRESS(
-            "EX", "快递单"), INSURE("IS", "保单"), ;
+            "EX", "快递单"), INSURE("IS", "保单"), CARSTORE("CS", "车行"), BANKCARD(
+            "BC", "银行卡"), INSURECOMPANY("CM", "保险公司"), AREA("AR", "市级地区");
 
     public static Map<String, EGeneratePrefix> getOrderTypeMap() {
         Map<String, EGeneratePrefix> map = new HashMap<String, EGeneratePrefix>();

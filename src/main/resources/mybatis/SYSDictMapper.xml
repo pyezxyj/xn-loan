@@ -9,6 +9,7 @@
 		<result column="dkey" property="dkey" />
 		<result column="dvalue" property="dvalue" />
 		<result column="remark" property="remark" />
+		<result column="system_code" property="systemCode" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -34,6 +35,7 @@
 		,dkey
 		,dvalue
 		,remark
+		,system_code
 		FROM
 		tsys_dict t 
 		<include refid="where_condition" />
@@ -56,6 +58,7 @@
 		,dkey
 		,dvalue
 		,remark
+		,system_code
 		)
 		VALUES(
 		#{type}
@@ -63,6 +66,7 @@
 		,#{dkey}
 		,#{dvalue}
 		,#{remark}
+		,#{systemCode}
 		)
 	</insert>
 

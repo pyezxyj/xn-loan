@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.loan.dao.IAreaDAO">
+	<resultMap id="area_DB_Result" type="area">
+		<result column="code" property="code" />
+		<result column="county" property="county" />
+		<result column="type" property="type" />
+		<result column="updater" property="updater" />
+		<result column="updater_datetime" property="updaterDatetime" />
+		<result column="remark" property="remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_area" parameterType="area" resultMap="area_DB_Result">
+		SELECT
+		t.code
+		,t.county
+		,t.type
+		,t.updater
+		,t.updater_datetime
+		,t.remark
+		FROM
+		tloan_area t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_area_count" parameterType="area"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tloan_area t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_area" parameterType="area">
+		INSERT INTO
+		tloan_area(
+		code
+		,county
+		,type
+		,updater
+		,updater_datetime
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{county}
+		,#{type}
+		,#{updater}
+		,#{updaterDatetime}
+		,#{remark}
+		)
+	</insert>
+
+	<update id="update_area" parameterType="area">
+		UPDATE tloan_area
+		SET
+		county = #{county}
+		,type = #{type}
+		,updater = #{updater}
+		,updater_datetime = #{updaterDatetime}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>

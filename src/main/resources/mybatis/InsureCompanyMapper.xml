@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdkj.loan.dao.IInsureCompanyDAO">
+	<resultMap id="insureCompany_DB_Result" type="insureCompany">
+		<result column="code" property="code" />
+		<result column="salutation" property="salutation" />
+		<result column="prefix" property="prefix" />
+		<result column="province" property="province" />
+		<result column="city" property="city" />
+		<result column="area" property="area" />
+		<result column="address" property="address" />
+		<result column="name" property="name" />
+		<result column="contacts" property="contacts" />
+		<result column="district" property="district" />
+		<result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
+		<result column="status" property="status" />
+		<result column="remark" property="remark" />
+	</resultMap>
+	<sql id="where_condition">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">
+				AND t.code = #{code}
+			</if>
+		</trim>
+	</sql>
+	<select id="select_insureCompany" parameterType="insureCompany" resultMap="insureCompany_DB_Result">
+		SELECT
+		t.code
+		,t.salutation
+		,t.prefix
+		,t.province
+		,t.city
+		,t.area
+		,t.address
+		,t.name
+		,t.contacts
+		,t.district
+		,t.updater
+		,t.update_datetime
+		,t.status
+		,t.remark
+		FROM
+		tloan_insure_company t
+		<include refid="where_condition" />
+		<trim prefix="ORDER BY ">
+			<if test="order != null and order != '' ">
+				t.${order}
+			</if>
+		</trim>
+	</select>
+
+	<select id="select_insureCompany_count" parameterType="insureCompany"
+		resultType="java.lang.Long">
+		SELECT count(1) FROM tloan_insure_company t
+		<include refid="where_condition" />
+	</select>
+
+	<insert id="insert_insureCompany" parameterType="insureCompany">
+		INSERT INTO
+		tloan_insure_company(
+		code
+		,salutation
+		,prefix
+		,province
+		,city
+		,area
+		,address
+		,name
+		,contacts
+		,district
+		,updater
+		,update_datetime
+		,status
+		,remark
+		)
+		VALUES(
+		#{code}
+		,#{salutation}
+		,#{prefix}
+		,#{province}
+		,#{city}
+		,#{area}
+		,#{address}
+		,#{name}
+		,#{contacts}
+		,#{district}
+		,#{updater}
+		,#{updateDatetime}
+		,#{status}
+		,#{remark}
+		)
+	</insert>
+
+	<update id="update_insureCompany" parameterType="insureCompany">
+		UPDATE tloan_insure_company
+		SET
+		salutation = #{salutation}
+		,prefix = #{prefix}
+		,province = #{province}
+		,city = #{city}
+		,area = #{area}
+		,address = #{address}
+		,name = #{name}
+		,contacts = #{contacts}
+		,district = #{district}
+		,updater = #{updater}
+		,update_datetime = #{updateDatetime}
+		,status = #{status}
+		,remark = #{remark}
+		WHERE code = #{code}
+	</update>
+
+
+</mapper>
