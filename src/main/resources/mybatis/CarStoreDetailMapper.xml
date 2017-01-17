@@ -24,6 +24,9 @@
 			<if test="code != null and code != '' ">
 				AND t.code = #{code}
 			</if>
+			<if test="district != null and district != '' ">
+				AND t.district like "%"#{district}"%"
+			</if>
 		</trim>
 	</sql>
 	<select id="select_carStoreDetail" parameterType="carStoreDetail" resultMap="carStoreDetail_DB_Result">
