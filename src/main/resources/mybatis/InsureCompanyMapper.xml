@@ -112,5 +112,10 @@
 		WHERE code = #{code}
 	</update>
 
+	<delete id="delete_insureCompany" parameterType="insureCompany">
+		DELETE FROM tloan_insure_company
+		WHERE
+		code = #{code}
+	</delete>
 
 </mapper>

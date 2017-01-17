@@ -34,11 +34,9 @@ public class RepayBOImpl extends PaginableBOImpl<Repay> implements IRepayBO {
     @Override
     public String saveRepay(Repay data) {
         String code = null;
-        Long amount = 0L;
         if (data != null) {
             code = OrderNoGenerater.generateME(EGeneratePrefix.REPAY.getCode());
             data.setCode(code);
-            data.setOverAmount(amount);
             data.setStatus(ERepayStatus.BEEN.getCode());
             RepayDAO.insert(data);
         }

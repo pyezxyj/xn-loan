@@ -22,7 +22,7 @@ public class XN617121 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        return areaAO.getArea(req.getCode());
+        return areaAO.dropArea(req.getCode());
     }
 
     @Override

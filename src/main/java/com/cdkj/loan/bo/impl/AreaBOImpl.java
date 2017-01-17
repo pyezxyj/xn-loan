@@ -59,6 +59,7 @@ public class AreaBOImpl extends PaginableBOImpl<Area> implements IAreaBO {
     public int refreshArea(Area data) {
         int count = 0;
         if (StringUtils.isNotBlank(data.getCode())) {
+            data.setUpdaterDatetime(new Date());
             count = areaDAO.update(data);
         }
         return count;

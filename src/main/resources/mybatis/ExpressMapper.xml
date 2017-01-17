@@ -129,4 +129,10 @@
 		WHERE code = #{code}
 	</update>
 
+   <delete id="delete_Express" parameterType="Express">
+		DELETE FROM tloan_express
+		WHERE
+		code = #{code}
+	</delete>
+
 </mapper>

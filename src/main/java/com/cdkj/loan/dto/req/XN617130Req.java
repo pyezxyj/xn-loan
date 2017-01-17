@@ -30,6 +30,8 @@ public class XN617130Req {
     // 备注（选填）
     private String remark;
 
+    private String updater;
+
     public String getType() {
         return type;
     }
@@ -68,5 +70,13 @@ public class XN617130Req {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
     }
 }

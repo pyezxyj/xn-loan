@@ -36,7 +36,7 @@ public class XN617132 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         sysDictAO.editSYSDict(StringValidater.toLong(req.getId()),
-            req.getDvalue(), req.getRemark());
+            req.getDvalue(), req.getRemark(), req.getUpdater());
         return new BooleanRes(true);
     }
 
@@ -46,7 +46,8 @@ public class XN617132 extends AProcessor {
     @Override
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN617132Req.class);
-        StringValidater.validateBlank(req.getId(), req.getDvalue());
+        StringValidater.validateBlank(req.getId(), req.getDvalue(),
+            req.getUpdater());
     }
 
 }

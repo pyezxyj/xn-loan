@@ -48,8 +48,8 @@ public class XN617102 extends AProcessor {
         req = JsonUtil.json2Bean(inputparams, XN617102Req.class);
         StringValidater.validateBlank(req.getCode(), req.getBenelux(),
             req.getAbbreviation(), req.getCorporation(), req.getProvince(),
-            req.getCity(), req.getArea(), req.getAddress(), req.getName(),
-            req.getContacts(), req.getDistrict(), req.getUpdater());
+            req.getCity(), req.getAddress(), req.getName(), req.getContacts(),
+            req.getDistrict(), req.getUpdater());
     }
 
 }

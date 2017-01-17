@@ -8,6 +8,8 @@
 		<result column="parent_key" property="parentKey" />
 		<result column="dkey" property="dkey" />
 		<result column="dvalue" property="dvalue" />
+		<result column="updater" property="updater" />
+		<result column="update_datetime" property="updateDatetime" />
 		<result column="remark" property="remark" />
 		<result column="system_code" property="systemCode" />
 	</resultMap>
@@ -36,6 +38,8 @@
 		,dvalue
 		,remark
 		,system_code
+		,updater
+		,update_datetime
 		FROM
 		tsys_dict t 
 		<include refid="where_condition" />
@@ -59,6 +63,8 @@
 		,dvalue
 		,remark
 		,system_code
+		,updater
+		,update_datetime
 		)
 		VALUES(
 		#{type}
@@ -67,6 +73,8 @@
 		,#{dvalue}
 		,#{remark}
 		,#{systemCode}
+		,#{updater}
+		,#{updateDatetime}
 		)
 	</insert>
 

@@ -322,14 +322,9 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
                 repay.setJbBank(creditOrder.getJbBank());
                 repay.setIdNo(creditOrder.getIdNo());
                 repay.setYhAmount(data.getTermAmount());
+                repay.setOverAmount(data.getTermAmount());
                 repayBO.saveRepay(repay);
             }
-            // while (true) {
-            // 干事情
-
-            // nowTearm+1
-            // nowTerm > loanTerm跳出这个循环；
-            // }
         } else {
             throw new BizException("xn0000", "訂單張氏不能回錄");
         }
@@ -404,6 +399,7 @@ public class CreditOrderAOImpl implements ICreditOrderAO {
                     List<Repay> repayList = repayBO.queryGroupList(condition);
                     for (Repay repay : repayList) {
                         repay.setYhAmount(data.getTermAmount());
+                        repay.setOverAmount(data.getTermAmount());
                         repayBO.refreshTerm(repay);
                     }
                 }

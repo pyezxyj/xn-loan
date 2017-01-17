@@ -8,6 +8,8 @@
  */
 package com.cdkj.loan.domain;
 
+import java.util.Date;
+
 import com.cdkj.loan.dao.base.ABaseDO;
 
 /** 
@@ -38,6 +40,10 @@ public class SYSDict extends ABaseDO {
 
     // 备注
     private String remark;
+
+    private String updater;
+
+    private Date updateDatetime;
 
     // 系统编号
     private String systemCode;
@@ -96,5 +102,21 @@ public class SYSDict extends ABaseDO {
 
     public void setSystemCode(String systemCode) {
         this.systemCode = systemCode;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
+
+    public Date getUpdateDatetime() {
+        return updateDatetime;
+    }
+
+    public void setUpdateDatetime(Date updateDatetime) {
+        this.updateDatetime = updateDatetime;
     }
 }

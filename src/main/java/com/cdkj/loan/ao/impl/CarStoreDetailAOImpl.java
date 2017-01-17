@@ -28,10 +28,14 @@ public class CarStoreDetailAOImpl implements ICarStoreDetailAO {
             List<BankCard> bankCardList) {
         String code = null;
         if (data != null) {
-            code = carStoreDetailBO.saveCarStoreDetail(data);
-            for (BankCard bankCard : bankCardList) {
-                bankCard.setCarStoreCode(code);
-                bankCardBO.saveBankCard(bankCard);
+            if (bankCardList == null) {
+                throw new BizException("xn0000", "银行卡不能为空");
+            } else {
+                code = carStoreDetailBO.saveCarStoreDetail(data);
+                for (BankCard bankCard : bankCardList) {
+                    bankCard.setCarStoreCode(code);
+                    bankCardBO.saveBankCard(bankCard);
+                }
             }
         }
         return code;
@@ -94,9 +98,7 @@ public class CarStoreDetailAOImpl implements ICarStoreDetailAO {
             condition.setCarStoreCode(code);
             List<BankCard> bankCardList = bankCardBO
                 .queryBankCardList(condition);
-            for (BankCard bankCard : bankCardList) {
-                data.setBankCard(bankCard);
-            }
+            data.setBankList(bankCardList);
         }
         return data;
     }

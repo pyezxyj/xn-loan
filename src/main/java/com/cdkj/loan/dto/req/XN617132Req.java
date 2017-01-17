@@ -23,6 +23,8 @@ public class XN617132Req {
     // 备注（选填）
     private String remark;
 
+    private String updater;
+
     public String getId() {
         return id;
     }
@@ -45,5 +47,13 @@ public class XN617132Req {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
     }
 }

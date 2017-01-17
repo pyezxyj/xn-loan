@@ -7,11 +7,11 @@
 		<result column="car_store_code" property="carStoreCode" />
 		<result column="bank" property="bank" />
 		<result column="branch" property="branch" />
-		<result column=" account_name" property=" accountName" />
-		<result column=" account" property=" account" />
-		<result column=" type" property=" type" />
-		<result column=" status" property=" status" />
-		<result column=" remark" property=" remark" />
+		<result column="account_name" property="accountName" />
+		<result column="account" property="account" />
+		<result column="type" property="type" />
+		<result column="status" property="status" />
+		<result column="remark" property="remark" />
 	</resultMap>
 	<sql id="where_condition">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -35,7 +35,7 @@
 		,t.status
 		,t.remark
 		FROM
-		tloan_bank t
+		tloan_bank_card t
 		<include refid="where_condition" />
 		<trim prefix="ORDER BY ">
 			<if test="order != null and order != '' ">
@@ -46,13 +46,13 @@
 
 	<select id="select_bankCard_count" parameterType="bankCard"
 		resultType="java.lang.Long">
-		SELECT count(1) FROM tloan_bank t
+		SELECT count(1) FROM tloan_bank_card t
 		<include refid="where_condition" />
 	</select>
 
 	<insert id="insert_bankCard" parameterType="bankCard">
 		INSERT INTO
-		tloan_bank(
+		tloan_bank_card(
 		code
 		,car_store_code
 		,bank
@@ -77,7 +77,7 @@
 	</insert>
 
 	<update id="update_bankCard" parameterType="bankCard">
-		UPDATE tloan_bank
+		UPDATE tloan_bank_card
 		SET
 		car_store_code = #{carStoreCode}
 		,bank = #{bank}
@@ -90,5 +90,10 @@
 		WHERE code = #{code}
 	</update>
 
+	<delete id="delete_bankCard" parameterType="bankCard">
+		DELETE FROM tloan_bank_card
+		WHERE
+		code = #{code}
+	</delete>
 
 </mapper>

@@ -72,5 +72,10 @@
 		WHERE code = #{code}
 	</update>
 
+	<delete id="delete_area" parameterType="area">
+		DELETE FROM tloan_area
+		WHERE
+		code = #{code}
+	</delete>
 
 </mapper>

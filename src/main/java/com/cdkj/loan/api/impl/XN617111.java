@@ -5,6 +5,7 @@ import com.cdkj.loan.api.AProcessor;
 import com.cdkj.loan.common.JsonUtil;
 import com.cdkj.loan.core.StringValidater;
 import com.cdkj.loan.dto.req.XN617111Req;
+import com.cdkj.loan.dto.res.BooleanRes;
 import com.cdkj.loan.exception.BizException;
 import com.cdkj.loan.exception.ParaException;
 import com.cdkj.loan.spring.SpringContextHolder;
@@ -23,7 +24,8 @@ public class XN617111 extends AProcessor {
 
     @Override
     public Object doBusiness() throws BizException {
-        return insureCompany.dropInsureCompany(req.getCode());
+        insureCompany.dropInsureCompany(req.getCode());
+        return new BooleanRes(true);
     }
 
     @Override

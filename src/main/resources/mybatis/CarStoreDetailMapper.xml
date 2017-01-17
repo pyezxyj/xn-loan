@@ -117,5 +117,9 @@
 		WHERE code = #{code}
 	</update>
 
-
+	<delete id="delete_carStoreDetail" parameterType="carStoreDetail">
+		DELETE FROM tloan_car_store_detail
+		WHERE
+		code = #{code}
+	</delete>
 </mapper>

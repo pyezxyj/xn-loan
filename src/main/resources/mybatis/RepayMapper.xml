@@ -188,12 +188,13 @@
 		UPDATE tloan_repay
 		SET
 		yh_amount=#{yhAmount}
+		,over_amount=#{overAmount}
 		WHERE code = #{code}
 	</update>
 	
 	<select id="select_repay" parameterType="Repay" resultMap="Repay_DB_Result">
-	SELECT SUM(yh_amount+over_amount) AS total_amount ,
-	(SELECT COUNT(*) FROM tloan_repay tr WHERE tr.credit_order_code = t.credit_order_code AND tr.over_amount = 0) AS total_term
+	select sum(t.over_amount) AS total_amount,
+	(SELECT COUNT(*) FROM tloan_repay tr WHERE tr.credit_order_code = t.credit_order_code AND tr.status = 6) AS total_term
 		,t.code
 		,t.credit_order_code
 		,t.jb_bank
@@ -208,6 +209,22 @@
 		,t.sms_count
 		,t.status
 		,t.remark FROM tloan_repay t WHERE STATUS IN(3,4,5,6)
+	<!-- SELECT SUM(yh_amount+over_amount) AS total_amount ,
+	(SELECT COUNT(*) FROM tloan_repay tr WHERE tr.credit_order_code = t.credit_order_code AND tr.over_amount = 0) AS total_term
+		,t.code
+		,t.credit_order_code
+		,t.jb_bank
+		,t.real_name
+		,t.id_no
+		,t.yh_amount
+		,t.yh_datetime
+		,t.sh_amount
+		,t.sh_datetime
+		,t.over_amount
+		,t.over_days
+		,t.sms_count
+		,t.status
+		,t.remark FROM tloan_repay t WHERE STATUS IN(3,4,5,6) -->
 		<if test="realNameForLikeQuery != null and realNameForLikeQuery != '' ">
 				AND t.real_name like "%"#{realNameForLikeQuery}"%"
 		</if>

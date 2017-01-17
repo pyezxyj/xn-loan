@@ -1,6 +1,7 @@
 package com.cdkj.loan.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import com.cdkj.loan.dao.base.ABaseDO;
 
@@ -60,7 +61,7 @@ public class CarStoreDetail extends ABaseDO {
     private String remark;
 
     // ------------------------
-    private BankCard bankCard;
+    private List<BankCard> bankList;
 
     public void setCode(String code) {
         this.code = code;
@@ -174,20 +175,20 @@ public class CarStoreDetail extends ABaseDO {
         return remark;
     }
 
-    public BankCard getBankCard() {
-        return bankCard;
-    }
-
-    public void setBankCard(BankCard bankCard) {
-        this.bankCard = bankCard;
-    }
-
     public Date getUpdateDatetime() {
         return updateDatetime;
     }
 
     public void setUpdateDatetime(Date updateDatetime) {
         this.updateDatetime = updateDatetime;
+    }
+
+    public List<BankCard> getBankList() {
+        return bankList;
+    }
+
+    public void setBankList(List<BankCard> bankList) {
+        this.bankList = bankList;
     }
 
 }

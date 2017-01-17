@@ -36,7 +36,7 @@ public class SYSDictAOImpl implements ISYSDictAO {
      */
     @Override
     public Long addSYSDict(String type, String parentKey, String key,
-            String value, String remark) {
+            String value, String remark, String updater) {
         if (EDictType.SECOND.getCode().equals(type)) {
             if (StringUtils.isBlank(parentKey)) {
                 throw new BizException("xn000000", "第二层字典数据，parentKey不能为空");
@@ -75,6 +75,7 @@ public class SYSDictAOImpl implements ISYSDictAO {
         sysDict.setDkey(key);
         sysDict.setDvalue(value);
         sysDict.setRemark(remark);
+        sysDict.setUpdater(updater);
         return sysDictBO.saveSYSDict(sysDict);
     }
 
@@ -93,11 +94,12 @@ public class SYSDictAOImpl implements ISYSDictAO {
     }
 
     @Override
-    public int editSYSDict(Long id, String value, String remark) {
+    public int editSYSDict(Long id, String value, String remark, String updater) {
         SYSDict data = new SYSDict();
         data.setId(id);
         data.setDvalue(value);
         data.setRemark(remark);
+        data.setUpdater(updater);
         return sysDictBO.refreshSYSDict(data);
     }
 

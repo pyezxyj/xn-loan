@@ -5,6 +5,7 @@ import com.cdkj.loan.api.AProcessor;
 import com.cdkj.loan.common.JsonUtil;
 import com.cdkj.loan.core.StringValidater;
 import com.cdkj.loan.dto.req.XN617003Req;
+import com.cdkj.loan.dto.res.BooleanRes;
 import com.cdkj.loan.exception.BizException;
 import com.cdkj.loan.exception.ParaException;
 import com.cdkj.loan.spring.SpringContextHolder;
@@ -25,7 +26,7 @@ public class XN617003 extends AProcessor {
     public Object doBusiness() throws BizException {
         creditOrderAO.editSurvey(req.getCode(), req.getMobile(),
             req.getDcUser(), req.getUpdater(), req.getRemark());
-        return new Boolean(true);
+        return new BooleanRes(true);
     }
 
     @Override

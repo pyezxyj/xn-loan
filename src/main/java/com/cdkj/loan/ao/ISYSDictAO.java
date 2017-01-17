@@ -22,11 +22,11 @@ public interface ISYSDictAO {
     static String DEFAULT_ORDER_COLUMN = "id";
 
     public Long addSYSDict(String type, String parentKey, String key,
-            String value, String remark);
+            String value, String remark, String updater);
 
     public int dropSYSDict(Long id);
 
-    public int editSYSDict(Long id, String value, String remark);
+    public int editSYSDict(Long id, String value, String remark, String updater);
 
     public Paginable<SYSDict> querySYSDictPage(int start, int limit,
             SYSDict condition);
