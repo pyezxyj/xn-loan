@@ -16,7 +16,7 @@ public class XN617040Req {
 
     private String company;
 
-    private String type;
+    private String parentKey;
 
     private String orderNo;
 
@@ -44,14 +44,6 @@ public class XN617040Req {
 
     public void setCompany(String company) {
         this.company = company;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getOrderNo() {
@@ -100,5 +92,13 @@ public class XN617040Req {
 
     public void setInsureTypeList(List<InsureType> insureTypeList) {
         this.insureTypeList = insureTypeList;
+    }
+
+    public String getParentKey() {
+        return parentKey;
+    }
+
+    public void setParentKey(String parentKey) {
+        this.parentKey = parentKey;
     }
 }

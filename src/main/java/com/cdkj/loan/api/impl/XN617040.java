@@ -28,7 +28,7 @@ public class XN617040 extends AProcessor {
         Insure data = new Insure();
         data.setCode(req.getCode());
         data.setCompany(req.getCompany());
-        data.setType(req.getType());
+        data.setType(req.getParentKey());
         data.setOrderNo(req.getOrderNo());
         data.setAmount(StringValidater.toLong(req.getAmount()));
         data.setStartDatetime(DateUtil.strToDate(req.getStartDatetime(),
@@ -44,7 +44,7 @@ public class XN617040 extends AProcessor {
     public void doCheck(String inputparams) throws ParaException {
         req = JsonUtil.json2Bean(inputparams, XN617040Req.class);
         StringValidater.validateBlank(req.getCode(), req.getCompany(),
-            req.getType(), req.getOrderNo(), req.getAmount(),
+            req.getParentKey(), req.getOrderNo(), req.getAmount(),
             req.getStartDatetime(), req.getEndDatetime());
     }
 }
