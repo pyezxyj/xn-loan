@@ -6,6 +6,7 @@
 		<result column="code" property="code" />
 		<result column="credit_order_code" property="creditOrderCode" />
 		<result column="real_name" property="realName" />
+		<result column="area" property="area" />
 		<result column="brand" property="brand" />
 		<result column="model" property="model" />
 		<result column="price" property="price" />
@@ -65,6 +66,7 @@
 		,t.brand
 		,t.model
 		,t.price
+		,t.area
 		,t.first_amount
 		,t.license_no
 		,t.chassis_no
@@ -179,7 +181,8 @@
 	<update id="update_Car" parameterType="Car">
 		UPDATE tloan_car
 		SET
-		license_no = #{licenseNo}
+		area=#{area}
+		,license_no = #{licenseNo}
 		,chassis_no = #{chassisNo}
 		,engine_no = #{engineNo}
 		,seat_num = #{seatNum}

@@ -27,6 +27,7 @@ public class XN617030 extends AProcessor {
     public Object doBusiness() throws BizException {
         Car data = new Car();
         data.setCode(req.getCode());
+        data.setArea(req.getArea());
         data.setEngineNo(req.getEngineNo());
         data.setChassisNo(req.getChassisNo());
         data.setLicenseNo(req.getLicenseNo());

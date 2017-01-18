@@ -23,6 +23,8 @@ public class XN617127 extends AProcessor {
     @Override
     public Object doBusiness() throws BizException {
         Area condition = new Area();
+        condition.setType(req.getType());
+        condition.setCode(req.getCode());
         return areaAO.queryAreaList(condition);
     }
 

@@ -111,6 +111,8 @@ public class Car extends ABaseDO {
     // 备注
     private String remark;
 
+    private String area;
+
     private List<String> statusList;
 
     public void setCode(String code) {
@@ -375,6 +377,14 @@ public class Car extends ABaseDO {
 
     public void setStatusList(List<String> statusList) {
         this.statusList = statusList;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 
 }

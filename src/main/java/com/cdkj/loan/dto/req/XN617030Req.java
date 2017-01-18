@@ -1,6 +1,5 @@
 package com.cdkj.loan.dto.req;
 
-
 /**
  * 更新车辆登记
  * @author: asus 
@@ -9,6 +8,8 @@ package com.cdkj.loan.dto.req;
  */
 public class XN617030Req {
     private String code;
+
+    private String area;
 
     private String licenseNo;
 
@@ -176,5 +177,13 @@ public class XN617030Req {
 
     public void setDyEndDatetime(String dyEndDatetime) {
         this.dyEndDatetime = dyEndDatetime;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

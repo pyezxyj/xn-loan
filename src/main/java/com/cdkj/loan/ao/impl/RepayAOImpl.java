@@ -1,6 +1,5 @@
 package com.cdkj.loan.ao.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -77,12 +76,13 @@ public class RepayAOImpl implements IRepayAO {
     @Override
     public Paginable<Repay> queryRepayPage(int start, int limit, Repay condition) {
         Repay repay = new Repay();
-        ArrayList<String> status = new ArrayList<String>();
-        status.add(ERepayStatus.YLL.getCode());
-        status.add(ERepayStatus.ALREAD.getCode());
-        status.add(ERepayStatus.YQ.getCode());
-        status.add(ERepayStatus.YQ.getCode());
-        repay.setStatusList(status);
+        // ArrayList<String> status = new ArrayList<String>();
+        // status.add(ERepayStatus.YLL.getCode());
+        // status.add(ERepayStatus.ALREAD.getCode());
+        // status.add(ERepayStatus.YQ.getCode());
+        // status.add(ERepayStatus.YQ.getCode());
+        // repay.setStatusList(status);
+        repay.setStatusList(condition.getStatusList());
         List<Repay> repayList = repayBO.queryRepayList(repay);
         if (repayList.size() != 0) {
             for (Repay repay2 : repayList) {
@@ -159,6 +159,7 @@ public class RepayAOImpl implements IRepayAO {
         if (!repayBO.isRepayExist(code)) {
             throw new BizException("xn0000", "记录编号不存在");
         }
+        Long amount = 0L;
         Repay data = getRepay(code);
         Repay condition = new Repay();
         condition.setCreditOrderCode(data.getCreditOrderCode());
@@ -168,6 +169,7 @@ public class RepayAOImpl implements IRepayAO {
             repay.setStatus(ERepayStatus.YTQ.getCode());
             repay.setShDatetime(new Date());
             repay.setShAmount(repay.getYhAmount());
+            repay.setOverAmount(amount);
             repay.setRemark(remark);
             repayBO.refreshAdvance(repay);
         }

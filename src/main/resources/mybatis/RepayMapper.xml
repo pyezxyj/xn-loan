@@ -173,6 +173,7 @@
 		status=#{status}
 		,sh_datetime=#{shDatetime}
         ,sh_amount=#{shAmount}
+        ,over_amount=#{overAmount}
 		,remark=#{remark}
 		WHERE code = #{code}
 	</update>
