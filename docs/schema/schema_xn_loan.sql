@@ -11,6 +11,37 @@ MySQL - 5.5.45-log : Database - xn_loan
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`xn_loan` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `xn_loan`;
+
+/*Table structure for table `tloan_area` */
+
+CREATE TABLE `tloan_area` (
+  `code` varchar(32) NOT NULL COMMENT '编号',
+  `county` varchar(32) DEFAULT NULL COMMENT '县市名称',
+  `type` varchar(32) DEFAULT NULL COMMENT '类型',
+  `updater` varchar(32) DEFAULT NULL COMMENT '更新人',
+  `updater_datetime` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `tloan_bank_card` */
+
+CREATE TABLE `tloan_bank_card` (
+  `code` varchar(32) NOT NULL COMMENT '编号',
+  `car_store_code` varchar(32) DEFAULT NULL COMMENT '所属车行',
+  `bank` varchar(32) DEFAULT NULL COMMENT '银行',
+  `branch` varchar(32) DEFAULT NULL COMMENT '开户行',
+  `account_name` varchar(32) DEFAULT NULL COMMENT '户名',
+  `account` varchar(32) DEFAULT NULL COMMENT '账号',
+  `type` varchar(32) DEFAULT NULL COMMENT '类型',
+  `status` varchar(32) DEFAULT NULL COMMENT '状态',
+  `remark` varchar(32) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 /*Table structure for table `tloan_car` */
 
 CREATE TABLE `tloan_car` (
@@ -19,6 +50,7 @@ CREATE TABLE `tloan_car` (
   `real_name` varchar(32) DEFAULT NULL COMMENT '车主',
   `brand` varchar(32) DEFAULT NULL COMMENT '车辆品牌',
   `model` varchar(32) DEFAULT NULL COMMENT '车辆类型',
+  `area` varchar(32) DEFAULT NULL COMMENT '上牌地',
   `price` bigint(20) DEFAULT NULL COMMENT '车价',
   `first_amount` bigint(20) DEFAULT NULL COMMENT '首付',
   `license_no` varchar(32) DEFAULT NULL COMMENT '车牌号码',
@@ -48,12 +80,33 @@ CREATE TABLE `tloan_car` (
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `tloan_car` */
+/*Table structure for table `tloan_car_store_detail` */
+
+CREATE TABLE `tloan_car_store_detail` (
+  `code` varchar(32) NOT NULL COMMENT '编号',
+  `benelux` varchar(32) DEFAULT NULL COMMENT '全称',
+  `abbreviation` varchar(32) DEFAULT NULL COMMENT '简称',
+  `corporation` varchar(32) DEFAULT NULL COMMENT '法人',
+  `province` varchar(32) DEFAULT NULL COMMENT '省',
+  `city` varchar(32) DEFAULT NULL COMMENT '市',
+  `area` varchar(32) DEFAULT NULL COMMENT '区',
+  `address` varchar(32) DEFAULT NULL COMMENT '详细地址',
+  `name` varchar(32) DEFAULT NULL COMMENT '联系人',
+  `contacts` varchar(32) DEFAULT NULL COMMENT '联系方式',
+  `district` varchar(32) DEFAULT NULL COMMENT '所属地区',
+  `status` varchar(4) DEFAULT NULL COMMENT '状态',
+  `updater` varchar(32) DEFAULT NULL COMMENT '操作人',
+  `update_datetime` datetime DEFAULT NULL COMMENT '操作时间',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `tloan_credit_order` */
 
 CREATE TABLE `tloan_credit_order` (
   `code` varchar(32) NOT NULL COMMENT '编号',
+  `province` varchar(32) DEFAULT NULL COMMENT '省份',
+  `city` varchar(32) DEFAULT NULL COMMENT '城市',
   `area` varchar(32) DEFAULT NULL COMMENT '地区',
   `salesman` varchar(32) DEFAULT NULL COMMENT '业务员',
   `car_store` varchar(32) DEFAULT NULL COMMENT '车行',
@@ -94,8 +147,6 @@ CREATE TABLE `tloan_credit_order` (
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `tloan_credit_order` */
-
 /*Table structure for table `tloan_credit_people` */
 
 CREATE TABLE `tloan_credit_people` (
@@ -121,8 +172,6 @@ CREATE TABLE `tloan_credit_people` (
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `tloan_credit_people` */
-
 /*Table structure for table `tloan_express` */
 
 CREATE TABLE `tloan_express` (
@@ -146,8 +195,6 @@ CREATE TABLE `tloan_express` (
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `tloan_express` */
-
 /*Table structure for table `tloan_insure` */
 
 CREATE TABLE `tloan_insure` (
@@ -166,9 +213,25 @@ CREATE TABLE `tloan_insure` (
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `tloan_insure` */
+/*Table structure for table `tloan_insure_company` */
 
-insert  into `tloan_insure`(`code`,`real_name`,`car_code`,`company`,`type`,`order_no`,`amount`,`start_datetime`,`end_datetime`,`sms_count`,`status`,`remark`) values ('1',NULL,NULL,'太平洋','车险','10000',1000000000000,'2017-01-08','2017-01-08',2,'1','已发2次短信'),('IS201701090015402057','sfdf','CA201701091438458704','太平阳','车险','11111',20000000,'2017-01-08','2017-01-08',2,'1','已发2次短信'),('IS201701100229017285','张三','CA201701100011459681','tttttt','ttttttttt','tttttttt',555555555000,'2017-01-08','2017-01-08',1,'1','已发1次短信'),('IS201701100247186617','乌龙球','CA201701071917374475',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('IS201701100310437125','ppp','CA201701100303408016',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('IS201701100552234031','北包包','CA201701100547098220','44444','4','4',1111111000,'2017-01-09','2017-01-09',2,'1','已发2次短信');
+CREATE TABLE `tloan_insure_company` (
+  `code` varchar(32) NOT NULL COMMENT '编号',
+  `salutation` varchar(32) DEFAULT NULL COMMENT '名称',
+  `prefix` varchar(32) DEFAULT NULL COMMENT '保单前缀',
+  `province` varchar(32) DEFAULT NULL COMMENT '省',
+  `city` varchar(32) DEFAULT NULL COMMENT '市',
+  `area` varchar(32) DEFAULT NULL COMMENT '区',
+  `address` varchar(32) DEFAULT NULL COMMENT '详细地址',
+  `name` varchar(32) DEFAULT NULL COMMENT '联系人',
+  `contacts` varchar(32) DEFAULT NULL COMMENT '联系方式',
+  `district` varchar(32) DEFAULT NULL COMMENT '所属地区',
+  `updater` varchar(32) DEFAULT NULL COMMENT '操作人',
+  `update_datetime` datetime DEFAULT NULL COMMENT '操作时间',
+  `status` varchar(32) DEFAULT NULL COMMENT '状态',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `tloan_insure_type` */
 
@@ -180,8 +243,6 @@ CREATE TABLE `tloan_insure_type` (
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `tloan_insure_type` */
 
 /*Table structure for table `tloan_node` */
 
@@ -195,8 +256,6 @@ CREATE TABLE `tloan_node` (
   `updater` varchar(32) DEFAULT NULL COMMENT '更新人',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `tloan_node` */
 
 /*Table structure for table `tloan_repay` */
 
@@ -218,7 +277,20 @@ CREATE TABLE `tloan_repay` (
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `tloan_repay` */
+/*Table structure for table `tsys_dict` */
+
+CREATE TABLE `tsys_dict` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号（自增长）',
+  `type` char(1) DEFAULT NULL COMMENT '类型（第一层/第二层）',
+  `parent_key` varchar(32) DEFAULT NULL COMMENT '父key',
+  `dkey` varchar(32) DEFAULT NULL COMMENT 'key',
+  `dvalue` varchar(255) DEFAULT NULL COMMENT '值',
+  `updater` varchar(32) DEFAULT NULL COMMENT '更新人',
+  `update_datetime` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `system_code` varchar(32) DEFAULT NULL COMMENT '系统编号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
