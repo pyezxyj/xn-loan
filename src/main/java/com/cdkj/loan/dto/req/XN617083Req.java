@@ -18,6 +18,8 @@ public class XN617083Req extends APageReq {
 
     private String status;
 
+    private String jbBank;
+
     private List<String> statusList;
 
     public String getRealName() {
@@ -42,5 +44,13 @@ public class XN617083Req extends APageReq {
 
     public void setStatusList(List<String> statusList) {
         this.statusList = statusList;
+    }
+
+    public String getJbBank() {
+        return jbBank;
+    }
+
+    public void setJbBank(String jbBank) {
+        this.jbBank = jbBank;
     }
 }

@@ -30,6 +30,7 @@ public class XN617083 extends AProcessor {
         condition.setStatus(req.getStatus());
         condition.setRealNameForLikeQuery(req.getRealName());
         condition.setStatusList(req.getStatusList());
+        condition.setJbBank(req.getJbBank());
         String orderColumn = req.getOrderColumn();
         if (StringUtils.isBlank(orderColumn)) {
             orderColumn = ICreditOrderAO.DEFAULT_ORDER_COLUMN;

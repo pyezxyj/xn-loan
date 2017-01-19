@@ -456,6 +456,7 @@
 		bank=#{bank}
 		,branch=#{branch}
 		,bankcard_no=#{bankcardNo}
+		,remark=#{remark}
 		WHERE code = #{code}
 	</update>
 	
