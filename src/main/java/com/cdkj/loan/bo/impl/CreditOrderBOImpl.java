@@ -194,6 +194,7 @@ public class CreditOrderBOImpl extends PaginableBOImpl<CreditOrder> implements
             data.setStatus(status);
             data.setLastNode(lastNode);
             data.setRemark(remark);
+            data.setConsume(consume);
             count = creditOrderDAO.updateFinancial(data);
         }
         return count;
