@@ -82,12 +82,6 @@ public class RepayAOImpl implements IRepayAO {
     @Override
     public Paginable<Repay> queryRepayPage(int start, int limit, Repay condition) {
         Repay repay = new Repay();
-        // ArrayList<String> status = new ArrayList<String>();
-        // status.add(ERepayStatus.YLL.getCode());
-        // status.add(ERepayStatus.ALREAD.getCode());
-        // status.add(ERepayStatus.YQ.getCode());
-        // status.add(ERepayStatus.YQ.getCode());
-        // repay.setStatusList(status);
         repay.setStatusList(condition.getStatusList());
         List<Repay> repayList = repayBO.queryRepayList(repay);
         Date cxStartDatetime = null;

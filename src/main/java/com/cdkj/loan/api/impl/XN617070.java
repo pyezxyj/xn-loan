@@ -52,6 +52,13 @@ public class XN617070 extends AProcessor {
         req = JsonUtil.json2Bean(inputparams, XN617070Req.class);
         if (CollectionUtils.isEmpty(req.getRepayList())) {
             throw new BizException("xn0000", "还款信息不能为空");
+        } else {
+            for (XN617084Req repay : req.getRepayList()) {
+                StringValidater
+                    .validateBlank(repay.getJbBank(), repay.getIdNo(),
+                        repay.getRealName(), repay.getYhDatetime());
+                StringValidater.validateNumber(repay.getYhAmount());
+            }
         }
     }
 
